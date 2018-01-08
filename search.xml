@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[PS命令]]></title>
-    <url>%2Flinux%2Flinux-shell-ps%2F</url>
+    <url>%2Fblog%2Flinux%2Flinux-shell-ps%2F</url>
     <content type="text"><![CDATA[ps：将某个时间点的程序运作情况撷取下来 123$ ps aux$ ps -lA$ ps axjf 参数 -A ：所有的 process 均显示出来，与 -e 具有同样的效用；-a ：不与 terminal 有关的所有 process ；-u ：有效使用者 (effective user) 相关的 process ；x ：通常与 a 这个参数一起使用，可列出较完整信息。输出格式规划：l ：较长、较详细的将该 PID 的的信息列出；j ：工作的格式 (jobs format)-f ：做一个更为完整的输出。特别说明：由于 ps 能够支持的 OS 类型相当的多，所以他的参数多的离谱！而且有没有加上 - 差很多！详细的用法应该要参考 man ps 喔！]]></content>
       <categories>
         <category>linux</category>
@@ -15,7 +15,7 @@
   </entry>
   <entry>
     <title><![CDATA[WGET命令]]></title>
-    <url>%2Flinux%2Flinux-shell-wget%2F</url>
+    <url>%2Fblog%2Flinux%2Flinux-shell-wget%2F</url>
     <content type="text"><![CDATA[wget命令用来从指定的URL下载文件。wget非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性，如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。 参数说明12345678910111213141516171819202122-a&lt;日志文件&gt;：在指定的日志文件中记录资料的执行过程；-A&lt;后缀名&gt;：指定要下载文件的后缀名，多个后缀名之间使用逗号进行分隔；-b：进行后台的方式运行wget；-B&lt;连接地址&gt;：设置参考的连接地址的基地地址；-c：继续执行上次终端的任务；-C&lt;标志&gt;：设置服务器数据块功能标志on为激活，off为关闭，默认值为on；-d：调试模式运行指令；-D&lt;域名列表&gt;：设置顺着的域名列表，域名之间用“，”分隔；-e&lt;指令&gt;：作为文件“.wgetrc”中的一部分执行指定的指令；-h：显示指令帮助信息；-i&lt;文件&gt;：从指定文件获取要下载的URL地址；-l&lt;目录列表&gt;：设置顺着的目录列表，多个目录用“，”分隔；-L：仅顺着关联的连接；-r：递归下载方式；-nc：文件存在时，下载文件不覆盖原有文件；-nv：下载时只显示更新和出错信息，不显示指令的详细执行过程；-q：不显示指令执行过程；-nh：不查询主机名称；-v：显示详细执行过程；-V：显示版本信息；--passive-ftp：使用被动模式PASV连接FTP服务器；--follow-ftp：从HTML文件中下载FTP连接文件。 示例下载单个文件 以下的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。 1$ wget http://www.xxx.net/xxx.zip 下载并以不同的文件名保存 wget默认会以最后一个符合/的后面的字符来命令，对于动态链接的下载通常文件名会不正确。 1$ wget -O wordpress.zip http://www.xxx.net/xxx.aspx?id=1080 wget限速下载 当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。 1$ wget --limit-rate=300k http://www.xxx.net/testfile.zip 使用wget断点续传 使用wget -c重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用-c参数。 1$ wget -c http://www.xxx.net/testfile.zip 使用wget后台下载1$ wget -b http://www.xxx.net/testfile.zip 伪装代理名称下载1$ wget --user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16" http://www.xxx.net/testfile.zip 测试下载链接 当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行检查。 1$ wget --spider URL 增加重试次数 如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。 1$ wget --tries=40 URL 下载多个文件 首先，保存一份下载链接文件：cat &gt; filelist.txturl1url2url3url4接着使用这个文件和参数-i下载。 1$ wget -i filelist.txt 镜像网站 下载整个网站到本地。–miror开户镜像下载。-p下载所有为了html页面显示正常的文件。–convert-links下载后，转换成本地的链接。-P ./LOCAL保存所有文件和目录到本地指定目录。 1$ wget --mirror -p --convert-links -P ./LOCAL URL 过滤指定格式下载 下载一个网站，但你不希望下载图片，可以使用这条命令。 1$ wget --reject=gif ur 把下载信息存入日志文件 不希望下载信息直接显示在终端而是在一个日志文件，可以使用。 1$ wget -o download.log URL 限制总下载文件大小 当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。 1$ wget -Q5m -i filelist.txt 下载指定格式文件 可以在以下情况使用该功能：下载一个网站的所有图片。下载一个网站的所有视频。下载一个网站的所有PDF文件。 1$ wget -r -A.pdf url FTP下载12$ wget ftp-url$ wget --ftp-user=USERNAME --ftp-password=PASSWORD url Https下载1$ wget -r -np -nd --accept=gz --no-check-certificate https://www.xxx.com/dir/ --http-user=username --http-password=password]]></content>
       <categories>
         <category>linux</category>
