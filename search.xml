@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux设置全路径显示]]></title>
+    <url>%2Flinux%2Flinux-config-setallpath%2F</url>
+    <content type="text"><![CDATA[在Linux中，编辑vi /etc/bashrc文件，搜索PS1=&quot;[\u@\h \W]，将大写的W改为w 修改前： 修改后: 效果显示:]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DF命令]]></title>
+    <url>%2Flinux%2Flinux-shell-df%2F</url>
+    <content type="text"><![CDATA[df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。 参数说明12345678910111213141516-a或--all：包含全部的文件系统；--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；-h或--human-readable：以可读性较高的方式来显示信息；-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；-i或--inodes：显示inode的信息；-k或--kilobytes：指定区块大小为1024字节；-l或--local：仅显示本地端的文件系统；-m或--megabytes：指定区块大小为1048576字节；--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；-P或--portability：使用POSIX的输出格式；--sync：在取得磁盘使用信息前，先执行sync指令；-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；-T或--print-type：显示文件系统的类型；-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；--help：显示帮助；--version：显示版本信息。 示例查看系统磁盘设备，默认是KB为单位1$ df 结果显示： 字段说明：Filesystem: 文件系统1K-blocks: 1K-块Used: 已用Available: 可用Use%: 已用%Mounted on: 挂载点 使用-h选项以KB以上的单位来显示，可读性高1$ df -h 结果显示：]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell</tag>
+        <tag>df</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Route命令]]></title>
+    <url>%2Flinux%2Flinux-shell-route%2F</url>
+    <content type="text"><![CDATA[route命令用来显示并设置Linux内核中的网络路由表，route命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。 在Linux系统中设置路由通常是为了解决以下问题：该Linux系统在一个局域网中，局域网中有一个网关，能够让机器访问Internet，那么就需要将这台机器的ip地址设置为Linux机器的默认路由。要注意的是，直接在命令行下执行route命令来添加路由，不会永久保存，当网卡重启或者机器重启之后，该路由就失效了；可以在/etc/rc.local中添加route命令来保证该路由设置永久有效。 参数说明1234567-A：设置地址类型；-C：打印将Linux核心的路由缓存；-v：详细信息模式；-n：不执行DNS反向查找，直接显示数字形式的IP地址；-e：netstat格式显示路由表；-net：到一个网络的路由表；-host：到一个主机的路由表。 示例显示当前路由1$ route -n 结果显示： 字段说明： U Up表示此路由当前为启动状态。H Host，表示此网关为一主机。G Gateway，表示此网关为一路由器。R Reinstate Route，使用动态路由重新初始化的路由。D Dynamically,此路由是动态性地写入。M Modified，此路由是由路由守护程序或导向器动态修改。! 表示此路由当前为关闭状态。 添加网关/设置网关1$ route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0 屏蔽一条路由1$ route add -net 224.0.0.0 netmask 240.0.0.0 reject 删除路由记录12$ route del -net 224.0.0.0 netmask 240.0.0.0$ route del -net 224.0.0.0 netmask 240.0.0.0 reject 删除和添加设置默认网关12$ route del default gw 192.168.120.240$ route add default gw 192.168.120.240]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell</tag>
+        <tag>route</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Tail命令]]></title>
+    <url>%2Flinux%2Flinux-shell-tail%2F</url>
+    <content type="text"><![CDATA[tail命令用于输入文件中的尾部内容。tail命令默认在屏幕上显示指定文件的末尾10行。如果给定的文件不止一个，则在显示的每个文件前面加一个文件名标题。如果没有指定文件或者文件名为“-”，则读取标准输入。 注意：如果表示字节或行数的N值之前有一个”+”号，则从文件开头的第N项开始显示，而不是显示文件的最后N项。N值后面可以有后缀：b表示512，k表示1024，m表示1 048576(1M)。 参数说明1234567891011--retry：即是在tail命令启动时，文件不可访问或者文件稍后变得不可访问，都始终尝试打开文件。使用此选项时需要与选项“——follow=name”连用；-c&lt;N&gt;或——bytes=&lt;N&gt;：输出文件尾部的N（N为整数）个字节内容；-f&lt;name/descriptor&gt;或；--follow&lt;nameldescript&gt;：显示文件最新追加的内容。“name”表示以文件名的方式监视文件的变化。“-f”与“-fdescriptor”等效；-F：与选项“-follow=name”和“--retry"连用时功能相同；-n&lt;N&gt;或——line=&lt;N&gt;：输出文件的尾部N（N位数字）行内容。--pid=&lt;进程号&gt;：与“-f”选项连用，当指定的进程号的进程终止后，自动退出tail命令；-q或——quiet或——silent：当有多个文件参数时，不输出各个文件名；-s&lt;秒数&gt;或——sleep-interal=&lt;秒数&gt;：与“-f”选项连用，指定监视文件变化时间隔的秒数；-v或——verbose：当有多个文件参数时，总是输出各个文件名；--help：显示指令的帮助信息；--version：显示指令的版本信息。 示例显示文件末尾内容1$ tail -n 5 log2014.log 循环查看文件内容1$ tail -f test.log 从第5行开始显示文件1$ tail -n +5 log2014.log]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell</tag>
+        <tag>tail</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LN命令]]></title>
     <url>%2Flinux%2Flinux-shell-ln%2F</url>
-    <content type="text"><![CDATA[ln命令用来为文件创件连接，连接类型分为硬连接和符号连接两种，默认的连接类型是硬连接。如果要创建符号连接必须使用-s选项。 注意：符号链接文件不是一个独立的文件，它的许多属性依赖于源文件，所以给符号链接文件设置存取权限是没有意义的。 参数1234567891011-b: 删除，覆盖以前建立的链接-d: 允许超级用户制作目录的硬链接-f: 强制执行-i: 交互模式，文件存在则提示用户是否覆盖-n: 把符号链接视为一般目录-s: 软链接(符号链接)-v: 显示详细的处理过程-S: “-S&lt;字尾备份字符串&gt; ”或 “--suffix=&lt;字尾备份字符串&gt;”-V: “-V&lt;备份方式&gt;”或“--version-control=&lt;备份方式&gt;”--help: 显示帮助信息--version: 显示版本信息 示例建立一个符号链接 在目录/usr/liu下建立一个符号链接文件abc，使它指向目录/usr/mengqc/mub1 1$ ln -s /usr/mengqc/mub1 /usr/liu/abc 删除一个符号链接 将目录/usr/liu/下的abc链接删除，注意不是rm -rf symbolic_name/ 12$ cd /usr/liu/$ rm -rf symbolic_name]]></content>
+    <content type="text"><![CDATA[ln命令用来为文件创件连接，连接类型分为硬连接和符号连接两种，默认的连接类型是硬连接。如果要创建符号连接必须使用-s选项。 注意：符号链接文件不是一个独立的文件，它的许多属性依赖于源文件，所以给符号链接文件设置存取权限是没有意义的。 参数说明1234567891011-b: 删除，覆盖以前建立的链接-d: 允许超级用户制作目录的硬链接-f: 强制执行-i: 交互模式，文件存在则提示用户是否覆盖-n: 把符号链接视为一般目录-s: 软链接(符号链接)-v: 显示详细的处理过程-S: “-S&lt;字尾备份字符串&gt; ”或 “--suffix=&lt;字尾备份字符串&gt;”-V: “-V&lt;备份方式&gt;”或“--version-control=&lt;备份方式&gt;”--help: 显示帮助信息--version: 显示版本信息 示例建立一个符号链接 在目录/usr/liu下建立一个符号链接文件abc，使它指向目录/usr/mengqc/mub1 1$ ln -s /usr/mengqc/mub1 /usr/liu/abc 删除一个符号链接 将目录/usr/liu/下的abc链接删除，注意不是rm -rf symbolic_name/ 12$ cd /usr/liu/$ rm -rf symbolic_name]]></content>
       <categories>
         <category>linux</category>
       </categories>
