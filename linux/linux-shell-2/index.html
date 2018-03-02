@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="linux,shell,ps," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -101,21 +101,21 @@
 
 
 
-<meta name="description" content="简介要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的. 参数说明12345678-a：显示现行终端机下的所有进程，包括其他用户的进程-A：所有的进程均显示出来，与 -">
-<meta name="keywords" content="linux,shell,ps">
+<meta name="description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PS命令">
-<meta property="og:url" content="http://blog.appydm.com/linux/linux-shell-ps/index.html">
+<meta property="og:title" content="centos7升级后无法重启或关机解决办法">
+<meta property="og:url" content="http://blog.appydm.com/linux/linux-shell-2/index.html">
 <meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="简介要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的. 参数说明12345678-a：显示现行终端机下的所有进程，包括其他用户的进程-A：所有的进程均显示出来，与 -">
+<meta property="og:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/2.png">
-<meta property="og:updated_time" content="2018-01-08T05:18:54.000Z">
+<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
+<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg">
+<meta property="og:updated_time" content="2018-03-02T02:31:01.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PS命令">
-<meta name="twitter:description" content="简介要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的. 参数说明12345678-a：显示现行终端机下的所有进程，包括其他用户的进程-A：所有的进程均显示出来，与 -">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png">
+<meta name="twitter:title" content="centos7升级后无法重启或关机解决办法">
+<meta name="twitter:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
+<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
 
 
 
@@ -145,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.appydm.com/linux/linux-shell-ps/"/>
+  <link rel="canonical" href="http://blog.appydm.com/linux/linux-shell-2/"/>
 
 
 
 
 
-  <title>PS命令 | Figthing的博客</title>
+  <title>centos7升级后无法重启或关机解决办法 | Figthing的博客</title>
   
 
 
@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-ps/">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PS命令</h1>
+          <h1 class="post-title" itemprop="name headline">centos7升级后无法重启或关机解决办法</h1>
         
 
         <div class="post-meta">
@@ -361,8 +361,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-07T23:07:00+08:00">
-                2018-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T10:21:00+08:00">
+                2018-03-02
               </time>
             
 
@@ -377,8 +377,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-08T13:18:54+08:00">
-                2018-01-08
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-02T10:31:01+08:00">
+                2018-03-02
               </time>
             
           </span>
@@ -469,28 +469,30 @@
       
 
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的.</p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a：显示现行终端机下的所有进程，包括其他用户的进程</span><br><span class="line">-A：所有的进程均显示出来，与 -e 具有同样的效用</span><br><span class="line">-u：以用户为主的进程状态</span><br><span class="line">-f：做一个更为完整的输出</span><br><span class="line">-e：等于“-A”</span><br><span class="line">x： 通常与 a 这个参数一起使用，可列出较完整信息</span><br><span class="line">l： 较长、较详细的将该 PID 的的信息列出</span><br><span class="line">j： 工作的格式 (jobs format)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="PS-L字段说明"><a href="#PS-L字段说明" class="headerlink" title="PS L字段说明"></a>PS L字段说明</h3><p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png" alt=""></p>
-<blockquote>
-</blockquote>
-<p>F    ：代表这个程序的旗标 (flag)， 4 代表使用者为 super user<br>S    ：代表这个程序的状态 (STAT)，关于各 STAT 的意义将在内文介绍<br>UID ：程序被该 UID 所拥有<br>PID ：就是这个程序的 ID ！<br>PPID ：则是其上级父程序的ID<br>C    ：CPU 使用的资源百分比<br>PRI ：这个是 Priority (优先执行序) 的缩写，详细后面介绍<br>NI    ：这个是 Nice 值，在下一小节我们会持续介绍<br>ADDR ：这个是 kernel function，指出该程序在内存的那个部分。如果是个 running的程序，一般就是 “-“<br>SZ    ：使用掉的内存大小<br>WCHAN ：目前这个程序是否正在运作当中，若为 - 表示正在运作<br>TTY ：登入者的终端机位置<br>TIME ：使用掉的 CPU 时间。<br>CMD ：所下达的指令为何</p>
-<h3 id="PS-AUX字段说明"><a href="#PS-AUX字段说明" class="headerlink" title="PS AUX字段说明"></a>PS AUX字段说明</h3><p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/2.png" alt=""></p>
-<blockquote>
-</blockquote>
-<p>USER：该进程属于那个使用者账号的？<br>PID ：该进程的进程ID号。<br>%CPU：该进程使用掉的 CPU 资源百分比；<br>%MEM：该进程所占用的物理内存百分比；<br>VSZ ：该进程使用掉的虚拟内存量 (Kbytes)<br>RSS ：该进程占用的固定的内存量 (Kbytes)<br>TTY ：该进程是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。<br>START：该进程被触发启动的时间；<br>TIME ：该进程实际使用 CPU 运作的时间。<br>COMMAND：该程序的实际指令为什么？</p>
-<blockquote>
-<blockquote>
-<p>STAT：该程序目前的状态，主要的状态有：<br>   R ：该程序目前正在运作，或者是可被运作；<br>   S ：该程序目前正在睡眠当中 (可说是 idle 状态啦！)，但可被某些讯号(signal) 唤醒。<br>   T ：该程序目前正在侦测或者是停止了；<br>   Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态</p>
-</blockquote>
-</blockquote>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="显示所有进程信息"><a href="#显示所有进程信息" class="headerlink" title="显示所有进程信息"></a>显示所有进程信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -A</span><br></pre></td></tr></table></figure>
-<h4 id="显示指定用户信息"><a href="#显示指定用户信息" class="headerlink" title="显示指定用户信息"></a>显示指定用户信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -u root</span><br></pre></td></tr></table></figure>
-<h4 id="显示所有进程信息，连同命令行"><a href="#显示所有进程信息，连同命令行" class="headerlink" title="显示所有进程信息，连同命令行"></a>显示所有进程信息，连同命令行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -ef</span><br></pre></td></tr></table></figure>
-<h4 id="ps-与grep-常用组合用法，查找特定进程"><a href="#ps-与grep-常用组合用法，查找特定进程" class="headerlink" title="ps 与grep 常用组合用法，查找特定进程"></a>ps 与grep 常用组合用法，查找特定进程</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -ef|grep ssh</span><br></pre></td></tr></table></figure>
-<h4 id="列出类似程序树的程序显示"><a href="#列出类似程序树的程序显示" class="headerlink" title="列出类似程序树的程序显示"></a>列出类似程序树的程序显示</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -axjf</span><br></pre></td></tr></table></figure>
-<h4 id="找出与-cron-与-syslog-这两个服务有关的-PID-号码"><a href="#找出与-cron-与-syslog-这两个服务有关的-PID-号码" class="headerlink" title="找出与 cron 与 syslog 这两个服务有关的 PID 号码"></a>找出与 cron 与 syslog 这两个服务有关的 PID 号码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps aux | egrep '(cron|syslog)'</span><br></pre></td></tr></table></figure>
+        <p>由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。</p>
+<p>执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.el7版本之后，reboot会出现如下卡机界面导致系统挂住，无法重启： </p>
+<p><strong>现象：</strong></p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg" alt=""></p>
+<p><strong>查询版本包：</strong></p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg" alt=""></p>
+<p><strong>解决办法：</strong></p>
+<ol>
+<li><p>新建/etc/systemd/system/rc-local.service并写入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.d/rc.local Compatibility</span><br><span class="line">ConditionFileIsExecutable=/etc/rc.d/rc.local</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.d/rc.local start</span><br><span class="line">TimeoutSec=5</span><br><span class="line">RemainAfterExit=yes</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>备份/etc/systemd/system.conf<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -a /etc/systemd/system.conf /etc/systemd/system.conf_bak</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>修改文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=30s/g' /etc/systemd/system.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>重新加载<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
+</ol>
+
       
     </div>
     
@@ -500,34 +502,6 @@
     <div>
           
             
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/linux/linux-shell-ps/">PS命令</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 Figthing 的个人博客">Figthing</a></p>
-  <p><span>发布时间:</span>2018年01月07日 - 23:01</p>
-  <p><span>最后更新:</span>2018年01月08日 - 13:01</p>
-  <p><span>原始链接:</span><a href="/linux/linux-shell-ps/" title="PS命令">http://blog.appydm.com/linux/linux-shell-ps/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://blog.appydm.com/linux/linux-shell-ps/"  aria-label="复制成功！"></i></span>
-  </p>
-</div>
-<script>
-    var clipboard = new Clipboard('.fa-clipboard');
-      $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({
-          title: "",
-          text: '复制成功',
-          icon: "success",
-          showConfirmButton: true
-          });
-        });
-    });
-</script>
-
 
           
     </div>
@@ -573,10 +547,6 @@
           
             <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
           
-            <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
-          
-            <a href="/tags/ps/" rel="tag"><i class="fa fa-tag"></i> ps</a>
-          
         </div>
       
 
@@ -588,8 +558,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux/linux-shell-wget/" rel="next" title="WGET命令">
-                <i class="fa fa-chevron-left"></i> WGET命令
+              <a href="/设计模式/design-pattern-1/" rel="next" title="适配器模式之对象适配器">
+                <i class="fa fa-chevron-left"></i> 适配器模式之对象适配器
               </a>
             
           </div>
@@ -597,10 +567,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/http/http-mime/" rel="prev" title="MIME类型列表">
-                MIME类型列表 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -652,17 +618,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -754,22 +711,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明"><span class="nav-number">2.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS-L字段说明"><span class="nav-number">3.</span> <span class="nav-text">PS L字段说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS-AUX字段说明"><span class="nav-number">4.</span> <span class="nav-text">PS AUX字段说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">5.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#显示所有进程信息"><span class="nav-number">5.1.</span> <span class="nav-text">显示所有进程信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示指定用户信息"><span class="nav-number">5.2.</span> <span class="nav-text">显示指定用户信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示所有进程信息，连同命令行"><span class="nav-number">5.3.</span> <span class="nav-text">显示所有进程信息，连同命令行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ps-与grep-常用组合用法，查找特定进程"><span class="nav-number">5.4.</span> <span class="nav-text">ps 与grep 常用组合用法，查找特定进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出类似程序树的程序显示"><span class="nav-number">5.5.</span> <span class="nav-text">列出类似程序树的程序显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#找出与-cron-与-syslog-这两个服务有关的-PID-号码"><span class="nav-number">5.6.</span> <span class="nav-text">找出与 cron 与 syslog 这两个服务有关的 PID 号码</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
