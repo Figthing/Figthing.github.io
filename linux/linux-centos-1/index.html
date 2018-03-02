@@ -90,7 +90,7 @@
 
 
 
-  <meta name="keywords" content="设计模式,适配器模式," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -101,18 +101,21 @@
 
 
 
-<meta name="description" content="问题导入：比如有A型螺母和B型螺母，那么用户可以再A型螺母上直接使用按着A型螺母生产的A型螺丝，同样也可以在B型螺母上直接使用按着B型螺母标准生产的B型螺丝。但是由于A型螺母和B型螺母的标准不一样，用户在A型螺母上不能直接使用B型的螺丝，反之也一样。该如何达到这个目的呢？ 使用适配器就可以解决这个问题：生产一种“A型螺母适配器”，这种A型螺母适配器的前端符合A型螺母标准要求，可以拧在A型螺母上，后">
-<meta name="keywords" content="设计模式,适配器模式">
+<meta name="description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="适配器模式之对象适配器">
-<meta property="og:url" content="http://blog.appydm.com/设计模式/design-pattern-1/index.html">
+<meta property="og:title" content="centos7升级后无法重启或关机解决办法">
+<meta property="og:url" content="http://blog.appydm.com/linux/linux-centos-1/index.html">
 <meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="问题导入：比如有A型螺母和B型螺母，那么用户可以再A型螺母上直接使用按着A型螺母生产的A型螺丝，同样也可以在B型螺母上直接使用按着B型螺母标准生产的B型螺丝。但是由于A型螺母和B型螺母的标准不一样，用户在A型螺母上不能直接使用B型的螺丝，反之也一样。该如何达到这个目的呢？ 使用适配器就可以解决这个问题：生产一种“A型螺母适配器”，这种A型螺母适配器的前端符合A型螺母标准要求，可以拧在A型螺母上，后">
+<meta property="og:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T02:18:53.581Z">
+<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
+<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg">
+<meta property="og:updated_time" content="2018-03-02T02:38:19.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="适配器模式之对象适配器">
-<meta name="twitter:description" content="问题导入：比如有A型螺母和B型螺母，那么用户可以再A型螺母上直接使用按着A型螺母生产的A型螺丝，同样也可以在B型螺母上直接使用按着B型螺母标准生产的B型螺丝。但是由于A型螺母和B型螺母的标准不一样，用户在A型螺母上不能直接使用B型的螺丝，反之也一样。该如何达到这个目的呢？ 使用适配器就可以解决这个问题：生产一种“A型螺母适配器”，这种A型螺母适配器的前端符合A型螺母标准要求，可以拧在A型螺母上，后">
+<meta name="twitter:title" content="centos7升级后无法重启或关机解决办法">
+<meta name="twitter:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
+<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
 
 
 
@@ -142,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.appydm.com/设计模式/design-pattern-1/"/>
+  <link rel="canonical" href="http://blog.appydm.com/linux/linux-centos-1/"/>
 
 
 
 
 
-  <title>适配器模式之对象适配器 | Figthing的博客</title>
+  <title>centos7升级后无法重启或关机解决办法 | Figthing的博客</title>
   
 
 
@@ -329,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/设计模式/design-pattern-1/">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-centos-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
@@ -346,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">适配器模式之对象适配器</h1>
+          <h1 class="post-title" itemprop="name headline">centos7升级后无法重启或关机解决办法</h1>
         
 
         <div class="post-meta">
@@ -358,8 +361,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T09:59:00+08:00">
-                2018-02-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T10:21:00+08:00">
+                2018-03-02
               </time>
             
 
@@ -374,8 +377,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-22T10:18:53+08:00">
-                2018-02-22
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-02T10:38:19+08:00">
+                2018-03-02
               </time>
             
           </span>
@@ -393,8 +396,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -466,47 +469,30 @@
       
 
       
-        <p>问题导入：比如有A型螺母和B型螺母，那么用户可以再A型螺母上直接使用按着A型螺母生产的A型螺丝，同样也可以在B型螺母上直接使用按着B型螺母标准生产的B型螺丝。但是由于A型螺母和B型螺母的标准不一样，用户在A型螺母上不能直接使用B型的螺丝，反之也一样。该如何达到这个目的呢？</p>
-<p>使用适配器就可以解决这个问题：生产一种“A型螺母适配器”，这种A型螺母适配器的前端符合A型螺母标准要求，可以拧在A型螺母上，后端又焊接了一个B型螺母。这样用户就可以借助A型螺母适配器在A型螺母上使用B型的螺丝了。</p>
-<p>适配器模式又称为包装器，是用来将一个类的接口转换成客户希望的另外一个接口。这可以使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。适配器模式的关键是建立一个适配器，这个适配器实现了目标接口并且包含了被适配者的引用。</p>
-<p><strong>适配器模式的三种角色：</strong></p>
-<ul>
-<li>目标：目标是一个接口，该接口是客户想要使用的接口。</li>
-<li>被适配者：被适配者是一个已经存在的接口或抽象类，这个接口接口或者抽象类需要适配。</li>
-<li>适配器：适配器是一个类，该类实现了目标接口并且包含有被适配者的引用，即适配器的职责是对适配者接口或抽象类与目标接口进行适配。</li>
-</ul>
-<p>以下通过一个简单的问题来描述适配器模式中所涉及的各个角色。</p>
+        <p>由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。</p>
+<p>执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.el7版本之后，reboot会出现如下卡机界面导致系统挂住，无法重启： </p>
+<p><strong>现象：</strong></p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>用户已经有一个两厢的插座，但是最近用户又有了一个新的三厢插座。用户现有一台洗衣机和一台电视机，洗衣机是三厢插头，而电视机是两厢插头。现在用户想用心的三厢插座来使用洗衣机和电视机，即用心的三厢插座为洗衣机和电视机接通电流。</p>
-<p>针对以上问题，使用适配器模式设计若干个类。</p>
+<p><strong>查询版本包：</strong></p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg" alt=""></p>
+<p><strong>解决办法：</strong></p>
 <ol>
-<li><p><strong>目标</strong></p>
-<p>本问题是使用三厢插座来为电视机和洗衣机接通电流，所以目标是三厢插座。把三厢插座设置为一个接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.adatpe;</span><br><span class="line"></span><br><span class="line"><span class="comment">//适配目标：三相插座</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ThreeElectricOutlet</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>被适配者</strong></p>
-<p>对于本问题，用户是想要用三厢插座为两厢插头的电视机接通电流，所以被适配者应该是两厢插座，也设置为一个接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.adatpe;</span><br><span class="line"></span><br><span class="line"><span class="comment">//被适配者：两相插座</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TwoElectricOutlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>适配器</strong></p>
-<p>该适配器实现了目标接口三厢插座ThreeElectricOutlet，同时又包含了两厢插座TwoElectricOutlet的引用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.adatpe;</span><br><span class="line"></span><br><span class="line"><span class="comment">//适配器：实现目标接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreeElectricAdapter</span> <span class="keyword">implements</span> <span class="title">ThreeElectricOutlet</span> </span>&#123;</span><br><span class="line">    <span class="comment">//适配器包含被适配者的引用</span></span><br><span class="line">    <span class="keyword">private</span> TwoElectricOutlet outlet;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreeElectricAdapter</span><span class="params">(TwoElectricOutlet outlet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.outlet = outlet;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        outlet.connectElectricCurrent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>新建/etc/systemd/system/rc-local.service并写入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.d/rc.local Compatibility</span><br><span class="line">ConditionFileIsExecutable=/etc/rc.d/rc.local</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.d/rc.local start</span><br><span class="line">TimeoutSec=5</span><br><span class="line">RemainAfterExit=yes</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>下列应用程序中，Application.java使用了适配器模式中所涉及的类，应用程序负责用Wash类创建一个对象来模拟一台洗衣机，使用TV类创建一个对象来模拟一台电视机</p>
-<p>使用ThreeElectricOutlet接口变量调用Wash对象的connectElectricCurrent()方法，并借助适配器调用TV对象的connectElectricCurrent()方法，即用三厢插座分别为洗衣机和电视机接通电流。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.adatpe; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreeElectricOutlet outlet; <span class="comment">//目标接口（三相插座）</span></span><br><span class="line">        Wash wash = <span class="keyword">new</span> Wash();     <span class="comment">//洗衣机</span></span><br><span class="line">        outlet = wash;              <span class="comment">//洗衣机插在三相插座上</span></span><br><span class="line">        System.out.println(<span class="string">"使用三相插座接通电流"</span>);</span><br><span class="line">        outlet.connectElectricCurrent();    <span class="comment">//接通电流开始洗衣服</span></span><br><span class="line">        TV tv = <span class="keyword">new</span> TV();           <span class="comment">//电视机</span></span><br><span class="line">        ThreeElectricAdapter adapter = <span class="keyword">new</span> ThreeElectricAdapter(tv); <span class="comment">//把电视插在适配器上面</span></span><br><span class="line">        outlet = adapter;           <span class="comment">//再把适配器插在三厢插座上</span></span><br><span class="line">        System.out.println(<span class="string">"使用三厢插座接通电流"</span>);</span><br><span class="line">        outlet.connectElectricCurrent();  <span class="comment">//接通电流，开始播放电视节目</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//洗衣机使用三相插座</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wash</span> <span class="keyword">implements</span> <span class="title">ThreeElectricOutlet</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Wash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        name = <span class="string">"黄河洗衣机"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Wash</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turnOn();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOn</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(name+<span class="string">"开始洗衣服了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//电视机使用两厢插座</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TV</span> <span class="keyword">implements</span> <span class="title">TwoElectricOutlet</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TV</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        name = <span class="string">"长江电视机"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TV</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turnOn();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOn</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(name+<span class="string">"开始播放电视节目"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>运行结果为：</strong></p>
-<p>使用三相插座接通电流<br>黄河洗衣机开始洗衣服了<br>使用三厢插座接通电流<br>长江电视机开始播放电视节目</p>
-<h4 id="双向适配器"><a href="#双向适配器" class="headerlink" title="双向适配器"></a>双向适配器</h4><p>在适配器模式中，如果Adapter角色同时实现目标接口和被适配者接口，并包含目标接口和被适配接口的引用，那么该适配器就是一个双向适配器。使用双向适配器，用户既可以用新的接口又可以用已有的接口。在以上例子中，如果用户希望能有三厢插座来接通洗衣机和电视机的电流，有可以用两厢插座来接通洗衣机和电视机的电流，那么就必须使用一个双向适配器。具体代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.adatpe;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreeAndTwoElectricAdapter</span> <span class="keyword">implements</span> <span class="title">ThreeElectricOutlet</span>,</span></span><br><span class="line"><span class="class">        <span class="title">TwoElectricOutlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ThreeElectricOutlet threeElectricOutlet;</span><br><span class="line">    <span class="keyword">private</span> TwoElectricOutlet twoElectricOutlet;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreeAndTwoElectricAdapter</span><span class="params">(ThreeElectricOutlet threeOutlet,TwoElectricOutlet twoOutlet)</span> </span>&#123;</span><br><span class="line">        threeElectricOutlet = threeOutlet;</span><br><span class="line">        twoElectricOutlet = twoOutlet;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreeAndTwoElectricAdapter</span><span class="params">(TwoElectricOutlet twoOutlet,ThreeElectricOutlet threeOutlet)</span></span>&#123;</span><br><span class="line">        threeElectricOutlet = threeOutlet;</span><br><span class="line">        twoElectricOutlet = twoOutlet;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectElectricCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> ThreeElectricOutlet)&#123;</span><br><span class="line">            twoElectricOutlet.connectElectricCurrent();<span class="comment">//twoElectricOutlet是被适配的接口</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> TwoElectricOutlet)&#123;</span><br><span class="line">            threeElectricOutlet.connectElectricCurrent(); <span class="comment">//threeElectricOutlet是被适配的接口</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreeElectricOutlet threeOutlet;</span><br><span class="line">        TwoElectricOutlet twOutlet;</span><br><span class="line">        Wash wash = <span class="keyword">new</span> Wash();</span><br><span class="line">        TV tv = <span class="keyword">new</span> TV();</span><br><span class="line">        ThreeAndTwoElectricAdapter adapter = <span class="keyword">new</span> ThreeAndTwoElectricAdapter(wash,tv);</span><br><span class="line">        threeOutlet = adapter;</span><br><span class="line">        System.out.println(<span class="string">"使用三厢插座接通电源"</span>);</span><br><span class="line">        threeOutlet.connectElectricCurrent();</span><br><span class="line">        twOutlet = adapter;</span><br><span class="line">        System.out.println(<span class="string">"使用两厢插座接通电源"</span>);</span><br><span class="line">        twOutlet.connectElectricCurrent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>运行结果为：</strong></p>
-<p>使用三厢插座接通电源<br>长江电视机开始播放电视节目<br>黄河洗衣机开始洗衣服了<br>使用两厢插座接通电源<br>长江电视机开始播放电视节目<br>黄河洗衣机开始洗衣服了  </p>
-<p>这样就实现了即可以用三厢插座又可以用两厢插座来为电视机和洗衣机接通电流了。</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
-<li>目标和被适配者是完全解耦的关系。</li>
-<li>适配器模式满足“开–闭原则”，当添加一个实现了Adapter接口的新类时，不必修改Adapter，Adapter就能对这个新类的实例进行适配。</li>
-</ul>
+<ol>
+<li>备份/etc/systemd/system.conf<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -a /etc/systemd/system.conf /etc/systemd/system.conf_bak</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>修改文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=30s/g' /etc/systemd/system.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>重新加载<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -560,9 +546,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
-          
-            <a href="/tags/适配器模式/" rel="tag"><i class="fa fa-tag"></i> 适配器模式</a>
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
           
         </div>
       
@@ -575,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/java/java-MapStruct-2/" rel="next" title="关于MapStruct转换list的问题">
-                <i class="fa fa-chevron-left"></i> 关于MapStruct转换list的问题
+              <a href="/设计模式/design-pattern-1/" rel="next" title="适配器模式之对象适配器">
+                <i class="fa fa-chevron-left"></i> 适配器模式之对象适配器
               </a>
             
           </div>
@@ -584,10 +568,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/linux/linux-centos-1/" rel="prev" title="centos7升级后无法重启或关机解决办法">
-                centos7升级后无法重启或关机解决办法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -639,17 +619,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -741,22 +712,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双向适配器"><span class="nav-number">2.</span> <span class="nav-text">双向适配器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">3.</span> <span class="nav-text">优点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

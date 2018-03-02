@@ -328,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-2/">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-centos-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
@@ -347,7 +347,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/linux/linux-shell-2/" itemprop="url">centos7升级后无法重启或关机解决办法</a></h1>
+                <a class="post-title-link" href="/linux/linux-centos-1/" itemprop="url">centos7升级后无法重启或关机解决办法</a></h1>
         
 
         <div class="post-meta">
@@ -375,7 +375,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-02T10:31:01+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-02T10:38:19+08:00">
                 2018-03-02
               </time>
             
@@ -463,32 +463,17 @@
 
       
         
-          
-            <p>由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。</p>
+          <p>由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。</p>
 <p>执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.el7版本之后，reboot会出现如下卡机界面导致系统挂住，无法重启： </p>
 <p><strong>现象：</strong></p>
 <p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg" alt=""></p>
-<p><strong>查询版本包：</strong></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg" alt=""></p>
-<p><strong>解决办法：</strong></p>
-<ol>
-<li><p>新建/etc/systemd/system/rc-local.service并写入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=/etc/rc.d/rc.local Compatibility</span><br><span class="line">ConditionFileIsExecutable=/etc/rc.d/rc.local</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.d/rc.local start</span><br><span class="line">TimeoutSec=5</span><br><span class="line">RemainAfterExit=yes</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>备份/etc/systemd/system.conf<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -a /etc/systemd/system.conf /etc/systemd/system.conf_bak</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>修改文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=30s/g' /etc/systemd/system.conf</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>重新加载<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux/linux-centos-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
