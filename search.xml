@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Oracle安装（四）]]></title>
+    <url>%2Foracle%2FOracle-4%2F</url>
+    <content type="text"><![CDATA[Linux下Oracle安装（四）启动监听和数据库123# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdbaSQL&gt; startup 设置dba密码1SQL&gt; alter user sys identified by 123456; 使用Oracle客户端，创建表空间1234567create tablespace ccmp_app -表空间名称logging datafile '/oracle/ccmp-databases/ccmp_app' -表空间存储位置size 10m autoextend on next 10m maxsize 20480m extent management local; 使用Oracle客户端，创建临时表空间123456create temporary tablespace ccmp_app_temp -表空间名称tempfile '/oracle/ccmp-databases/ccmp_app_temp' -表空间存储位置size 10m autoextend on next 10m maxsize 20480m extent management local; 创建用户和指定表空间123SQL&gt; create user ccmp_app identified by 123456;SQL&gt; default tablespace ccmp_app;SQL&gt; temporary tablespace ccmp_app_temp; 赋予用户权限1SQL&gt; grant connect,resource,dba to ccmp_app;]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Oracle安装（三）]]></title>
+    <url>%2Foracle%2FOracle-3%2F</url>
+    <content type="text"><![CDATA[Linux下Oracle安装（三）配置监听文件和本地服务1# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/netca 创建监听服务，作为Oracle的服务端 使用tcp协议 Oracle的默认的端口是1521 是否要创建另外一个监听文件，这里就选NO 配置本地网络服务名，作为Oracle的客户端 这里填服务器的ip 这里选yes测试一下，之后就和之前一样结束即可，到此Oracle的安装部署就已经完成了]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Oracle安装（二）]]></title>
+    <url>%2Foracle%2FOracle-2%2F</url>
+    <content type="text"><![CDATA[Linux下Oracle安装（二）运行Oracle安装文件 123# su oracle# source ~/.bash_profile# /opt/oracle/database/runInstaller -jreLoc /opt/jdk1.7.0_80/ 运行Oracle自带脚本12# /oracle/app/oraInventory/orainstRoot.sh# /oracle/app/oracle/product/11.2.0/dbhome_1/root.sh 安装数据库1# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/dbca 这里有3个模板，在这里就使用第一个，一般用途或事务处理 在这里需要填上之前在环境变量文件中写的sid Oracle的EM资料档案库，可以做到很多的功能实现，可以做到很多的功能，但是如果是不需要的话就把钩去掉 在这里设置用户密码，可以让用户的密码单独不一样，在这里就设置成一样的 这里使用文件系统 在这里设置闪回区大小，建议20~30GB，这个要根据磁盘的时间情况设置，闪回区如果满了Oracle数据库会停止，所以这个需要注意 说明示例，这里不需要 配置Oracle的默认的一些系统配置，这里需要注意的是字符集，这个需要根据需求修改 这样数据库的创建dbca的部分就安装完成了]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Oracle安装（一）]]></title>
+    <url>%2Foracle%2Foracle-1%2F</url>
+    <content type="text"><![CDATA[Linux下Oracle安装（一）在Linux中安装Oracle主要有以下几步 安装Oracle依赖包 1# yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686 创建Oracle对应目录并设置权限 12# mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle# mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory 安装图形界面 123456# yum install xhost# yum grouplist# yum groupinstall "X Window System"# yum groupinstall Desktop# yum install xterm# yum install xclock 设置图形界面显示位置 export DISPLAY=客户端IP:0.0 创建Oracle系统用户 1234# groupadd oinstall # groupadd dba # useradd -g oinstall -G dba oracle # passwd oracle 修改系统内核（可选） vi /etc/sysctl.conf 新增内容如下： kernel.shmall = 2097152 kernel.shmmax = 536870912 kernel.shmmni = 4096 kernel.sem = 250 32000 100 128 fs.aio-max-nr = 1048576 fs.file-max = 6815744 net.ipv4.ip_local_port_range = 9000 65500 net.core.rmem_default = 262144 net.core.rmem_max = 4194304 net.core.wmem_default = 262144 net.core.wmem_max = 1048586 配置文件限制（可选） vi /etc/security/limits.conf 内容如下： oracle soft nproc 2047 oracle hard nproc 16384 oracle soft nofile 1024 oracle hard nofile 65536 配置Oracle环境变量 12# su oracle# vi .bash_profile bash_profile内容修改如下： export ORACLE_BASE=/oracle/app/oracle #ORACLE基础目录 export ORACLE_HOME=/oracle/app/oracle/product/11.2.0/dbhome_1 #ORACLE安装目录 export ORACLE_SID=CCMP #SID export PATH=$ORACLE_HOME/bin:$PATH export ORACLE_TERM=xterm export TNS_ADMIN=$ORACLE_HOME/network/admin export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/oracm/lib:$ORACLE_HOME/lib export CLASSPATH=$CLASSPATH:$ORACLE_HOME/rdbms/jlib:$ORACLE_HOME/jlib:$ORACLE_HOME/network/lib export LANG=en_US.gbk export NLS_LANG=american_america.ZHS16GBK export EDITOR=vi PATH=$PATH:$HOME/.local/bin:$HOME/bin export PATH 使用Xshell/MobaXterm来显示界面]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[搭建跳板机]]></title>
     <url>%2Flinux%2Flinux-ssh-drawboard-1%2F</url>
     <content type="text"><![CDATA[前言近遇到这样一个问题，我在阿里云室架设了一台服务器，发现外部网元对服务器攻击非常平凡，都知道服务器开放出来的端口越多，对服务器的风险越大。如何来规避这些风险呢，下面具体说明在阿里云上搭建一个跳板机来访问内网服务器，提升服务器的安全。 描述一下目前的机器状况，梳理梳理： 机器 IP 用户名 备注 A 123.78.150.91 root 外网服务器，相当于桥梁的作用，跳板机 B 172.18.62.123 root 目标服务器，处于内网 C 123.123.123.123 win 自己的电脑 解决方法通俗地说：就是在机器C上使用xshell/mobaXterm软件连接A机器，自动转向到B机器上。 实现前的准备每台都要安装ssh的客户端，在这里我使用的是centos7，都自带ssh。如果是使用其他版本Linux，请手动Google一下咯。 介绍一下使用到的ssh参数反向代理ssh -fCNR 正向代理ssh -fCNL -f 后台执行ssh指令-C 允许压缩数据-N 不执行远程指令-R 将远程主机(服务器)的某个端口转发到本地端指定机器的指定端口-L 将本地机(客户机)的某个端口转发到远端指定机器的指定端口-p 指定远程主机的端口 首先在A上面操作建立A机器到B机器的反向代理，具体指令为ssh -fCNR [B机器IP或省略]:[B机器端口]:[A机器的IP]:[A机器端口] [登陆B机器的用户名@服务器IP] 在这里我使用了B机器的2222端口，以及A机器的22端口，按照上面的指令就是这样子的操作 1ssh -ngfNTR 2222:172.18.62.123:22 root@123.78.150.91 -o ServerAliveInterval=300 检验是否已经启动了可以使用ps aux | grep ssh指令来查看 阿里云打开端口A服务器要打开2222B服务器要打开22，仅限A服务器访问 接着在B上面操作建立B机器的ssh-key 1ssh-keygen 然后一直按回车就可以了，将~/ssh/id_rsa.pub拷贝给A服务器~/ssh/authorized_keys 在B上用autossh建立稳定隧道centos7上没有默认安装autossh的，所以使用一下命令安装 1yum install autossh 在B服务器上使用autossh建立稳定隧道 1autossh -p 22 -M 6777 -fNR 2222:127.0.0.1:22 root@123.78.150.91 命令说明-M 6777 这个表示是监控端口，检测到这个端口不通会重新连接2222:127.0.0.1:22 2222表示需要在远程主机上开启的端口，22表示本地的ssh端口root@123.78.150.91 -p 22 root为vps上面的用户，22为vps ssh端口 现在就可以在A服务器使用SSH端口为2222访问B服务器了]]></content>
