@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JAVA动态代理机制]]></title>
+    <url>%2Fjava%2Fjava-proxy-1%2F</url>
+    <content type="text"><![CDATA[JAVA动态代理机制以及使用场景什么是代理？大道理上讲代理是一种软件设计模式，目的地希望能做到代码重用。具体上讲，代理这种设计模式是通过不直接访问被代理对象的方式，而访问被代理对象的方法。这个就好比 商户—-&gt;明星经纪人(代理)—-&gt;明星这种模式。我们可以不通过直接与明星对话的情况下，而通过明星经纪人(代理)与其产生间接对话。 什么情况下使用代理？ 设计模式中有一个设计原则是开闭原则，是说对修改关闭对扩展开放，我们在工作中有时会接手很多前人的代码，里面代码逻辑让人摸不着头脑(sometimes the code is really like shit)，这时就很难去下手修改代码，那么这时我们就可以通过代理对类进行增强。 我们在使用RPC框架的时候，框架本身并不能提前知道各个业务方要调用哪些接口的哪些方法 。那么这个时候，就可用通过动态代理的方式来建立一个中间人给客户端使用，也方便框架进行搭建逻辑，某种程度上也是客户端代码和框架松耦合的一种表现。 Spring的AOP机制就是采用动态代理的机制来实现切面编程。 静态代理和动态代理我们根据加载被代理类的时机不同，将代理分为静态代理和动态代理。如果我们在代码编译时就确定了被代理的类是哪一个，那么就可以直接使用静态代理；如果不能确定，那么可以使用类的动态加载机制，在代码运行期间加载被代理的类这就是动态代理，比如RPC框架和Spring AOP机制。 静态代理我们先创建一个接口，遗憾的是java api代理机制求被代理类必须要实现某个接口，对于静态代理方式代理类也要实现和被代理类相同的接口；对于动态代理代理类则不需要显示的实现被代理类所实现的接口。 接口文件：IUser.java123public interface IUser &#123; public String getUserName();&#125; 明星：User.java1234567public class User implements IUser&#123; @Override public void getUserName() &#123; return "我叫Fighting"; &#125;&#125; 经纪人：UserProxyFactory.java1234567891011121314151617public class UserProxyFactory implements IUser &#123; private IUser user; public UserProxyFactory(IUser user)&#123; this.user = user; &#125; @Override public void getUserName() &#123; // TODO Auto-generated method stub System.out.println("代理开始"); this.user.sayHello(); System.out.println("代理结束"); &#125;&#125; 商户：app.java 1234567891011public class app &#123; public static void main(String[] args) &#123; // TODO Auto-generated method stub //user为被代理的对象，某些情况下 我们不希望修改已有的代码，我们采用代理来间接访问 User user = new User(); //创建代理类对象 UserProxyFactory proxy = new UserProxyFactory(user); //调用代理类对象的方法 System.out.println(proxy.getUserName()); &#125;&#125; 静态代理看起来是比较简单的，没有什么问题只不过是在代理类中引入了被代理类的对象而已。那么接下来我们看看动态代理。 动态代理IUser.java不变，User.java不变，UserProxyFactory.java发生改变 123456789101112131415161718192021222324public class UserProxyFactory &#123; private Object target; public UserProxyFactory(Object target) &#123; this.target = target; &#125; public Object getProxyInstance()&#123; return Proxy.newProxyInstance( target.getClass().getClassLoader(), target.getClass().getInterfaces(), new InvocationHandler() &#123; @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123; System.out.println("代理开始"); Object retVal = method.invoke(target, args); System.out.println("代理结束"); return retVal; &#125; &#125; ); &#125;&#125; 其中最重要的一点，类似于Spring AOP切面，在代理开始,代理结束地方加上逻辑，就成了切面方式了！这也是为什么要用代理的一个重要原因之一！你不用修改任何已经编写好的代码，只要使用代理就可以灵活的加入任何东西，将来不喜欢了，不用也不会影响原来的代码。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Oracle安装（四）]]></title>
     <url>%2Foracle%2FOracle-4%2F</url>
     <content type="text"><![CDATA[Linux下Oracle安装（四）启动监听和数据库123# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start# /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdbaSQL&gt; startup 设置dba密码1SQL&gt; alter user sys identified by 123456; 使用Oracle客户端，创建表空间1234567create tablespace ccmp_app -表空间名称logging datafile '/oracle/ccmp-databases/ccmp_app' -表空间存储位置size 10m autoextend on next 10m maxsize 20480m extent management local; 使用Oracle客户端，创建临时表空间123456create temporary tablespace ccmp_app_temp -表空间名称tempfile '/oracle/ccmp-databases/ccmp_app_temp' -表空间存储位置size 10m autoextend on next 10m maxsize 20480m extent management local; 创建用户和指定表空间123SQL&gt; create user ccmp_app identified by 123456;SQL&gt; default tablespace ccmp_app;SQL&gt; temporary tablespace ccmp_app_temp; 赋予用户权限1SQL&gt; grant connect,resource,dba to ccmp_app;]]></content>
