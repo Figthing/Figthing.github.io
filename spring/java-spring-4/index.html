@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="源码解读Spring IOC原理（四）IOC容器的高级特性介绍通过前面4篇文章对Spring IoC容器的源码分析，我们已经基本上了解了Spring IoC容器对Bean定义资源的定位、读入和解析过程，同时也清楚了当用户通过getBean方法向IoC容器获取被管理的Bean时，IoC容器对Bean进行的初始化和依赖注入过程，这些是Spring IoC容器的基本功能特性。Spring IoC容器还有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-10T08:11:35.660Z">
+<meta property="og:updated_time" content="2018-05-10T08:15:09.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="源码解读Spring IOC原理（四）">
 <meta name="twitter:description" content="源码解读Spring IOC原理（四）IOC容器的高级特性介绍通过前面4篇文章对Spring IoC容器的源码分析，我们已经基本上了解了Spring IoC容器对Bean定义资源的定位、读入和解析过程，同时也清楚了当用户通过getBean方法向IoC容器获取被管理的Bean时，IoC容器对Bean进行的初始化和依赖注入过程，这些是Spring IoC容器的基本功能特性。Spring IoC容器还有">
@@ -374,7 +374,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T16:11:35+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T16:15:09+08:00">
                 2018-05-10
               </time>
             
@@ -467,6 +467,7 @@
 
       
         <h4 id="源码解读Spring-IOC原理（四）"><a href="#源码解读Spring-IOC原理（四）" class="headerlink" title="源码解读Spring IOC原理（四）"></a>源码解读Spring IOC原理（四）</h4><h5 id="IOC容器的高级特性"><a href="#IOC容器的高级特性" class="headerlink" title="IOC容器的高级特性"></a>IOC容器的高级特性</h5><h6 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h6><p>通过前面4篇文章对Spring IoC容器的源码分析，我们已经基本上了解了Spring IoC容器对Bean定义资源的定位、读入和解析过程，同时也清楚了当用户通过getBean方法向IoC容器获取被管理的Bean时，IoC容器对Bean进行的初始化和依赖注入过程，这些是Spring IoC容器的基本功能特性。Spring IoC容器还有一些高级特性，如使用lazy-init属性对Bean预初始化、FactoryBean产生或者修饰Bean对象的生成、IoC容器初始化Bean过程中使用BeanPostProcessor后置处理器对Bean声明周期事件管理和IoC容器的autowiring自动装配功能等。</p>
+<a id="more"></a>
 <h6 id="Spring-IoC容器的lazy-init属性实现预实例化"><a href="#Spring-IoC容器的lazy-init属性实现预实例化" class="headerlink" title="Spring IoC容器的lazy-init属性实现预实例化"></a><strong>Spring IoC容器的lazy-init属性实现预实例化</strong></h6><p>通过前面我们对IoC容器的实现和工作原理分析，我们知道IoC容器的初始化过程就是对Bean定义资源的定位、载入和注册，此时容器对Bean的依赖注入并没有发生，依赖注入主要是在应用程序第一次向容器索取Bean时，通过getBean方法的调用完成。</p>
 <p> 当Bean定义资源的<bean>元素中配置了lazy-init属性时，容器将会在初始化的时候对所配置的Bean进行预实例化，Bean的依赖注入在容器初始化的时候就已经完成。这样，当应用程序第一次向容器索取被管理的Bean时，就不用再初始化和对Bean进行依赖注入了，直接从容器中获取已经完成依赖注入的现成Bean，可以提高应用第一次向容器获取Bean的性能。</bean></p>
 <p>下面我们通过代码分析容器预实例化的实现过程：</p>
