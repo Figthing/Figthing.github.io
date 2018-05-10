@@ -328,6 +328,830 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/java-pojo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/java/java-pojo/" itemprop="url">JavaEE PO VO BO DTO POJO DAO 整理总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T10:06:00+08:00">
+                2018-02-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-12T10:25:36+08:00">
+                2018-02-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  840
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/1.jpg" alt=""></p>
+<ol>
+<li><p><strong>DAO[data access object]数据访问对象</strong></p>
+<blockquote>
+<p>DAO层对开发人员黑盒，由架构师设计封装。<br>在很长一段时间内，我将它理解为对数据库的访问，后面随着项目的积累。<br>发现自己的理解相对狭隘，对数据访问不仅仅指的是对数据库的访问。<br>假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。</p>
+</blockquote>
+</li>
+<li><p><strong>DTO[data transfer object]数据传输对象</strong></p>
+<blockquote>
+<p>假设数据表中存在20个字段，但是在页面展示列表的时候，这20个字段显然都不会用到。<br>我想对其中的5个字段进行展示，而且这5个字段展示的时候，也并不是数据库中他们原有的样子。<br>还需要进行计算、截取、业务代码转名称 …..等等<br>数据传输对象因此而被诞生，一是能提高数据传输的速度，二能隐藏后端表结构。</p>
+</blockquote>
+</li>
+<li><p><strong>PO[persistant object]持久层对象</strong></p>
+<blockquote>
+<p>持久对象属性和数据库中的字段是一一对应的，数据库中的一条数据可以理解为一个持久对象。<br>因ORM框架的广泛使用而被引入到 JavaEE 项目设计当中。</p>
+</blockquote>
+</li>
+<li><p><strong>BO[bussiness object]业务对象</strong></p>
+<blockquote>
+<p>业务对象顾名思义是在业务处理中抽象出来的对象，里面除了get/set 方法外，也可以有对字段进行业务处理的方法。<br>假设你要对一个班级进行业务处理，其中的学生、教师、甚至是桌椅板凳都是业务对象的组成部分。<br>当然其中的学生、教室….都可以是和数据库对应的PO。</p>
+</blockquote>
+</li>
+<li><p><strong>VO[value object]值对象</strong></p>
+<blockquote>
+<p>值对象也可以称做页面对象，如果称做页面对象，那门它所代表的将是整个页面展示层的对象。<br>可以由需要的业务对象进行的换算转换而来。<br>如果称呼他为值对象的话，那门他可以理解为存放业务对象的一个地方。<br>假设锅碗瓢盆分别为对应的业务对象的话，那门整个碗柜就是一个值对象。</p>
+</blockquote>
+</li>
+<li><p><strong>POJO[plain ordiary java object] 简单java对象</strong></p>
+<blockquote>
+<p>简单java对象应该是JavaEE世界里面最灵活的对象。<br>在简单系统中，如果从数据库到页面展示都是POJO的话，它可以是DTO。<br>如果从数据库中到业务处理中都是POJO的话，他也可以是BO。<br>同样如果从数据库到整个页面的展示的话，它同样可以是VO。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>小结：</strong></p>
+<blockquote>
+<p>各个数据对象之间的转换是相当灵活的，在项目中可以定义上述对象的全部和其中的几种类型，这取决与架构师和需求。<br>在大型项目中，架构师在项目初期的任务除了搭建起整个开发环境以外，定义在系统中流转的数据结构对象同样是重重之重。<br>这项工作需要许多项目的积累和长期对软件开发的思考，多实践，多思考，提供最合适的数据对象解决方法，方能展现架构师的魅力。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/nodejs/npm-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/nodejs/npm-1/" itemprop="url">npm使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T11:19:00+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-05T11:33:32+08:00">
+                2018-02-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,259
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</p>
+<ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+</ul>
+<p>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。同样可以通过输入 “npm -v” 来测试是否成功安装。命令如下，出现版本提示表示安装成功:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm -v</span></span><br><span class="line">2.3.0</span><br></pre></td></tr></table></figure>
+<p>如果你安装的是旧版本的 npm，可以很容易得通过 npm 命令来升级，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo npm install npm -g</span></span><br><span class="line">/usr/local/bin/npm -&gt; /usr/local/lib/node_modules/npm/bin/npm-cli.js</span><br><span class="line">npm@2.14.2 /usr/local/lib/node_modules/npm</span><br></pre></td></tr></table></figure>
+<p>如果是 Window 系统使用以下命令即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install npm -g</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/nodejs/npm-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/VirtualBox/VirtualBox-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/VirtualBox/VirtualBox-1/" itemprop="url">VirtualBox建立软链接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T11:15:00+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-05T11:18:29+08:00">
+                2018-02-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VirtualBox/" itemprop="url" rel="index">
+                    <span itemprop="name">VirtualBox</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  92
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="VirtualBox共享目录，建立软链接"><a href="#VirtualBox共享目录，建立软链接" class="headerlink" title="VirtualBox共享目录，建立软链接"></a>VirtualBox共享目录，建立软链接</h4><ol>
+<li><p>关闭 VirtualBox。</p>
+</li>
+<li><p>将VirtualBox安装目录的路径加入系统环境变量PATH中。</p>
+</li>
+<li><p>打开命令行窗口，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VBoxManage setextradata &#123;YOURVMNAME&#125;</span><br><span class="line">VBoxInternal2/SharedFoldersEnableSymlinksCreate/&#123;YOURSHAREFOLDERNAME&#125; 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参数说明<br>YOURVMNAME：为虚拟机中ubuntu系统的名<br>YOURSHAREFOLDERNAME：为共享的目录名称</p>
+</blockquote>
+</li>
+<li><p>“以管理者身份运行” VirtualBox　即可！</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-iptabls-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/linux-shell-iptabls-2/" itemprop="url">9个常用iptables配置实例</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T10:35:00+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-22T10:46:46+08:00">
+                2018-01-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,178
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>iptables命令可用于配置Linux的包过滤规则，常用于实现防火墙、NAT。咋一看iptables的配置很复杂，掌握规律后，其实用iptables完成指定任务并不难，下面我们通过具体实例，学习iptables的详细用法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux/linux-shell-iptabls-2/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-tc-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1513,798 +2337,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-hwclock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux-shell-hwclock/" itemprop="url">hwclock命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T08:33:00+08:00">
-                2018-01-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-19T16:30:00+08:00">
-                2018-01-19
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  482
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>hwclock命令是一个硬件时钟访问工具，它可以显示当前时间、设置硬件时钟的时间和设置硬件时钟为系统时间，也可设置系统时间为硬件时钟的时间。</p>
-<p>在Linux中有硬件时钟与系统时钟等两种时钟。硬件时钟是指主机板上的时钟设备，也就是通常可在BIOS画面设定的时钟。系统时钟则是指kernel中的时钟。当Linux启动时，系统时钟会去读取硬件时钟的设定，之后系统时钟即独立运作。所有Linux相关指令与函数都是读取系统时钟的设定。</p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--adjust：hwclock每次更改硬件时钟时，都会记录在/etc/adjtime文件中。使用--adjust参数，可使hwclock根据先前的记录来估算硬件时钟的偏差，并用来校正目前的硬件时钟；</span><br><span class="line">--debug：显示hwclock执行时详细的信息；</span><br><span class="line">--directisa：hwclock预设从/dev/rtc设备来存取硬件时钟。若无法存取时，可用此参数直接以I/O指令来存取硬件时钟；</span><br><span class="line">--hctosys：将系统时钟调整为与目前的硬件时钟一致；</span><br><span class="line">--set --date=&lt;日期与时间&gt;：设定硬件时钟；</span><br><span class="line">--show：显示硬件时钟的时间与日期；</span><br><span class="line">--systohc：将硬件时钟调整为与目前的系统时钟一致；</span><br><span class="line">--test：仅测试程序，而不会实际更改硬件时钟；</span><br><span class="line">--utc：若要使用格林威治时间，请加入此参数，hwclock会执行转换的工作；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux-shell-hwclock/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-software-vsftpd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux-software-vsftpd/" itemprop="url">vsftpd安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T20:39:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-16T15:28:11+08:00">
-                2018-01-16
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  469
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ul>
-<li>linux系统centos7</li>
-<li>vsftpd软件</li>
-<li>yum安装</li>
-</ul>
-<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h4><h5 id="安装vsftpd服务器"><a href="#安装vsftpd服务器" class="headerlink" title="安装vsftpd服务器"></a>安装vsftpd服务器</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install vsftpd</span></span><br></pre></td></tr></table></figure>
-<h5 id="安装一个加密工具"><a href="#安装一个加密工具" class="headerlink" title="安装一个加密工具"></a>安装一个加密工具</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install libdb-utils.x86_64</span></span><br></pre></td></tr></table></figure>
-<h5 id="修改配置VSFTP"><a href="#修改配置VSFTP" class="headerlink" title="修改配置VSFTP"></a>修改配置VSFTP</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/vsftpd/vsftpd.conf</span></span><br></pre></td></tr></table></figure>
-<h5 id="配置文件参数说明"><a href="#配置文件参数说明" class="headerlink" title="配置文件参数说明"></a>配置文件参数说明</h5><blockquote>
-<p> anonymous_enable=NO #设定不允许匿名访问<br> local_enable=YES #设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问。<br> chroot_list_enable=YES #使用户不能离开主目录<br> ascii_upload_enable=YES #允许使用ASCII模式上传<br> ascii_download_enable=YES #设定支持ASCII模式的上传和下载功能。<br> pam_service_name=vsftpd #PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证<br> guest_enable=YES #设定启用虚拟用户功能。<br> guest_username=ftp #指定虚拟用户的宿主用户。-RHEL/CentOS中已经有内置的ftp用户了<br> user_config_dir=/etc/vsftpd/vuser_conf #设定虚拟用户个人vsftp的RHEL/CentOS FTP服务文件存放路  径。<br> listen=YES    # 只监听ipv4的地址<br> xferlog_file=/var/log/xferlog    # 日志文件的路径<br> listen_port=1315        #FTP端口<br> pasv_enable=YES            #开启被动模式<br> pasv_min_port=10060<br> pasv_max_port=10070</p>
-</blockquote>
-<h5 id="创建chroot-list，将ftp用户加入其中"><a href="#创建chroot-list，将ftp用户加入其中" class="headerlink" title="创建chroot list，将ftp用户加入其中"></a>创建chroot list，将ftp用户加入其中</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /etc/vsftpd/chroot_list</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ftp &gt;&gt; /etc/vsftpd/chroot_list</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux-software-vsftpd/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-shell-grep/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux-shell-grep/" itemprop="url">GREP命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T15:38:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-19T16:29:52+08:00">
-                2018-01-19
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,408
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-a 不要忽略二进制数据。</span><br><span class="line">-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</span><br><span class="line">-b 在显示符合范本样式的那一行之外，并显示该行之前的内容。</span><br><span class="line">-c 计算符合范本样式的列数。</span><br><span class="line">-C&lt;显示列数&gt;或-&lt;显示列数&gt;  除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</span><br><span class="line">-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</span><br><span class="line">-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式。</span><br><span class="line">-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</span><br><span class="line">-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</span><br><span class="line">-F 将范本样式视为固定字符串的列表。</span><br><span class="line">-G 将范本样式视为普通的表示法来使用。</span><br><span class="line">-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</span><br><span class="line">-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</span><br><span class="line">-i 忽略字符大小写的差别。</span><br><span class="line">-l 列出文件内容符合指定的范本样式的文件名称。</span><br><span class="line">-L 列出文件内容不符合指定的范本样式的文件名称。</span><br><span class="line">-n 在显示符合范本样式的那一列之前，标示出该列的编号。</span><br><span class="line">-q 不显示任何信息。</span><br><span class="line">-R/-r 此参数的效果和指定“-d recurse”参数相同。</span><br><span class="line">-s 不显示错误信息。</span><br><span class="line">-v 反转查找。</span><br><span class="line">-w 只显示全字符合的列。</span><br><span class="line">-x 只显示全列符合的列。</span><br><span class="line">-y 此参数效果跟“-i”相同。</span><br><span class="line">-o 只输出文件中匹配到的部分。</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux-shell-grep/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-config-setallpath/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux-config-setallpath/" itemprop="url">Linux设置全路径显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T13:48:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-12T13:58:01+08:00">
-                2018-01-12
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  33
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Linux中，编辑<code>vi /etc/bashrc</code>文件，搜索<code>PS1=&quot;[\u@\h \W]</code>，将大写的W改为w</p>
-<blockquote>
-<p>修改前：<br><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/7.png" alt=""></p>
-<p>修改后:<br><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/6.png" alt=""></p>
-<p>效果显示:<br><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/8.png" alt=""></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2354,7 +2391,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2365,7 +2402,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2376,7 +2413,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
