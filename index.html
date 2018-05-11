@@ -328,6 +328,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/idea/idea-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/idea/idea-1/" itemprop="url">Idea中整合Docker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T11:20:00+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-11T11:21:10+08:00">
+                2018-05-11
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/idea/" itemprop="url" rel="index">
+                    <span itemprop="name">idea</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  365
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="IDEA在Windows上结合Docker"><a href="#IDEA在Windows上结合Docker" class="headerlink" title="IDEA在Windows上结合Docker"></a>IDEA在Windows上结合Docker</h4><p>在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。</p>
+<h5 id="虚拟机（192-168-3-60）"><a href="#虚拟机（192-168-3-60）" class="headerlink" title="虚拟机（192.168.3.60）"></a>虚拟机（192.168.3.60）</h5><p>在虚拟机上安装Docker，我这里安装的是<code>Docker version 1.13.1, build 092cba3</code>。编辑Docker运行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vi /etc/systemd/system/docker.service</span></span><br></pre></td></tr></table></figure>
+<p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> systemctl start docker</span></span><br></pre></td></tr></table></figure>
+<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> netstat -anp|grep 2375</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>在虚拟机上的配置就完毕了。</p>
+<h5 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h5><p>在windows系统环境变量中新建DOCKER_HOST,值为tcp://192.168.3.60:2375</p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/2.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>打开Idea，安装Docker插件</p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/3.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>设置Docker远程访问地址为tcp://192.168.3.60:2375</p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/4.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>在Idea的运行中，运行Docker，就可查看到远程Docker的服务了</p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/5.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>我们现在在POM.xml中增加插件并设置要编译后的文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">        &lt;groupId&gt;com.spotify&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;configuration&gt;</span><br><span class="line">          &lt;imageName&gt;test/test:1.0&lt;/imageName&gt;</span><br><span class="line">          &lt;baseImage&gt;java&lt;/baseImage&gt;</span><br><span class="line">          &lt;entryPoint&gt;["java", "-jar", "/$&#123;project.build.finalName&#125;.jar"]&lt;/entryPoint&gt;</span><br><span class="line">          &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">              &lt;targetPath&gt;/&lt;/targetPath&gt;</span><br><span class="line">              &lt;directory&gt;$&#123;project.build.directory&#125;&lt;/directory&gt;</span><br><span class="line">              &lt;include&gt;$&#123;project.build.finalName&#125;.jar&lt;/include&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">          &lt;/resources&gt;</span><br><span class="line">        &lt;/configuration&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<p>执行<code>mvn clean package docker:build</code>，就可以进行远程编译了。编译后在会target下生成一个Dockerfile</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM java</span><br><span class="line">ADD /demo-1.0-SNAPSHOT.jar //</span><br><span class="line">ENTRYPOINT ["java", "-jar", "/demo-1.0-SNAPSHOT.jar"]</span><br></pre></td></tr></table></figure>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/6.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>查看远程编译后的包</p>
+<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/7.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/spring/java-spring-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2088,229 +2299,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux-ssh-drawboard-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux-ssh-drawboard-1/" itemprop="url">搭建跳板机</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T10:44:00+08:00">
-                2018-03-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-12T11:22:42+08:00">
-                2018-03-12
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  735
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>近遇到这样一个问题，我在阿里云室架设了一台服务器，发现外部网元对服务器攻击非常平凡，都知道服务器开放出来的端口越多，对服务器的风险越大。如何来规避这些风险呢，下面具体说明在阿里云上搭建一个跳板机来访问内网服务器，提升服务器的安全。</p>
-<h5 id="描述一下目前的机器状况，梳理梳理："><a href="#描述一下目前的机器状况，梳理梳理：" class="headerlink" title="描述一下目前的机器状况，梳理梳理："></a>描述一下目前的机器状况，梳理梳理：</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">机器</th>
-<th style="text-align:left">IP</th>
-<th style="text-align:left">用户名</th>
-<th style="text-align:left">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">A</td>
-<td style="text-align:left">123.78.150.91</td>
-<td style="text-align:left">root</td>
-<td style="text-align:left">外网服务器，相当于桥梁的作用，跳板机</td>
-</tr>
-<tr>
-<td style="text-align:left">B</td>
-<td style="text-align:left">172.18.62.123</td>
-<td style="text-align:left">root</td>
-<td style="text-align:left">目标服务器，处于内网</td>
-</tr>
-<tr>
-<td style="text-align:left">C</td>
-<td style="text-align:left">123.123.123.123</td>
-<td style="text-align:left">win</td>
-<td style="text-align:left">自己的电脑</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux-ssh-drawboard-1/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2365,7 +2353,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2376,7 +2364,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2387,7 +2375,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
