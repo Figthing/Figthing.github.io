@@ -116,7 +116,7 @@
 <meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/docker/5.png?imageView2/2/w/600/h/600/q/75|imageslim">
 <meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/docker/6.png?imageView2/2/w/600/h/600/q/75|imageslim">
 <meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/docker/7.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:updated_time" content="2018-05-11T03:21:10.602Z">
+<meta property="og:updated_time" content="2018-05-11T03:33:15.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Idea中整合Docker">
 <meta name="twitter:description" content="IDEA在Windows上结合Docker在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。 虚拟机（192.168.3.60）在虚拟机上安装Docker，我这里安装的是Docker version 1.13.1, build 092cba3。编辑Docker运行文件 1# vi /etc/systemd/system/docker.servi">
@@ -382,7 +382,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-11T11:21:10+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-11T11:33:15+08:00">
                 2018-05-11
               </time>
             
@@ -482,6 +482,7 @@
 <p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> netstat -anp|grep 2375</span></span><br></pre></td></tr></table></figure></p>
 <p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>在虚拟机上的配置就完毕了。</p>
+<a id="more"></a>
 <h5 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h5><p>在windows系统环境变量中新建DOCKER_HOST,值为tcp://192.168.3.60:2375</p>
 <p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/2.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>打开Idea，安装Docker插件</p>
