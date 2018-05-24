@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/java/java-spring-5/</loc>
+    <lastmod>2018-05-24T14:16:12.884Z</lastmod>
+    <data>
+        <display>
+        <title>Spring 阅读源码笔记</title>
+        <pubTime>2018-05-24T14:06:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/java/java-jvm-1/</loc>
+    <lastmod>2018-05-24T13:58:42.992Z</lastmod>
+    <data>
+        <display>
+        <title>JVM运行原理</title>
+        <pubTime>2018-05-24T02:05:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>jvm</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/idea/idea-1/</loc>
     <lastmod>2018-05-11T03:33:15.246Z</lastmod>
     <data>
