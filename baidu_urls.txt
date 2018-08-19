@@ -1,6 +1,7 @@
+http://blog.appydm.com/java/java-jvm-2/
+http://blog.appydm.com/java/java-jvm-1/
 http://blog.appydm.com/uncategorized/linux-mobaxterm-1/
 http://blog.appydm.com/java/java-spring-5/
-http://blog.appydm.com/java/java-jvm-1/
 http://blog.appydm.com/idea/idea-1/
 http://blog.appydm.com/spring/java-spring-4/
 http://blog.appydm.com/spring/java-spring-3/

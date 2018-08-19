@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/java/java-jvm-1/</loc>
+    
+    <lastmod>2018-08-02T08:35:27.467Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.appydm.com/java/java-jvm-2/</loc>
+    
+    <lastmod>2018-08-02T07:50:24.815Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/uncategorized/linux-mobaxterm-1/</loc>
     
     <lastmod>2018-05-29T02:09:51.515Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://blog.appydm.com/java/java-spring-5/</loc>
     
     <lastmod>2018-05-24T14:16:12.884Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.appydm.com/java/java-jvm-1/</loc>
-    
-    <lastmod>2018-05-24T13:58:42.992Z</lastmod>
     
   </url>
   
