@@ -109,14 +109,14 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="在UML 2.0的13种图形中，类图是使用频率最高的UML图之一。Martin Fowler在其著作《UML Distilled: A Brief Guide to the Standard Object Modeling Language, Third Edition》（《UML精粹：标准对象建模语言简明指南（第3版）》）中有这么一段：“If someone were to come up to">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/uml/2.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/uml/3.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:updated_time" content="2018-03-06T03:39:25.604Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/2.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/3.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:updated_time" content="2019-01-09T09:58:58.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出UML类图（一）">
 <meta name="twitter:description" content="在UML 2.0的13种图形中，类图是使用频率最高的UML图之一。Martin Fowler在其著作《UML Distilled: A Brief Guide to the Standard Object Modeling Language, Third Edition》（《UML精粹：标准对象建模语言简明指南（第3版）》）中有这么一段：“If someone were to come up to">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
 
 
 
@@ -392,8 +392,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T11:39:25+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -502,7 +502,7 @@
 <p>在面向对象分析和设计的初级阶段，通常首先识别出实体类，绘制初始类图，此时的类图也可称为领域模型，包括实体类及其它们之间的相互关系。</p>
 <a id="more"></a>
 <h4 id="类的UML图示"><a href="#类的UML图示" class="headerlink" title="类的UML图示"></a>类的UML图示</h4><p>在UML中，类使用包含类名、属性和操作且带有分隔线的长方形来表示，如定义一个Employee类，它包含属性name、age和email，以及操作modifyInfo()，在UML类图中该类如图1所示：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/1.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>图1对应的Java代码片段如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;  </span><br><span class="line">    <span class="keyword">private</span> String email;  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modifyInfo</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        ......  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在UML类图中，类一般由三部分组成：</p>
@@ -532,9 +532,9 @@
 </li>
 </ol>
 <p>在类图2中，操作method1的可见性为public(+)，带入了一个Object类型的参数par，返回值为空(void)；操作method2的可见性为protected(#)，无参数，返回值为String类型；操作method3的可见性为private(-)，包含两个参数，其中一个参数为int类型，另一个为int[]类型，返回值为int类型。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/2.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/2.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>由于在Java语言中允许出现内部类，因此可能会出现包含四个部分的类图，如图3所示：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/3.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/3.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 
       
     </div>
@@ -797,7 +797,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

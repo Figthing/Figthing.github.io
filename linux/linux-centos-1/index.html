@@ -109,13 +109,13 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg">
-<meta property="og:updated_time" content="2018-03-02T02:40:46.643Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/9.jpg">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/10.jpg">
+<meta property="og:updated_time" content="2019-01-09T09:57:04.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7升级后无法重启或关机解决办法">
 <meta name="twitter:description" content="由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。 执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/9.jpg">
 
 
 
@@ -391,8 +391,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-02T10:40:46+08:00">
-                2018-03-02
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:57:04+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -486,10 +486,10 @@
         <p>由于CentOS7新发布的yum源升级包中systemd关机流程判断条件发生了变化，可能会导致centos7升级后，服务器重启时卡死。新发布的systemd进程的判断更加严格，如果某些进程不响应SIGTERM信号，可能会导致重启是挂死。该问题和业务进程对SIGTERM信号的处理有关。</p>
 <p>执行yum update systemd（或者yum update）将systemd系列软件包更新到219-19.el7版本之后，reboot会出现如下卡机界面导致系统挂住，无法重启： </p>
 <p><strong>现象：</strong></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/9.jpg" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/9.jpg" alt=""></p>
 <a id="more"></a>
 <p><strong>查询版本包：</strong></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/10.jpg" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/10.jpg" alt=""></p>
 <p><strong>解决办法：</strong></p>
 <ol>
 <li><p>新建/etc/systemd/system/rc-local.service并写入：</p>
@@ -746,7 +746,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

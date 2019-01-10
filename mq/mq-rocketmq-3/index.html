@@ -109,27 +109,27 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="关于多Master多Slave的说明 由于在之前的博客中已经搭建了双Master，其实多Master多Slave大同小异，因此这里并不会一步步的演示搭建多Master多Slave，而是从思路上，分析下重点应该注意的配置项。    这四台机器，对外是一个统一的整体，是一个rocketmq cluster，因此需要brokerClusterName保持统一 123机器是121的从，124机器是122的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/35.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/36.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/37.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/38.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/39.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/40.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/41.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/42.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/43.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/44.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/45.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/46.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/47.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/48.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/49.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:updated_time" content="2018-03-29T07:17:12.147Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/35.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/36.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/37.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/38.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/39.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/40.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/41.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/42.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/43.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/44.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/45.jpg?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/46.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/47.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/48.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/49.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:updated_time" content="2019-01-09T09:58:58.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RocketMQ实战（三）">
 <meta name="twitter:description" content="关于多Master多Slave的说明 由于在之前的博客中已经搭建了双Master，其实多Master多Slave大同小异，因此这里并不会一步步的演示搭建多Master多Slave，而是从思路上，分析下重点应该注意的配置项。    这四台机器，对外是一个统一的整体，是一个rocketmq cluster，因此需要brokerClusterName保持统一 123机器是121的从，124机器是122的">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim">
 
 
 
@@ -405,8 +405,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-29T15:17:12+08:00">
-                2018-03-29
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -499,7 +499,7 @@
       
         <p><strong>关于多Master多Slave的说明</strong></p>
 <p>由于在之前的博客中已经搭建了双Master，其实多Master多Slave大同小异，因此这里并不会一步步的演示搭建多Master多Slave，而是从思路上，分析下重点应该注意的配置项。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <blockquote>
 <ul>
 <li>这四台机器，对外是一个统一的整体，是一个rocketmq cluster，因此需要brokerClusterName保持统一</li>
@@ -512,10 +512,10 @@
 </blockquote>
 <a id="more"></a>
 <h4 id="Queue-in-Topic"><a href="#Queue-in-Topic" class="headerlink" title="Queue in Topic"></a>Queue in Topic</h4><p>对于RocketMQ而言，Topic只是一个逻辑上的概念，真正的消息存储其实是在Topic中的Queue中。想一想，为什么RocketMQ要这要设计呢？其实是为了消息的顺序消费，后文中将为大家介绍。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/35.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/36.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/37.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<h4 id="初步认识RocketMQ的核心模块"><a href="#初步认识RocketMQ的核心模块" class="headerlink" title="初步认识RocketMQ的核心模块"></a>初步认识RocketMQ的核心模块</h4><p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/38.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/35.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/36.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/37.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<h4 id="初步认识RocketMQ的核心模块"><a href="#初步认识RocketMQ的核心模块" class="headerlink" title="初步认识RocketMQ的核心模块"></a>初步认识RocketMQ的核心模块</h4><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/38.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <ul>
 <li>rocketmq-broker：接受生产者发来的消息并存储（通过调用rocketmq-store），消费者从这里取得消息。</li>
 <li>rocketmq-client：提供发送、接受消息的客户端API。</li>
@@ -534,21 +534,21 @@
 </ul>
 <p>在前面的博客当中，涉及的都是NormalProducer，调用传统的send方法，消息是无序的。接下来，我们来看看顺序消费。模拟这样一个场景，如果一个用户完成一个订单需要3条消息，比如订单的创建、订单的支付、订单的发货，很显然，同一个用户的订单消息必须要顺序消费，但是不同用户之间的订单可以并行消费。</p>
 <p>生产者端代码示例：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/39.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/39.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>注意，一个Message除了Topic/Tag外，还有Key的概念。上图的send方法不同于以往，有一个MessageQueueSelector，将用于指定特定的消息发往特定的队列当中！</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/40.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/40.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>注意，在以前普通消费消息时设置的回调是MessageListenerConcurrently，而顺序消费的回调设置是MessageListenerOrderly。</p>
 <p>当我们启动2个Consumer进行消费时，可以观察到：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/41.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/41.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>可以观察得到，虽然从全局上来看，消息的消费不是有序的，但是每一个订单下的3条消息是顺序消费的！</p>
 <p>其实，如果需要保证消息的顺序消费，那么很简单，首先需要做到一组需要有序消费的消息发往同一个broker的同一个队列上！其次消费者端采用有序Listener即可。</p>
 <p>这里，RocketMQ底层是如何做到消息顺序消费的，看一看源码你就能大概了解到，至少来说，在多线程消费场景下，一个线程只去消费一个队列上的消息，那么自然就保证了消息消费的顺序性，同时也保证了多个线程之间的并发性。也就是说其实broker并不能完全保证消息的顺序消费，它仅仅能保证的消息的顺序发送而已！</p>
 <p>关于多线程消费这块，RocketMQ早就替我们想好了，这样设置即可：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/42.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/42.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>想一想，在ActiveMQ中，我们如果想实现并发消费的话，恐怕还得搞个线程池提交任务吧，RocketMQ让我们的工作变得简单！</p>
 <h4 id="Transaction-Message"><a href="#Transaction-Message" class="headerlink" title="Transaction Message"></a>Transaction Message</h4><p>在说事务消息之前，我们先来说说分布式事务的那些事！</p>
 <p>什么是分布式事务，我的理解是一半事务。怎么说，比如有2个异构系统，A异构系统要做T1，B异构系统要做T2，要么都成功，要么都失败。要知道异构系统，很显然，不在一个数据库实例上，它们往往分布在不同物理节点上，本地事务已经失效。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/43.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/43.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <blockquote>
 <ul>
 <li>2阶段提交协议，Two-Phase Commit，是处理分布式事务的一种常见手段。2PC，存在2个重要角色：事务协调器（TC），事务执行者。</li>
@@ -559,20 +559,20 @@
 <p><strong>考虑生活中的场景：</strong></p>
 <p>我们去北京庆丰包子铺吃炒肝，先去营业员那里付款（Action1），拿到小票（Ticket），然后去取餐窗口排队拿炒肝（Action2）。思考2个问题：第一，为什么不在付款的同时，给顾客炒肝？如果这样的话，会增加处理时间，使得后面的顾客等待时间变长，相当于降低了接待顾客的能力（降低了系统的QPS）。第二，付了款，拿到的是Ticket，顾客为什么会接受？从心理上说，顾客相信Ticket会兑现炒肝。事实上也是如此，就算在最后炒肝没了，或者断电断水（系统出现异常），顾客依然可以通过Ticket进行退款操作，这样都不会有什么损失！（虽然这么说，但是实际上包子铺最大化了它的利益，如果炒肝真的没了，浪费了顾客的时间，不过顾客顶多发发牢骚，最后接受）</p>
 <p>生活已经告诉我们处理分布式事务，保证数据最终一致性的思路！这个Ticket（凭证）其实就是消息！</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/44.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/44.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>业务操作和消息的生成耦合在一起，保证了只要A银行的账户发生扣款，那么一定会生成一条转账消息。只要A银行系统的事务成功提交，我们可以通过实时消息服务，将转账消息通知B银行系统，如果B银行系统回复成功，那么A银行系统可以在table中设置这条转账消息的状态。</p>
 <p>这样耦合的方式，从架构上来看，就有点不太优雅，而且存在一些问题。比如说，消息的存储实质上是在A银行系统中的，如果A银行系统出了问题，将导致无法转账。如果解耦，将消息独立出来呢？</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/45.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/45.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>如上图所示，消息数据独立存储，业务和消息解耦，实质上消息的发送有2次，一条是转账消息，另一条是确认消息。</p>
 <p>到这里，我们先来看看基于RocketMQ的代码：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/46.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/46.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>生产者这里用到是：TransactionMQProducer。</p>
 <p>这里涉及到2个角色：本地事务执行器（代码中的TransactionExecuterImpl）、服务器回查客户端Listener（代码中的TransactionCheckListener）。</p>
 <p>如果事务消息发送到MQ上后，会回调  本地事务执行器；但是此时事务消息是prepare状态，对消费者还不可见，需要  本地事务执行器  返回RMQ一个确认消息。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/47.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/47.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>事务消息是否对消费者可见，完全由事务返回给RMQ的状态码决定（状态码的本质也是一条消息）。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/48.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/mq/49.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/48.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/49.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>生产者发送了2条消息给RMQ，有一条本地事务执行成功，有一条本地事务执行失败。</p>
 <p>2条业务消息 + 2条确认消息  因此是4条；</p>
 <p>注意，到消费者只消费了一条数据，就是只有告诉RMQ本地事务执行成功的那条消息才会被消费！因此是1条！</p>
@@ -848,7 +848,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

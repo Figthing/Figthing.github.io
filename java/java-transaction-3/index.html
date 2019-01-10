@@ -109,15 +109,15 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="最终一致性(一)TCC简介TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/7.jpeg">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/8.jpeg">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/9.jpeg">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/10.jpeg">
-<meta property="og:updated_time" content="2018-03-06T02:23:45.111Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/7.jpeg">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/8.jpeg">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/9.jpeg">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/10.jpeg">
+<meta property="og:updated_time" content="2019-01-09T09:58:58.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="说说分布式事务(三)">
 <meta name="twitter:description" content="最终一致性(一)TCC简介TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/7.jpeg">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/7.jpeg">
 
 
 
@@ -393,8 +393,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:23:45+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -485,14 +485,14 @@
       
 
       
-        <h4 id="最终一致性-一"><a href="#最终一致性-一" class="headerlink" title="最终一致性(一)"></a>最终一致性(一)</h4><h4 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h4><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/7.jpeg" alt=""></p>
+        <h4 id="最终一致性-一"><a href="#最终一致性-一" class="headerlink" title="最终一致性(一)"></a>最终一致性(一)</h4><h4 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h4><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/7.jpeg" alt=""></p>
 <a id="more"></a>
-<h4 id="TCC流程"><a href="#TCC流程" class="headerlink" title="TCC流程"></a>TCC流程</h4><p>TCC的关键流程如下图(以下单和扣减库存为例子)<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/8.jpeg" alt=""></p>
+<h4 id="TCC流程"><a href="#TCC流程" class="headerlink" title="TCC流程"></a>TCC流程</h4><p>TCC的关键流程如下图(以下单和扣减库存为例子)<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/8.jpeg" alt=""></p>
 <p>Q: 预生成订单失败了,为什么要通过TCC执行预处理数据回滚?<br>A: 可能预生成订单成功,但是接口返回失败(超时失败),所以预处理在某些情况下是有预处理数据,需要清理</p>
-<h4 id="TCC异常场景"><a href="#TCC异常场景" class="headerlink" title="TCC异常场景"></a>TCC异常场景</h4><p>在整个流程,我们主要需要关注的是cancel失败和confirm失败引起的数据不一致现象<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/9.jpeg" alt=""></p>
+<h4 id="TCC异常场景"><a href="#TCC异常场景" class="headerlink" title="TCC异常场景"></a>TCC异常场景</h4><p>在整个流程,我们主要需要关注的是cancel失败和confirm失败引起的数据不一致现象<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/9.jpeg" alt=""></p>
 <h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
 <li>TCC服务支持接口失败重试,所以对TCC暴露的接口都需要满足幂等性(根据事务Id很好满足)</li>
-<li>基于TCC的中心化事务一致性解决方法,各个应用服务器如果需要感知某次事务是否成功的成本很高,所以对于自身而言进行事务补偿成本就会很高.举个例子:<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/10.jpeg" alt=""></li>
+<li>基于TCC的中心化事务一致性解决方法,各个应用服务器如果需要感知某次事务是否成功的成本很高,所以对于自身而言进行事务补偿成本就会很高.举个例子:<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/10.jpeg" alt=""></li>
 </ol>
 <h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><ol>
 <li><p>是否一定需要TCC服务器? 不一定,可以让交易链路来充当TCC服务器的角色,但是长期来看,TCC相当于是一个公用的组件,所以其它地方也需要TCC分布式事务,可以公用这一个组件(交易链路可以完成TCC所能完成的一切操作,把TCC单独部署一个服务,仅仅是考虑整个系统的抽象结构和功能复用)</p>
@@ -764,7 +764,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

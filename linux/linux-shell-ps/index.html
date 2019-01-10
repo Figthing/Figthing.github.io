@@ -109,13 +109,13 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="简介要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的. 参数说明12345678-a：显示现行终端机下的所有进程，包括其他用户的进程-A：所有的进程均显示出来，与 -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/2.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/1.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/2.png">
 <meta property="og:updated_time" content="2018-01-08T05:18:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PS命令">
 <meta name="twitter:description" content="简介要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的. 参数说明12345678-a：显示现行终端机下的所有进程，包括其他用户的进程-A：所有的进程均显示出来，与 -">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/1.png">
 
 
 
@@ -486,11 +486,11 @@
         <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>要对进程进行监测和控制,首先必须要了解当前进程的情况,也就是需要查看当前进程,而ps命令就是最基本同时也是非常强大的进程查看命令.使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵尸、哪些进程占用了过多的资源等等.总之大部分信息都是可以通过执行该命令得到的.</p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a：显示现行终端机下的所有进程，包括其他用户的进程</span><br><span class="line">-A：所有的进程均显示出来，与 -e 具有同样的效用</span><br><span class="line">-u：以用户为主的进程状态</span><br><span class="line">-f：做一个更为完整的输出</span><br><span class="line">-e：等于“-A”</span><br><span class="line">x： 通常与 a 这个参数一起使用，可列出较完整信息</span><br><span class="line">l： 较长、较详细的将该 PID 的的信息列出</span><br><span class="line">j： 工作的格式 (jobs format)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="PS-L字段说明"><a href="#PS-L字段说明" class="headerlink" title="PS L字段说明"></a>PS L字段说明</h3><p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/1.png" alt=""></p>
+<h3 id="PS-L字段说明"><a href="#PS-L字段说明" class="headerlink" title="PS L字段说明"></a>PS L字段说明</h3><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/1.png" alt=""></p>
 <blockquote>
 <p>F    ：代表这个程序的旗标 (flag)， 4 代表使用者为 super user<br>S    ：代表这个程序的状态 (STAT)，关于各 STAT 的意义将在内文介绍<br>UID ：程序被该 UID 所拥有<br>PID ：就是这个程序的 ID ！<br>PPID ：则是其上级父程序的ID<br>C    ：CPU 使用的资源百分比<br>PRI ：这个是 Priority (优先执行序) 的缩写，详细后面介绍<br>NI    ：这个是 Nice 值，在下一小节我们会持续介绍<br>ADDR ：这个是 kernel function，指出该程序在内存的那个部分。如果是个 running的程序，一般就是 “-“<br>SZ    ：使用掉的内存大小<br>WCHAN ：目前这个程序是否正在运作当中，若为 - 表示正在运作<br>TTY ：登入者的终端机位置<br>TIME ：使用掉的 CPU 时间。<br>CMD ：所下达的指令为何</p>
 </blockquote>
-<h3 id="PS-AUX字段说明"><a href="#PS-AUX字段说明" class="headerlink" title="PS AUX字段说明"></a>PS AUX字段说明</h3><p><img src="http://p237jbzdy.bkt.clouddn.com/img/linux/2.png" alt=""></p>
+<h3 id="PS-AUX字段说明"><a href="#PS-AUX字段说明" class="headerlink" title="PS AUX字段说明"></a>PS AUX字段说明</h3><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/2.png" alt=""></p>
 <blockquote>
 <p>USER：该进程属于那个使用者账号的？<br>PID ：该进程的进程ID号。<br>%CPU：该进程使用掉的 CPU 资源百分比；<br>%MEM：该进程所占用的物理内存百分比；<br>VSZ ：该进程使用掉的虚拟内存量 (Kbytes)<br>RSS ：该进程占用的固定的内存量 (Kbytes)<br>TTY ：该进程是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。<br>START：该进程被触发启动的时间；<br>TIME ：该进程实际使用 CPU 运作的时间。<br>COMMAND：该程序的实际指令为什么？</p>
 <blockquote>
@@ -796,7 +796,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

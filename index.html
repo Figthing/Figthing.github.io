@@ -389,8 +389,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T15:50:24+08:00">
-                2018-08-02
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -478,9 +478,9 @@
       
         
           <h4 id="JVM运行原理详解"><a href="#JVM运行原理详解" class="headerlink" title="JVM运行原理详解"></a>JVM运行原理详解</h4><h5 id="JVM简析"><a href="#JVM简析" class="headerlink" title="JVM简析"></a>JVM简析</h5><p>作为一名Java使用者，掌握JVM的体系结构也是很有必要的。<br>说起Java，我们首先想到的是Java编程语言，然而事实上，Java是一种技术，它由四方面组成：Java编程语言、Java类文件格式、Java虚拟机和Java应用程序接口(Java API)。它们的关系如下图所示：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>Java平台由Java虚拟机和Java应用程序接口搭建，Java语言则是进入这个平台的通道，用Java语言编写并编译的程序可以运行在这个平台上。这个平台的结构如下图所示： 运行期环境代表着Java平台，开发人员编写Java代码(.java文件)，然后将之编译成字节码(.class文件)，再然后字节码被装入内存，一旦字节码进入虚拟机，它就会被解释器解释执行，或者是被即时代码发生器有选择的转换成机器码执行。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/2.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/2.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>JVM在它的生存周期中有一个明确的任务，那就是运行Java程序，因此当Java程序启动的时候，就产生JVM的一个实例；当程序运行结束的时候，该实例也跟着消失了。 在Java平台的结构中, 可以看出，Java虚拟机(JVM) 处在核心的位置，是程序与底层操作系统和硬件无关的关键。它的下方是移植接口，移植接口由两部分组成：适配器和Java操作系统, 其中依赖于平台的部分称为适配器；JVM 通过移植接口在具体的平台和操作系统上实现；在JVM 的上方是Java的基本类库和扩展类库以及它们的API， 利用Java API编写的应用程序(application) 和小程序(Java applet) 可以在任何Java平台上运行而无需考虑底层平台, 就是因为有Java虚拟机(JVM)实现了程序与操作系统的分离，从而实现了Java 的平台无关性。</p>
 <p>下面我们从JVM的基本概念和运过程程这两个方面入手来对它进行深入的研究。</p>
           <!--noindex-->
@@ -587,8 +587,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T16:35:27+08:00">
-                2018-08-02
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1162,8 +1162,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-11T11:33:15+08:00">
-                2018-05-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:59:02+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1256,7 +1256,7 @@
 <p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl daemon-reload</span><br><span class="line"><span class="meta">#</span> systemctl start docker</span><br></pre></td></tr></table></figure>
 <p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> netstat -anp|grep 2375</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>在虚拟机上的配置就完毕了。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1555,8 +1555,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T16:14:58+08:00">
-                2018-05-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1651,7 +1651,7 @@
 </ul>
 </blockquote>
 <p>BeanFactory接口定义了Spring IoC容器的基本功能规范，是Spring IoC容器所应遵守的最底层和最基本的编程规范。BeanFactory接口中定义了几个getBean方法，就是用户向IoC容器索取管理的Bean的方法，我们通过分析其子类的具体实现，理解Spring IoC容器在用户索取Bean时如何完成依赖注入。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/spring/8.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/8.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>在BeanFactory中我们看到getBean（String…）函数，它的具体实现在AbstractBeanFactory中</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1757,8 +1757,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T16:14:42+08:00">
-                2018-05-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1845,7 +1845,7 @@
 
       
         
-          <h4 id="源码解读Spring-IOC原理（二）"><a href="#源码解读Spring-IOC原理（二）" class="headerlink" title="源码解读Spring IOC原理（二）"></a>源码解读Spring IOC原理（二）</h4><h5 id="IOC容器的初始化？"><a href="#IOC容器的初始化？" class="headerlink" title="IOC容器的初始化？"></a>IOC容器的初始化？</h5><p>IoC容器的初始化包括BeanDefinition的Resource定位、载入和注册这三个基本的过程。我们以ApplicationContext为例讲解，ApplicationContext系列容器也许是我们最熟悉的，因为web项目中使用的XmlWebApplicationContext就属于这个继承体系，还有ClasspathXmlApplicationContext等，其继承体系如下图所示<br><img src="http://p237jbzdy.bkt.clouddn.com/img/spring/4.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""><br>ApplicationContext允许上下文嵌套，通过保持父上下文可以维持一个上下文体系。对于bean的查找可以在这个上下文体系中发生，首先检查当前上下文，其次是父上下文，逐级向上，这样为不同的Spring应用提供了一个共享的bean定义环境。</p>
+          <h4 id="源码解读Spring-IOC原理（二）"><a href="#源码解读Spring-IOC原理（二）" class="headerlink" title="源码解读Spring IOC原理（二）"></a>源码解读Spring IOC原理（二）</h4><h5 id="IOC容器的初始化？"><a href="#IOC容器的初始化？" class="headerlink" title="IOC容器的初始化？"></a>IOC容器的初始化？</h5><p>IoC容器的初始化包括BeanDefinition的Resource定位、载入和注册这三个基本的过程。我们以ApplicationContext为例讲解，ApplicationContext系列容器也许是我们最熟悉的，因为web项目中使用的XmlWebApplicationContext就属于这个继承体系，还有ClasspathXmlApplicationContext等，其继承体系如下图所示<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/4.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""><br>ApplicationContext允许上下文嵌套，通过保持父上下文可以维持一个上下文体系。对于bean的查找可以在这个上下文体系中发生，首先检查当前上下文，其次是父上下文，逐级向上，这样为不同的Spring应用提供了一个共享的bean定义环境。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/spring/java-spring-2/" rel="contents">
@@ -1950,8 +1950,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T16:14:22+08:00">
-                2018-05-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -2433,7 +2433,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -109,17 +109,17 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="JAVA调优之JVM-GC在分享之前需要给大家说一下，JVM的堆一般分为新生代,老年代，永久代这三个区间，下面我们就来说明根据各种情况来进行排查，并对这三个区进行分配合理的区间。 服务器  应用：dal-service-5.1.4.0-SNAPSHOT.jar CPU：24核 内存：125G JDK：8.144">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/13.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/14.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/15.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/16.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/17.png?imageView2/2/w/600/h/600/q/75|imageslim">
-<meta property="og:updated_time" content="2018-08-02T08:35:27.467Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/13.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/14.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/15.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/16.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/17.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta property="og:updated_time" content="2019-01-09T09:58:58.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA调优之JVM-GC">
 <meta name="twitter:description" content="JAVA调优之JVM-GC在分享之前需要给大家说一下，JVM的堆一般分为新生代,老年代，永久代这三个区间，下面我们就来说明根据各种情况来进行排查，并对这三个区进行分配合理的区间。 服务器  应用：dal-service-5.1.4.0-SNAPSHOT.jar CPU：24核 内存：125G JDK：8.144">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim">
 
 
 
@@ -395,8 +395,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T16:35:27+08:00">
-                2018-08-02
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -499,20 +499,20 @@
 <h5 id="启动应用"><a href="#启动应用" class="headerlink" title="启动应用"></a>启动应用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ./dal-service-5.1.4.0-SNAPSHOT.jar --spring.profiles.active=test</span><br></pre></td></tr></table></figure>
 <p>使用上面的命令，我们的应用就启动完成来，然后我们来看一下应用的各种数据。</p>
 <ol>
-<li><p>查看应用的PID进程号，使用<code>JPS</code><br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<li><p>查看应用的PID进程号，使用<code>JPS</code><br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/12.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 </li>
-<li><p>查看CPU和内存情况，可以使用<code>TOP</code>，并按下<code>1</code><br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/13.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<li><p>查看CPU和内存情况，可以使用<code>TOP</code>，并按下<code>1</code><br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/13.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 </li>
 </ol>
 <p>现在应用的基本情况就知道来，但这只是一个基础的信息，怎样能看详细的资源，比如GC怎么回收的，GC触发时间，GC频率等。现在我们把应用停了，加载GC的一些参数和GC的日志，再次启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">java \</span><br><span class="line">-verbose:gc \</span><br><span class="line">-XX:+PrintGCDetails \</span><br><span class="line">-XX:+PrintGCTimeStamps \</span><br><span class="line">-XX:+PrintHeapAtGC \</span><br><span class="line">-Xloggc:/home/iot/dal-service-gc.log \</span><br><span class="line">-jar /home/iot/portal/dal-service-5.1.4.0-SNAPSHOT.jar --spring.profiles.active=test</span><br></pre></td></tr></table></figure>
 <h5 id="查看GC情况"><a href="#查看GC情况" class="headerlink" title="查看GC情况"></a>查看GC情况</h5><p>查看GC情况，有2种方法可以查看</p>
-<p>1、直接查看dal-service-gc.log日志文件<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/14.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>1、直接查看dal-service-gc.log日志文件<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/14.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>2、使用<code>jstatd</code>进行监听，然后通过<code>jvisualvm</code>来查看</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstatd -J-Djava.security.policy=/home/iot/jdk1.8.0_131/bin/jstatd.all.policy -J-Djava.rmi.server.hostname=192.168.156.22 -p 1099 -J-Djava.rmi.server.logCalls=true</span><br></pre></td></tr></table></figure>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/15.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/15.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>其实，我们在日志中就看见当应用启动的时候执行来3次FULL GC。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/16.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/16.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>新生代情况：</p>
 <ul>
 <li>PSYoungGen      total 3185152K, used 3185120K<ul>
@@ -536,7 +536,7 @@
 </li>
 </ul>
 <h5 id="优化JVM"><a href="#优化JVM" class="headerlink" title="优化JVM"></a>优化JVM</h5><p>大家都知道FULL GC一次，将会降低TPS，并且会暂用线程时间。本次优化让应用尽量启动后不再产生FULL GC，我们调整一下启动命令。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/jvm/17.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/jvm/17.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>调整后，我们虽然进行来GC，但是没有再次执行FULL GC了，这也算调整完成了。</p>
 <h5 id="启动命令参数"><a href="#启动命令参数" class="headerlink" title="启动命令参数"></a>启动命令参数</h5><p>–  GC</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCDetails    		GC内容</span><br><span class="line">-XX:+PrintGCTimeStamps 		输出GC的时间戳（以基准时间的形式）</span><br><span class="line">-XX:+PrintHeapAtGC 			在进行GC的前后打印出堆的信息</span><br><span class="line">-Xloggc:../logs/gc.log 		日志文件的输出路径</span><br></pre></td></tr></table></figure>
@@ -811,7 +811,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -389,8 +389,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T11:56:12+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -483,7 +483,7 @@
 </blockquote>
 <p>根据以上描述绘制初始类图。</p>
 <h4 id="参考解决方案："><a href="#参考解决方案：" class="headerlink" title="参考解决方案："></a>参考解决方案：</h4><p>参考类图如下：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/15.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/15.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/uml/uml-4/" rel="contents">
@@ -588,8 +588,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T11:45:03+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -677,7 +677,7 @@
       
         
           <h4 id="类与类之间的关系（2）"><a href="#类与类之间的关系（2）" class="headerlink" title="类与类之间的关系（2）"></a>类与类之间的关系（2）</h4><h5 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h5><p>依赖(Dependency)关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需要表示一个事物使用另一个事物时使用依赖关系。大多数情况下，依赖关系体现在某个类的方法使用另一个类的对象作为参数。在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。例如：驾驶员开车，在Driver类的drive()方法中将Car类型的对象car作为一个参数传递，以便在drive()方法中能够调用car的move()方法，且驾驶员的drive()方法依赖车的move()方法，因此类Driver依赖类Car，如图1所示：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/11.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/11.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>在系统实施阶段，依赖关系通常通过三种方式来实现，第一种也是最常用的一种方式是如图1所示的将一个类的对象作为另一个类中方法的参数，第二种方式是在一个类的方法中将另一个类的对象作为其局部变量，第三种方式是在一个类的方法中调用另一个类的静态方法。图1对应的Java代码片段如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Driver</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">(Car car)</span> </span>&#123;  </span><br><span class="line">        car.move();  </span><br><span class="line">    &#125;  </span><br><span class="line">    ……  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        ......  </span><br><span class="line">    &#125;  </span><br><span class="line">    ……  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
@@ -784,8 +784,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T11:34:18+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -875,7 +875,7 @@
           <h4 id="类与类之间的关系（1）"><a href="#类与类之间的关系（1）" class="headerlink" title="类与类之间的关系（1）"></a>类与类之间的关系（1）</h4><p>在软件系统中，类并不是孤立存在的，类与类之间存在各种关系，对于不同类型的关系，UML提供了不同的表示方式。</p>
 <h4 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h4><p>关联(Association)关系是类与类之间最常用的一种关系，它是一种结构化关系，用于表示一类对象与另一类对象之间有联系，如汽车和轮胎、师傅和徒弟、班级和学生等等。在UML类图中，用实线连接有关联关系的对象所对应的类，在使用Java、C#和C++等编程语言实现关联关系时，通常将一个类的对象作为另一个类的成员变量。在使用类图表示关联关系时可以在关联线上标注角色名，一般使用一个表示两者之间关系的动词或者名词表示角色名（有时该名词为实例对象名），关系的两端代表两种不同的角色，因此在一个关联关系中可以包含两个角色名，角色名不是必须的，可以根据需要增加，其目的是使类之间的关系更加明确。</p>
 <p>如在一个登录界面类LoginForm中包含一个JButton类型的注册按钮loginButton，它们之间可以表示为关联关系，代码实现时可以在LoginForm中定义一个名为loginButton的属性对象，其类型为JButton。如图1所示：</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/uml/4.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/4.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>图1对应的Java代码片段如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginForm</span> </span>&#123;  </span><br><span class="line"><span class="keyword">private</span> JButton loginButton; <span class="comment">//定义为成员变量  </span></span><br><span class="line">……  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JButton</span> </span>&#123;  </span><br><span class="line">    ……  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
@@ -982,8 +982,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T11:39:25+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1190,8 +1190,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:48:06+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1280,7 +1280,7 @@
         
           <h4 id="业务回补"><a href="#业务回补" class="headerlink" title="业务回补"></a>业务回补</h4><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>业务对资金进行操作</p>
 <h4 id="简化流程"><a href="#简化流程" class="headerlink" title="简化流程"></a>简化流程</h4><p>整个资金平台会和支付宝进行交互(冻结金额,出账金额),对这两个动作支付宝都会返回成功或者失败,当然还有异常流接口超时(实际成功/实际失败).</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/12.png" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/12.png" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/java/java-transaction-5/" rel="contents">
@@ -1385,8 +1385,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:48:23+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1473,7 +1473,7 @@
 
       
         
-          <h4 id="最终一致性-二"><a href="#最终一致性-二" class="headerlink" title="最终一致性(二)"></a>最终一致性(二)</h4><h4 id="基于MQ的分布式事务补偿机制"><a href="#基于MQ的分布式事务补偿机制" class="headerlink" title="基于MQ的分布式事务补偿机制"></a>基于MQ的分布式事务补偿机制</h4><h4 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h4><p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/11.jpeg" alt=""></p>
+          <h4 id="最终一致性-二"><a href="#最终一致性-二" class="headerlink" title="最终一致性(二)"></a>最终一致性(二)</h4><h4 id="基于MQ的分布式事务补偿机制"><a href="#基于MQ的分布式事务补偿机制" class="headerlink" title="基于MQ的分布式事务补偿机制"></a>基于MQ的分布式事务补偿机制</h4><h4 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h4><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/11.jpeg" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/java/java-transaction-4/" rel="contents">
@@ -1578,8 +1578,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:23:45+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -1666,7 +1666,7 @@
 
       
         
-          <h4 id="最终一致性-一"><a href="#最终一致性-一" class="headerlink" title="最终一致性(一)"></a>最终一致性(一)</h4><h4 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h4><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/7.jpeg" alt=""></p>
+          <h4 id="最终一致性-一"><a href="#最终一致性-一" class="headerlink" title="最终一致性(一)"></a>最终一致性(一)</h4><h4 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h4><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TCC是由支付宝架构师提供的一种柔性解决分布式事务解决方案,主要包括三个步骤:<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/7.jpeg" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/java/java-transaction-3/" rel="contents">
@@ -1966,8 +1966,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:09:20+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -2054,7 +2054,7 @@
 
       
         
-          <h4 id="2PC-两阶段事务提交"><a href="#2PC-两阶段事务提交" class="headerlink" title="2PC(两阶段事务提交)"></a>2PC(两阶段事务提交)</h4><p>两阶段事务提交简化图<br><img src="http://p237jbzdy.bkt.clouddn.com/img/java/5.jpeg" alt=""></p>
+          <h4 id="2PC-两阶段事务提交"><a href="#2PC-两阶段事务提交" class="headerlink" title="2PC(两阶段事务提交)"></a>2PC(两阶段事务提交)</h4><p>两阶段事务提交简化图<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/5.jpeg" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/java/java-transaction-1/" rel="contents">
@@ -2159,8 +2159,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-05T09:09:43+08:00">
-                2018-03-05
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:57:27+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -2248,7 +2248,7 @@
       
         
           <p>SonarQube(Sonar)是一个用于管理代码质量的开源平台。SonarQube目前已支持超过20种主流编程语言，它管理的代码质量主要涉及7个维度:架构与设计、重复、单元测试、复杂度、潜在的bug、代码标准、注释。</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/4.png" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/4.png" alt=""></p>
 <p>  本文，笔者将围绕搭建SonarQube这样的代码质量管理平台这个主题展开，结合java代码实例一步步讲述具体的过程，其中涉及Sonar的下载安装、创建对应Mysql数据库以及运行和管理，并对实践过程中出现的一些问题进行了分析和解决。</p>
 <p>  注：本文中所有的实践都是在Docker虚拟机下进行，但目测同样适用于各个平台。</p>
           <!--noindex-->
@@ -2436,7 +2436,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

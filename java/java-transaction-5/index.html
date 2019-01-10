@@ -109,15 +109,15 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="业务回补场景业务对资金进行操作 简化流程整个资金平台会和支付宝进行交互(冻结金额,出账金额),对这两个动作支付宝都会返回成功或者失败,当然还有异常流接口超时(实际成功/实际失败).">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/12.png">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/13.png">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/14.png">
-<meta property="og:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/15.png">
-<meta property="og:updated_time" content="2018-03-06T02:48:06.125Z">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/12.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/13.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/14.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/15.png">
+<meta property="og:updated_time" content="2019-01-09T09:58:58.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="说说分布式事务(五)">
 <meta name="twitter:description" content="业务回补场景业务对资金进行操作 简化流程整个资金平台会和支付宝进行交互(冻结金额,出账金额),对这两个动作支付宝都会返回成功或者失败,当然还有异常流接口超时(实际成功/实际失败).">
-<meta name="twitter:image" content="http://p237jbzdy.bkt.clouddn.com/img/java/12.png">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/12.png">
 
 
 
@@ -393,8 +393,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-03-06T10:48:06+08:00">
-                2018-03-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-09T17:58:58+08:00">
+                2019-01-09
               </time>
             
           </span>
@@ -487,14 +487,14 @@
       
         <h4 id="业务回补"><a href="#业务回补" class="headerlink" title="业务回补"></a>业务回补</h4><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>业务对资金进行操作</p>
 <h4 id="简化流程"><a href="#简化流程" class="headerlink" title="简化流程"></a>简化流程</h4><p>整个资金平台会和支付宝进行交互(冻结金额,出账金额),对这两个动作支付宝都会返回成功或者失败,当然还有异常流接口超时(实际成功/实际失败).</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/12.png" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/12.png" alt=""></p>
 <a id="more"></a>
 <p>正常流的业务,我们都可以根据实际的返回进行自己业务逻辑的处理,但是异常流对于调用方其实不知道实际结果,这个时候就需要进行业务数据回补,丰富一下调用时序图</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/13.png" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/13.png" alt=""></p>
 <p>对资金进行操作以后,如果最终是成功的话,都会发送相应的成功消息,业务可以根据实际情况接受消息进行处理,对应的流程图为</p>
-<p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/14.png" alt=""></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/14.png" alt=""></p>
 <p>自身业务,需要监听调用方的业务消息,因为会出现接口返回失败(比如说接口超时),但是实际成功的场景,通过监听成功消息进行流程回溯</p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p><img src="http://p237jbzdy.bkt.clouddn.com/img/java/15.png" alt=""></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/15.png" alt=""></p>
 <p>涉及异步更新的操作,都会存在短暂的状态不一致的情况,当数据处于中间状态,可能会出现业务重复提交的情况,这个就需要业务上规避类似的问题(比如对于资金会加入审核流程)</p>
 
       
@@ -760,7 +760,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
