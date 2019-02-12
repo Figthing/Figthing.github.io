@@ -1,3 +1,4 @@
+http://blog.appydm.com/docker/redis/docker/redis/1/
 http://blog.appydm.com/docker/docker/2/
 http://blog.appydm.com/docker/docker/1/
 http://blog.appydm.com/docker/docker/jq-2/
