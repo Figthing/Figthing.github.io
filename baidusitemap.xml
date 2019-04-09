@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/uncategorized/apollo-1/</loc>
+    <lastmod>2019-04-09T07:25:04.299Z</lastmod>
+    <data>
+        <display>
+        <title>携程Apollo配置中心</title>
+        <pubTime>2019-04-09T05:13:00.000Z</pubTime>
+        
+        <tag>spring cloud</tag>
+         
+        <tag>apollo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/redis/docker/redis/1/</loc>
     <lastmod>2019-02-12T07:21:48.687Z</lastmod>
     <data>
@@ -1346,30 +1365,6 @@
     
     
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
-    <lastmod>2018-01-08T05:18:54.000Z</lastmod>
-    <data>
-        <display>
-        <title>PS命令</title>
-        <pubTime>2018-01-07T15:07:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
-         
-        <tag>ps</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://blog.appydm.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     <data>
@@ -1382,6 +1377,30 @@
         <tag>shell</tag>
          
         <tag>wget</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://blog.appydm.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
+    <lastmod>2018-01-08T05:18:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>PS命令</title>
+        <pubTime>2018-01-07T15:07:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>ps</tag>
          
          
            

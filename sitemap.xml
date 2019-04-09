@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/uncategorized/apollo-1/</loc>
+    
+    <lastmod>2019-04-09T07:25:04.299Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/docker/redis/docker/redis/1/</loc>
     
     <lastmod>2019-02-12T07:21:48.687Z</lastmod>
@@ -443,14 +450,14 @@
   </url>
   
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
+    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
     
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
+    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
     
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     

@@ -342,6 +342,216 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/uncategorized/apollo-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/apollo-1/" itemprop="url">携程Apollo配置中心</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T13:13:00+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-09T15:25:04+08:00">
+                2019-04-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,392
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="携程-Apollo-配置中心"><a href="#携程-Apollo-配置中心" class="headerlink" title="携程 Apollo 配置中心"></a>携程 Apollo 配置中心</h2><p>在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。</p>
+<h3 id="部署准备"><a href="#部署准备" class="headerlink" title="部署准备"></a>部署准备</h3><ul>
+<li>docker 安装</li>
+<li>docker-compose 安装</li>
+<li>mysql 安装</li>
+</ul>
+<h3 id="Apollo工程"><a href="#Apollo工程" class="headerlink" title="Apollo工程"></a>Apollo工程</h3><table>
+<thead>
+<tr>
+<th>工程名</th>
+<th>优先级</th>
+<th>说明</th>
+<th>端口</th>
+<th>sql</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apollo-configservice</td>
+<td>1</td>
+<td>服务</td>
+<td>8090</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-adminservice</td>
+<td>2</td>
+<td>管理</td>
+<td>8091</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-portal</td>
+<td>3</td>
+<td>界面</td>
+<td>8092</td>
+<td><a href="https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloportaldb.sql" target="_blank" rel="noopener">apolloportaldb.sql</a></td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uncategorized/apollo-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/redis/docker/redis/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2104,206 +2314,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/idea/idea/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/idea/idea/1/" itemprop="url">Idea中整合Docker</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T11:20:00+08:00">
-                2018-05-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-17T11:28:17+08:00">
-                2019-01-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/idea/" itemprop="url" rel="index">
-                    <span itemprop="name">idea</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  365
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="IDEA在Windows上结合Docker"><a href="#IDEA在Windows上结合Docker" class="headerlink" title="IDEA在Windows上结合Docker"></a>IDEA在Windows上结合Docker</h4><p>在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。</p>
-<h5 id="虚拟机（192-168-3-60）"><a href="#虚拟机（192-168-3-60）" class="headerlink" title="虚拟机（192.168.3.60）"></a>虚拟机（192.168.3.60）</h5><p>在虚拟机上安装Docker，我这里安装的是<code>Docker version 1.13.1, build 092cba3</code>。编辑Docker运行文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> vi /etc/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
-<p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl daemon-reload</span><br><span class="line"><span class="meta">#</span> systemctl start docker</span><br></pre></td></tr></table></figure>
-<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> netstat -anp|grep 2375</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p>在虚拟机上的配置就完毕了。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/idea/idea/1/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2358,7 +2368,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2380,7 +2390,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
