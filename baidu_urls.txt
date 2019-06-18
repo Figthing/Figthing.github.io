@@ -1,3 +1,4 @@
+http://blog.appydm.com/docker/k8s/docker/k8s-1/
 http://blog.appydm.com/java/spring/spring/spring-oauth2/
 http://blog.appydm.com/java/spring/spring/spring-security-1/
 http://blog.appydm.com/java/spring/spring/spring-security-oauth2-1/
@@ -13,10 +14,10 @@ http://blog.appydm.com/java/java/jvm/1/
 http://blog.appydm.com/uncategorized/linux/mobaxterm-1/
 http://blog.appydm.com/java/java/spring/5/
 http://blog.appydm.com/idea/idea/1/
-http://blog.appydm.com/spring/java/spring/4/
-http://blog.appydm.com/spring/java/spring/3/
-http://blog.appydm.com/spring/java/spring/2/
-http://blog.appydm.com/spring/java/spring/1/
+http://blog.appydm.com/java/spring/java/spring/4/
+http://blog.appydm.com/java/spring/java/spring/3/
+http://blog.appydm.com/java/spring/java/spring/2/
+http://blog.appydm.com/java/spring/java/spring/1/
 http://blog.appydm.com/java/java/proxy-1/
 http://blog.appydm.com/oracle/oracle/4/
 http://blog.appydm.com/oracle/oracle/3/
