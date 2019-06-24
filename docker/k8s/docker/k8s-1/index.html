@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1    环境准备1、设置主机名hostname，管理节点设置主机名为 k8s-master 。 1hostname">
+<meta name="description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1   172.24.2.70 worker k8s-node-2    环境准备1、设置主机名hostname，管">
 <meta name="keywords" content="docker,k8s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K8s安装">
 <meta property="og:url" content="http://blog.appydm.com/docker/k8s/docker/k8s-1/index.html">
 <meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1    环境准备1、设置主机名hostname，管理节点设置主机名为 k8s-master 。 1hostname">
+<meta property="og:description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1   172.24.2.70 worker k8s-node-2    环境准备1、设置主机名hostname，管">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-18T12:43:12.126Z">
+<meta property="og:updated_time" content="2019-06-24T12:51:14.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K8s安装">
-<meta name="twitter:description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1    环境准备1、设置主机名hostname，管理节点设置主机名为 k8s-master 。 1hostname">
+<meta name="twitter:description" content="K8S安装Kubernetes支持在物理服务器或虚拟机中运行，本次使用虚拟机准备测试环境，硬件配置信息如表所示    IP地址 节点角色 Hostname     172.24.2.69 master k8s-master   172.24.2.71 worker k8s-node-1   172.24.2.70 worker k8s-node-2    环境准备1、设置主机名hostname，管">
 
 
 
@@ -388,8 +388,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-18T20:43:12+08:00">
-                2019-06-18
+              <time title="更新于" itemprop="dateModified" datetime="2019-06-24T20:51:14+08:00">
+                2019-06-24
               </time>
             
           </span>
@@ -454,7 +454,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  629
+                  680
                 </span>
               
 
@@ -470,7 +470,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -511,6 +511,11 @@
 <td>worker</td>
 <td>k8s-node-1</td>
 </tr>
+<tr>
+<td>172.24.2.70</td>
+<td>worker</td>
+<td>k8s-node-2</td>
+</tr>
 </tbody>
 </table>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>1、设置主机名hostname，管理节点设置主机名为 k8s-master 。</p>
@@ -521,7 +526,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt;EOF</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>4、配置国内yum源</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line">mkdir /etc/yum.repos.d/bak &amp;&amp; mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak</span><br><span class="line"></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos7_base.repo</span><br><span class="line"></span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.cloud.tencent.com/repo/epel-7.repo</span><br><span class="line"></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line">mkdir /etc/yum.repos.d/bak &amp;&amp; mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak</span><br><span class="line"></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"></span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line"></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
 <p>5、配置国内Kubernetes源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line"></span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 <p>6、配置 docker 源</p>
@@ -529,7 +534,7 @@
 <h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><p>1、安装docker</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce-18.06.1.ce-3.el7</span><br><span class="line"></span><br><span class="line">systemctl enable docker &amp;&amp; systemctl start docker</span><br><span class="line"></span><br><span class="line">docker --version</span><br></pre></td></tr></table></figure>
 <p>2、安装kubeadm、kubelet、kubectl</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line">systemctl enable kubelet</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install kubelet-1.14.3-0 kubeadm-1.14.3-0 kubectl-1.14.3-0</span><br><span class="line"></span><br><span class="line">systemctl enable kubelet</span><br></pre></td></tr></table></figure>
 <h3 id="部署启动"><a href="#部署启动" class="headerlink" title="部署启动"></a>部署启动</h3><p>1、在master进行Kubernetes集群初始化</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --kubernetes-version=1.14.3 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16</span><br></pre></td></tr></table></figure>
 <p>2、配置kubectl工具</p>
@@ -541,8 +546,9 @@
 <p>2、子节点可以继续执行主节点中（环境准备、软件安装）</p>
 <p>3、将子节点加入到主节点中</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 172.24.2.69:6443 --token 94zry6.lzob4h452am02f0d \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:bf8e4fcdbf4001cafe5ab5325e429dcb3f8a52a836d0a6b80f683db506611043</span><br></pre></td></tr></table></figure>
+<p>4、如果当token过期了，可以使用下面命令重新生成token<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token create</span><br></pre></td></tr></table></figure></p>
 <h3 id="集群状态检查"><a href="#集群状态检查" class="headerlink" title="集群状态检查"></a>集群状态检查</h3><p>在master节点输入命令检查集群状态，返回如下结果则集群状态正常</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line"></span><br><span class="line">NAME         STATUS   ROLES    AGE   VERSION</span><br><span class="line">k8s-master   Ready    master   30h   v1.14.3</span><br><span class="line">k8s-node-1   Ready    &lt;none&gt;   29h   v1.14.3</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line"></span><br><span class="line">NAME         STATUS   ROLES    AGE    VERSION</span><br><span class="line">k8s-master   Ready    master   7d6h   v1.14.3</span><br><span class="line">k8s-node-1   Ready    &lt;none&gt;   7d5h   v1.14.3</span><br><span class="line">k8s-node-2   Ready    &lt;none&gt;   100s   v1.14.3</span><br></pre></td></tr></table></figure>
 <p>参考文献：<a href="https://www.kubernetes.org.cn/5462.html" target="_blank" rel="noopener">https://www.kubernetes.org.cn/5462.html</a></p>
 
       
@@ -621,6 +627,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/docker/k8s/docker/K8s-Dashboard-1/" rel="prev" title="K8s-Dashboard安装">
+                K8s-Dashboard安装 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -701,7 +711,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

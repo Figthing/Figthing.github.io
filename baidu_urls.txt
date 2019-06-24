@@ -1,3 +1,4 @@
+http://blog.appydm.com/docker/k8s/docker/K8s-Dashboard-1/
 http://blog.appydm.com/docker/k8s/docker/k8s-1/
 http://blog.appydm.com/java/spring/spring/spring-oauth2/
 http://blog.appydm.com/java/spring/spring/spring-security-1/
