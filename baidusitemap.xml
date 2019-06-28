@@ -4,8 +4,58 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/K8s-Dashboard-1/</loc>
-    <lastmod>2019-06-24T13:21:55.634Z</lastmod>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/coreDns-1/</loc>
+    <lastmod>2019-06-28T08:22:10.546Z</lastmod>
+    <data>
+        <display>
+        <title>K8s搭建-CoreDns</title>
+        <pubTime>2019-06-28T08:21:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/zookeeper-1/</loc>
+    <lastmod>2019-06-28T07:27:11.842Z</lastmod>
+    <data>
+        <display>
+        <title>K8s搭建-Zookeeper集群</title>
+        <pubTime>2019-06-28T07:18:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
+    <lastmod>2019-06-28T07:25:30.766Z</lastmod>
     <data>
         <display>
         <title>K8s-Dashboard安装</title>
@@ -29,8 +79,8 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/k8s-1/</loc>
-    <lastmod>2019-06-24T12:51:14.763Z</lastmod>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/1/</loc>
+    <lastmod>2019-06-28T07:25:15.193Z</lastmod>
     <data>
         <display>
         <title>K8s安装</title>

@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/K8s-Dashboard-1/</loc>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/coreDns-1/</loc>
     
-    <lastmod>2019-06-24T13:21:55.634Z</lastmod>
+    <lastmod>2019-06-28T08:22:10.546Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/k8s-1/</loc>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/zookeeper-1/</loc>
     
-    <lastmod>2019-06-24T12:51:14.763Z</lastmod>
+    <lastmod>2019-06-28T07:27:11.842Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
+    
+    <lastmod>2019-06-28T07:25:30.766Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/1/</loc>
+    
+    <lastmod>2019-06-28T07:25:15.193Z</lastmod>
     
   </url>
   

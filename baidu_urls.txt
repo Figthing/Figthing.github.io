@@ -1,5 +1,7 @@
-http://blog.appydm.com/docker/k8s/docker/K8s-Dashboard-1/
-http://blog.appydm.com/docker/k8s/docker/k8s-1/
+http://blog.appydm.com/docker/k8s/docker/k8s/coreDns-1/
+http://blog.appydm.com/docker/k8s/docker/k8s/zookeeper-1/
+http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/
+http://blog.appydm.com/docker/k8s/docker/k8s/1/
 http://blog.appydm.com/java/spring/spring/spring-oauth2/
 http://blog.appydm.com/java/spring/spring/spring-security-1/
 http://blog.appydm.com/java/spring/spring/spring-security-oauth2-1/
