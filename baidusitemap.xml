@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/</loc>
+    <lastmod>2019-07-18T04:03:38.388Z</lastmod>
+    <data>
+        <display>
+        <title>K8s搭建-YAPI</title>
+        <pubTime>2019-07-18T04:01:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/coreDns-1/</loc>
     <lastmod>2019-06-28T08:22:10.546Z</lastmod>
     <data>

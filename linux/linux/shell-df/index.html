@@ -486,12 +486,12 @@
         <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：包含全部的文件系统；</span><br><span class="line">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span><br><span class="line">-h或--human-readable：以可读性较高的方式来显示信息；</span><br><span class="line">-H或--si：与-h参数相同，但在计算时是以1000 Bytes为换算单位而非1024 Bytes；</span><br><span class="line">-i或--inodes：显示inode的信息；</span><br><span class="line">-k或--kilobytes：指定区块大小为1024字节；</span><br><span class="line">-l或--local：仅显示本地端的文件系统；</span><br><span class="line">-m或--megabytes：指定区块大小为1048576字节；</span><br><span class="line">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span><br><span class="line">-P或--portability：使用POSIX的输出格式；</span><br><span class="line">--sync：在取得磁盘使用信息前，先执行sync指令；</span><br><span class="line">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span><br><span class="line">-T或--print-type：显示文件系统的类型；</span><br><span class="line">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span><br><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="查看系统磁盘设备，默认是KB为单位"><a href="#查看系统磁盘设备，默认是KB为单位" class="headerlink" title="查看系统磁盘设备，默认是KB为单位"></a>查看系统磁盘设备，默认是KB为单位</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df</span></span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="查看系统磁盘设备，默认是KB为单位"><a href="#查看系统磁盘设备，默认是KB为单位" class="headerlink" title="查看系统磁盘设备，默认是KB为单位"></a>查看系统磁盘设备，默认是KB为单位</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> df</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>结果显示：<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/4.png" alt=""></p>
 <p>字段说明：<br>Filesystem:        文件系统<br>1K-blocks:        1K-块<br>Used:            已用<br>Available:        可用<br>Use%:            已用%<br>Mounted on:        挂载点</p>
 </blockquote>
-<h4 id="使用-h选项以KB以上的单位来显示，可读性高"><a href="#使用-h选项以KB以上的单位来显示，可读性高" class="headerlink" title="使用-h选项以KB以上的单位来显示，可读性高"></a>使用-h选项以KB以上的单位来显示，可读性高</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df -h</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用-h选项以KB以上的单位来显示，可读性高"><a href="#使用-h选项以KB以上的单位来显示，可读性高" class="headerlink" title="使用-h选项以KB以上的单位来显示，可读性高"></a>使用-h选项以KB以上的单位来显示，可读性高</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> df -h</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>结果显示：<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/5.png" alt=""></p>
 </blockquote>
@@ -658,7 +658,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
