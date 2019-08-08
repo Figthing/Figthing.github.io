@@ -353,7 +353,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -486,7 +486,7 @@
 
       
         <h4 id="Docker使用Portainer管理Swarm集群"><a href="#Docker使用Portainer管理Swarm集群" class="headerlink" title="Docker使用Portainer管理Swarm集群"></a>Docker使用Portainer管理Swarm集群</h4><p>在上一节中已经将了，如果将子节点加入到主节点中，本节将使用portainer来对swarm集群进行管理</p>
-<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --name portainer \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --publish 9000:9000 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --constraint <span class="string">'node.role == manager'</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> -H unix:///var/run/docker.sock</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span> --name portainer \</span><br><span class="line"><span class="meta">&gt;</span> --publish 9000:9000 \</span><br><span class="line"><span class="meta">&gt;</span> --constraint 'node.role == manager' \</span><br><span class="line"><span class="meta">&gt;</span> --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span><br><span class="line"><span class="meta">&gt;</span> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span><br><span class="line"><span class="meta">&gt;</span> -H unix:///var/run/docker.sock</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>查看docker的服务，已经启用成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker service ls</span><br><span class="line">ID            NAME       MODE        REPLICAS  IMAGE</span><br><span class="line">y6ydozgujzjo  portainer  replicated  1/1       registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br></pre></td></tr></table></figure></p>
 <p>如果想停用该服务可以使用以下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker service rm portainer</span><br><span class="line">portainer</span><br></pre></td></tr></table></figure></p>
@@ -510,35 +510,6 @@
 
     
 
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://p237jbzdy.bkt.clouddn.com/weixin-pay.png" alt="Figthing 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://p237jbzdy.bkt.clouddn.com/zhifubao-pay.png" alt="Figthing 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
@@ -637,10 +608,6 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="http://p237jbzdy.bkt.clouddn.com/ava.jpg"
-                alt="Figthing" />
             
               <p class="site-author-name" itemprop="name">Figthing</p>
               <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>

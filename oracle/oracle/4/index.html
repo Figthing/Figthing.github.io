@@ -348,7 +348,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -480,12 +480,12 @@
       
 
       
-        <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span><br><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span><br><span class="line"><span class="meta">SQL&gt;</span> startup</span><br></pre></td></tr></table></figure>
-<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> alter user sys identified by 123456;</span><br></pre></td></tr></table></figure>
+        <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br></pre></td></tr></table></figure>
+<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter user sys identified by 123456;</span></span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建表空间"><a href="#使用Oracle客户端，创建表空间" class="headerlink" title="使用Oracle客户端，创建表空间"></a>使用Oracle客户端，创建表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create tablespace ccmp_app 						-表空间名称</span><br><span class="line">logging </span><br><span class="line">datafile '/oracle/ccmp-databases/ccmp_app' 		-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建临时表空间"><a href="#使用Oracle客户端，创建临时表空间" class="headerlink" title="使用Oracle客户端，创建临时表空间"></a>使用Oracle客户端，创建临时表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create temporary tablespace ccmp_app_temp 			-表空间名称</span><br><span class="line">tempfile '/oracle/ccmp-databases/ccmp_app_temp' 	-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
-<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> create user ccmp_app identified by 123456;</span><br><span class="line"><span class="meta">SQL&gt;</span> default tablespace ccmp_app;</span><br><span class="line"><span class="meta">SQL&gt;</span> temporary tablespace ccmp_app_temp;</span><br></pre></td></tr></table></figure>
-<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> grant connect,resource,dba to ccmp_app;</span><br></pre></td></tr></table></figure>
+<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> create user ccmp_app identified by 123456;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> default tablespace ccmp_app;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> temporary tablespace ccmp_app_temp;</span></span><br></pre></td></tr></table></figure>
+<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> grant connect,resource,dba to ccmp_app;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -501,35 +501,6 @@
 
     
 
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://p237jbzdy.bkt.clouddn.com/weixin-pay.png" alt="Figthing 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://p237jbzdy.bkt.clouddn.com/zhifubao-pay.png" alt="Figthing 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
@@ -628,10 +599,6 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="http://p237jbzdy.bkt.clouddn.com/ava.jpg"
-                alt="Figthing" />
             
               <p class="site-author-name" itemprop="name">Figthing</p>
               <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>

@@ -348,7 +348,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -487,11 +487,11 @@
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="建立一个符号链接"><a href="#建立一个符号链接" class="headerlink" title="建立一个符号链接"></a>建立一个符号链接</h4><blockquote>
 <p>在目录<code>/usr/liu</code>下建立一个符号链接文件<code>abc</code>，使它指向目录<code>/usr/mengqc/mub1</code></p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ln -s /usr/mengqc/mub1 /usr/liu/abc</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ln -s /usr/mengqc/mub1 /usr/liu/abc</span><br></pre></td></tr></table></figure>
 <h4 id="删除一个符号链接"><a href="#删除一个符号链接" class="headerlink" title="删除一个符号链接"></a>删除一个符号链接</h4><blockquote>
 <p>将目录<code>/usr/liu/</code>下的<code>abc</code>链接删除，注意不是<code>rm -rf symbolic_name/</code></p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/liu/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm -rf symbolic_name</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd /usr/liu/</span><br><span class="line"><span class="meta">$</span> rm -rf symbolic_name</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -507,35 +507,6 @@
 
     
 
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://p237jbzdy.bkt.clouddn.com/weixin-pay.png" alt="Figthing 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://p237jbzdy.bkt.clouddn.com/zhifubao-pay.png" alt="Figthing 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
@@ -638,10 +609,6 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="http://p237jbzdy.bkt.clouddn.com/ava.jpg"
-                alt="Figthing" />
             
               <p class="site-author-name" itemprop="name">Figthing</p>
               <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>

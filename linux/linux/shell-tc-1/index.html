@@ -348,7 +348,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://p237jbzdy.bkt.clouddn.com/ava.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -482,9 +482,9 @@
       
         <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>参考了TC的很多文档，自己也整理了一篇配置记录。在实际使用过程中效果还不错，在此分享给大家以备参考。<br>环境：局域网规模不是很大40多台机器。 NAT共享上网（内网：eth0 外网：eth2）<br>CBQ是通过硬件的闲置时间来计算队列，硬件不同，效果也不同，对于比较大的网络使用HTB比较好。以下限制上传和下载的方法可以写成脚本，通过mrtg发现流量的异常情况，然后通过ntop查处是谁在干坏事，最后用写好的tc脚本限制他的流量，避免影响其他人的网络使用。</p>
  <a id="more"></a>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="针对网络物理设备绑定一个CBQ队列"><a href="#针对网络物理设备绑定一个CBQ队列" class="headerlink" title="针对网络物理设备绑定一个CBQ队列"></a>针对网络物理设备绑定一个CBQ队列</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc add dev eth0 root handle 1: cbq bandwidth 10Mbit avpkt 1000 cell 8 mpu 64</span></span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="针对网络物理设备绑定一个CBQ队列"><a href="#针对网络物理设备绑定一个CBQ队列" class="headerlink" title="针对网络物理设备绑定一个CBQ队列"></a>针对网络物理设备绑定一个CBQ队列</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc qdisc add dev eth0 root handle 1: cbq bandwidth 10Mbit avpkt 1000 cell 8 mpu 64</span><br></pre></td></tr></table></figure>
 <p> 将一个cbq队列绑定到网络物理设备eth0上，其编号为1:0；网络物理设备eth0的实际带宽为10Mbit，包的平均大小为1000字节；包间隔发送单元的大小为8字节，最小传输包大小为64字节。</p>
-<h4 id="在该队列上建立分类"><a href="#在该队列上建立分类" class="headerlink" title="在该队列上建立分类"></a>在该队列上建立分类</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc class add dev eth0 parent 1:0 classid 1:1 cbq bandwidth 10Mbit rate 10Mbit maxburst 20 allot 1514 prio 1 avpkt 1000 cell 8 weight 1Mbit</span></span><br></pre></td></tr></table></figure>
+<h4 id="在该队列上建立分类"><a href="#在该队列上建立分类" class="headerlink" title="在该队列上建立分类"></a>在该队列上建立分类</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc class add dev eth0 parent 1:0 classid 1:1 cbq bandwidth 10Mbit rate 10Mbit maxburst 20 allot 1514 prio 1 avpkt 1000 cell 8 weight 1Mbit</span><br></pre></td></tr></table></figure>
 <p> 创建根分类1:1；分配带宽为10Mbit，优先级别为1。该队列的最大可用带宽为10Mbit，实际分配的带宽为10Mbit，可接收冲突的发送最长包数目为20字节；最大传输单元加MAC头的大小为1514字节，优先级别为1，包的平均大小为1000字节，包间隔发送单元的大小为8字节，相应于实际带宽的加权速率为1Mbit。</p>
 <blockquote>
 <p><strong> 创建子分类 </strong></p>
@@ -493,35 +493,35 @@
 <li>创建分类1:3，其父分类为1:1，分配带宽为64Kbit，优先级别为9。该队列的最大可用带宽为10Mbit，实际分配的带宽为64Kbit，可接收冲突的发送最长包数目为20字节；最大传输单元加MAC头的大小为1514字节，优先级别为9，包的平均大小为1000字节，包间隔发送单元的大小为8字节，相应于实际带宽的加权速率为100Kbit，且不可借用未使用带宽。<br><code>$ tc class add dev eth0 parent 1:1 classid 1:3 cbq bandwidth 10Mbit rate 64Kbit maxburst 20 allot 1514 prio 9 avpkt 1000 cell 8 weight 100Kbit bounded</code></li>
 </ul>
 </blockquote>
-<h4 id="在子分类地下创建队列，使用sfq随机公平队列"><a href="#在子分类地下创建队列，使用sfq随机公平队列" class="headerlink" title="在子分类地下创建队列，使用sfq随机公平队列"></a>在子分类地下创建队列，使用sfq随机公平队列</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc add dev eth0 parent 1:2 sfq quantum 1514b perturb 15</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc add dev eth0 parent 1:3 sfq quantum 1514b perturb 15</span></span><br></pre></td></tr></table></figure>
+<h4 id="在子分类地下创建队列，使用sfq随机公平队列"><a href="#在子分类地下创建队列，使用sfq随机公平队列" class="headerlink" title="在子分类地下创建队列，使用sfq随机公平队列"></a>在子分类地下创建队列，使用sfq随机公平队列</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc qdisc add dev eth0 parent 1:2 sfq quantum 1514b perturb 15</span><br><span class="line"><span class="meta">$</span> tc qdisc add dev eth0 parent 1:3 sfq quantum 1514b perturb 15</span><br></pre></td></tr></table></figure>
 <p> 在分类底下，创建队列，使用sfq随即公平队列</p>
-<h4 id="为每一分类建立一个基于路由的过滤"><a href="#为每一分类建立一个基于路由的过滤" class="headerlink" title="为每一分类建立一个基于路由的过滤"></a>为每一分类建立一个基于路由的过滤</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc filter add dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tc filter add dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.66 flowid 1:3</span></span><br></pre></td></tr></table></figure>
+<h4 id="为每一分类建立一个基于路由的过滤"><a href="#为每一分类建立一个基于路由的过滤" class="headerlink" title="为每一分类建立一个基于路由的过滤"></a>为每一分类建立一个基于路由的过滤</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc filter add dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:2</span><br><span class="line"><span class="meta">$</span> tc filter add dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.66 flowid 1:3</span><br></pre></td></tr></table></figure>
 <p> 限制各ip地址的下载带宽，使用u32过滤器，对目的地址进行分类，对应已经创建的队列需要添加新的被限制ip的下载带宽，需要先要创建新的分类(比如1:4),然后根据新的分类创建新的sfq队列，最后使用u32过滤器对目的地址进行带宽限制。需要对几个ip限制下载带宽，就需要创建几个分类、队列、过滤器</p>
-<h4 id="限制上传"><a href="#限制上传" class="headerlink" title="限制上传"></a>限制上传</h4><p> 将一个cbq队列绑定到网络物理设备eth2上，其编号为2:0；网络物理设备eth2的实际带宽为2Mbit，包的平均大小为1000字节；包间隔发送单元的大小为8字节，最小传输包大小为64字节。<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc add dev eth2 root handle 2: cbq bandwidth 2Mbit avpkt 1000 cell 8 mpu 64</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="限制上传"><a href="#限制上传" class="headerlink" title="限制上传"></a>限制上传</h4><p> 将一个cbq队列绑定到网络物理设备eth2上，其编号为2:0；网络物理设备eth2的实际带宽为2Mbit，包的平均大小为1000字节；包间隔发送单元的大小为8字节，最小传输包大小为64字节。<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc qdisc add dev eth2 root handle 2: cbq bandwidth 2Mbit avpkt 1000 cell 8 mpu 64</span><br></pre></td></tr></table></figure></p>
 <p> 创建根分类2:1；分配带宽为2Mbit，优先级别为1。该队列的最大可用带宽为2Mbit，实际分配的带宽2Mbit，<br> 可接收冲突的发送最长包数目为20字节；最大传输单元加MAC头的大小为1514字节，优先级别为1，包的平均<br> 大小为1000字节，包间隔发送单元的大小为8字节，相应于实际带宽的加权速率为200Kbit。</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc class add dev eth2 parent 2:0 classid 2:1 cbq bandwidth 2Mbit rate 2Mbit maxburst 20 allot 1514 prio 1 avpkt 1000 cell 8 weight 200Kbit</span></span><br></pre></td></tr></table></figure>
-<p> 创建分类2:2，其父分类为2:1，分配带宽为64Kbit，优先级别为8。该队列的最大可用带宽为2Mbit，实际分配的带宽为64Kbit，可接收冲突的发送最长包数目为20字节；最大传输单元加MAC头的大小为1514字节，优先级别为8，包的平均大小为1000字节，包间隔发送单元的大小为8字节，相应于实际带宽的加权速率为100Kbit，且不可借用未使用带宽。<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc class add dev eth2 parent 2:1 classid 2:2 cbq bandwidth 2Mbit rate 64Kbit maxburst 20 allot 1514 prio 8 avpkt 1000 cell 8 weight 200Kbit bounded</span></span><br></pre></td></tr></table></figure></p>
-<p> 在分类底下，创建队列，使用sfq随即公平队列<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc add dev eth2 parent 2:2 sfq quantum 1514b perturb 15</span></span><br></pre></td></tr></table></figure></p>
-<p> 应用路由分类器到cbq队列的根，过滤协议为ip，优先级为100<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc filter add dev eth2 parent 2:0 protocol ip prio 1 handle 2 fw classid 2:2</span></span><br></pre></td></tr></table></figure></p>
-<p> 给数据包打标签,可以通过RETURN方法避免遍历所有的规则，加快处理速度<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> iptables –t mangle –A PREROUTING –i eth0 –s 192.111.1.xxx –j MARK --<span class="built_in">set</span>-mark 2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> iptables –t mangle –A PREROUTING –i eth0 –s 192.111.1.xxx –j RETURN</span></span><br></pre></td></tr></table></figure></p>
-<p> nat模式<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> iptables -t nat -A POSTROUTING -s 192.111.1.0/24 -o eth2 -j SNAT --to 外网IP</span></span><br></pre></td></tr></table></figure></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc class add dev eth2 parent 2:0 classid 2:1 cbq bandwidth 2Mbit rate 2Mbit maxburst 20 allot 1514 prio 1 avpkt 1000 cell 8 weight 200Kbit</span><br></pre></td></tr></table></figure>
+<p> 创建分类2:2，其父分类为2:1，分配带宽为64Kbit，优先级别为8。该队列的最大可用带宽为2Mbit，实际分配的带宽为64Kbit，可接收冲突的发送最长包数目为20字节；最大传输单元加MAC头的大小为1514字节，优先级别为8，包的平均大小为1000字节，包间隔发送单元的大小为8字节，相应于实际带宽的加权速率为100Kbit，且不可借用未使用带宽。<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc class add dev eth2 parent 2:1 classid 2:2 cbq bandwidth 2Mbit rate 64Kbit maxburst 20 allot 1514 prio 8 avpkt 1000 cell 8 weight 200Kbit bounded</span><br></pre></td></tr></table></figure></p>
+<p> 在分类底下，创建队列，使用sfq随即公平队列<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc qdisc add dev eth2 parent 2:2 sfq quantum 1514b perturb 15</span><br></pre></td></tr></table></figure></p>
+<p> 应用路由分类器到cbq队列的根，过滤协议为ip，优先级为100<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc filter add dev eth2 parent 2:0 protocol ip prio 1 handle 2 fw classid 2:2</span><br></pre></td></tr></table></figure></p>
+<p> 给数据包打标签,可以通过RETURN方法避免遍历所有的规则，加快处理速度<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> iptables –t mangle –A PREROUTING –i eth0 –s 192.111.1.xxx –j MARK --set-mark 2</span><br><span class="line"><span class="meta">$</span> iptables –t mangle –A PREROUTING –i eth0 –s 192.111.1.xxx –j RETURN</span><br></pre></td></tr></table></figure></p>
+<p> nat模式<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> iptables -t nat -A POSTROUTING -s 192.111.1.0/24 -o eth2 -j SNAT --to 外网IP</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>需要添加新的被限制ip的上传带宽，需要先要创建新的分类(比如2:3),然后根据新的分类创建新的sfq队列，最后使用路由过滤器，过滤协议为ip，给原地址是需要限制的ip地址来的数据包打标记。<br>需要对几个ip限制下载带宽，就需要创建几个分类、队列、路由过滤器、iptable的mangle表的PREROUTING链</p>
 </blockquote>
-<p> 另外还有其他的过滤器比如<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc filter add dev eth0 parent 1:0 protocol ip prio 100 route to 2 flowid 1:2 ip route add 192.111.1.24 dev eth0 via 192.111.1.4 realm 2</span></span><br></pre></td></tr></table></figure></p>
+<p> 另外还有其他的过滤器比如<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc filter add dev eth0 parent 1:0 protocol ip prio 100 route to 2 flowid 1:2 ip route add 192.111.1.24 dev eth0 via 192.111.1.4 realm 2</span><br></pre></td></tr></table></figure></p>
 <h4 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h4><p> 主要包括对队列、分类、过滤器和路由的增添、修改和删除。 增添动作一般依照”队列-&gt;分类-&gt;过滤器-&gt;路由”的顺序进行；修改动作则没有什么要求；删除则依照”路由-&gt;过滤器-&gt;分类-&gt;队列”的顺序进行。</p>
-<p> 简单显示指定设备的队列状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc qdisc ls dev eth0</span></span><br></pre></td></tr></table></figure></p>
-<p> 详细显示指定设备的队列状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc –s qdisc ls dev eth0</span></span><br></pre></td></tr></table></figure></p>
-<p> 简单显示指定设备的分类状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc class ls dev eth0</span></span><br></pre></td></tr></table></figure></p>
-<p> 详细显示指定设备的分类状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc –s class ls dev eth0</span></span><br></pre></td></tr></table></figure></p>
-<p> 显示过滤器的状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc –s filter ls dev eth0</span></span><br></pre></td></tr></table></figure></p>
+<p> 简单显示指定设备的队列状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc qdisc ls dev eth0</span><br></pre></td></tr></table></figure></p>
+<p> 详细显示指定设备的队列状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc –s qdisc ls dev eth0</span><br></pre></td></tr></table></figure></p>
+<p> 简单显示指定设备的分类状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc class ls dev eth0</span><br></pre></td></tr></table></figure></p>
+<p> 详细显示指定设备的分类状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc –s class ls dev eth0</span><br></pre></td></tr></table></figure></p>
+<p> 显示过滤器的状况<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc –s filter ls dev eth0</span><br></pre></td></tr></table></figure></p>
 <p> 队列的维护<br> 一般对于一台流量控制器来说，出厂时针对每个以太网卡均已配置好一个队列了，通常情况下对队列无需进行增添、修改和删除动作了。</p>
 <h4 id="分类的维护"><a href="#分类的维护" class="headerlink" title="分类的维护"></a>分类的维护</h4><p> 增添动作通过<code>tc class add</code>命令实现。</p>
-<p> 修改动作通过<code>tc class change</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc class change dev eth0 parent 1:1 classid 1:2 cbq bandwidth 10Mbit rate 64Kbit maxburst 20 allot 1514 prio 8 avpkt 1000 cell 8 weight 100Kbit bounded</span></span><br></pre></td></tr></table></figure></p>
+<p> 修改动作通过<code>tc class change</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc class change dev eth0 parent 1:1 classid 1:2 cbq bandwidth 10Mbit rate 64Kbit maxburst 20 allot 1514 prio 8 avpkt 1000 cell 8 weight 100Kbit bounded</span><br></pre></td></tr></table></figure></p>
 <p> 对于bounded命令应慎用，一旦添加后就进行修改，只可通过删除后再添加来实现。</p>
 <h4 id="过滤器的维护"><a href="#过滤器的维护" class="headerlink" title="过滤器的维护"></a>过滤器的维护</h4><p> 增添动作通过<code>tc filter add</code>命令实现。</p>
-<p> 修改动作通过<code>tc filter change</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc filter change dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:2</span></span><br></pre></td></tr></table></figure></p>
-<p> 删除动作通过<code>tc filter del</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tc filter del dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:</span></span><br></pre></td></tr></table></figure></p>
+<p> 修改动作通过<code>tc filter change</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc filter change dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:2</span><br></pre></td></tr></table></figure></p>
+<p> 删除动作通过<code>tc filter del</code>命令实现，如下所示：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tc filter del dev eth0 parent 1:0 protocol ip prio 1 u32 match ip dst 192.111.1.116 flowid 1:</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -538,35 +538,6 @@
 
     
 
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://p237jbzdy.bkt.clouddn.com/weixin-pay.png" alt="Figthing 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://p237jbzdy.bkt.clouddn.com/zhifubao-pay.png" alt="Figthing 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
@@ -669,10 +640,6 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="http://p237jbzdy.bkt.clouddn.com/ava.jpg"
-                alt="Figthing" />
             
               <p class="site-author-name" itemprop="name">Figthing</p>
               <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>
