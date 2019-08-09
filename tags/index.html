@@ -3,27 +3,15 @@
 
 
 
-<html class="theme-next gemini" lang="zh-Hans">
+<html class="theme-next gemini" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-<style>
-    .pace .pace-progress {
-        background: #1E92FB; /*进度条颜色*/
-        height: 3px;
-    }
-    .pace .pace-progress-inner {
-         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
-    }
-    .pace .pace-activity {
-        border-top-color: #1E92FB;    /*上边框颜色*/
-        border-left-color: #1E92FB;    /*左边框颜色*/
-    }
-</style>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -72,46 +60,25 @@
 
 <link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.0.3" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.3">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.3">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.3">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Java, PHP, Object-C, Css, Javascript, Vue, Linux, Docker, 集中营" />
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.3" color="#222">
 
 
 
 
 
 
-
-
-
-
-<meta name="description" content="奋斗过，就不后悔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="云标签">
-<meta property="og:url" content="http://blog.appydm.com/tags/index.html">
-<meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="奋斗过，就不后悔">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T06:18:16.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云标签">
-<meta name="twitter:description" content="奋斗过，就不后悔">
 
 
 
@@ -120,15 +87,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '5.1.4',
+    version: '6.0.3',
     sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -140,13 +105,41 @@
 </script>
 
 
+  
+
+
+
+
+  
+  <meta name="keywords" content="Java, PHP, Object-C, Css, Javascript, Vue, Linux, Docker, 集中营" />
+
+
+<meta name="description" content="奋斗过，就不后悔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="云标签">
+<meta property="og:url" content="http://blog.appydm.com/tags/index.html">
+<meta property="og:site_name" content="Figthing的博客">
+<meta property="og:description" content="奋斗过，就不后悔">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-09T06:18:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云标签">
+<meta name="twitter:description" content="奋斗过，就不后悔">
+
+
+
+
+
 
   <link rel="canonical" href="http://blog.appydm.com/tags/"/>
 
 
 
-
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
   <title>云标签 | Figthing的博客</title>
   
 
@@ -156,6 +149,34 @@
 
 
 
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
   <script>
 (function(){
@@ -173,7 +194,7 @@
 </script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -184,7 +205,7 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"> <div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -218,109 +239,57 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
         </li>
       
         
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
         </li>
       
         
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
         </li>
       
         
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
         </li>
       
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
 </nav>
+
+
+  
 
 
 
  </div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -349,10 +318,216 @@
         
           <div class="tag-cloud">
             <div class="tag-cloud-title">
+                
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
                 目前共计 51 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/VirtualBox/" style="font-size: 13px; color: #ccc">VirtualBox</a> <a href="/tags/apollo/" style="font-size: 13px; color: #ccc">apollo</a> <a href="/tags/centos/" style="font-size: 13px; color: #ccc">centos</a> <a href="/tags/date/" style="font-size: 13px; color: #ccc">date</a> <a href="/tags/df/" style="font-size: 13px; color: #ccc">df</a> <a href="/tags/docker/" style="font-size: 25px; color: #4f4f4f">docker</a> <a href="/tags/drawboard/" style="font-size: 13px; color: #ccc">drawboard</a> <a href="/tags/feign/" style="font-size: 13px; color: #ccc">feign</a> <a href="/tags/grep/" style="font-size: 13px; color: #ccc">grep</a> <a href="/tags/http/" style="font-size: 15px; color: #b7b7b7">http</a> <a href="/tags/hwclock/" style="font-size: 13px; color: #ccc">hwclock</a> <a href="/tags/idea/" style="font-size: 13px; color: #ccc">idea</a> <a href="/tags/iptables/" style="font-size: 17px; color: #a2a2a2">iptables</a> <a href="/tags/java/" style="font-size: 31px; color: #111">java</a> <a href="/tags/jvm/" style="font-size: 15px; color: #b7b7b7">jvm</a> <a href="/tags/k8s/" style="font-size: 21px; color: #797979">k8s</a> <a href="/tags/linux/" style="font-size: 29px; color: #262626">linux</a> <a href="/tags/ln/" style="font-size: 13px; color: #ccc">ln</a> <a href="/tags/lombok/" style="font-size: 13px; color: #ccc">lombok</a> <a href="/tags/ls/" style="font-size: 13px; color: #ccc">ls</a> <a href="/tags/mapstruct/" style="font-size: 15px; color: #b7b7b7">mapstruct</a> <a href="/tags/mobaxterm/" style="font-size: 13px; color: #ccc">mobaxterm</a> <a href="/tags/mq/" style="font-size: 17px; color: #a2a2a2">mq</a> <a href="/tags/nexus/" style="font-size: 13px; color: #ccc">nexus</a> <a href="/tags/nodejs/" style="font-size: 13px; color: #ccc">nodejs</a> <a href="/tags/npm/" style="font-size: 13px; color: #ccc">npm</a> <a href="/tags/oauth2/" style="font-size: 15px; color: #b7b7b7">oauth2</a> <a href="/tags/oracle/" style="font-size: 19px; color: #8e8e8e">oracle</a> <a href="/tags/pojo/" style="font-size: 13px; color: #ccc">pojo</a> <a href="/tags/proxy/" style="font-size: 13px; color: #ccc">proxy</a> <a href="/tags/ps/" style="font-size: 13px; color: #ccc">ps</a> <a href="/tags/redis/" style="font-size: 13px; color: #ccc">redis</a> <a href="/tags/rocketmq/" style="font-size: 17px; color: #a2a2a2">rocketmq</a> <a href="/tags/route/" style="font-size: 13px; color: #ccc">route</a> <a href="/tags/security/" style="font-size: 15px; color: #b7b7b7">security</a> <a href="/tags/shell/" style="font-size: 27px; color: #3b3b3b">shell</a> <a href="/tags/software/" style="font-size: 13px; color: #ccc">software</a> <a href="/tags/sonar/" style="font-size: 13px; color: #ccc">sonar</a> <a href="/tags/spring/" style="font-size: 23px; color: #646464">spring</a> <a href="/tags/spring-cloud/" style="font-size: 13px; color: #ccc">spring cloud</a> <a href="/tags/ssh/" style="font-size: 13px; color: #ccc">ssh</a> <a href="/tags/tail/" style="font-size: 13px; color: #ccc">tail</a> <a href="/tags/tc/" style="font-size: 13px; color: #ccc">tc</a> <a href="/tags/tcpdump/" style="font-size: 13px; color: #ccc">tcpdump</a> <a href="/tags/transaction/" style="font-size: 21px; color: #797979">transaction</a> <a href="/tags/uml/" style="font-size: 21px; color: #797979">uml</a> <a href="/tags/vsftpd/" style="font-size: 13px; color: #ccc">vsftpd</a> <a href="/tags/wget/" style="font-size: 13px; color: #ccc">wget</a> <a href="/tags/协议/" style="font-size: 15px; color: #b7b7b7">协议</a> <a href="/tags/设计模式/" style="font-size: 13px; color: #ccc">设计模式</a> <a href="/tags/适配器模式/" style="font-size: 13px; color: #ccc">适配器模式</a>
+              <a href="/tags/VirtualBox/" style="font-size: 12px; color: #ccc">VirtualBox</a> <a href="/tags/apollo/" style="font-size: 12px; color: #ccc">apollo</a> <a href="/tags/centos/" style="font-size: 12px; color: #ccc">centos</a> <a href="/tags/date/" style="font-size: 12px; color: #ccc">date</a> <a href="/tags/df/" style="font-size: 12px; color: #ccc">df</a> <a href="/tags/docker/" style="font-size: 24px; color: #4f4f4f">docker</a> <a href="/tags/drawboard/" style="font-size: 12px; color: #ccc">drawboard</a> <a href="/tags/feign/" style="font-size: 12px; color: #ccc">feign</a> <a href="/tags/grep/" style="font-size: 12px; color: #ccc">grep</a> <a href="/tags/http/" style="font-size: 14px; color: #b7b7b7">http</a> <a href="/tags/hwclock/" style="font-size: 12px; color: #ccc">hwclock</a> <a href="/tags/idea/" style="font-size: 12px; color: #ccc">idea</a> <a href="/tags/iptables/" style="font-size: 16px; color: #a2a2a2">iptables</a> <a href="/tags/java/" style="font-size: 30px; color: #111">java</a> <a href="/tags/jvm/" style="font-size: 14px; color: #b7b7b7">jvm</a> <a href="/tags/k8s/" style="font-size: 20px; color: #797979">k8s</a> <a href="/tags/linux/" style="font-size: 28px; color: #262626">linux</a> <a href="/tags/ln/" style="font-size: 12px; color: #ccc">ln</a> <a href="/tags/lombok/" style="font-size: 12px; color: #ccc">lombok</a> <a href="/tags/ls/" style="font-size: 12px; color: #ccc">ls</a> <a href="/tags/mapstruct/" style="font-size: 14px; color: #b7b7b7">mapstruct</a> <a href="/tags/mobaxterm/" style="font-size: 12px; color: #ccc">mobaxterm</a> <a href="/tags/mq/" style="font-size: 16px; color: #a2a2a2">mq</a> <a href="/tags/nexus/" style="font-size: 12px; color: #ccc">nexus</a> <a href="/tags/nodejs/" style="font-size: 12px; color: #ccc">nodejs</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/oauth2/" style="font-size: 14px; color: #b7b7b7">oauth2</a> <a href="/tags/oracle/" style="font-size: 18px; color: #8e8e8e">oracle</a> <a href="/tags/pojo/" style="font-size: 12px; color: #ccc">pojo</a> <a href="/tags/proxy/" style="font-size: 12px; color: #ccc">proxy</a> <a href="/tags/ps/" style="font-size: 12px; color: #ccc">ps</a> <a href="/tags/redis/" style="font-size: 12px; color: #ccc">redis</a> <a href="/tags/rocketmq/" style="font-size: 16px; color: #a2a2a2">rocketmq</a> <a href="/tags/route/" style="font-size: 12px; color: #ccc">route</a> <a href="/tags/security/" style="font-size: 14px; color: #b7b7b7">security</a> <a href="/tags/shell/" style="font-size: 26px; color: #3b3b3b">shell</a> <a href="/tags/software/" style="font-size: 12px; color: #ccc">software</a> <a href="/tags/sonar/" style="font-size: 12px; color: #ccc">sonar</a> <a href="/tags/spring/" style="font-size: 22px; color: #646464">spring</a> <a href="/tags/spring-cloud/" style="font-size: 12px; color: #ccc">spring cloud</a> <a href="/tags/ssh/" style="font-size: 12px; color: #ccc">ssh</a> <a href="/tags/tail/" style="font-size: 12px; color: #ccc">tail</a> <a href="/tags/tc/" style="font-size: 12px; color: #ccc">tc</a> <a href="/tags/tcpdump/" style="font-size: 12px; color: #ccc">tcpdump</a> <a href="/tags/transaction/" style="font-size: 20px; color: #797979">transaction</a> <a href="/tags/uml/" style="font-size: 20px; color: #797979">uml</a> <a href="/tags/vsftpd/" style="font-size: 12px; color: #ccc">vsftpd</a> <a href="/tags/wget/" style="font-size: 12px; color: #ccc">wget</a> <a href="/tags/协议/" style="font-size: 14px; color: #b7b7b7">协议</a> <a href="/tags/设计模式/" style="font-size: 12px; color: #ccc">设计模式</a> <a href="/tags/适配器模式/" style="font-size: 12px; color: #ccc">适配器模式</a>
             </div>
           </div>
         
@@ -368,9 +543,6 @@
 
 
           </div>
-          
-
-
           
 
   
@@ -405,42 +577,176 @@
               <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">51</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
 
@@ -475,6 +781,9 @@
           
 
           
+            
+          
+          
 
         </div>
       </section>
@@ -500,9 +809,14 @@
   <span class="author" itemprop="copyrightHolder">Figthing</span>
   <span class="post-meta-divider">|</span>
   <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  
+
+  
 
   
 </div>
+
+
 
 
 
@@ -540,12 +854,6 @@
 
 
 
-  <div style="display: none;">
-    <script src="//s95.cnzz.com/z_stat.php?id=1272049870&web_id=1272049870" language="JavaScript"></script>
-  </div>
-
-
-
         
       </div>
     </footer>
@@ -579,7 +887,13 @@
 
 
 
+
+
+
   
+
+
+
 
 
 
@@ -595,16 +909,6 @@
   
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
   
 
   
@@ -626,40 +930,36 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.3"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.3"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.3"></script>
 
 
 
   
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.3"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.3"></script>
 
+
+
+  
 
 
 
@@ -686,326 +986,7 @@
 
 
 
-
-
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
@@ -1016,23 +997,12 @@
   
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
+
+  
+  
+
   
 
   
