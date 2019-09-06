@@ -323,6 +323,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/uncategorized/apollo-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/apollo-1/" itemprop="url">携程Apollo配置中心</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T13:13:00+08:00">2019-04-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="携程-Apollo-配置中心"><a href="#携程-Apollo-配置中心" class="headerlink" title="携程 Apollo 配置中心"></a>携程 Apollo 配置中心</h2><p>在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。</p>
+<h3 id="部署准备"><a href="#部署准备" class="headerlink" title="部署准备"></a>部署准备</h3><ul>
+<li>docker 安装</li>
+<li>docker-compose 安装</li>
+<li>mysql 安装</li>
+</ul>
+<h3 id="Apollo工程"><a href="#Apollo工程" class="headerlink" title="Apollo工程"></a>Apollo工程</h3><table>
+<thead>
+<tr>
+<th>工程名</th>
+<th>优先级</th>
+<th>说明</th>
+<th>端口</th>
+<th>sql</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apollo-configservice</td>
+<td>1</td>
+<td>服务</td>
+<td>8090</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-adminservice</td>
+<td>2</td>
+<td>管理</td>
+<td>8091</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-portal</td>
+<td>3</td>
+<td>界面</td>
+<td>8092</td>
+<td><a href="https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloportaldb.sql" target="_blank" rel="noopener">apolloportaldb.sql</a></td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uncategorized/apollo-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/redis/docker/redis/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -944,7 +1136,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.2k</span>
+                <span title="字数统计">3.4k</span>
               
 
               
@@ -980,7 +1172,7 @@
       
         
           <h4 id="Docker使用Portainer管理Swarm集群"><a href="#Docker使用Portainer管理Swarm集群" class="headerlink" title="Docker使用Portainer管理Swarm集群"></a>Docker使用Portainer管理Swarm集群</h4><p>在上一节中已经将了，如果将子节点加入到主节点中，本节将使用portainer来对swarm集群进行管理</p>
-<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span> --name portainer \</span><br><span class="line"><span class="meta">&gt;</span> --publish 9000:9000 \</span><br><span class="line"><span class="meta">&gt;</span> --constraint 'node.role == manager' \</span><br><span class="line"><span class="meta">&gt;</span> --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span><br><span class="line"><span class="meta">&gt;</span> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span><br><span class="line"><span class="meta">&gt;</span> -H unix:///var/run/docker.sock</span><br></pre></td></tr></table></figure></p>
+<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --name portainer \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --publish 9000:9000 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --constraint <span class="string">'node.role == manager'</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> -H unix:///var/run/docker.sock</span></span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/docker/docker/jq-2/" rel="contents">
@@ -1152,7 +1344,7 @@
       
         
           <h4 id="Docker使用Swarm搭建集群"><a href="#Docker使用Swarm搭建集群" class="headerlink" title="Docker使用Swarm搭建集群"></a>Docker使用Swarm搭建集群</h4><h5 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h5><p>查看selinux是否关闭<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# /usr/sbin/sestatus -v</span><br><span class="line">SELinux status:                 disabled</span><br></pre></td></tr></table></figure></p>
-<p>如果没有关闭，可以直接修改<code>/etc/selinux/config</code>中的<code>SELINUX</code>为<code>disabled</code>：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ vi /etc/selinux/config</span><br><span class="line"><span class="meta">#</span> This file controls the state of SELinux on the system.</span><br><span class="line"><span class="meta">#</span> SELINUX= can take one of these three values:</span><br><span class="line"><span class="meta">#</span>     enforcing - SELinux security policy is enforced.</span><br><span class="line"><span class="meta">#</span>     permissive - SELinux prints warnings instead of enforcing.</span><br><span class="line"><span class="meta">#</span>     disabled - No SELinux policy is loaded.</span><br><span class="line"><span class="meta">#</span>SELINUX=enforcing</span><br><span class="line">SELINUX=disabled</span><br><span class="line"><span class="meta">#</span> SELINUXTYPE= can take one of three two values:</span><br><span class="line"><span class="meta">#</span>     targeted - Targeted processes are protected,</span><br><span class="line"><span class="meta">#</span>     minimum - Modification of targeted policy. Only selected processes are protected. </span><br><span class="line"><span class="meta">#</span>     mls - Multi Level Security protection.</span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure></p>
+<p>如果没有关闭，可以直接修改<code>/etc/selinux/config</code>中的<code>SELINUX</code>为<code>disabled</code>：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ vi /etc/selinux/config</span><br><span class="line"><span class="meta">#</span><span class="bash"> This file controls the state of SELinux on the system.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> SELINUX= can take one of these three values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     enforcing - SELinux security policy is enforced.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     permissive - SELinux prints warnings instead of enforcing.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     disabled - No SELinux policy is loaded.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">SELINUX=enforcing</span></span><br><span class="line">SELINUX=disabled</span><br><span class="line"><span class="meta">#</span><span class="bash"> SELINUXTYPE= can take one of three two values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     targeted - Targeted processes are protected,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     minimum - Modification of targeted policy. Only selected processes are protected. </span></span><br><span class="line"><span class="meta">#</span><span class="bash">     mls - Multi Level Security protection.</span></span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure></p>
 <p><strong>注意：修改xelinux后需重启服务器</strong></p>
 <p>打开docker.service中的2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~]$ sudo vi /usr/lib/systemd/system/docker.service</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target rhel-push-plugin.socket registries.service</span><br><span class="line">Wants=docker-storage-setup.service</span><br><span class="line">Requires=docker-cleanup.timer</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">NotifyAccess=all</span><br><span class="line">EnvironmentFile=-/run/containers/registries.conf</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker-storage</span><br><span class="line">EnvironmentFile=-/etc/sysconfig/docker-network</span><br><span class="line">Environment=GOTRACEBACK=crash</span><br><span class="line">Environment=DOCKER_HTTP_HOST_COMPAT=1</span><br><span class="line">Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin</span><br><span class="line">ExecStart=/usr/bin/dockerd-current \</span><br><span class="line">          --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current \</span><br><span class="line">          --default-runtime=docker-runc \</span><br><span class="line">          --exec-opt native.cgroupdriver=systemd \</span><br><span class="line">          --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \</span><br><span class="line">          --init-path=/usr/libexec/docker/docker-init-current \</span><br><span class="line">          --seccomp-profile=/etc/docker/seccomp.json \</span><br><span class="line">          $OPTIONS \</span><br><span class="line">          $DOCKER_STORAGE_OPTIONS \</span><br><span class="line">          $DOCKER_NETWORK_OPTIONS \</span><br><span class="line">          $ADD_REGISTRY \</span><br><span class="line">          $BLOCK_REGISTRY \</span><br><span class="line">          $INSECURE_REGISTRY \</span><br><span class="line">          $REGISTRIES \</span><br><span class="line">          -H unix:///var/run/docker.sock -H 0.0.0.0:2375</span><br></pre></td></tr></table></figure></p>
 <p>重启docker</p>
@@ -1885,184 +2077,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/idea/idea/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/idea/idea/1/" itemprop="url">Idea中整合Docker</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T11:20:00+08:00">2018-05-11</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/idea/" itemprop="url" rel="index"><span itemprop="name">idea</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="IDEA在Windows上结合Docker"><a href="#IDEA在Windows上结合Docker" class="headerlink" title="IDEA在Windows上结合Docker"></a>IDEA在Windows上结合Docker</h4><p>在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。</p>
-<h5 id="虚拟机（192-168-3-60）"><a href="#虚拟机（192-168-3-60）" class="headerlink" title="虚拟机（192.168.3.60）"></a>虚拟机（192.168.3.60）</h5><p>在虚拟机上安装Docker，我这里安装的是<code>Docker version 1.13.1, build 092cba3</code>。编辑Docker运行文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> vi /etc/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
-<p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl daemon-reload</span><br><span class="line"><span class="meta">#</span> systemctl start docker</span><br></pre></td></tr></table></figure>
-<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> netstat -anp|grep 2375</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p>在虚拟机上的配置就完毕了。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/idea/idea/1/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2110,7 +2124,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/uncategorized/spring/redis-1/</loc>
+    
+    <lastmod>2019-09-06T07:46:11.960Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/</loc>
     
     <lastmod>2019-07-18T04:03:38.388Z</lastmod>

@@ -323,6 +323,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/idea/idea/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/idea/idea/1/" itemprop="url">Idea中整合Docker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T11:20:00+08:00">2018-05-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/idea/" itemprop="url" rel="index"><span itemprop="name">idea</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="IDEA在Windows上结合Docker"><a href="#IDEA在Windows上结合Docker" class="headerlink" title="IDEA在Windows上结合Docker"></a>IDEA在Windows上结合Docker</h4><p>在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。</p>
+<h5 id="虚拟机（192-168-3-60）"><a href="#虚拟机（192-168-3-60）" class="headerlink" title="虚拟机（192.168.3.60）"></a>虚拟机（192.168.3.60）</h5><p>在虚拟机上安装Docker，我这里安装的是<code>Docker version 1.13.1, build 092cba3</code>。编辑Docker运行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> vi /etc/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
+<p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl daemon-reload</span><br><span class="line"><span class="meta">#</span> systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> netstat -anp|grep 2375</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
+<p>在虚拟机上的配置就完毕了。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/idea/idea/1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/spring/java/spring/4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1311,7 +1489,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4k</span>
+                <span title="字数统计">3.8k</span>
               
 
               
@@ -1325,7 +1503,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -1347,12 +1525,12 @@
       
         
           
-            <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br></pre></td></tr></table></figure>
-<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter user sys identified by 123456;</span></span><br></pre></td></tr></table></figure>
+            <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span><br><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span><br><span class="line"><span class="meta">SQL&gt;</span> startup</span><br></pre></td></tr></table></figure>
+<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> alter user sys identified by 123456;</span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建表空间"><a href="#使用Oracle客户端，创建表空间" class="headerlink" title="使用Oracle客户端，创建表空间"></a>使用Oracle客户端，创建表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create tablespace ccmp_app 						-表空间名称</span><br><span class="line">logging </span><br><span class="line">datafile '/oracle/ccmp-databases/ccmp_app' 		-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建临时表空间"><a href="#使用Oracle客户端，创建临时表空间" class="headerlink" title="使用Oracle客户端，创建临时表空间"></a>使用Oracle客户端，创建临时表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create temporary tablespace ccmp_app_temp 			-表空间名称</span><br><span class="line">tempfile '/oracle/ccmp-databases/ccmp_app_temp' 	-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
-<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> create user ccmp_app identified by 123456;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> default tablespace ccmp_app;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> temporary tablespace ccmp_app_temp;</span></span><br></pre></td></tr></table></figure>
-<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> grant connect,resource,dba to ccmp_app;</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> create user ccmp_app identified by 123456;</span><br><span class="line"><span class="meta">SQL&gt;</span> default tablespace ccmp_app;</span><br><span class="line"><span class="meta">SQL&gt;</span> temporary tablespace ccmp_app_temp;</span><br></pre></td></tr></table></figure>
+<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> grant connect,resource,dba to ccmp_app;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1659,7 +1837,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.5k</span>
+                <span title="字数统计">5.3k</span>
               
 
               
@@ -1694,7 +1872,7 @@
 
       
         
-          <h4 id="Linux下Oracle安装（二）"><a href="#Linux下Oracle安装（二）" class="headerlink" title="Linux下Oracle安装（二）"></a>Linux下Oracle安装（二）</h4><h5 id="运行Oracle安装文件"><a href="#运行Oracle安装文件" class="headerlink" title="运行Oracle安装文件"></a>运行Oracle安装文件</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> su oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /opt/oracle/database/runInstaller -jreLoc /opt/jdk1.7.0_80/</span></span><br></pre></td></tr></table></figure>
+          <h4 id="Linux下Oracle安装（二）"><a href="#Linux下Oracle安装（二）" class="headerlink" title="Linux下Oracle安装（二）"></a>Linux下Oracle安装（二）</h4><h5 id="运行Oracle安装文件"><a href="#运行Oracle安装文件" class="headerlink" title="运行Oracle安装文件"></a>运行Oracle安装文件</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> su oracle</span><br><span class="line"><span class="meta">#</span> source ~/.bash_profile</span><br><span class="line"><span class="meta">#</span> /opt/oracle/database/runInstaller -jreLoc /opt/jdk1.7.0_80/</span><br></pre></td></tr></table></figure>
 <p>  <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/5.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>  <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/6.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
           <!--noindex-->
@@ -1832,7 +2010,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">6.3k</span>
+                <span title="字数统计">5.9k</span>
               
 
               
@@ -1846,7 +2024,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -1868,213 +2046,12 @@
       
         
           <h4 id="Linux下Oracle安装（一）"><a href="#Linux下Oracle安装（一）" class="headerlink" title="Linux下Oracle安装（一）"></a>Linux下Oracle安装（一）</h4><p>在Linux中安装Oracle主要有以下几步</p>
-<h5 id="安装Oracle依赖包"><a href="#安装Oracle依赖包" class="headerlink" title="安装Oracle依赖包"></a>安装Oracle依赖包</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686</span></span><br></pre></td></tr></table></figure>
-<h5 id="创建Oracle对应目录并设置权限"><a href="#创建Oracle对应目录并设置权限" class="headerlink" title="创建Oracle对应目录并设置权限"></a>创建Oracle对应目录并设置权限</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory</span></span><br></pre></td></tr></table></figure>
-<h5 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum install xhost</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum grouplist</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall <span class="string">"X Window System"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall Desktop</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xterm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xclock</span></span><br></pre></td></tr></table></figure>
+<h5 id="安装Oracle依赖包"><a href="#安装Oracle依赖包" class="headerlink" title="安装Oracle依赖包"></a>安装Oracle依赖包</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686</span><br></pre></td></tr></table></figure>
+<h5 id="创建Oracle对应目录并设置权限"><a href="#创建Oracle对应目录并设置权限" class="headerlink" title="创建Oracle对应目录并设置权限"></a>创建Oracle对应目录并设置权限</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle</span><br><span class="line"><span class="meta">#</span> mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory</span><br></pre></td></tr></table></figure>
+<h5 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> yum install xhost</span><br><span class="line"><span class="meta">#</span> yum grouplist</span><br><span class="line"><span class="meta">#</span> yum groupinstall "X Window System"</span><br><span class="line"><span class="meta">#</span> yum groupinstall Desktop</span><br><span class="line"><span class="meta">#</span> yum install xterm</span><br><span class="line"><span class="meta">#</span> yum install xclock</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/oracle/oracle/1/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux/ssh-drawboard-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux/ssh-drawboard-1/" itemprop="url">搭建跳板机</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T10:44:00+08:00">2018-03-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>近遇到这样一个问题，我在阿里云室架设了一台服务器，发现外部网元对服务器攻击非常平凡，都知道服务器开放出来的端口越多，对服务器的风险越大。如何来规避这些风险呢，下面具体说明在阿里云上搭建一个跳板机来访问内网服务器，提升服务器的安全。</p>
-<h5 id="描述一下目前的机器状况，梳理梳理："><a href="#描述一下目前的机器状况，梳理梳理：" class="headerlink" title="描述一下目前的机器状况，梳理梳理："></a>描述一下目前的机器状况，梳理梳理：</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">机器</th>
-<th style="text-align:left">IP</th>
-<th style="text-align:left">用户名</th>
-<th style="text-align:left">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">A</td>
-<td style="text-align:left">123.78.150.91</td>
-<td style="text-align:left">root</td>
-<td style="text-align:left">外网服务器，相当于桥梁的作用，跳板机</td>
-</tr>
-<tr>
-<td style="text-align:left">B</td>
-<td style="text-align:left">172.18.62.123</td>
-<td style="text-align:left">root</td>
-<td style="text-align:left">目标服务器，处于内网</td>
-</tr>
-<tr>
-<td style="text-align:left">C</td>
-<td style="text-align:left">123.123.123.123</td>
-<td style="text-align:left">win</td>
-<td style="text-align:left">自己的电脑</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux/ssh-drawboard-1/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2159,7 +2136,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

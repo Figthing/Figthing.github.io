@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/uncategorized/spring/redis-1/</loc>
+    <lastmod>2019-09-06T07:46:11.960Z</lastmod>
+    <data>
+        <display>
+        <title>Redis客户端选择</title>
+        <pubTime>2019-09-06T07:44:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>redis</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/</loc>
     <lastmod>2019-07-18T04:03:38.388Z</lastmod>
     <data>
@@ -240,9 +261,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
