@@ -111,30 +111,28 @@
 
 
   
-  <meta name="keywords" content="java,transaction," />
+  <meta name="keywords" content="java,spring," />
 
 
-<meta name="description" content="最终一致性(二)基于MQ的分布式事务补偿机制序列图">
-<meta name="keywords" content="java,transaction">
+<meta name="description" content="ApiGateway整合Swagger2概述最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。 引入依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.spring">
+<meta name="keywords" content="java,spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="说说分布式事务(四)">
-<meta property="og:url" content="http://blog.appydm.com/java/java/transaction/4/index.html">
+<meta property="og:title" content="ApiGateway整合Swagger2">
+<meta property="og:url" content="http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/index.html">
 <meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="最终一致性(二)基于MQ的分布式事务补偿机制序列图">
+<meta property="og:description" content="ApiGateway整合Swagger2概述最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。 引入依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.spring">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/11.jpeg">
-<meta property="og:updated_time" content="2019-01-17T03:31:31.047Z">
+<meta property="og:updated_time" content="2019-10-09T10:18:35.119Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="说说分布式事务(四)">
-<meta name="twitter:description" content="最终一致性(二)基于MQ的分布式事务补偿机制序列图">
-<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/11.jpeg">
+<meta name="twitter:title" content="ApiGateway整合Swagger2">
+<meta name="twitter:description" content="ApiGateway整合Swagger2概述最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。 引入依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.spring">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.appydm.com/java/java/transaction/4/"/>
+  <link rel="canonical" href="http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/"/>
 
 
 
@@ -143,7 +141,7 @@
     sidebar: "",
   };
 </script>
-  <title>说说分布式事务(四) | Figthing的博客</title>
+  <title>ApiGateway整合Swagger2 | Figthing的博客</title>
   
 
 
@@ -326,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/java/transaction/4/">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Figthing">
@@ -343,7 +341,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">说说分布式事务(四)</h1>
+          <h1 class="post-title" itemprop="name headline">ApiGateway整合Swagger2</h1>
         
 
         <div class="post-meta">
@@ -355,7 +353,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T10:26:00+08:00">2018-03-06</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T18:15:00+08:00">2019-10-09</time>
             
 
             
@@ -377,6 +375,13 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
 
                 
                 
@@ -409,7 +414,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.2k</span>
+                <span title="字数统计">13k</span>
               
 
               
@@ -423,7 +428,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">12 mins.</span>
               
             </div>
           
@@ -443,19 +448,13 @@
       
 
       
-        <h4 id="最终一致性-二"><a href="#最终一致性-二" class="headerlink" title="最终一致性(二)"></a>最终一致性(二)</h4><h4 id="基于MQ的分布式事务补偿机制"><a href="#基于MQ的分布式事务补偿机制" class="headerlink" title="基于MQ的分布式事务补偿机制"></a>基于MQ的分布式事务补偿机制</h4><h4 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h4><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/11.jpeg" alt=""></p>
+        <h3 id="ApiGateway整合Swagger2"><a href="#ApiGateway整合Swagger2" class="headerlink" title="ApiGateway整合Swagger2"></a>ApiGateway整合Swagger2</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。</p>
+<h4 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Swagger2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h4 id="异常场景处理"><a href="#异常场景处理" class="headerlink" title="异常场景处理"></a>异常场景处理</h4><ol>
-<li>预创建订单失败:如果实际预创建订单成功,订单定时补偿机制,定时删除这部分订单,不影响数据一致性,下单失败</li>
-<li>预扣减库存失败:如果预扣减库存真实失败,则下单失败(订单由定时补偿机制定时删除,其它应用参照场景4的处理方式,下单失败;如果实际预扣减库存成功,参照场景4的处理方式,下单失败</li>
-<li>实际创建订单失败:如果创建订单真实失败(不需要发送下单失败消息,防止实际创建订单成功场景),订单的预处理数据通过订单的定时补偿机制尝试删除(需要考虑事务处理时间,将超过某个时间范围该事务还处于预处理状态的订单删除),下单失败;如果实际创建订单成功,其它应用参照场景4的处理方式,下单成功(提示用户下单失败)</li>
-<li>发送订单创建成功消息失败/库存服务由于各种原因没有接到下单成功消息:库存服务定时轮询处理数据(需要考虑事务处理时间,将超过某个时间范围该事务还处于预处理状态的订单筛选出来),询问订单服务改订单Id对应的订单是否创建成功,根据订单创建成功与否选取相应的事务补偿机制</li>
-</ol>
-<h4 id="和TCC的比较"><a href="#和TCC的比较" class="headerlink" title="和TCC的比较"></a>和TCC的比较</h4><ol>
-<li>TCC是把所有的订单创建步骤平等看待,只要有一个失败,整个下单流程全部失败(比较TCC里面的confirm失败和基于MQ实际创建订单失败的补偿难易程度)</li>
-<li>TCC是通过发消息给TCC服务器,然后由TCC服务调用应用服务;基于MQ的分布式事务补偿机制,是通过将消息发送到MQ,然后由应用自己去监听MQ的事件</li>
-</ol>
-
+<h4 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h4><p>配置SwaggerProvider，获取Api-doc，即SwaggerResources。<code>SwaggerProvider.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerProvider</span> <span class="keyword">implements</span> <span class="title">SwaggerResourcesProvider</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String API_URI = <span class="string">"/v2/api-docs"</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> RouteLocator routeLocator;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> GatewayProperties gatewayProperties;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;SwaggerResource&gt; <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		List&lt;SwaggerResource&gt; resources = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		List&lt;String&gt; routes = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="comment">//取出gateway的route</span></span><br><span class="line">		routeLocator.getRoutes().subscribe(route -&gt; routes.add(route.getId()));</span><br><span class="line">		<span class="comment">//结合配置的route-路径(Path)，和route过滤，只获取有效的route节点</span></span><br><span class="line">		gatewayProperties.getRoutes()</span><br><span class="line">				.stream()</span><br><span class="line">				.filter(routeDefinition -&gt; routes.contains(routeDefinition.getId()))</span><br><span class="line">				.forEach(routeDefinition -&gt; routeDefinition.getPredicates().stream()</span><br><span class="line">						.filter(predicateDefinition -&gt; (<span class="string">"Path"</span>).equalsIgnoreCase(predicateDefinition.getName()))</span><br><span class="line">						.forEach(predicateDefinition -&gt; &#123;</span><br><span class="line">							resources.add(swaggerResource(</span><br><span class="line">									routeDefinition.getId(),</span><br><span class="line">									predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + <span class="string">"0"</span>).replace(<span class="string">"/**"</span>, API_URI)</span><br><span class="line">							));</span><br><span class="line">						&#125;));</span><br><span class="line">		<span class="keyword">return</span> resources;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> SwaggerResource <span class="title">swaggerResource</span><span class="params">(String name, String location)</span> </span>&#123;</span><br><span class="line">		SwaggerResource swaggerResource = <span class="keyword">new</span> SwaggerResource();</span><br><span class="line">		swaggerResource.setName(name);</span><br><span class="line">		swaggerResource.setLocation(location);</span><br><span class="line">		swaggerResource.setSwaggerVersion(<span class="string">"1.0"</span>);</span><br><span class="line">		<span class="keyword">return</span> swaggerResource;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为Gateway里没有配置SwaggerConfig，而运行Swagger-ui又需要依赖一些接口，所以我的想法是自己建立相应的swagger-resource端点<code>SwaggerHandler.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@ConditionalOnExpression</span>(<span class="string">"#&#123;'true'.equals(environment['neusoft.hype.swagger.enable'])&#125;"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/swagger-resources"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span>(required = <span class="keyword">false</span>)</span><br><span class="line">	<span class="keyword">private</span> SecurityConfiguration securityConfiguration;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span>(required = <span class="keyword">false</span>)</span><br><span class="line">	<span class="keyword">private</span> UiConfiguration uiConfiguration;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> SwaggerResourcesProvider swaggerResources;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SwaggerHandler</span><span class="params">(SwaggerResourcesProvider swaggerResources)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.swaggerResources = swaggerResources;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/configuration/security"</span>)</span><br><span class="line">	<span class="keyword">public</span> Mono&lt;ResponseEntity&lt;SecurityConfiguration&gt;&gt; securityConfiguration() &#123;</span><br><span class="line">		<span class="keyword">return</span> Mono.just(<span class="keyword">new</span> ResponseEntity&lt;&gt;(</span><br><span class="line">				Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build()), HttpStatus.OK));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/configuration/ui"</span>)</span><br><span class="line">	<span class="keyword">public</span> Mono&lt;ResponseEntity&lt;UiConfiguration&gt;&gt; uiConfiguration() &#123;</span><br><span class="line">		<span class="keyword">return</span> Mono.just(<span class="keyword">new</span> ResponseEntity&lt;&gt;(</span><br><span class="line">				Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">""</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Mono&lt;ResponseEntity&gt; <span class="title">swaggerResources</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Mono.just((<span class="keyword">new</span> ResponseEntity&lt;&gt;(swaggerResources.get(), HttpStatus.OK)));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -474,7 +473,7 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/transaction/" rel="tag"># transaction</a>
+            <a href="/tags/spring/" rel="tag"># spring</a>
           
         </div>
       
@@ -487,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/java/java/transaction/3/" rel="next" title="说说分布式事务(三)">
-                <i class="fa fa-chevron-left"></i> 说说分布式事务(三)
+              <a href="/dwh/etl/dwh/kettle-1/" rel="next" title="kettle">
+                <i class="fa fa-chevron-left"></i> kettle
               </a>
             
           </div>
@@ -496,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/java/java/transaction/5/" rel="prev" title="说说分布式事务(五)">
-                说说分布式事务(五) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -799,7 +794,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#最终一致性-二"><span class="nav-number">1.</span> <span class="nav-text">最终一致性(二)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于MQ的分布式事务补偿机制"><span class="nav-number">2.</span> <span class="nav-text">基于MQ的分布式事务补偿机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#序列图"><span class="nav-number">3.</span> <span class="nav-text">序列图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常场景处理"><span class="nav-number">4.</span> <span class="nav-text">异常场景处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#和TCC的比较"><span class="nav-number">5.</span> <span class="nav-text">和TCC的比较</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ApiGateway整合Swagger2"><span class="nav-number">1.</span> <span class="nav-text">ApiGateway整合Swagger2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入依赖"><span class="nav-number">1.2.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心代码"><span class="nav-number">1.3.</span> <span class="nav-text">核心代码</span></a></li></ol></li></ol></div>
             
 
           </div>

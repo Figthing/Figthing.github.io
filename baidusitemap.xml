@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/</loc>
+    <lastmod>2019-10-09T10:18:35.119Z</lastmod>
+    <data>
+        <display>
+        <title>ApiGateway整合Swagger2</title>
+        <pubTime>2019-10-09T10:15:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="spring" url="http://blog.appydm.com/categories/java/spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/dwh/etl/dwh/kettle-1/</loc>
     <lastmod>2019-10-09T01:34:05.371Z</lastmod>
     <data>
