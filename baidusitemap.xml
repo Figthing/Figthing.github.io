@@ -4,21 +4,79 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/uncategorized/spring/redis-1/</loc>
-    <lastmod>2019-09-06T07:46:11.960Z</lastmod>
+    <loc>http://blog.appydm.com/dwh/etl/dwh/kettle-1/</loc>
+    <lastmod>2019-10-09T01:34:05.371Z</lastmod>
     <data>
         <display>
-        <title>Redis客户端选择</title>
-        <pubTime>2019-09-06T07:44:00.000Z</pubTime>
+        <title>kettle</title>
+        <pubTime>2019-10-08T10:08:00.000Z</pubTime>
+        
+        <tag>dwh</tag>
+         
+        <tag>etl</tag>
+         
+        <tag>kettle</tag>
+         
+         
+           
+             
+              <breadCrumb title="dwh" url="http://blog.appydm.com/categories/dwh/"/>
+          
+             
+              <breadCrumb title="etl" url="http://blog.appydm.com/categories/dwh/etl/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/java/spring/spring/spring-security-1/</loc>
+    <lastmod>2019-10-09T01:32:23.949Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Security基础</title>
+        <pubTime>2019-05-04T05:44:00.000Z</pubTime>
         
         <tag>java</tag>
          
         <tag>spring</tag>
          
-        <tag>redis</tag>
+        <tag>security</tag>
          
          
            
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="spring" url="http://blog.appydm.com/categories/java/spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
+    <lastmod>2019-10-09T01:32:09.976Z</lastmod>
+    <data>
+        <display>
+        <title>K8s-Dashboard安装</title>
+        <pubTime>2019-06-18T12:43:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
         </display>
     </data>
     </url>
@@ -26,7 +84,7 @@
     
   <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/</loc>
-    <lastmod>2019-07-18T04:03:38.388Z</lastmod>
+    <lastmod>2019-10-09T01:31:55.606Z</lastmod>
     <data>
         <display>
         <title>K8s搭建-YAPI</title>
@@ -44,6 +102,52 @@
              
               <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/dwh/etl/dwh/etl-1/</loc>
+    <lastmod>2019-10-09T01:31:36.904Z</lastmod>
+    <data>
+        <display>
+        <title>数据仓库之ETL</title>
+        <pubTime>2019-10-08T09:44:00.000Z</pubTime>
+        
+        <tag>etl</tag>
+         
+        <tag>data-warehouse</tag>
+         
+         
+           
+             
+              <breadCrumb title="dwh" url="http://blog.appydm.com/categories/dwh/"/>
+          
+             
+              <breadCrumb title="etl" url="http://blog.appydm.com/categories/dwh/etl/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/uncategorized/spring/redis-1/</loc>
+    <lastmod>2019-09-06T07:46:11.960Z</lastmod>
+    <data>
+        <display>
+        <title>Redis客户端选择</title>
+        <pubTime>2019-09-06T07:44:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring</tag>
+         
+        <tag>redis</tag>
+         
+         
+           
         </display>
     </data>
     </url>
@@ -81,31 +185,6 @@
         <display>
         <title>K8s搭建-Zookeeper集群</title>
         <pubTime>2019-06-28T07:18:00.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>k8s</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
-          
-             
-              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
-    <lastmod>2019-06-28T07:25:30.766Z</lastmod>
-    <data>
-        <display>
-        <title>K8s-Dashboard安装</title>
-        <pubTime>2019-06-18T12:43:00.000Z</pubTime>
         
         <tag>docker</tag>
          
@@ -291,33 +370,6 @@
         <tag>spring</tag>
          
         <tag>oauth2</tag>
-         
-         
-           
-             
-              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
-          
-             
-              <breadCrumb title="spring" url="http://blog.appydm.com/categories/java/spring/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.appydm.com/java/spring/spring/spring-security-1/</loc>
-    <lastmod>2019-05-04T06:28:18.924Z</lastmod>
-    <data>
-        <display>
-        <title>Spring Security基础</title>
-        <pubTime>2019-05-04T05:44:00.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>spring</tag>
-         
-        <tag>security</tag>
          
          
            

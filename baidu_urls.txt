@@ -1,3 +1,5 @@
+http://blog.appydm.com/dwh/etl/dwh/kettle-1/
+http://blog.appydm.com/dwh/etl/dwh/etl-1/
 http://blog.appydm.com/uncategorized/spring/redis-1/
 http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/
 http://blog.appydm.com/docker/k8s/docker/k8s/coreDns-1/
