@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/java/war/java/war/1/</loc>
+    
+    <lastmod>2019-10-11T11:08:05.343Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/</loc>
     
     <lastmod>2019-10-09T10:18:35.119Z</lastmod>

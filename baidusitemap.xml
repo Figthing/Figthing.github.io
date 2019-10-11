@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/java/war/java/war/1/</loc>
+    <lastmod>2019-10-11T11:08:05.343Z</lastmod>
+    <data>
+        <display>
+        <title>War包二次开发技巧</title>
+        <pubTime>2019-10-11T11:05:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>war</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="war" url="http://blog.appydm.com/categories/java/war/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/</loc>
     <lastmod>2019-10-09T10:18:35.119Z</lastmod>
     <data>
@@ -365,9 +390,9 @@
          
         <tag>spring</tag>
          
-        <tag>security</tag>
-         
         <tag>oauth2</tag>
+         
+        <tag>security</tag>
          
          
            
