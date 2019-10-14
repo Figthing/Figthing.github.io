@@ -323,6 +323,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/java/proxy-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/java/java/proxy-1/" itemprop="url">JAVA动态代理机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-04T17:24:00+08:00">2018-05-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">10k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="JAVA动态代理机制以及使用场景"><a href="#JAVA动态代理机制以及使用场景" class="headerlink" title="JAVA动态代理机制以及使用场景"></a>JAVA动态代理机制以及使用场景</h4><h5 id="什么是代理？"><a href="#什么是代理？" class="headerlink" title="什么是代理？"></a>什么是代理？</h5><p>大道理上讲代理是一种软件设计模式，目的地希望能做到代码重用。具体上讲，代理这种设计模式是通过不直接访问被代理对象的方式，而访问被代理对象的方法。这个就好比 商户—-&gt;明星经纪人(代理)—-&gt;明星这种模式。我们可以不通过直接与明星对话的情况下，而通过明星经纪人(代理)与其产生间接对话。</p>
+<h5 id="什么情况下使用代理？"><a href="#什么情况下使用代理？" class="headerlink" title="什么情况下使用代理？"></a>什么情况下使用代理？</h5><ul>
+<li><p>设计模式中有一个设计原则是开闭原则，是说对修改关闭对扩展开放，我们在工作中有时会接手很多前人的代码，里面代码逻辑让人摸不着头脑(sometimes the code is really like shit)，这时就很难去下手修改代码，那么这时我们就可以通过代理对类进行增强。</p>
+</li>
+<li><p>我们在使用RPC框架的时候，框架本身并不能提前知道各个业务方要调用哪些接口的哪些方法 。那么这个时候，就可用通过动态代理的方式来建立一个中间人给客户端使用，也方便框架进行搭建逻辑，某种程度上也是客户端代码和框架松耦合的一种表现。</p>
+</li>
+<li><p>Spring的AOP机制就是采用动态代理的机制来实现切面编程。</p>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/java/java/proxy-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/oracle/oracle/4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -403,7 +582,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.8k</span>
+                <span title="字数统计">4k</span>
               
 
               
@@ -417,7 +596,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -439,12 +618,12 @@
       
         
           
-            <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span><br><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span><br><span class="line"><span class="meta">SQL&gt;</span> startup</span><br></pre></td></tr></table></figure>
-<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> alter user sys identified by 123456;</span><br></pre></td></tr></table></figure>
+            <h4 id="Linux下Oracle安装（四）"><a href="#Linux下Oracle安装（四）" class="headerlink" title="Linux下Oracle安装（四）"></a>Linux下Oracle安装（四）</h4><h5 id="启动监听和数据库"><a href="#启动监听和数据库" class="headerlink" title="启动监听和数据库"></a>启动监听和数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/sqlplus / as sysdba</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br></pre></td></tr></table></figure>
+<h5 id="设置dba密码"><a href="#设置dba密码" class="headerlink" title="设置dba密码"></a>设置dba密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter user sys identified by 123456;</span></span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建表空间"><a href="#使用Oracle客户端，创建表空间" class="headerlink" title="使用Oracle客户端，创建表空间"></a>使用Oracle客户端，创建表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create tablespace ccmp_app 						-表空间名称</span><br><span class="line">logging </span><br><span class="line">datafile '/oracle/ccmp-databases/ccmp_app' 		-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
 <h5 id="使用Oracle客户端，创建临时表空间"><a href="#使用Oracle客户端，创建临时表空间" class="headerlink" title="使用Oracle客户端，创建临时表空间"></a>使用Oracle客户端，创建临时表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create temporary tablespace ccmp_app_temp 			-表空间名称</span><br><span class="line">tempfile '/oracle/ccmp-databases/ccmp_app_temp' 	-表空间存储位置</span><br><span class="line">size 10m </span><br><span class="line">autoextend on </span><br><span class="line">next 10m maxsize 20480m </span><br><span class="line">extent management local;</span><br></pre></td></tr></table></figure>
-<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> create user ccmp_app identified by 123456;</span><br><span class="line"><span class="meta">SQL&gt;</span> default tablespace ccmp_app;</span><br><span class="line"><span class="meta">SQL&gt;</span> temporary tablespace ccmp_app_temp;</span><br></pre></td></tr></table></figure>
-<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span> grant connect,resource,dba to ccmp_app;</span><br></pre></td></tr></table></figure>
+<h5 id="创建用户和指定表空间"><a href="#创建用户和指定表空间" class="headerlink" title="创建用户和指定表空间"></a>创建用户和指定表空间</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> create user ccmp_app identified by 123456;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> default tablespace ccmp_app;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> temporary tablespace ccmp_app_temp;</span></span><br></pre></td></tr></table></figure>
+<h5 id="赋予用户权限"><a href="#赋予用户权限" class="headerlink" title="赋予用户权限"></a>赋予用户权限</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> grant connect,resource,dba to ccmp_app;</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -609,7 +788,7 @@
 
       
         
-          <h4 id="Linux下Oracle安装（三）"><a href="#Linux下Oracle安装（三）" class="headerlink" title="Linux下Oracle安装（三）"></a>Linux下Oracle安装（三）</h4><h5 id="配置监听文件和本地服务"><a href="#配置监听文件和本地服务" class="headerlink" title="配置监听文件和本地服务"></a>配置监听文件和本地服务</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/netca</span><br></pre></td></tr></table></figure>
+          <h4 id="Linux下Oracle安装（三）"><a href="#Linux下Oracle安装（三）" class="headerlink" title="Linux下Oracle安装（三）"></a>Linux下Oracle安装（三）</h4><h5 id="配置监听文件和本地服务"><a href="#配置监听文件和本地服务" class="headerlink" title="配置监听文件和本地服务"></a>配置监听文件和本地服务</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /oracle/app/oracle/product/11.2.0/dbhome_1/bin/netca</span></span><br></pre></td></tr></table></figure>
 <p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/30.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>创建监听服务，作为Oracle的服务端</p>
 <p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/31.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
@@ -751,7 +930,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.3k</span>
+                <span title="字数统计">5.5k</span>
               
 
               
@@ -786,7 +965,7 @@
 
       
         
-          <h4 id="Linux下Oracle安装（二）"><a href="#Linux下Oracle安装（二）" class="headerlink" title="Linux下Oracle安装（二）"></a>Linux下Oracle安装（二）</h4><h5 id="运行Oracle安装文件"><a href="#运行Oracle安装文件" class="headerlink" title="运行Oracle安装文件"></a>运行Oracle安装文件</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> su oracle</span><br><span class="line"><span class="meta">#</span> source ~/.bash_profile</span><br><span class="line"><span class="meta">#</span> /opt/oracle/database/runInstaller -jreLoc /opt/jdk1.7.0_80/</span><br></pre></td></tr></table></figure>
+          <h4 id="Linux下Oracle安装（二）"><a href="#Linux下Oracle安装（二）" class="headerlink" title="Linux下Oracle安装（二）"></a>Linux下Oracle安装（二）</h4><h5 id="运行Oracle安装文件"><a href="#运行Oracle安装文件" class="headerlink" title="运行Oracle安装文件"></a>运行Oracle安装文件</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> su oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /opt/oracle/database/runInstaller -jreLoc /opt/jdk1.7.0_80/</span></span><br></pre></td></tr></table></figure>
 <p>  <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/5.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>  <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/6.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
           <!--noindex-->
@@ -924,7 +1103,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.9k</span>
+                <span title="字数统计">6.3k</span>
               
 
               
@@ -938,7 +1117,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">6 mins.</span>
               
             </div>
           
@@ -960,9 +1139,9 @@
       
         
           <h4 id="Linux下Oracle安装（一）"><a href="#Linux下Oracle安装（一）" class="headerlink" title="Linux下Oracle安装（一）"></a>Linux下Oracle安装（一）</h4><p>在Linux中安装Oracle主要有以下几步</p>
-<h5 id="安装Oracle依赖包"><a href="#安装Oracle依赖包" class="headerlink" title="安装Oracle依赖包"></a>安装Oracle依赖包</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686</span><br></pre></td></tr></table></figure>
-<h5 id="创建Oracle对应目录并设置权限"><a href="#创建Oracle对应目录并设置权限" class="headerlink" title="创建Oracle对应目录并设置权限"></a>创建Oracle对应目录并设置权限</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle</span><br><span class="line"><span class="meta">#</span> mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory</span><br></pre></td></tr></table></figure>
-<h5 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> yum install xhost</span><br><span class="line"><span class="meta">#</span> yum grouplist</span><br><span class="line"><span class="meta">#</span> yum groupinstall "X Window System"</span><br><span class="line"><span class="meta">#</span> yum groupinstall Desktop</span><br><span class="line"><span class="meta">#</span> yum install xterm</span><br><span class="line"><span class="meta">#</span> yum install xclock</span><br></pre></td></tr></table></figure>
+<h5 id="安装Oracle依赖包"><a href="#安装Oracle依赖包" class="headerlink" title="安装Oracle依赖包"></a>安装Oracle依赖包</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建Oracle对应目录并设置权限"><a href="#创建Oracle对应目录并设置权限" class="headerlink" title="创建Oracle对应目录并设置权限"></a>创建Oracle对应目录并设置权限</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory</span></span><br></pre></td></tr></table></figure>
+<h5 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum install xhost</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum grouplist</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall <span class="string">"X Window System"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall Desktop</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xterm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xclock</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/oracle/oracle/1/" rel="contents">
@@ -1921,189 +2100,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/uml/uml/5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uml/uml/5/" itemprop="url">深入浅出UML类图（五）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T14:09:00+08:00">2018-03-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/uml/" itemprop="url" rel="index"><span itemprop="name">uml</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="实例分析3——售票机控制程序"><a href="#实例分析3——售票机控制程序" class="headerlink" title="实例分析3——售票机控制程序"></a>实例分析3——售票机控制程序</h3><p>某运输公司决定为新的售票机开发车票销售的控制软件。图I给出了售票机的面板示意图以及相关的控制部件。</p>
-<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/uml/18.jpg?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
-<p>售票机相关部件的作用如下所述：</p>
-<ol>
-<li>目的地键盘用来输入行程目的地的代码（例如，200表示总站）。</li>
-<li>乘客可以通过车票键盘选择车票种类（单程票、多次往返票和座席种类）。</li>
-<li>继续/取消键盘上的取消按钮用于取消购票过程，继续按钮允许乘客连续购买多张票。</li>
-<li>显示屏显示所有的系统输出和用户提示信息。</li>
-<li>插卡口接受MCard（现金卡），硬币口和纸币槽接受现金。</li>
-<li>打印机用于输出车票。</li>
-<li>所有部件均可实现自检并恢复到初始状态。</li>
-<li>现采用面向对象方法开发该系统，使用UML进行建模，绘制该系统的初始类图。</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/uml/uml/5/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2151,7 +2147,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-count">79</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2198,7 +2194,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2323,7 +2323,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/software/ss/software/ss-1/</loc>
+    <lastmod>2019-10-14T07:53:35.525Z</lastmod>
+    <data>
+        <display>
+        <title>搭建Shadowsocks服务</title>
+        <pubTime>2019-10-13T15:49:00.000Z</pubTime>
+        
+        <tag>software</tag>
+         
+        <tag>ss</tag>
+         
+         
+           
+             
+              <breadCrumb title="software" url="http://blog.appydm.com/categories/software/"/>
+          
+             
+              <breadCrumb title="ss" url="http://blog.appydm.com/categories/software/ss/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/java/war/java/war/1/</loc>
     <lastmod>2019-10-11T11:08:05.343Z</lastmod>
     <data>
@@ -61,9 +86,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>dwh</tag>
-         
         <tag>etl</tag>
+         
+        <tag>dwh</tag>
          
         <tag>kettle</tag>
          
@@ -165,9 +190,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>data-warehouse</tag>
+         
+        <tag>etl</tag>
          
          
            
