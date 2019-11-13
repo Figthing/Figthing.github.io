@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/2/</loc>
+    
+    <lastmod>2019-11-13T09:15:39.701Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/software/ss/software/ss-1/</loc>
     
     <lastmod>2019-10-14T07:53:35.525Z</lastmod>
@@ -555,14 +562,14 @@
   </url>
   
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
+    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
     
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
+    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
     
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     

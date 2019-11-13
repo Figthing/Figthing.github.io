@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/2/</loc>
+    <lastmod>2019-11-13T09:15:39.701Z</lastmod>
+    <data>
+        <display>
+        <title>Windows下访问K8S集群中的POD</title>
+        <pubTime>2019-11-13T09:10:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/software/ss/software/ss-1/</loc>
     <lastmod>2019-10-14T07:53:35.525Z</lastmod>
     <data>
@@ -86,9 +111,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>dwh</tag>
+         
+        <tag>etl</tag>
          
         <tag>kettle</tag>
          
@@ -190,9 +215,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>data-warehouse</tag>
-         
         <tag>etl</tag>
+         
+        <tag>data-warehouse</tag>
          
          
            
@@ -415,9 +440,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
@@ -1755,30 +1780,6 @@
     
     
   <url>
-    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
-    <lastmod>2018-01-08T05:18:54.000Z</lastmod>
-    <data>
-        <display>
-        <title>WGET命令</title>
-        <pubTime>2018-01-07T13:53:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>shell</tag>
-         
-        <tag>wget</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://blog.appydm.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.appydm.com/linux/linux/shell-ps/</loc>
     <lastmod>2018-01-08T05:18:54.000Z</lastmod>
     <data>
@@ -1791,6 +1792,30 @@
         <tag>shell</tag>
          
         <tag>ps</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://blog.appydm.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/linux/linux/shell-wget/</loc>
+    <lastmod>2018-01-08T05:18:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>WGET命令</title>
+        <pubTime>2018-01-07T13:53:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>wget</tag>
          
          
            
