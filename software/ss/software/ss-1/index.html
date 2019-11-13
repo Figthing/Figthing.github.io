@@ -122,13 +122,13 @@
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="搭建Shadowsocks服务概念 shadowsocks可以指一种SOCKS5的加密传输协议，也可以指基于这种加密协议的各种数据传输包。  shadowsocks实现科学上网原理？shadowsocks正常工作需要服务器端和客户端两端合作实现，首先，客户端（本机）通过ss（shadowsocks）对正常的访问请求进行SOCK5加密，将加密后的访问请求传输给ss服务器端，服务器端接收到客户端的加密">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="g:/develop/nodejs/blog/oss/img/ss/1.png">
-<meta property="og:image" content="g:/develop/nodejs/blog/oss/img/ss/2.png">
-<meta property="og:updated_time" content="2019-10-14T07:53:35.525Z">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/software/ss/1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/software/ss/2.png">
+<meta property="og:updated_time" content="2019-11-13T09:19:23.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建Shadowsocks服务">
 <meta name="twitter:description" content="搭建Shadowsocks服务概念 shadowsocks可以指一种SOCKS5的加密传输协议，也可以指基于这种加密协议的各种数据传输包。  shadowsocks实现科学上网原理？shadowsocks正常工作需要服务器端和客户端两端合作实现，首先，客户端（本机）通过ss（shadowsocks）对正常的访问请求进行SOCK5加密，将加密后的访问请求传输给ss服务器端，服务器端接收到客户端的加密">
-<meta name="twitter:image" content="g:/develop/nodejs/blog/oss/img/ss/1.png">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/software/ss/1.png">
 
 
 
@@ -476,7 +476,7 @@
 </li>
 </ol>
 <h4 id="一键搭建Shadowsocks"><a href="#一键搭建Shadowsocks" class="headerlink" title="一键搭建Shadowsocks"></a>一键搭建Shadowsocks</h4><p> 连上购买的VPS后（以Xshell为例），你将看到如下图所示的界面 </p>
-<p><img src="G:\develop\nodejs\blog\oss\img\ss\1.png" alt="1"></p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/software/ss/1.png" alt="1"></p>
 <p> 如红框中所示，root@vult（root@ubuntu）说明已经连接成功了，之后你只需要<strong>在绿色光标处直接复制以下代码并回车</strong>就可以了（直接复制即可，如每段代码下方截图中所示）。 </p>
 <p>1、安装git</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
@@ -485,7 +485,7 @@
 <p>3、运行搭建ss脚本代码 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-fly/ss-fly.sh -i 密码 端口号</span><br></pre></td></tr></table></figure>
 <p>界面如下就表示一键搭建ss成功了：</p>
-<p><img src="G:\develop\nodejs\blog\oss\img\ss\2.png" alt="2"></p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/software/ss/2.png" alt="2"></p>
 <p>4、 相关ss操作 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改配置文件：vim /etc/shadowsocks.json</span><br><span class="line">停止ss服务：ssserver -c /etc/shadowsocks.json -d stop</span><br><span class="line">启动ss服务：ssserver -c /etc/shadowsocks.json -d start</span><br><span class="line">重启ss服务：ssserver -c /etc/shadowsocks.json -d restart</span><br></pre></td></tr></table></figure>
 <p>5、 卸载ss服务 </p>
