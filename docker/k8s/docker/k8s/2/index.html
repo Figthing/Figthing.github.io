@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/微信截图_20191113165954.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/微信截图_20191113170256.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/微信截图_20191113170443.png">
-<meta property="og:updated_time" content="2019-11-13T09:15:39.701Z">
+<meta property="og:updated_time" content="2019-11-14T07:44:35.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下访问K8S集群中的POD">
 <meta name="twitter:description" content="Windows下访问K8S集群中的POD概述近期在公司搭建了一个K8s集群，有一个项目使用了spring cloud框架做开发，在部署的时候发现一个问题。所有的微服务打包后运行在集群上，互相是可以通过feign进行访问的，这点没问题。但如果需要在本地调试，发现在集群中部署的应用无法反向访问本地应用，下面是我解决的具体方法。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">7.1k</span>
+                <span title="字数统计">8.2k</span>
               
 
               
@@ -432,7 +432,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 mins.</span>
+                <span title="阅读时长">7 mins.</span>
               
             </div>
           
@@ -501,6 +501,9 @@
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/微信截图_20191113170256.png" alt="微信截图_20191113170256" style="zoom:60%;"></p>
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/微信截图_20191113170443.png" alt="微信截图_20191113170443" style="zoom:60%;"></p>
 <p>使用<code>curl -i</code>来验证是否本地能访问，到这里windows中访问k8s集群的pod就完成了</p>
+<h4 id="Eureka本地远程互相访问"><a href="#Eureka本地远程互相访问" class="headerlink" title="Eureka本地远程互相访问"></a>Eureka本地远程互相访问</h4><p>有了之前的一些配置后，只是打通了本地访问pod的问题，如果通过eureka进行转发还是会存在无法访问的情况，那么我们还需要在各个工程中设置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭IP注册方式</span></span><br><span class="line"><span class="string">eureka.instance.prefer-ip-address</span> <span class="string">=</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对每一个微服务设置hostname</span></span><br><span class="line"><span class="string">eureka.instance.hostname</span> <span class="string">=</span> <span class="string">hype-auth-service-svc</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：hostname的名称必须要和k8s中<code>Service.metadata.name</code>一致，本地需要调试的工程无需进行设置，将ip注册方式打开就可以了。</strong></p>
 <p><strong>参考文献</strong></p>
 <ul>
 <li>github：<a href="txn2/kubefwd">https://github.com/txn2/kubefwd</a></li>
@@ -856,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows下访问K8S集群中的POD"><span class="nav-number">1.</span> <span class="nav-text">Windows下访问K8S集群中的POD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用服务器"><span class="nav-number">1.2.</span> <span class="nav-text">应用服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用部署说明"><span class="nav-number">1.3.</span> <span class="nav-text">应用部署说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地环境"><span class="nav-number">1.4.</span> <span class="nav-text">本地环境</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows下访问K8S集群中的POD"><span class="nav-number">1.</span> <span class="nav-text">Windows下访问K8S集群中的POD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用服务器"><span class="nav-number">1.2.</span> <span class="nav-text">应用服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用部署说明"><span class="nav-number">1.3.</span> <span class="nav-text">应用部署说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地环境"><span class="nav-number">1.4.</span> <span class="nav-text">本地环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Eureka本地远程互相访问"><span class="nav-number">1.5.</span> <span class="nav-text">Eureka本地远程互相访问</span></a></li></ol></li></ol></div>
             
 
           </div>
