@@ -61,8 +61,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>etl</tag>
         <tag>dwh</tag>
+        <tag>etl</tag>
         <tag>kettle</tag>
       </tags>
   </entry>
@@ -75,8 +75,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>data-warehouse</tag>
         <tag>etl</tag>
+        <tag>data-warehouse</tag>
       </tags>
   </entry>
   <entry>
@@ -193,8 +193,8 @@
       <tags>
         <tag>java</tag>
         <tag>spring</tag>
-        <tag>oauth2</tag>
         <tag>security</tag>
+        <tag>oauth2</tag>
       </tags>
   </entry>
   <entry>

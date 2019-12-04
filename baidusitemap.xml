@@ -111,9 +111,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>dwh</tag>
+         
+        <tag>etl</tag>
          
         <tag>kettle</tag>
          
@@ -215,9 +215,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>data-warehouse</tag>
-         
         <tag>etl</tag>
+         
+        <tag>data-warehouse</tag>
          
          
            
@@ -440,9 +440,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
