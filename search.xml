@@ -61,8 +61,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>dwh</tag>
         <tag>etl</tag>
+        <tag>dwh</tag>
         <tag>kettle</tag>
       </tags>
   </entry>
@@ -75,8 +75,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>etl</tag>
         <tag>data-warehouse</tag>
+        <tag>etl</tag>
       </tags>
   </entry>
   <entry>
