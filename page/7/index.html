@@ -1281,7 +1281,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8.2k</span>
+                <span title="字数统计">8.6k</span>
               
 
               
@@ -1295,7 +1295,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 mins.</span>
+                <span title="阅读时长">8 mins.</span>
               
             </div>
           
@@ -1468,7 +1468,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">6.9k</span>
+                <span title="字数统计">6.1k</span>
               
 
               
@@ -1813,7 +1813,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.5k</span>
+                <span title="字数统计">5.2k</span>
               
 
               
@@ -1853,13 +1853,13 @@
 <li>vsftpd软件</li>
 <li>yum安装</li>
 </ul>
-<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h4><h5 id="安装vsftpd服务器"><a href="#安装vsftpd服务器" class="headerlink" title="安装vsftpd服务器"></a>安装vsftpd服务器</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install vsftpd</span></span><br></pre></td></tr></table></figure>
-<h5 id="安装一个加密工具"><a href="#安装一个加密工具" class="headerlink" title="安装一个加密工具"></a>安装一个加密工具</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install libdb-utils.x86_64</span></span><br></pre></td></tr></table></figure>
-<h5 id="修改配置VSFTP"><a href="#修改配置VSFTP" class="headerlink" title="修改配置VSFTP"></a>修改配置VSFTP</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/vsftpd/vsftpd.conf</span></span><br></pre></td></tr></table></figure>
+<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h4><h5 id="安装vsftpd服务器"><a href="#安装vsftpd服务器" class="headerlink" title="安装vsftpd服务器"></a>安装vsftpd服务器</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> yum install vsftpd</span><br></pre></td></tr></table></figure>
+<h5 id="安装一个加密工具"><a href="#安装一个加密工具" class="headerlink" title="安装一个加密工具"></a>安装一个加密工具</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> yum install libdb-utils.x86_64</span><br></pre></td></tr></table></figure>
+<h5 id="修改配置VSFTP"><a href="#修改配置VSFTP" class="headerlink" title="修改配置VSFTP"></a>修改配置VSFTP</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
 <h5 id="配置文件参数说明"><a href="#配置文件参数说明" class="headerlink" title="配置文件参数说明"></a>配置文件参数说明</h5><blockquote>
 <p> anonymous_enable=NO #设定不允许匿名访问<br> local_enable=YES #设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问。<br> chroot_list_enable=YES #使用户不能离开主目录<br> ascii_upload_enable=YES #允许使用ASCII模式上传<br> ascii_download_enable=YES #设定支持ASCII模式的上传和下载功能。<br> pam_service_name=vsftpd #PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证<br> guest_enable=YES #设定启用虚拟用户功能。<br> guest_username=ftp #指定虚拟用户的宿主用户。-RHEL/CentOS中已经有内置的ftp用户了<br> user_config_dir=/etc/vsftpd/vuser_conf #设定虚拟用户个人vsftp的RHEL/CentOS FTP服务文件存放路  径。<br> listen=YES    # 只监听ipv4的地址<br> xferlog_file=/var/log/xferlog    # 日志文件的路径<br> listen_port=1315        #FTP端口<br> pasv_enable=YES            #开启被动模式<br> pasv_min_port=10060<br> pasv_max_port=10070</p>
 </blockquote>
-<h5 id="创建chroot-list，将ftp用户加入其中"><a href="#创建chroot-list，将ftp用户加入其中" class="headerlink" title="创建chroot list，将ftp用户加入其中"></a>创建chroot list，将ftp用户加入其中</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /etc/vsftpd/chroot_list</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ftp &gt;&gt; /etc/vsftpd/chroot_list</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建chroot-list，将ftp用户加入其中"><a href="#创建chroot-list，将ftp用户加入其中" class="headerlink" title="创建chroot list，将ftp用户加入其中"></a>创建chroot list，将ftp用户加入其中</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> touch /etc/vsftpd/chroot_list</span><br><span class="line"><span class="meta">$</span> echo ftp &gt;&gt; /etc/vsftpd/chroot_list</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/linux/linux/software-vsftpd/" rel="contents">
