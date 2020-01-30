@@ -4,6 +4,56 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
+    <lastmod>2020-01-30T14:15:53.201Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Cloud 配置中心 Github SSH验证</title>
+        <pubTime>2020-01-30T09:28:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring-cloud</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="spring-cloud" url="http://blog.appydm.com/categories/java/spring-cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/spring-cloud-gateway-1/</loc>
+    <lastmod>2020-01-30T14:15:13.134Z</lastmod>
+    <data>
+        <display>
+        <title>ApiGateway整合Swagger2</title>
+        <pubTime>2019-10-09T10:15:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring-cloud</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="spring-cloud" url="http://blog.appydm.com/categories/java/spring-cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/2/</loc>
     <lastmod>2019-11-14T07:44:35.872Z</lastmod>
     <data>
@@ -79,31 +129,6 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/java/spring/java/spring/spring-cloud-gateway-1/</loc>
-    <lastmod>2019-10-09T10:18:35.119Z</lastmod>
-    <data>
-        <display>
-        <title>ApiGateway整合Swagger2</title>
-        <pubTime>2019-10-09T10:15:00.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>spring</tag>
-         
-         
-           
-             
-              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
-          
-             
-              <breadCrumb title="spring" url="http://blog.appydm.com/categories/java/spring/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.appydm.com/dwh/etl/dwh/kettle-1/</loc>
     <lastmod>2019-10-09T01:34:05.371Z</lastmod>
     <data>
@@ -111,9 +136,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>dwh</tag>
+         
+        <tag>etl</tag>
          
         <tag>kettle</tag>
          
@@ -215,9 +240,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>data-warehouse</tag>
-         
         <tag>etl</tag>
+         
+        <tag>data-warehouse</tag>
          
          
            

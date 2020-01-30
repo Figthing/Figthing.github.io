@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring Cloud 配置中心 Github SSH验证]]></title>
+    <url>%2Fjava%2Fspring-cloud%2Fjava%2Fspring-cloud%2Fconfig-server-github-ssh%2F</url>
+    <content type="text"><![CDATA[Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spring Cloud来搭建一个配置中心，并以 github 作为配置存储。除了 git 外，还可以用数据库、svn、本地文件等作为存储。 Github SSH配置密匙生成Windows下生成密匙，可以直接使用Git Bash工具，执行ssh-keygen -m PEM -t rsa -b 4096命令 在弹出来的选项直接按回车就可以了，密匙生成目录C:\Users\用户\.ssh 公钥id_rsa.pub 私钥id_rsa 配置SSH点击右上角头像，弹出的菜单中，点击Settings进入设置 点击SSH and GPG keys，进入SSH的key设置 点击New SSH key，进行SSH的添加，记住这里的Title随便填写，Key就是我们的公钥，打开公钥内容全部复制粘贴到Key的输入框中，点击Add SSH key即可！公钥是ssh-rsa开头 添加公钥后就会显示 校验密匙这时我们回到Windows上，打开Git Bash，在执行ssh -T git@github.com命令 只要出现You&#39;ve successfully authenticated就证明，已经验证成功了。 Spring Cloud 配置中心配置文件存放在github中新建一个仓库，这个仓库一定要是干净的，就是最好不要有其他文件存在，不然会报错。因为我们使用了SSH，所以这是一个私库，我存放的位置是local/eureka.properties。 POM依赖1234&lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt; &lt;/dependency&gt; 项目配置文件properties文件 12345678spring.cloud.config.server.git.uri=git@github.com:Figthing/hyper-config-repo.gitspring.cloud.config.server.git.strict-host-key-checking=falsespring.cloud.config.server.git.ignore-local-ssh-settings=truespring.cloud.config.server.git.search-paths=/localspring.cloud.config.server.git.private-key=-----BEGIN RSA PRIVATE KEY-----\n\aaaa\xxxx\n\-----END RSA PRIVATE KEY----- ​ 参数说明 spring.cloud.config.server.git.uri：配置的Github仓库的ssh地址 spring.cloud.config.server.git.strict-host-key-checking：true-使用用户名密码，false-使用ssh key spring.cloud.config.server.git.ignore-local-ssh-settings：true-ssh 登陆方式 spring.cloud.config.server.git.search-paths：git仓库地址下的相对地址 多个用逗号”,”分割。 spring.cloud.config.server.git.private-key：私钥内容（可以使用变量代替），这里要注意几点 第一行使用\n\结尾 内容行使用\结尾 End结束之前使用\n\结尾 yaml文件 因我项目使用的properties，至于yaml就自行百度吧，应该相差不大。 启动验证main类文件 12345678@EnableConfigServer@SpringBootApplicationpublic class ConfigApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(ConfigApplication.class, args); &#125;&#125; 访问配置 我们在URL中输入http://localhost:8802/eureka/local Spring cloud config 的URL与配置文件的映射关系如下: /{application}/{profile}[/{label}]/{application}-{profile}.yml/{label}/{application}-{profile}.yml/{application}-{profile}.properties/{label}/{application}-{profile}.properties 我这里的application = eureka，profile = local]]></content>
+      <categories>
+        <category>java</category>
+        <category>spring-cloud</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>spring-cloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Windows下访问K8S集群中的POD]]></title>
     <url>%2Fdocker%2Fk8s%2Fdocker%2Fk8s%2F2%2F</url>
     <content type="text"><![CDATA[Windows下访问K8S集群中的POD概述近期在公司搭建了一个K8s集群，有一个项目使用了spring cloud框架做开发，在部署的时候发现一个问题。所有的微服务打包后运行在集群上，互相是可以通过feign进行访问的，这点没问题。但如果需要在本地调试，发现在集群中部署的应用无法反向访问本地应用，下面是我解决的具体方法。 应用服务器K8s的安装和配置就不在这里具体说明了，将master中的k8s代理启动好，执行下面脚本。 启动脚本：proxy-start.sh 123# /bin/shkubectl proxy --address 0.0.0.0 --accept-hosts '.*' 停止脚本： 1234# /bin/shpid=$(ps -ef|grep 'kubectl proxy --address 0.0.0.0 --accept-hosts .*' | grep -v grep | awk '&#123;print $2&#125;')kill -9 $pid 测试地址：http://{IP地址}:8001/api/v1/namespaces/default/services 应用部署说明 应用名称 部署位置 Eureka k8s Api-Gateway k8s SSO-Login k8s Auth-Service 本地 本地环境准备工作 在本地环境中我们先下载kubectl和kubefwd工具，并在当前windows用户下创建一个.kube文件，我这里的地址是C:\Users\13966\.kube 配置kubectl 在windows的cmd中使用命令配置k8s远程环境 12345kubectl config set-cluster &#123;cluster_name&#125; --server=https://master_ip:8001 --insecure-skip-tls-verify=truekubectl config set-context &#123;cluster_name&#125;-context --cluster=&#123;cluster_name&#125;kubectl config set-credentials &#123;cluster_name&#125;-user --token=&#123;token&#125;kubectl config set-context &#123;cluster_name&#125;-context --user=&#123;cluster_name&#125;-user --namespace=defaultkubectl config use-context &#123;cluster_name&#125;-context 配置好后会在C:\Users\13966\.kube下生成一个config文件 12345678910111213141516171819apiVersion: v1clusters:- cluster: insecure-skip-tls-verify: true server: &#123;远程K8S代理API地址&#125; name: neusoft-clustercontexts:- context: cluster: neusoft-cluster namespace: &#123;访问的命名空间&#125; user: neusoft-cluster-user name: neusoft-cluster-contextcurrent-context: neusoft-cluster-contextkind: Configpreferences: &#123;&#125;users:- name: neusoft-cluster-user user: token: &#123;自己的Token&#125; 到这里我们就可以使用k8s的命令来验证是否能连上远程代理 这只是将windows和k8s打通了，还不能直接访问pod。我们还需要使用kubefwd软件，执行命令。 配置kubefwd 使用官方给的命令.\kubefwd.exe services -n default，这时就会看到下图，就说明我们本地能进行访问pods了 使用curl -i来验证是否本地能访问，到这里windows中访问k8s集群的pod就完成了 Eureka本地远程互相访问有了之前的一些配置后，只是打通了本地访问pod的问题，如果通过eureka进行转发还是会存在无法访问的情况，那么我们还需要在各个工程中设置如下： 12345# 关闭IP注册方式eureka.instance.prefer-ip-address = false# 对每一个微服务设置hostnameeureka.instance.hostname = hype-auth-service-svc 注意：hostname的名称必须要和k8s中Service.metadata.name一致，本地需要调试的工程无需进行设置，将ip注册方式打开就可以了。 参考文献 github：https://github.com/txn2/kubefwd IBM的从Kubectl Cli访问集群]]></content>
@@ -41,15 +54,15 @@
   </entry>
   <entry>
     <title><![CDATA[ApiGateway整合Swagger2]]></title>
-    <url>%2Fjava%2Fspring%2Fjava%2Fspring%2Fspring-cloud-gateway-1%2F</url>
+    <url>%2Fjava%2Fspring-cloud%2Fjava%2Fspring-cloud%2Fspring-cloud-gateway-1%2F</url>
     <content type="text"><![CDATA[ApiGateway整合Swagger2概述最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。 引入依赖1234567891011121314151617&lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;&lt;/dependency&gt;&lt;!-- Swagger2 --&gt;&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt; &lt;version&gt;2.9.2&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt; &lt;version&gt;2.9.2&lt;/version&gt;&lt;/dependency&gt; 核心代码配置SwaggerProvider，获取Api-doc，即SwaggerResources。SwaggerProvider.java 1234567891011121314151617181920212223242526272829303132333435363738@Component@Primary@AllArgsConstructorpublic class SwaggerProvider implements SwaggerResourcesProvider &#123; public static final String API_URI = "/v2/api-docs"; private final RouteLocator routeLocator; private final GatewayProperties gatewayProperties; @Override public List&lt;SwaggerResource&gt; get() &#123; List&lt;SwaggerResource&gt; resources = new ArrayList&lt;&gt;(); List&lt;String&gt; routes = new ArrayList&lt;&gt;(); //取出gateway的route routeLocator.getRoutes().subscribe(route -&gt; routes.add(route.getId())); //结合配置的route-路径(Path)，和route过滤，只获取有效的route节点 gatewayProperties.getRoutes() .stream() .filter(routeDefinition -&gt; routes.contains(routeDefinition.getId())) .forEach(routeDefinition -&gt; routeDefinition.getPredicates().stream() .filter(predicateDefinition -&gt; ("Path").equalsIgnoreCase(predicateDefinition.getName())) .forEach(predicateDefinition -&gt; &#123; resources.add(swaggerResource( routeDefinition.getId(), predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0").replace("/**", API_URI) )); &#125;)); return resources; &#125; private SwaggerResource swaggerResource(String name, String location) &#123; SwaggerResource swaggerResource = new SwaggerResource(); swaggerResource.setName(name); swaggerResource.setLocation(location); swaggerResource.setSwaggerVersion("1.0"); return swaggerResource; &#125;&#125; 因为Gateway里没有配置SwaggerConfig，而运行Swagger-ui又需要依赖一些接口，所以我的想法是自己建立相应的swagger-resource端点SwaggerHandler.java 1234567891011121314151617181920212223242526272829303132333435@RestController@ConditionalOnExpression("#&#123;'true'.equals(environment['neusoft.hype.swagger.enable'])&#125;")@RequestMapping("/swagger-resources")public class SwaggerHandler &#123; @Autowired(required = false) private SecurityConfiguration securityConfiguration; @Autowired(required = false) private UiConfiguration uiConfiguration; private final SwaggerResourcesProvider swaggerResources; @Autowired public SwaggerHandler(SwaggerResourcesProvider swaggerResources) &#123; this.swaggerResources = swaggerResources; &#125; @GetMapping("/configuration/security") public Mono&lt;ResponseEntity&lt;SecurityConfiguration&gt;&gt; securityConfiguration() &#123; return Mono.just(new ResponseEntity&lt;&gt;( Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build()), HttpStatus.OK)); &#125; @GetMapping("/configuration/ui") public Mono&lt;ResponseEntity&lt;UiConfiguration&gt;&gt; uiConfiguration() &#123; return Mono.just(new ResponseEntity&lt;&gt;( Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK)); &#125; @GetMapping("") public Mono&lt;ResponseEntity&gt; swaggerResources() &#123; return Mono.just((new ResponseEntity&lt;&gt;(swaggerResources.get(), HttpStatus.OK))); &#125;&#125;]]></content>
       <categories>
         <category>java</category>
-        <category>spring</category>
+        <category>spring-cloud</category>
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>spring</tag>
+        <tag>spring-cloud</tag>
       </tags>
   </entry>
   <entry>
@@ -61,8 +74,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>etl</tag>
         <tag>dwh</tag>
+        <tag>etl</tag>
         <tag>kettle</tag>
       </tags>
   </entry>
@@ -75,8 +88,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>data-warehouse</tag>
         <tag>etl</tag>
+        <tag>data-warehouse</tag>
       </tags>
   </entry>
   <entry>

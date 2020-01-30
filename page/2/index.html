@@ -323,6 +323,219 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/k8s/docker/k8s/zookeeper-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/docker/k8s/docker/k8s/zookeeper-1/" itemprop="url">K8s搭建-Zookeeper集群</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T15:18:00+08:00">2019-06-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">36k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">33 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="K8S搭建Zookeeper集群"><a href="#K8S搭建Zookeeper集群" class="headerlink" title="K8S搭建Zookeeper集群"></a>K8S搭建Zookeeper集群</h2><h3 id="服务器资源"><a href="#服务器资源" class="headerlink" title="服务器资源"></a>服务器资源</h3><table>
+<thead>
+<tr>
+<th>服务器地址</th>
+<th>k8s</th>
+<th>NFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>172.24.2.67</td>
+<td>k8s-node-3</td>
+<td>service</td>
+</tr>
+<tr>
+<td>172.24.2.69</td>
+<td>k8s-master</td>
+<td>client</td>
+</tr>
+<tr>
+<td>172.24.2.70</td>
+<td>k8s-node-2</td>
+<td>client</td>
+</tr>
+<tr>
+<td>172.24.2.71</td>
+<td>k8s-node-1</td>
+<td>client</td>
+</tr>
+</tbody>
+</table>
+<h3 id="安装NFS"><a href="#安装NFS" class="headerlink" title="安装NFS"></a>安装NFS</h3><p>1、在67服务器中安装NFS</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">master节点安装nfs</span></span><br><span class="line">yum -y install nfs-utils</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">创建nfs目录</span></span><br><span class="line">mkdir -p /nfs/data/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">修改权限</span></span><br><span class="line">chmod -R 777 /nfs/data</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">编辑<span class="built_in">export</span>文件,这个文件就是nfs默认的配置文件</span></span><br><span class="line">vi /etc/exports</span><br><span class="line">/nfs/data *(rw,no_root_squash,sync)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">配置生效</span></span><br><span class="line">exportfs -r</span><br><span class="line"><span class="meta">#</span><span class="bash">查看生效</span></span><br><span class="line">exportfs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">启动rpcbind、nfs服务</span></span><br><span class="line">systemctl restart rpcbind &amp;&amp; systemctl enable rpcbind</span><br><span class="line">systemctl restart nfs &amp;&amp; systemctl enable nfs</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看 RPC 服务的注册状况</span></span><br><span class="line">rpcinfo -p localhost</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">showmount测试</span></span><br><span class="line">showmount -e 172.24.2.67</span><br></pre></td></tr></table></figure>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700173921.png" alt="1561700173921"></p>
+<p>2、所有node节点安装客户端，开机启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nfs-utils</span><br><span class="line">systemctl start nfs &amp;&amp; systemctl enable nfs</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/docker/k8s/docker/k8s/zookeeper-1/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1982,194 +2195,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/docker/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/docker/docker/1/" itemprop="url">Docker使用非root用户</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T11:25:00+08:00">2019-01-17</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Docker使用非root用户"><a href="#Docker使用非root用户" class="headerlink" title="Docker使用非root用户"></a>Docker使用非root用户</h4><p>通常我们使用Docker的时候都是使用的root，官方说法如下：</p>
-<blockquote>
-<p>The docker daemon binds to a Unix socket instead of a TCP port. By default that Unix socket is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user.<br>To avoid having to use sudo when you use the docker command, create a Unix group called docker and add users to it. When the docker daemon starts, it makes the ownership of the Unix socket read/writable by the docker group.</p>
-</blockquote>
-<p>下面是使用非root用户操作的步骤</p>
-<h5 id="创建docker组"><a href="#创建docker组" class="headerlink" title="创建docker组"></a>创建docker组</h5><blockquote>
-<p>sudo groupadd docker</p>
-</blockquote>
-<h5 id="将当前用户加入docker组"><a href="#将当前用户加入docker组" class="headerlink" title="将当前用户加入docker组"></a>将当前用户加入docker组</h5><blockquote>
-<p>sudo gpasswd -a ${USER} docker</p>
-</blockquote>
-<h5 id="重新启动docker服务（下面是CentOS7的命令）"><a href="#重新启动docker服务（下面是CentOS7的命令）" class="headerlink" title="重新启动docker服务（下面是CentOS7的命令）"></a>重新启动docker服务（下面是CentOS7的命令）</h5><blockquote>
-<p>sudo systemctl restart docker</p>
-</blockquote>
-<h5 id="当前用户退出系统重新登陆"><a href="#当前用户退出系统重新登陆" class="headerlink" title="当前用户退出系统重新登陆"></a>当前用户退出系统重新登陆</h5><h5 id="运行docker命令"><a href="#运行docker命令" class="headerlink" title="运行docker命令"></a>运行docker命令</h5><blockquote>
-<p>docker ps</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2212,7 +2242,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">80</span>
+                    <span class="site-state-item-count">81</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2263,7 +2293,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2390,7 +2424,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">57</span>
+                      
+                    
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
