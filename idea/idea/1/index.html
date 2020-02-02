@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.3k</span>
+                <span title="字数统计">5.2k</span>
               
 
               
@@ -451,10 +451,10 @@
       
         <h4 id="IDEA在Windows上结合Docker"><a href="#IDEA在Windows上结合Docker" class="headerlink" title="IDEA在Windows上结合Docker"></a>IDEA在Windows上结合Docker</h4><p>在网上找了很多文章，却没有一篇文章明确说明如何整合，如何使用Idea+Docker，下面来一一说下整合。</p>
 <h5 id="虚拟机（192-168-3-60）"><a href="#虚拟机（192-168-3-60）" class="headerlink" title="虚拟机（192.168.3.60）"></a>虚拟机（192.168.3.60）</h5><p>在虚拟机上安装Docker，我这里安装的是<code>Docker version 1.13.1, build 092cba3</code>。编辑Docker运行文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> vi /etc/systemd/system/docker.service</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> vi /etc/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
 <p>在ExecStart节点上增加<code>unix:///var/run/docker.sock -H 0.0.0.0:2375</code>，打开Docker外部访问，保存后重启Docker服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> systemctl start docker</span></span><br></pre></td></tr></table></figure>
-<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> netstat -anp|grep 2375</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> systemctl daemon-reload</span><br><span class="line"><span class="meta">#</span> systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>查看Docker中是否开启2375端口<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> netstat -anp|grep 2375</span><br></pre></td></tr></table></figure></p>
 <p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/1.png?imageView2/2/w/600/h/600/q/75|imageslim" alt=""></p>
 <p>在虚拟机上的配置就完毕了。</p>
 <a id="more"></a>
@@ -589,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -601,8 +601,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     

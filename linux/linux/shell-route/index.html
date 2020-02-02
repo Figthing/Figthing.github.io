@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.8k</span>
+                <span title="字数统计">3.6k</span>
               
 
               
@@ -447,7 +447,7 @@
 <p>在Linux系统中设置路由通常是为了解决以下问题：该Linux系统在一个局域网中，局域网中有一个网关，能够让机器访问Internet，那么就需要将这台机器的ip地址设置为Linux机器的默认路由。要注意的是，直接在命令行下执行route命令来添加路由，不会永久保存，当网卡重启或者机器重启之后，该路由就失效了；可以在/etc/rc.local中添加route命令来保证该路由设置永久有效。</p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-A：设置地址类型；</span><br><span class="line">-C：打印将Linux核心的路由缓存；</span><br><span class="line">-v：详细信息模式；</span><br><span class="line">-n：不执行DNS反向查找，直接显示数字形式的IP地址；</span><br><span class="line">-e：netstat格式显示路由表；</span><br><span class="line">-net：到一个网络的路由表；</span><br><span class="line">-host：到一个主机的路由表。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="显示当前路由"><a href="#显示当前路由" class="headerlink" title="显示当前路由"></a>显示当前路由</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> route -n</span></span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="显示当前路由"><a href="#显示当前路由" class="headerlink" title="显示当前路由"></a>显示当前路由</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> route -n</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>结果显示：<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/linux/3.png" alt=""></p>
 <p>字段说明：</p>
@@ -455,10 +455,10 @@
 <p>U Up表示此路由当前为启动状态。<br>H Host，表示此网关为一主机。<br>G Gateway，表示此网关为一路由器。<br>R Reinstate Route，使用动态路由重新初始化的路由。<br>D Dynamically,此路由是动态性地写入。<br>M Modified，此路由是由路由守护程序或导向器动态修改。<br>! 表示此路由当前为关闭状态。</p>
 </blockquote>
 </blockquote>
-<h4 id="添加网关-设置网关"><a href="#添加网关-设置网关" class="headerlink" title="添加网关/设置网关"></a>添加网关/设置网关</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0</span></span><br></pre></td></tr></table></figure>
-<h4 id="屏蔽一条路由"><a href="#屏蔽一条路由" class="headerlink" title="屏蔽一条路由"></a>屏蔽一条路由</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> route add -net 224.0.0.0 netmask 240.0.0.0 reject</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除路由记录"><a href="#删除路由记录" class="headerlink" title="删除路由记录"></a>删除路由记录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> route del -net 224.0.0.0 netmask 240.0.0.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> route del -net 224.0.0.0 netmask 240.0.0.0 reject</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除和添加设置默认网关"><a href="#删除和添加设置默认网关" class="headerlink" title="删除和添加设置默认网关"></a>删除和添加设置默认网关</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> route del default gw 192.168.120.240</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> route add default gw 192.168.120.240</span></span><br></pre></td></tr></table></figure>
+<h4 id="添加网关-设置网关"><a href="#添加网关-设置网关" class="headerlink" title="添加网关/设置网关"></a>添加网关/设置网关</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0</span><br></pre></td></tr></table></figure>
+<h4 id="屏蔽一条路由"><a href="#屏蔽一条路由" class="headerlink" title="屏蔽一条路由"></a>屏蔽一条路由</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> route add -net 224.0.0.0 netmask 240.0.0.0 reject</span><br></pre></td></tr></table></figure>
+<h4 id="删除路由记录"><a href="#删除路由记录" class="headerlink" title="删除路由记录"></a>删除路由记录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> route del -net 224.0.0.0 netmask 240.0.0.0</span><br><span class="line"><span class="meta">$</span> route del -net 224.0.0.0 netmask 240.0.0.0 reject</span><br></pre></td></tr></table></figure>
+<h4 id="删除和添加设置默认网关"><a href="#删除和添加设置默认网关" class="headerlink" title="删除和添加设置默认网关"></a>删除和添加设置默认网关</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> route del default gw 192.168.120.240</span><br><span class="line"><span class="meta">$</span> route add default gw 192.168.120.240</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -578,7 +578,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -590,8 +590,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     

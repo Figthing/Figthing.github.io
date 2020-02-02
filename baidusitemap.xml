@@ -4,11 +4,36 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
-    <lastmod>2020-01-30T14:15:53.201Z</lastmod>
+    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh-2/</loc>
+    <lastmod>2020-02-02T08:54:42.933Z</lastmod>
     <data>
         <display>
-        <title>Spring Cloud 配置中心 Github SSH验证</title>
+        <title>Spring Cloud 配置中心 Github SSH验证（二）</title>
+        <pubTime>2020-02-02T08:53:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>spring-cloud</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://blog.appydm.com/categories/java/"/>
+          
+             
+              <breadCrumb title="spring-cloud" url="http://blog.appydm.com/categories/java/spring-cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
+    <lastmod>2020-02-02T08:53:55.316Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Cloud 配置中心 Github SSH验证（一）</title>
         <pubTime>2020-01-30T09:28:00.000Z</pubTime>
         
         <tag>java</tag>

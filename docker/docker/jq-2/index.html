@@ -412,7 +412,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.4k</span>
+                <span title="字数统计">3.2k</span>
               
 
               
@@ -447,7 +447,7 @@
 
       
         <h4 id="Docker使用Portainer管理Swarm集群"><a href="#Docker使用Portainer管理Swarm集群" class="headerlink" title="Docker使用Portainer管理Swarm集群"></a>Docker使用Portainer管理Swarm集群</h4><p>在上一节中已经将了，如果将子节点加入到主节点中，本节将使用portainer来对swarm集群进行管理</p>
-<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --name portainer \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --publish 9000:9000 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --constraint <span class="string">'node.role == manager'</span> \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> -H unix:///var/run/docker.sock</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="安装portainer管理工具"><a href="#安装portainer管理工具" class="headerlink" title="安装portainer管理工具"></a>安装portainer管理工具</h5><p>下载portainer工具，并启用docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker pull registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br><span class="line"></span><br><span class="line">[neusoft@localhost ~/docker]$ docker service create \</span><br><span class="line"><span class="meta">&gt;</span> --name portainer \</span><br><span class="line"><span class="meta">&gt;</span> --publish 9000:9000 \</span><br><span class="line"><span class="meta">&gt;</span> --constraint 'node.role == manager' \</span><br><span class="line"><span class="meta">&gt;</span> --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span><br><span class="line"><span class="meta">&gt;</span> registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0 \</span><br><span class="line"><span class="meta">&gt;</span> -H unix:///var/run/docker.sock</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>查看docker的服务，已经启用成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker service ls</span><br><span class="line">ID            NAME       MODE        REPLICAS  IMAGE</span><br><span class="line">y6ydozgujzjo  portainer  replicated  1/1       registry.cn-shenzhen.aliyuncs.com/zhouqi/portainer:1.20.0</span><br></pre></td></tr></table></figure></p>
 <p>如果想停用该服务可以使用以下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[neusoft@localhost ~/docker]$ docker service rm portainer</span><br><span class="line">portainer</span><br></pre></td></tr></table></figure></p>
@@ -571,7 +571,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -583,8 +583,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     

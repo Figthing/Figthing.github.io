@@ -117,7 +117,7 @@
 <meta name="description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
 <meta name="keywords" content="java,spring-cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Cloud 配置中心 Github SSH验证">
+<meta property="og:title" content="Spring Cloud 配置中心 Github SSH验证（一）">
 <meta property="og:url" content="http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/index.html">
 <meta property="og:site_name" content="Figthing的博客">
 <meta property="og:description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
@@ -129,9 +129,9 @@
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205930159.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130213543634.png">
-<meta property="og:updated_time" content="2020-01-30T14:15:53.201Z">
+<meta property="og:updated_time" content="2020-02-02T08:53:55.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Cloud 配置中心 Github SSH验证">
+<meta name="twitter:title" content="Spring Cloud 配置中心 Github SSH验证（一）">
 <meta name="twitter:description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
 <meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130201553870.png">
 
@@ -149,7 +149,7 @@
     sidebar: "",
   };
 </script>
-  <title>Spring Cloud 配置中心 Github SSH验证 | Figthing的博客</title>
+  <title>Spring Cloud 配置中心 Github SSH验证（一） | Figthing的博客</title>
   
 
 
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Cloud 配置中心 Github SSH验证</h1>
+          <h1 class="post-title" itemprop="name headline">Spring Cloud 配置中心 Github SSH验证（一）</h1>
         
 
         <div class="post-meta">
@@ -475,7 +475,7 @@
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205705772.png" alt="image-20200130205705772" style="zoom:50%;"></p>
 <p>添加公钥后就会显示</p>
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205930159.png" alt="image-20200130205930159" style="zoom:50%;"></p>
-<h5 id="校验密匙"><a href="#校验密匙" class="headerlink" title="校验密匙"></a>校验密匙</h5><p>这时我们回到Windows上，打开Git Bash，在执行<code>ssh -T git@github.com</code>命令</p>
+<h5 id="校验密匙"><a href="#校验密匙" class="headerlink" title="校验密匙"></a>校验密匙</h5><p>这时我们回到Windows上，打开Git Bash，在执行<code>ssh -vT git@github.com</code>命令</p>
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png" alt="image-20200130210138318" style="zoom: 67%;"></p>
 <p>只要出现<code>You&#39;ve successfully authenticated</code>就证明，已经验证成功了。</p>
 <h4 id="Spring-Cloud-配置中心"><a href="#Spring-Cloud-配置中心" class="headerlink" title="Spring Cloud 配置中心"></a>Spring Cloud 配置中心</h4><h5 id="配置文件存放"><a href="#配置文件存放" class="headerlink" title="配置文件存放"></a>配置文件存放</h5><p>在github中新建一个仓库，这个仓库一定要是<strong>干净</strong>的，就是最好不要有其他文件存在，不然会报错。因为我们使用了SSH，所以这是一个<strong>私库</strong>，我存放的位置是<code>local/eureka.properties</code>。</p>
@@ -549,6 +549,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/java/spring-cloud/java/spring-cloud/config-server-github-ssh-2/" rel="prev" title="Spring Cloud 配置中心 Github SSH验证（二）">
+                Spring Cloud 配置中心 Github SSH验证（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -621,7 +625,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -633,8 +637,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
