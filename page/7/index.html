@@ -323,6 +323,209 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/java/java/pojo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/java/java/pojo/" itemprop="url">JavaEE PO VO BO DTO POJO DAO 整理总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T10:06:00+08:00">2018-02-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/1.jpg" alt=""></p>
+<ol>
+<li><p><strong>DAO[data access object]数据访问对象</strong></p>
+<blockquote>
+<p>DAO层对开发人员黑盒，由架构师设计封装。<br>在很长一段时间内，我将它理解为对数据库的访问，后面随着项目的积累。<br>发现自己的理解相对狭隘，对数据访问不仅仅指的是对数据库的访问。<br>假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。</p>
+</blockquote>
+</li>
+<li><p><strong>DTO[data transfer object]数据传输对象</strong></p>
+<blockquote>
+<p>假设数据表中存在20个字段，但是在页面展示列表的时候，这20个字段显然都不会用到。<br>我想对其中的5个字段进行展示，而且这5个字段展示的时候，也并不是数据库中他们原有的样子。<br>还需要进行计算、截取、业务代码转名称 …..等等<br>数据传输对象因此而被诞生，一是能提高数据传输的速度，二能隐藏后端表结构。</p>
+</blockquote>
+</li>
+<li><p><strong>PO[persistant object]持久层对象</strong></p>
+<blockquote>
+<p>持久对象属性和数据库中的字段是一一对应的，数据库中的一条数据可以理解为一个持久对象。<br>因ORM框架的广泛使用而被引入到 JavaEE 项目设计当中。</p>
+</blockquote>
+</li>
+<li><p><strong>BO[bussiness object]业务对象</strong></p>
+<blockquote>
+<p>业务对象顾名思义是在业务处理中抽象出来的对象，里面除了get/set 方法外，也可以有对字段进行业务处理的方法。<br>假设你要对一个班级进行业务处理，其中的学生、教师、甚至是桌椅板凳都是业务对象的组成部分。<br>当然其中的学生、教室….都可以是和数据库对应的PO。</p>
+</blockquote>
+</li>
+<li><p><strong>VO[value object]值对象</strong></p>
+<blockquote>
+<p>值对象也可以称做页面对象，如果称做页面对象，那门它所代表的将是整个页面展示层的对象。<br>可以由需要的业务对象进行的换算转换而来。<br>如果称呼他为值对象的话，那门他可以理解为存放业务对象的一个地方。<br>假设锅碗瓢盆分别为对应的业务对象的话，那门整个碗柜就是一个值对象。</p>
+</blockquote>
+</li>
+<li><p><strong>POJO[plain ordiary java object] 简单java对象</strong></p>
+<blockquote>
+<p>简单java对象应该是JavaEE世界里面最灵活的对象。<br>在简单系统中，如果从数据库到页面展示都是POJO的话，它可以是DTO。<br>如果从数据库中到业务处理中都是POJO的话，他也可以是BO。<br>同样如果从数据库到整个页面的展示的话，它同样可以是VO。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>小结：</strong></p>
+<blockquote>
+<p>各个数据对象之间的转换是相当灵活的，在项目中可以定义上述对象的全部和其中的几种类型，这取决与架构师和需求。<br>在大型项目中，架构师在项目初期的任务除了搭建起整个开发环境以外，定义在系统中流转的数据结构对象同样是重重之重。<br>这项工作需要许多项目的积累和长期对软件开发的思考，多实践，多思考，提供最合适的数据对象解决方法，方能展现架构师的魅力。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/nodejs/npm/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -445,11 +648,11 @@
 <li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
 </ul>
 <p>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。同样可以通过输入 “npm -v” 来测试是否成功安装。命令如下，出现版本提示表示安装成功:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm -v</span></span><br><span class="line">2.3.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm -v</span><br><span class="line">2.3.0</span><br></pre></td></tr></table></figure>
 <p>如果你安装的是旧版本的 npm，可以很容易得通过 npm 命令来升级，命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo npm install npm -g</span></span><br><span class="line">/usr/local/bin/npm -&gt; /usr/local/lib/node_modules/npm/bin/npm-cli.js</span><br><span class="line">npm@2.14.2 /usr/local/lib/node_modules/npm</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo npm install npm -g</span><br><span class="line">/usr/local/bin/npm -&gt; /usr/local/lib/node_modules/npm/bin/npm-cli.js</span><br><span class="line">npm@2.14.2 /usr/local/lib/node_modules/npm</span><br></pre></td></tr></table></figure>
 <p>如果是 Window 系统使用以下命令即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install npm -g</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install npm -g</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/nodejs/npm/1/" rel="contents">
@@ -1456,7 +1659,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.2k</span>
+                <span title="字数统计">1.3k</span>
               
 
               
@@ -1509,7 +1712,7 @@
 <ol>
 <li>unix2dos或dos2unix这两个小程序来做. 很简单. 在djgpp中这两个程序的名字叫dtou和utod, u代表unix, d代表dos</li>
 <li><p>也可以用sed 这样的工具来做:    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sed 's/^M//' filename &gt; tmp_filename</span><br><span class="line"><span class="meta">$</span> mv -f tmp_filename filename</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'s/^M//'</span> filename &gt; tmp_filename</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mv -f tmp_filename filename</span></span><br></pre></td></tr></table></figure>
 <p>来做说明:^M并不是按键shift + 6产生的^和字母M, 它是一个字符, 其ASCII是0x0D, 生成它的办法是先按CTRL+V, 然后再回车(或CTRL+M)</p>
 </li>
 </ol>
@@ -1643,7 +1846,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8.2k</span>
+                <span title="字数统计">8.6k</span>
               
 
               
@@ -1657,7 +1860,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 mins.</span>
+                <span title="阅读时长">8 mins.</span>
               
             </div>
           
@@ -1907,179 +2110,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux/shell-hwclock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux/shell-hwclock/" itemprop="url">hwclock命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T08:33:00+08:00">2018-01-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>hwclock命令是一个硬件时钟访问工具，它可以显示当前时间、设置硬件时钟的时间和设置硬件时钟为系统时间，也可设置系统时间为硬件时钟的时间。</p>
-<p>在Linux中有硬件时钟与系统时钟等两种时钟。硬件时钟是指主机板上的时钟设备，也就是通常可在BIOS画面设定的时钟。系统时钟则是指kernel中的时钟。当Linux启动时，系统时钟会去读取硬件时钟的设定，之后系统时钟即独立运作。所有Linux相关指令与函数都是读取系统时钟的设定。</p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--adjust：hwclock每次更改硬件时钟时，都会记录在/etc/adjtime文件中。使用--adjust参数，可使hwclock根据先前的记录来估算硬件时钟的偏差，并用来校正目前的硬件时钟；</span><br><span class="line">--debug：显示hwclock执行时详细的信息；</span><br><span class="line">--directisa：hwclock预设从/dev/rtc设备来存取硬件时钟。若无法存取时，可用此参数直接以I/O指令来存取硬件时钟；</span><br><span class="line">--hctosys：将系统时钟调整为与目前的硬件时钟一致；</span><br><span class="line">--set --date=&lt;日期与时间&gt;：设定硬件时钟；</span><br><span class="line">--show：显示硬件时钟的时间与日期；</span><br><span class="line">--systohc：将硬件时钟调整为与目前的系统时钟一致；</span><br><span class="line">--test：仅测试程序，而不会实际更改硬件时钟；</span><br><span class="line">--utc：若要使用格林威治时间，请加入此参数，hwclock会执行转换的工作；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux/shell-hwclock/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2127,7 +2157,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2180,7 +2210,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2309,7 +2341,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
