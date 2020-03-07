@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/docker/docker/4/</loc>
+    <lastmod>2020-03-07T03:00:39.141Z</lastmod>
+    <data>
+        <display>
+        <title>Nexus搭建Docker私库</title>
+        <pubTime>2019-04-23T03:54:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>nexus</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/software/vpn/software/vpn-1/</loc>
     <lastmod>2020-02-05T09:27:53.703Z</lastmod>
     <data>
@@ -515,9 +537,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
@@ -560,28 +582,6 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/docker/docker/4/</loc>
-    <lastmod>2019-04-23T04:03:43.808Z</lastmod>
-    <data>
-        <display>
-        <title>Nexus搭建Docker私库</title>
-        <pubTime>2019-04-23T03:54:00.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>nexus</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.appydm.com/uncategorized/apollo-1/</loc>
     <lastmod>2019-04-09T07:25:04.299Z</lastmod>
     <data>
@@ -608,9 +608,9 @@
         <title>Docker搭建Redis集群</title>
         <pubTime>2019-02-12T05:29:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>redis</tag>
+         
+        <tag>docker</tag>
          
          
            

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/docker/docker/4/</loc>
+    
+    <lastmod>2020-03-07T03:00:39.141Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/software/vpn/software/vpn-1/</loc>
     
     <lastmod>2020-02-05T09:27:53.703Z</lastmod>
@@ -152,13 +159,6 @@
     <loc>http://blog.appydm.com/java/spring/spring/spring-oauth2/</loc>
     
     <lastmod>2019-05-04T06:38:02.533Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.appydm.com/docker/docker/4/</loc>
-    
-    <lastmod>2019-04-23T04:03:43.808Z</lastmod>
     
   </url>
   

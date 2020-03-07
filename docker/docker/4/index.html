@@ -123,7 +123,7 @@
 <meta property="og:description" content="Nexus搭建Docker私库Nexus是用于Maven私服的，不过在官网上发现最新的Nexus 3.x还支持Docker仓库了，所以使用docker来搭建一下Nexus  前面安装docker，docker-compose就不说了，直接来文件  docker-compose.yml12345678910nexus:  image: registry.cn-shenzhen.aliyuncs.co">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/nexus/1.png?1">
-<meta property="og:updated_time" content="2019-04-23T04:03:43.808Z">
+<meta property="og:updated_time" content="2020-03-07T03:00:39.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nexus搭建Docker私库">
 <meta name="twitter:description" content="Nexus搭建Docker私库Nexus是用于Maven私服的，不过在官网上发现最新的Nexus 3.x还支持Docker仓库了，所以使用docker来搭建一下Nexus  前面安装docker，docker-compose就不说了，直接来文件  docker-compose.yml12345678910nexus:  image: registry.cn-shenzhen.aliyuncs.co">
@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">3.1k</span>
               
 
               
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -454,11 +454,10 @@
 <li><p>创建一个docker本地仓库<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/nexus/1.png?1" alt=""></p>
 </li>
 <li><p>在docker所在服务上进行设置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "insecure-registries":["172.24.2.65:5000"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Docker注册本地</span></span><br><span class="line">  "insecure-registries":["172.24.2.65:5000"],</span><br><span class="line">  </span><br><span class="line"><span class="meta">  #</span><span class="bash"> Docker pull 优先拉取本地</span></span><br><span class="line">  "add-registry": ["172.24.2.65:5000"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启docker并登录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line">docker login -u admin -p admin123 172.24.2.65:5000</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line">docker login -u admin -p admin123 172.24.2.65:5000</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
