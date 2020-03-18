@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
+    
+    <lastmod>2020-03-18T04:02:52.014Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/docker/docker/4/</loc>
     
     <lastmod>2020-03-07T03:00:39.141Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh-2/</loc>
     
     <lastmod>2020-02-02T08:54:42.933Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
-    
-    <lastmod>2020-02-02T08:53:55.316Z</lastmod>
     
   </url>
   

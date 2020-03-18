@@ -407,7 +407,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8.6k</span>
+                <span title="字数统计">8.2k</span>
               
 
               
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">8 mins.</span>
+                <span title="阅读时长">7 mins.</span>
               
             </div>
           
@@ -461,47 +461,47 @@
 <a id="more"></a>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ol>
 <li><p><strong> 监视指定网络接口的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -i eth1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -i eth1</span><br></pre></td></tr></table></figure>
 <p>如果不指定网卡，默认tcpdump只会监视第一个网络接口，如eth0。</p>
 </li>
 <li><p><strong> 监视指定主机的数据包，例如所有进入或离开longshuai的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump host longshuai</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump host longshuai</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 打印helios&lt;–&gt;hot或helios&lt;–&gt;ace之间通信的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump host helios and \( hot or ace \)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump host helios and \( hot or ace \)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 打印ace与任何其他主机之间通信的IP数据包,但不包括与helios之间的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump ip host ace and not helios</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump ip host ace and not helios</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 截获主机hostname发送的所有数据 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump src host hostname</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump src host hostname</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 监视所有发送到主机hostname的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump dst host hostname</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump dst host hostname</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 监视指定主机和端口的数据包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump tcp port 22 and host hostname</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump tcp port 22 and host hostname</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 对本机的udp 123端口进行监视(123为ntp的服务端口) </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump udp port 123</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump udp port 123</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 监视指定网络的数据包，如本机与192.168网段通信的数据包，”-c 10”表示只抓取10个包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -c 10 net 192.168</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -c 10 net 192.168</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 打印所有通过网关snup的ftp数据包(注意,表达式被单引号括起来了,这可以防止shell对其中的括号进行错误解析) </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump <span class="string">'gateway snup and (port ftp or ftp-data)'</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump 'gateway snup and (port ftp or ftp-data)'</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 抓取ping包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -c 5 -nn -i eth0 icmp</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -c 5 -nn -i eth0 icmp</span><br></pre></td></tr></table></figure>
 <p>如果明确要抓取主机为192.168.100.70对本机的ping，则使用and操作符。  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -c 5 -nn -i eth0 icmp and src 192.168.100.62</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -c 5 -nn -i eth0 icmp and src 192.168.100.62</span><br></pre></td></tr></table></figure>
 <p>注意不能直接写icmp src 192.168.100.70，因为icmp协议不支持直接应用host这个type。</p>
 </li>
 <li><p><strong> 抓取到本机22端口包 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -c 10 -nn -i eth0 tcp dst port 22</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -c 10 -nn -i eth0 tcp dst port 22</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong> 解析包数据 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tcpdump -c 2 -q -XX -vvv -nn -i eth0 tcp dst port 22</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -c 2 -q -XX -vvv -nn -i eth0 tcp dst port 22</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       

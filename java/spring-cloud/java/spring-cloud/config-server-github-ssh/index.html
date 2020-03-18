@@ -129,7 +129,7 @@
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205930159.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png">
 <meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130213543634.png">
-<meta property="og:updated_time" content="2020-02-02T08:53:55.316Z">
+<meta property="og:updated_time" content="2020-03-18T04:02:52.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud 配置中心 Github SSH验证（一）">
 <meta name="twitter:description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">7.4k</span>
+                <span title="字数统计">7.5k</span>
               
 
               
@@ -478,6 +478,9 @@
 <h5 id="校验密匙"><a href="#校验密匙" class="headerlink" title="校验密匙"></a>校验密匙</h5><p>这时我们回到Windows上，打开Git Bash，在执行<code>ssh -vT git@github.com</code>命令</p>
 <p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png" alt="image-20200130210138318" style="zoom: 67%;"></p>
 <p>只要出现<code>You&#39;ve successfully authenticated</code>就证明，已经验证成功了。</p>
+<blockquote>
+<p>如果是内网搭建的Gitlab，可以使用 <code>ssh -vT git@ip -p 端口</code>命令</p>
+</blockquote>
 <h4 id="Spring-Cloud-配置中心"><a href="#Spring-Cloud-配置中心" class="headerlink" title="Spring Cloud 配置中心"></a>Spring Cloud 配置中心</h4><h5 id="配置文件存放"><a href="#配置文件存放" class="headerlink" title="配置文件存放"></a>配置文件存放</h5><p>在github中新建一个仓库，这个仓库一定要是<strong>干净</strong>的，就是最好不要有其他文件存在，不然会报错。因为我们使用了SSH，所以这是一个<strong>私库</strong>，我存放的位置是<code>local/eureka.properties</code>。</p>
 <h5 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-config-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h5 id="项目配置文件"><a href="#项目配置文件" class="headerlink" title="项目配置文件"></a>项目配置文件</h5><p><strong>properties文件</strong></p>
