@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/%E6%9E%B6%E6%9E%84/system/1/</loc>
+    
+    <lastmod>2020-04-09T06:40:00.826Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/</loc>
     
     <lastmod>2020-03-18T04:02:52.014Z</lastmod>
