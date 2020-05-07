@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
+    <lastmod>2020-05-07T07:17:04.001Z</lastmod>
+    <data>
+        <display>
+        <title>K8s-Dashboard安装</title>
+        <pubTime>2019-06-18T12:43:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/%E6%9E%B6%E6%9E%84/system/1/</loc>
     <lastmod>2020-04-09T06:40:00.826Z</lastmod>
     <data>
@@ -275,31 +300,6 @@
 
     
   <url>
-    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
-    <lastmod>2019-10-09T01:32:09.976Z</lastmod>
-    <data>
-        <display>
-        <title>K8s-Dashboard安装</title>
-        <pubTime>2019-06-18T12:43:00.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>k8s</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
-          
-             
-              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/yapi-1/</loc>
     <lastmod>2019-10-09T01:31:55.606Z</lastmod>
     <data>
@@ -557,9 +557,9 @@
          
         <tag>spring</tag>
          
-        <tag>security</tag>
-         
         <tag>oauth2</tag>
+         
+        <tag>security</tag>
          
          
            
@@ -628,9 +628,9 @@
         <title>Docker搭建Redis集群</title>
         <pubTime>2019-02-12T05:29:00.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>redis</tag>
+         
+        <tag>docker</tag>
          
          
            

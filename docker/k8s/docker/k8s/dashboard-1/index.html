@@ -114,18 +114,21 @@
   <meta name="keywords" content="docker,k8s," />
 
 
-<meta name="description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 安装在master节点上进行如下操作 1、创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubuserco">
+<meta name="description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 创建创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubusercontent.com/kubernete">
 <meta name="keywords" content="docker,k8s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K8s-Dashboard安装">
 <meta property="og:url" content="http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/index.html">
 <meta property="og:site_name" content="Figthing的博客">
-<meta property="og:description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 安装在master节点上进行如下操作 1、创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubuserco">
+<meta property="og:description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 创建创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubusercontent.com/kubernete">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-09T01:32:09.976Z">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/20200507145738.png?">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/20200507150647.png?">
+<meta property="og:updated_time" content="2020-05-07T07:17:04.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K8s-Dashboard安装">
-<meta name="twitter:description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 安装在master节点上进行如下操作 1、创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubuserco">
+<meta name="twitter:description" content="安装Kubernetes-dashboard概述Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。 创建创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址 123wget https://raw.githubusercontent.com/kubernete">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/20200507145738.png?">
 
 
 
@@ -414,7 +417,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.1k</span>
+                <span title="字数统计">4.8k</span>
               
 
               
@@ -428,7 +431,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -449,15 +452,45 @@
 
       
         <h2 id="安装Kubernetes-dashboard"><a href="#安装Kubernetes-dashboard" class="headerlink" title="安装Kubernetes-dashboard"></a>安装Kubernetes-dashboard</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在master节点上进行如下操作</p>
-<p>1、创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br><span class="line">sed -i 's/k8s.gcr.io/loveone/g' kubernetes-dashboard.yaml</span><br><span class="line">sed -i '/targetPort:/a\ \ \ \ \ \ nodePort: 30001\n\ \ type: NodePort' kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><h4 id="生成自签证书"><a href="#生成自签证书" class="headerlink" title="生成自签证书"></a>生成自签证书</h4><p>1）生成证书请求的key</p>
+<blockquote>
+<p>openssl genrsa -out dashboard.key 2048</p>
+</blockquote>
+<p>2）生成证书请求</p>
+<blockquote>
+<p>openssl req -days 3650 -new -out dashboard.csr -key dashboard.key -subj ‘/CN=<strong>172.24.2.69</strong>‘</p>
+</blockquote>
+<p>3）生成自签证书</p>
+<blockquote>
+<p>openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt</p>
+</blockquote>
+<p><strong>以上都是在服务器上执行</strong></p>
 <a id="more"></a>
-<p>2、部署Dashboard</p>
+<h4 id="创建Secret"><a href="#创建Secret" class="headerlink" title="创建Secret"></a>创建Secret</h4><p>1）删除之前部署的Dashboard</p>
+<blockquote>
+<p>kubectl delete -f kubernetes-dashboard.yaml</p>
+</blockquote>
+<p>2) 创建与KubernetesDashboard 部署文件中同名的secret</p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/20200507145738.png?" style="zoom:80%;"></p>
+<blockquote>
+<p>kubectl create secret generic kubernetes-dashboard-certs –from-file=./dashboard.key –from-file=./dashboard.crt -n kube-system</p>
+</blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li><p>命名空间：<code>kube-system</code></p>
+</li>
+<li><p>删除证书：<code>kubectl delete secret kubernetes-dashboard-certs</code></p>
+</li>
+</ul>
+<p>3)注释 kubernetes-dashboard.yaml文件中关于Dashboard Secret部分</p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/20200507150647.png?" style="zoom:80%;"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>1、部署Dashboard</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
-<p>3、创建完成后，检查相关服务运行状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deployment kubernetes-dashboard -n kube-system</span><br><span class="line"></span><br><span class="line">kubectl get pods -n kube-system -o wide</span><br><span class="line"></span><br><span class="line">kubectl get services -n kube-system</span><br><span class="line"></span><br><span class="line">netstat -ntlp|grep 30001</span><br></pre></td></tr></table></figure>
-<p>4、查看访问Dashboard的认证令牌</p>
+<p>2、创建完成后，检查相关服务运行状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deployment kubernetes-dashboard -n kube-system</span><br><span class="line"></span><br><span class="line">kubectl get pods -n kube-system -o wide</span><br><span class="line"></span><br><span class="line">kubectl get services -n kube-system</span><br><span class="line"></span><br><span class="line">kubectl describe pod kubernetes-dashboard-fd674d9c5-dp5k6 --namespace=kube-system</span><br><span class="line"></span><br><span class="line">netstat -ntlp|grep 30001</span><br></pre></td></tr></table></figure>
+<p>3、查看访问Dashboard的认证令牌</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl create serviceaccount  dashboard-admin -n kube-system</span><br><span class="line">kubectl create clusterrolebinding  dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin</span><br><span class="line">kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk '/dashboard-admin/&#123;print $1&#125;')</span><br></pre></td></tr></table></figure>
 <h3 id="问题集合"><a href="#问题集合" class="headerlink" title="问题集合"></a>问题集合</h3><ul>
 <li>问题：Chrome无法访问</li>
@@ -843,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kubernetes-dashboard"><span class="nav-number">1.</span> <span class="nav-text">安装Kubernetes-dashboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题集合"><span class="nav-number">1.3.</span> <span class="nav-text">问题集合</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kubernetes-dashboard"><span class="nav-number">1.</span> <span class="nav-text">安装Kubernetes-dashboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">1.2.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证书"><span class="nav-number">1.3.</span> <span class="nav-text">证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成自签证书"><span class="nav-number">1.3.1.</span> <span class="nav-text">生成自签证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Secret"><span class="nav-number">1.3.2.</span> <span class="nav-text">创建Secret</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.4.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题集合"><span class="nav-number">1.5.</span> <span class="nav-text">问题集合</span></a></li></ol></li></ol></div>
             
 
           </div>

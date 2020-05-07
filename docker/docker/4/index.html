@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3k</span>
+                <span title="字数统计">3.1k</span>
               
 
               
@@ -454,7 +454,7 @@
 <li><p>创建一个docker本地仓库<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/nexus/1.png?1" alt=""></p>
 </li>
 <li><p>在docker所在服务上进行设置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">  #</span> Docker注册本地</span><br><span class="line">  "insecure-registries":["172.24.2.65:5000"],</span><br><span class="line">  </span><br><span class="line"><span class="meta">  #</span> Docker pull 优先拉取本地</span><br><span class="line">  "add-registry": ["172.24.2.65:5000"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Docker注册本地</span></span><br><span class="line">  "insecure-registries":["172.24.2.65:5000"],</span><br><span class="line">  </span><br><span class="line"><span class="meta">  #</span><span class="bash"> Docker pull 优先拉取本地</span></span><br><span class="line">  "add-registry": ["172.24.2.65:5000"]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启docker并登录</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line">docker login -u admin -p admin123 172.24.2.65:5000</span><br></pre></td></tr></table></figure></li>

@@ -1148,7 +1148,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.1k</span>
+                <span title="字数统计">4.8k</span>
               
 
               
@@ -1162,7 +1162,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -1184,9 +1184,21 @@
       
         
           <h2 id="安装Kubernetes-dashboard"><a href="#安装Kubernetes-dashboard" class="headerlink" title="安装Kubernetes-dashboard"></a>安装Kubernetes-dashboard</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Kubernetes Dashboard是Kubernetes集群的基于Web的通用UI。它允许用户管理在群集中运行的应用程序并对其进行故障排除，以及管理群集本身。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在master节点上进行如下操作</p>
-<p>1、创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建Dashboard的yaml文件，并设置端口为30001，拉取镜像文件地址</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml</span><br><span class="line">sed -i 's/k8s.gcr.io/loveone/g' kubernetes-dashboard.yaml</span><br><span class="line">sed -i '/targetPort:/a\ \ \ \ \ \ nodePort: 30001\n\ \ type: NodePort' kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><h4 id="生成自签证书"><a href="#生成自签证书" class="headerlink" title="生成自签证书"></a>生成自签证书</h4><p>1）生成证书请求的key</p>
+<blockquote>
+<p>openssl genrsa -out dashboard.key 2048</p>
+</blockquote>
+<p>2）生成证书请求</p>
+<blockquote>
+<p>openssl req -days 3650 -new -out dashboard.csr -key dashboard.key -subj ‘/CN=<strong>172.24.2.69</strong>‘</p>
+</blockquote>
+<p>3）生成自签证书</p>
+<blockquote>
+<p>openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt</p>
+</blockquote>
+<p><strong>以上都是在服务器上执行</strong></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/docker/k8s/docker/k8s/dashboard-1/" rel="contents">
@@ -2089,7 +2101,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3k</span>
+                <span title="字数统计">3.1k</span>
               
 
               
