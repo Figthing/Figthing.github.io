@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/oracle/oracle/debug/1/</loc>
+    
+    <lastmod>2020-05-18T03:22:27.181Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
     
     <lastmod>2020-05-07T07:17:04.001Z</lastmod>

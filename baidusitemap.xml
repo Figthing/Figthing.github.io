@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/oracle/oracle/debug/1/</loc>
+    <lastmod>2020-05-18T03:22:27.181Z</lastmod>
+    <data>
+        <display>
+        <title>Oracle-"WM_CONCAT": 标识符无效</title>
+        <pubTime>2020-05-18T03:19:00.000Z</pubTime>
+        
+        <tag>oracle</tag>
+         
+         
+           
+             
+              <breadCrumb title="oracle" url="http://blog.appydm.com/categories/oracle/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/dashboard-1/</loc>
     <lastmod>2020-05-07T07:17:04.001Z</lastmod>
     <data>
@@ -253,9 +273,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>dwh</tag>
+         
+        <tag>etl</tag>
          
         <tag>kettle</tag>
          
@@ -332,9 +352,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>data-warehouse</tag>
-         
         <tag>etl</tag>
+         
+        <tag>data-warehouse</tag>
          
          
            
@@ -557,9 +577,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
@@ -901,9 +921,9 @@
         <title>vsftpd安装</title>
         <pubTime>2018-01-12T12:39:00.000Z</pubTime>
         
-        <tag>software</tag>
-         
         <tag>linux</tag>
+         
+        <tag>software</tag>
          
         <tag>vsftpd</tag>
          

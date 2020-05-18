@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Oracle-"WM_CONCAT": 标识符无效]]></title>
+    <url>%2Foracle%2Foracle%2Fdebug%2F1%2F</url>
+    <content type="text"><![CDATA[“WM_CONCAT”: 标识符无效概述11gr2和12C上已经摒弃了wm_concat函数，当时我们很多程序员在程序中确使用了该函数，导致程序出现错误，为了减轻程序员修改程序的工作量，只有通过手工创建个wm_concat函数，来临时解决该问题，但是注意，及时创建了该函数，在使用的过程中，也需要用to_char(wm_concat())方式，才能完全替代之前的应用。 方案 解锁sys用户 1alter user sys account unlock; 创建包，包体，函数 123456789101112131415161718CREATE OR REPLACETYPE WM_CONCAT_IMPL AS OBJECT ( CURR_STR VARCHAR2(32767),STATICFUNCTION ODCIAGGREGATEINITIALIZE(SCTX IN OUT WM_CONCAT_IMPL) RETURN NUMBER, MEMBERFUNCTION ODCIAGGREGATEITERATE(SELF IN OUT WM_CONCAT_IMPL, P1 IN VARCHAR2) RETURN NUMBER, MEMBER FUNCTION ODCIAGGREGATETERMINATE(SELF IN WM_CONCAT_IMPL, RETURNVALUE OUT VARCHAR2, FLAGS IN NUMBER) RETURN NUMBER, MEMBER FUNCTION ODCIAGGREGATEMERGE(SELF IN OUT WM_CONCAT_IMPL, SCTX2 IN WM_CONCAT_IMPL) RETURN NUMBER ); 定义类型body 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748CREATE OR REPLACETYPE BODY WM_CONCAT_IMPL IS STATICFUNCTION ODCIAGGREGATEINITIALIZE(SCTX IN OUT WM_CONCAT_IMPL) RETURN NUMBER ISBEGIN SCTX := WM_CONCAT_IMPL(NULL) ;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATEITERATE(SELF IN OUT WM_CONCAT_IMPL, P1 IN VARCHAR2) RETURN NUMBER ISBEGIN IF (CURR_STR IS NOT NULL) THEN CURR_STR := CURR_STR || ',' || P1;ELSE CURR_STR := P1;ENDIF;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATETERMINATE(SELF IN WM_CONCAT_IMPL, RETURNVALUE OUT VARCHAR2, FLAGS IN NUMBER) RETURN NUMBER ISBEGIN RETURNVALUE := CURR_STR ;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATEMERGE(SELF IN OUT WM_CONCAT_IMPL, SCTX2 IN WM_CONCAT_IMPL) RETURN NUMBER ISBEGIN IF (SCTX2.CURR_STR IS NOT NULL) THEN SELF.CURR_STR := SELF.CURR_STR || ',' || SCTX2.CURR_STR ;ENDIF;RETURN ODCICONST.SUCCESS;END;END; 自定义行变列函数 1234CREATE OR REPLACEFUNCTION wm_concat(P1 VARCHAR2) RETURN VARCHAR2 AGGREGATE USING WM_CONCAT_IMPL ; 创建同义词并授权 1234create public synonym WM_CONCAT_IMPL for sys.WM_CONCAT_IMPL;create public synonym wm_concat for sys.wm_concat;grant execute on WM_CONCAT_IMPL to public;grant execute on wm_concat to public; 注意 DBeaver这种类似的数据库管理工具，无法执行上述SQL脚本，建议使用PLSQL]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[浅谈系统高可用几个9]]></title>
     <url>%2F%E6%9E%B6%E6%9E%84%2Fsystem%2F1%2F</url>
     <content type="text"><![CDATA[浅谈系统高可用几个9概述经常看到各种技术文章或者分布式系统介绍说系统的可用性达到了多少个9，那么所谓”几个9“到底是怎么计算的？又意味着什么？我们简单计算分析下看看。所谓”1个9“是指90%，”2个9“是指99%，”3个9“是指99.9%，依次类推。 可用性的反面是故障时间，网站或者分布式系统会因为很多原因导致不可用，比如：程序bug；运维更新错误；环境配置升级变化；机器硬件故障；被恶意攻击；网关不小心踢掉了网线/电源插座；市政施工挖断了光纤；程序猿删库跑路；地震海啸自然灾害等等。 计算公式如果按照年为单位计算系统的故障时间，公式如下： 故障时间秒数=(1-可用性) 365 24 * 3600 计算6个9以内的情况得到如下结果： 可用性指标 计算公式 不可用时间 99.9% 0.1% * 365 * 24 * 60 525.6分钟 99.99% 0.01% * 365 * 24 * 60 52.56分钟 99.999% 0.001% * 365 * 24 * 60 5.256分钟 99.9999% 0.0001% * 365 * 24 * 60 * 60 31.536秒 结论可见，如果只有1个9的可用性，体验是极其糟糕的，1年下来有1个多月不能使用。一些大型网站号称能过做到4个9，那么1年有52分钟故障时间，其实已经是不错的情况了。]]></content>
@@ -111,8 +122,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>etl</tag>
         <tag>dwh</tag>
+        <tag>etl</tag>
         <tag>kettle</tag>
       </tags>
   </entry>
@@ -125,8 +136,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>data-warehouse</tag>
         <tag>etl</tag>
+        <tag>data-warehouse</tag>
       </tags>
   </entry>
   <entry>
@@ -243,8 +254,8 @@
       <tags>
         <tag>java</tag>
         <tag>spring</tag>
-        <tag>oauth2</tag>
         <tag>security</tag>
+        <tag>oauth2</tag>
       </tags>
   </entry>
   <entry>
@@ -883,8 +894,8 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>software</tag>
         <tag>linux</tag>
+        <tag>software</tag>
         <tag>vsftpd</tag>
       </tags>
   </entry>

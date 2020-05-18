@@ -1,3 +1,4 @@
+http://blog.appydm.com/oracle/oracle/debug/1/
 http://blog.appydm.com/架构/system/1/
 http://blog.appydm.com/software/vpn/software/vpn-1/
 http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh-2/
