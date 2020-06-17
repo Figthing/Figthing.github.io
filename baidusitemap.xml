@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/docker/k8s/3/</loc>
+    <lastmod>2020-06-17T11:06:37.730Z</lastmod>
+    <data>
+        <display>
+        <title>K8S-证书过期问题</title>
+        <pubTime>2020-06-17T11:04:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.appydm.com/categories/docker/"/>
+          
+             
+              <breadCrumb title="k8s" url="http://blog.appydm.com/categories/docker/k8s/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/oracle/oracle/debug/1/</loc>
     <lastmod>2020-05-18T03:22:27.181Z</lastmod>
     <data>
@@ -273,9 +298,9 @@
         <title>kettle</title>
         <pubTime>2019-10-08T10:08:00.000Z</pubTime>
         
-        <tag>dwh</tag>
-         
         <tag>etl</tag>
+         
+        <tag>dwh</tag>
          
         <tag>kettle</tag>
          
@@ -352,9 +377,9 @@
         <title>数据仓库之ETL</title>
         <pubTime>2019-10-08T09:44:00.000Z</pubTime>
         
-        <tag>etl</tag>
-         
         <tag>data-warehouse</tag>
+         
+        <tag>etl</tag>
          
          
            
@@ -577,9 +602,9 @@
          
         <tag>spring</tag>
          
-        <tag>security</tag>
-         
         <tag>oauth2</tag>
+         
+        <tag>security</tag>
          
          
            
@@ -648,9 +673,9 @@
         <title>Docker搭建Redis集群</title>
         <pubTime>2019-02-12T05:29:00.000Z</pubTime>
         
-        <tag>redis</tag>
-         
         <tag>docker</tag>
+         
+        <tag>redis</tag>
          
          
            

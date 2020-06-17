@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[K8S-证书过期问题]]></title>
+    <url>%2Fdocker%2Fk8s%2Fdocker%2Fk8s%2F3%2F</url>
+    <content type="text"><![CDATA[K8S-证书过期问题最近在开发环境中，在master使用kubectl get pods命令，发现报The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说明一下我在整个解决问题的过程，我使用的k8s版本是1.14.1。 找到问题1、执行systemctl status kubelet，看一下kuberntes是否启动正常，这个时候如果显示Unit kubelet.service entered failed state.句话，说明服务没有启动，有错误。 2、执行journalctl -xefu kubelet，查看kubernets中具体报错原因，在我这里显示的是Part of the existing bootstrap client certificate is expired: 2020-06-16 05:56:48 +0000 UTC，证书已经过期了。 3、使用以下命令，查看所有证书过期时间 1for item in `find /etc/kubernetes/pki -maxdepth 2 -name "*.crt"`;do openssl x509 -in $item -text -noout| grep Not;echo ======================$item===============;done or 也可以单独查看某一个证书过期时间 1openssl x509 -noout -dates -in /etc/kubernetes/pki/apiserver.crt 注意巨坑：Kuberntes里面有很多证书，其中有些证书失效时间是10年，有些证书是1年，我安装的正好到了时间，所以爆出了证书过期，现在看一下如何解决 解决证书问题修改源码，调整过期时间 1、克隆源码，切换到对应的分支，并修改源码 123git clone https://github.com/kubernetes/kubernetes.gitgit checkout -b remotes/origin/release-1.14.1 v1.14.1vi kubernetes/cmd/kubeadm/app/util/pkiutil/pki_helpers.go 将NotAfter: time.Now().Add(duration365d).UTC(),修改为NotAfter: time.Now().Add(duration365d * 10).UTC(), 2、下载go语言编译环境，并编译 1234docker run --rm -v &#123;源码路径&#125;:/go/src/k8s.io/kubernetes -it icyboy/k8s_build:v1.14.1 bashcd /go/src/k8s.io/kubernetesmake all WHAT=cmd/kubeadm GOFLAGS=-vexit 3、替换本地的kubeadm文件 12cp /usr/bin/kubeadm /usr/bin/kubeadm-bakln -s kubernetes/_output/local/bin/linux/amd64/kubeadm /usr/bin/kubeadm 4、查看是否替换成功 1234567kubeadm version新的kubeadm version: &amp;version.Info&#123;Major:"1", Minor:"14+", GitVersion:"v1.14.1-dirty", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"dirty", BuildDate:"2020-06-17T08:02:51Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"&#125;旧的kubeadm version: &amp;version.Info&#123;Major:"1", Minor:"14+", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"dirty", BuildDate:"2020-06-17T08:02:51Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"&#125; 创建新证书，重新载入 1、创建kubeadm.conf文件 123456touch kubeadm.confapiVersion: kubeadm.k8s.io/v1beta1kind: ClusterConfigurationkubernetesVersion: v1.14.3 ## 注意：这个是你k8s的版本号imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 2、生成证书 123cp -r /etc/kubernetes /etc/kubernetes-bakrm -rf /etc/kubernetes/pkikubeadm alpha certs renew all --config=~/kubeadm.conf 3、查看证书过期时间 1for item in `find /etc/kubernetes/pki -maxdepth 2 -name "*.crt"`;do openssl x509 -in $item -text -noout| grep Not;echo ======================$item===============;done 4、重新载入 1234567# 下面这几个文件，必须删了（后面会自动生成），不然会显示已存在，无法载入rm -rf /etc/kubernetes/admin.confrm -rf /etc/kubernetes/kubelet.confrm -rf /etc/kubernetes/controller-manager.confrm -rf /etc/kubernetes/scheduler.confkubeadm init phase kubeconfig all 5、重启kuberntes 1systemctl restart kubelet 每一个版本解决思路不太一样，其他版本可以参考文献：http://team.jiunile.com/blog/2018/12/k8s-kubeadm-ca-upgdate.html]]></content>
+      <categories>
+        <category>docker</category>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Oracle-"WM_CONCAT": 标识符无效]]></title>
     <url>%2Foracle%2Foracle%2Fdebug%2F1%2F</url>
     <content type="text"><![CDATA[“WM_CONCAT”: 标识符无效概述11gr2和12C上已经摒弃了wm_concat函数，当时我们很多程序员在程序中确使用了该函数，导致程序出现错误，为了减轻程序员修改程序的工作量，只有通过手工创建个wm_concat函数，来临时解决该问题，但是注意，及时创建了该函数，在使用的过程中，也需要用to_char(wm_concat())方式，才能完全替代之前的应用。 方案 解锁sys用户 1alter user sys account unlock; 创建包，包体，函数 123456789101112131415161718CREATE OR REPLACETYPE WM_CONCAT_IMPL AS OBJECT ( CURR_STR VARCHAR2(32767),STATICFUNCTION ODCIAGGREGATEINITIALIZE(SCTX IN OUT WM_CONCAT_IMPL) RETURN NUMBER, MEMBERFUNCTION ODCIAGGREGATEITERATE(SELF IN OUT WM_CONCAT_IMPL, P1 IN VARCHAR2) RETURN NUMBER, MEMBER FUNCTION ODCIAGGREGATETERMINATE(SELF IN WM_CONCAT_IMPL, RETURNVALUE OUT VARCHAR2, FLAGS IN NUMBER) RETURN NUMBER, MEMBER FUNCTION ODCIAGGREGATEMERGE(SELF IN OUT WM_CONCAT_IMPL, SCTX2 IN WM_CONCAT_IMPL) RETURN NUMBER ); 定义类型body 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748CREATE OR REPLACETYPE BODY WM_CONCAT_IMPL IS STATICFUNCTION ODCIAGGREGATEINITIALIZE(SCTX IN OUT WM_CONCAT_IMPL) RETURN NUMBER ISBEGIN SCTX := WM_CONCAT_IMPL(NULL) ;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATEITERATE(SELF IN OUT WM_CONCAT_IMPL, P1 IN VARCHAR2) RETURN NUMBER ISBEGIN IF (CURR_STR IS NOT NULL) THEN CURR_STR := CURR_STR || ',' || P1;ELSE CURR_STR := P1;ENDIF;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATETERMINATE(SELF IN WM_CONCAT_IMPL, RETURNVALUE OUT VARCHAR2, FLAGS IN NUMBER) RETURN NUMBER ISBEGIN RETURNVALUE := CURR_STR ;RETURN ODCICONST.SUCCESS;END;MEMBERFUNCTION ODCIAGGREGATEMERGE(SELF IN OUT WM_CONCAT_IMPL, SCTX2 IN WM_CONCAT_IMPL) RETURN NUMBER ISBEGIN IF (SCTX2.CURR_STR IS NOT NULL) THEN SELF.CURR_STR := SELF.CURR_STR || ',' || SCTX2.CURR_STR ;ENDIF;RETURN ODCICONST.SUCCESS;END;END; 自定义行变列函数 1234CREATE OR REPLACEFUNCTION wm_concat(P1 VARCHAR2) RETURN VARCHAR2 AGGREGATE USING WM_CONCAT_IMPL ; 创建同义词并授权 1234create public synonym WM_CONCAT_IMPL for sys.WM_CONCAT_IMPL;create public synonym wm_concat for sys.wm_concat;grant execute on WM_CONCAT_IMPL to public;grant execute on wm_concat to public; 注意 DBeaver这种类似的数据库管理工具，无法执行上述SQL脚本，建议使用PLSQL]]></content>
@@ -122,8 +135,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>dwh</tag>
         <tag>etl</tag>
+        <tag>dwh</tag>
         <tag>kettle</tag>
       </tags>
   </entry>
@@ -136,8 +149,8 @@
         <category>etl</category>
       </categories>
       <tags>
-        <tag>etl</tag>
         <tag>data-warehouse</tag>
+        <tag>etl</tag>
       </tags>
   </entry>
   <entry>
@@ -254,8 +267,8 @@
       <tags>
         <tag>java</tag>
         <tag>spring</tag>
-        <tag>security</tag>
         <tag>oauth2</tag>
+        <tag>security</tag>
       </tags>
   </entry>
   <entry>
@@ -288,8 +301,8 @@
         <category>redis</category>
       </categories>
       <tags>
-        <tag>redis</tag>
         <tag>docker</tag>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>

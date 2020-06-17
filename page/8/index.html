@@ -323,6 +323,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux/error-bash-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/linux/error-bash-1/" itemprop="url">shell /bin/bash^M: bad interpreter错误解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T17:16:00+08:00">2018-01-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>错误原因之一很有可能是你的脚本文件是DOS格式的, 即每一行的行尾以\r\n来标识, 其ASCII码分别是0x0D, 0x0A.可以有很多种办法看这个文件是DOS格式的还是UNIX格式的, 还是MAC格式的。</p>
+</blockquote>
+<ol>
+<li><p><code>vi filename</code>然后用命令<code>:set ff?</code>可以看到dos或unix的字样. 如果的确是dos格式的, 那么你可以用set ff=unix把它强制为unix格式的, 然后存盘退出. 再运行一遍看.</p>
+</li>
+<li><p>用<code>joe filename</code>如果是DOS格式的, 那么行尾会有很多绿色的^M字样出现. 你也可以用上述办法把它转为UNIX格式的.</p>
+</li>
+<li><p>用<code>od -t x1 filename</code>如果你看到有0d 0a 这样的字符, 那么它是dos格式的, 如果只有0a而没有0d, 那么它是UNIX格式的, 同样可以用上述方法把它转为UNIX格式的. </p>
+</li>
+</ol>
+<blockquote>
+<p>转换不同平台的文本文件格式可以用</p>
+</blockquote>
+<ol>
+<li>unix2dos或dos2unix这两个小程序来做. 很简单. 在djgpp中这两个程序的名字叫dtou和utod, u代表unix, d代表dos</li>
+<li><p>也可以用sed 这样的工具来做:    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sed 's/^M//' filename &gt; tmp_filename</span><br><span class="line"><span class="meta">$</span> mv -f tmp_filename filename</span><br></pre></td></tr></table></figure>
+<p>来做说明:^M并不是按键shift + 6产生的^和字母M, 它是一个字符, 其ASCII是0x0D, 生成它的办法是先按CTRL+V, 然后再回车(或CTRL+M)</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux/shell-tcpdump/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -403,7 +590,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8.2k</span>
+                <span title="字数统计">8.6k</span>
               
 
               
@@ -417,7 +604,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 mins.</span>
+                <span title="阅读时长">8 mins.</span>
               
             </div>
           
@@ -935,7 +1122,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.5k</span>
+                <span title="字数统计">5.2k</span>
               
 
               
@@ -975,13 +1162,13 @@
 <li>vsftpd软件</li>
 <li>yum安装</li>
 </ul>
-<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h4><h5 id="安装vsftpd服务器"><a href="#安装vsftpd服务器" class="headerlink" title="安装vsftpd服务器"></a>安装vsftpd服务器</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install vsftpd</span></span><br></pre></td></tr></table></figure>
-<h5 id="安装一个加密工具"><a href="#安装一个加密工具" class="headerlink" title="安装一个加密工具"></a>安装一个加密工具</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install libdb-utils.x86_64</span></span><br></pre></td></tr></table></figure>
-<h5 id="修改配置VSFTP"><a href="#修改配置VSFTP" class="headerlink" title="修改配置VSFTP"></a>修改配置VSFTP</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi /etc/vsftpd/vsftpd.conf</span></span><br></pre></td></tr></table></figure>
+<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h4><h5 id="安装vsftpd服务器"><a href="#安装vsftpd服务器" class="headerlink" title="安装vsftpd服务器"></a>安装vsftpd服务器</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> yum install vsftpd</span><br></pre></td></tr></table></figure>
+<h5 id="安装一个加密工具"><a href="#安装一个加密工具" class="headerlink" title="安装一个加密工具"></a>安装一个加密工具</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> yum install libdb-utils.x86_64</span><br></pre></td></tr></table></figure>
+<h5 id="修改配置VSFTP"><a href="#修改配置VSFTP" class="headerlink" title="修改配置VSFTP"></a>修改配置VSFTP</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
 <h5 id="配置文件参数说明"><a href="#配置文件参数说明" class="headerlink" title="配置文件参数说明"></a>配置文件参数说明</h5><blockquote>
 <p> anonymous_enable=NO #设定不允许匿名访问<br> local_enable=YES #设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问。<br> chroot_list_enable=YES #使用户不能离开主目录<br> ascii_upload_enable=YES #允许使用ASCII模式上传<br> ascii_download_enable=YES #设定支持ASCII模式的上传和下载功能。<br> pam_service_name=vsftpd #PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证<br> guest_enable=YES #设定启用虚拟用户功能。<br> guest_username=ftp #指定虚拟用户的宿主用户。-RHEL/CentOS中已经有内置的ftp用户了<br> user_config_dir=/etc/vsftpd/vuser_conf #设定虚拟用户个人vsftp的RHEL/CentOS FTP服务文件存放路  径。<br> listen=YES    # 只监听ipv4的地址<br> xferlog_file=/var/log/xferlog    # 日志文件的路径<br> listen_port=1315        #FTP端口<br> pasv_enable=YES            #开启被动模式<br> pasv_min_port=10060<br> pasv_max_port=10070</p>
 </blockquote>
-<h5 id="创建chroot-list，将ftp用户加入其中"><a href="#创建chroot-list，将ftp用户加入其中" class="headerlink" title="创建chroot list，将ftp用户加入其中"></a>创建chroot list，将ftp用户加入其中</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /etc/vsftpd/chroot_list</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ftp &gt;&gt; /etc/vsftpd/chroot_list</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建chroot-list，将ftp用户加入其中"><a href="#创建chroot-list，将ftp用户加入其中" class="headerlink" title="创建chroot list，将ftp用户加入其中"></a>创建chroot list，将ftp用户加入其中</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> touch /etc/vsftpd/chroot_list</span><br><span class="line"><span class="meta">$</span> echo ftp &gt;&gt; /etc/vsftpd/chroot_list</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/linux/linux/software-vsftpd/" rel="contents">
@@ -1884,179 +2071,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/linux/linux/shell-ln/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/linux/shell-ln/" itemprop="url">LN命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T17:15:00+08:00">2018-01-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>ln命令用来为文件创件连接，连接类型分为硬连接和符号连接两种，默认的连接类型是硬连接。如果要创建符号连接必须使用<code>-s</code>选项。</p>
-<p>注意：符号链接文件不是一个独立的文件，它的许多属性依赖于源文件，所以给符号链接文件设置存取权限是没有意义的。</p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-b: 删除，覆盖以前建立的链接</span><br><span class="line">-d: 允许超级用户制作目录的硬链接</span><br><span class="line">-f: 强制执行</span><br><span class="line">-i: 交互模式，文件存在则提示用户是否覆盖</span><br><span class="line">-n: 把符号链接视为一般目录</span><br><span class="line">-s: 软链接(符号链接)</span><br><span class="line">-v: 显示详细的处理过程</span><br><span class="line">-S: “-S&lt;字尾备份字符串&gt; ”或 “--suffix=&lt;字尾备份字符串&gt;”</span><br><span class="line">-V: “-V&lt;备份方式&gt;”或“--version-control=&lt;备份方式&gt;”</span><br><span class="line">--help: 显示帮助信息</span><br><span class="line">--version: 显示版本信息</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/linux/shell-ln/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2104,7 +2118,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2116,6 +2130,8 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
+                    
+                      
                     
                       
                     
