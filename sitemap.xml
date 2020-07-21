@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/software/rsync/software/rsync-1/</loc>
+    
+    <lastmod>2020-07-21T07:50:51.541Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/3/</loc>
     
     <lastmod>2020-06-17T11:06:37.730Z</lastmod>

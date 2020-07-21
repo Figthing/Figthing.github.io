@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://blog.appydm.com/software/rsync/software/rsync-1/</loc>
+    <lastmod>2020-07-21T07:50:51.541Z</lastmod>
+    <data>
+        <display>
+        <title>Rsync + Sersync 实现文件实时同步</title>
+        <pubTime>2020-07-21T07:48:00.000Z</pubTime>
+        
+        <tag>software</tag>
+         
+        <tag>rsync</tag>
+         
+         
+           
+             
+              <breadCrumb title="software" url="http://blog.appydm.com/categories/software/"/>
+          
+             
+              <breadCrumb title="rsync" url="http://blog.appydm.com/categories/software/rsync/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.appydm.com/docker/k8s/docker/k8s/3/</loc>
     <lastmod>2020-06-17T11:06:37.730Z</lastmod>
     <data>
@@ -602,9 +627,9 @@
          
         <tag>spring</tag>
          
-        <tag>oauth2</tag>
-         
         <tag>security</tag>
+         
+        <tag>oauth2</tag>
          
          
            
