@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.3" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.3',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="spring cloud,apollo," />
+
+
+<meta name="description" content="携程 Apollo 配置中心在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。 部署准备 docker 安装 docker-compose 安装 mysql 安装  Apollo工程   工程名 优先">
+<meta name="keywords" content="spring cloud,apollo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="携程Apollo配置中心">
+<meta property="og:url" content="http://blog.appydm.com/uncategorized/apollo-1/index.html">
+<meta property="og:site_name" content="Figthing的博客">
+<meta property="og:description" content="携程 Apollo 配置中心在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。 部署准备 docker 安装 docker-compose 安装 mysql 安装  Apollo工程   工程名 优先">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/2.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/3.png">
+<meta property="og:updated_time" content="2019-04-09T07:25:04.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="携程Apollo配置中心">
+<meta name="twitter:description" content="携程 Apollo 配置中心在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。 部署准备 docker 安装 docker-compose 安装 mysql 安装  Apollo工程   工程名 优先">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.appydm.com/uncategorized/apollo-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>携程Apollo配置中心 | Figthing的博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f1a329d7067c6d34df8dd32ab1da9afc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Figthing的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">blog.appydm.com</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/uncategorized/apollo-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">携程Apollo配置中心</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T13:13:00+08:00">2019-04-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="携程-Apollo-配置中心"><a href="#携程-Apollo-配置中心" class="headerlink" title="携程 Apollo 配置中心"></a>携程 Apollo 配置中心</h2><p>在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。</p>
+<h3 id="部署准备"><a href="#部署准备" class="headerlink" title="部署准备"></a>部署准备</h3><ul>
+<li>docker 安装</li>
+<li>docker-compose 安装</li>
+<li>mysql 安装</li>
+</ul>
+<h3 id="Apollo工程"><a href="#Apollo工程" class="headerlink" title="Apollo工程"></a>Apollo工程</h3><table>
+<thead>
+<tr>
+<th>工程名</th>
+<th>优先级</th>
+<th>说明</th>
+<th>端口</th>
+<th>sql</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apollo-configservice</td>
+<td>1</td>
+<td>服务</td>
+<td>8090</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-adminservice</td>
+<td>2</td>
+<td>管理</td>
+<td>8091</td>
+<td><a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a></td>
+</tr>
+<tr>
+<td>apollo-portal</td>
+<td>3</td>
+<td>界面</td>
+<td>8092</td>
+<td><a href="https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloportaldb.sql" target="_blank" rel="noopener">apolloportaldb.sql</a></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h3 id="部署策略"><a href="#部署策略" class="headerlink" title="部署策略"></a>部署策略</h3><p>Apollo目前支持以下环境：</p>
+<ul>
+<li>DEV 开发环境</li>
+<li>FAT 测试环境，相当于alpha环境(功能测试)</li>
+<li>UAT 集成环境，相当于beta环境（回归测试）</li>
+<li>PRO 生产环境</li>
+</ul>
+<h3 id="网络策略（官网）"><a href="#网络策略（官网）" class="headerlink" title="网络策略（官网）"></a>网络策略（官网）</h3><p>分布式部署的时候，apollo-configservice和apollo-adminservice需要把自己的IP和端口注册到Meta Server（apollo-configservice本身）。<br>Apollo客户端和Portal会从Meta Server获取服务的地址（IP+端口），然后通过服务地址直接访问。<br>所以如果实际部署的机器有多块网卡（如docker），或者存在某些网卡的IP是Apollo客户端和Portal无法访问的（如网络安全限制），那么我们就需要在apollo-configservice和apollo-adminservice中做相关限制以避免Eureka将这些网卡的IP注册到Meta Server。<br>如下面这个例子就是对于apollo-configservice，把docker0和veth.* 的网卡在注册到Eureka时忽略掉。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">      name: apollo-configservice</span><br><span class="line">  profiles:</span><br><span class="line">    active: $&#123;apollo_profile&#125;</span><br><span class="line">  cloud:</span><br><span class="line">    inetutils:</span><br><span class="line">      ignoredInterfaces:</span><br><span class="line">        - docker0</span><br><span class="line">        - veth.*</span><br></pre></td></tr></table></figure>
+<p>另外一种方式是直接指定要注册的IP，可以修改startup.sh，通过JVM System Property在运行时传入，如-Deureka.instance.ip-address=${指定的IP}，或者也可以修改apollo-adminservice或apollo-configservice 的bootstrap.yml文件，加入以下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    ip-address: $&#123;指定的IP&#125;</span><br></pre></td></tr></table></figure>
+<p>最后一种方式是直接指定要注册的IP+PORT，可以修改startup.sh，通过JVM System Property在运行时传入，如-Deureka.instance.homePageUrl=<a href="http://${指定的IP}:${指定的Port}，或者也可以修改apollo-adminservice或apollo-configservice" target="_blank" rel="noopener">http://${指定的IP}:${指定的Port}，或者也可以修改apollo-adminservice或apollo-configservice</a> 的bootstrap.yml文件，加入以下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    homePageUrl: http://$&#123;指定的IP&#125;:$&#123;指定的Port&#125;</span><br><span class="line">    preferIpAddress: false</span><br></pre></td></tr></table></figure>
+<p>如果Apollo部署在公有云上，本地开发环境无法连接，但又需要做开发测试的话，客户端可以升级到0.11.0版本及以上，然后通过-Dapollo.configService=<a href="http://config-service的公网IP:端口来跳过meta" target="_blank" rel="noopener">http://config-service的公网IP:端口来跳过meta</a> service的服务发现</p>
+<h3 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h3><p>部署步骤共四步：</p>
+<ul>
+<li>创建数据库，所有Apollo服务端都依赖于MySQL数据库，所以在启动时，应先配置数据才能启动服务；</li>
+<li>获取安装包：通过源码构建</li>
+<li>构建docker镜像：为apollo-configservice, apollo-adminservice, apollo-portal构建Docker镜像</li>
+<li>部署Apollo服务端：构建镜像后通过docker compose就可以部署到公司的测试和生产环境了</li>
+</ul>
+<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><p>Apollo服务端共需要两个数据库：ApolloPortalDB和ApolloConfigDB，官网把数据库、表的创建和样例数据都分别准备了sql文件，只需要导入数据库即可。</p>
+<table>
+<thead>
+<tr>
+<th>服务器</th>
+<th>数据库</th>
+<th>端口</th>
+<th>环境</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>172.24.2.65</td>
+<td>ApolloConfigDB</td>
+<td>3306</td>
+<td>dev</td>
+</tr>
+<tr>
+<td>172.24.2.65</td>
+<td>ApolloPortalDB</td>
+<td>3306</td>
+<td>dev</td>
+</tr>
+</tbody>
+</table>
+<h5 id="调整服务端配置"><a href="#调整服务端配置" class="headerlink" title="调整服务端配置"></a>调整服务端配置</h5><p>Apollo自身的一些配置是放在数据库里面的，所以需要针对实际情况做一些调整</p>
+<ul>
+<li><p>ApolloPortalDB</p>
+<blockquote>
+<ul>
+<li>配置项统一存储在ServerConfig表中，也可以通过管理员工具 - 系统参数页面进行配置。</li>
+<li>apollo.portal.envs - 可支持的环境列表，默认值是dev，如果portal需要管理多个环境的话，以逗号分隔即可（大小写不敏感）</li>
+</ul>
+</blockquote>
+</li>
+<li><p>ApolloConfigDB</p>
+<blockquote>
+<ul>
+<li>配置项统一存储在ServerConfig表中，需要注意每个环境的ApolloConfigDB.ServerConfig都需要单独配置。</li>
+<li>eureka.service.url - Eureka服务Url，不管是apollo-configservice还是apollo-adminservice都需要向eureka服务注册，所以需要配置eureka服务地址。 按照目前的实现，apollo-configservice本身就是一个eureka服务，所以只需要填入apollo-configservice的地址即可，如有多个，用逗号分隔（注意不要忘了/eureka/后缀）。这里我填写<a href="http://172.24.2.63:8090/eureka。" target="_blank" rel="noopener">http://172.24.2.63:8090/eureka。</a></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="获取安装包"><a href="#获取安装包" class="headerlink" title="获取安装包"></a>获取安装包</h4><p>到github上进行<a href="https://github.com/ctripcorp/apollo" target="_blank" rel="noopener">源码下载</a>，如果github下载比较慢，可以去<a href="https://www.ipaddress.com/" target="_blank" rel="noopener">ipaddress</a>把CDN信息搜索出来，添加到hosts中</p>
+<ul>
+<li>151.101.185.194 github.global.ssl.fastly.net </li>
+<li>192.30.253.113  github.com</li>
+<li>192.30.253.120    codeload.github.com</li>
+</ul>
+<h5 id="调整源码"><a href="#调整源码" class="headerlink" title="调整源码"></a>调整源码</h5><p>配置数据库连接信息<code>scripts/build.bat</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># config</span><br><span class="line">set apollo_config_db_url=<span class="string">"jdbc:mysql://172.24.2.65:3306/ApolloConfigDB?characterEncoding=utf8"</span></span><br><span class="line">set apollo_config_db_username=<span class="string">"apollo-config"</span></span><br><span class="line">set apollo_config_db_password=<span class="string">"apollo-config"</span></span><br><span class="line"></span><br><span class="line"># portal</span><br><span class="line">set apollo_portal_db_url=<span class="string">"jdbc:mysql://172.24.2.65:3306/ApolloPortalDB?characterEncoding=utf8"</span></span><br><span class="line">set apollo_portal_db_username=<span class="string">"apollo-portal"</span></span><br><span class="line">set apollo_portal_db_password=<span class="string">"apollo-portal"</span></span><br><span class="line"></span><br><span class="line"># dev_meta</span><br><span class="line">set dev_meta=<span class="string">"http://172.24.2.63:8090"</span></span><br><span class="line">set META_SERVERS_OPTS=-Ddev_meta=%dev_meta%</span><br></pre></td></tr></table></figure>
+<h6 id="调整apollo-configservice工程"><a href="#调整apollo-configservice工程" class="headerlink" title="调整apollo-configservice工程"></a>调整apollo-configservice工程</h6><ul>
+<li>将所有端口改为8090</li>
+<li><code>bootstrap.yml</code>调整<code>defaultZone: http://${eureka.instance.hostname}:8090/eureka/</code></li>
+<li><code>startup.sh</code> 新增 <code>export JAVA_OPTS=&quot;-Deureka.instance.ip-address=172.24.2.63&quot;</code></li>
+</ul>
+<h6 id="调整apollo-configservice工程-1"><a href="#调整apollo-configservice工程-1" class="headerlink" title="调整apollo-configservice工程"></a>调整apollo-configservice工程</h6><ul>
+<li>将所有端口改为8091</li>
+<li><code>bootstrap.yml</code>调整 <code>defaultZone: http://${eureka.instance.hostname}:8090/eureka/</code></li>
+<li><code>startup.sh</code> 新增 <code>export JAVA_OPTS=&quot;-Deureka.instance.ip-address=172.24.2.63&quot;</code></li>
+</ul>
+<h6 id="调整apollo-portal工程"><a href="#调整apollo-portal工程" class="headerlink" title="调整apollo-portal工程"></a>调整apollo-portal工程</h6><ul>
+<li>将所有端口改为8092</li>
+<li><code>apollo-env.properties</code>调整<code>local.meta=http://172.24.2.63:8090</code></li>
+</ul>
+<h5 id="执行编译、打包"><a href="#执行编译、打包" class="headerlink" title="执行编译、打包"></a>执行编译、打包</h5><p>做完上述配置后，就可以执行编译和打包了。执行/scripts目录下build.sh脚本，该脚本会依次打包apollo-configservice, apollo-adminservice, apollo-portal。</p>
+<h5 id="构建docker镜像"><a href="#构建docker镜像" class="headerlink" title="构建docker镜像"></a>构建docker镜像</h5><p>将target下的apollo-*-github.zip和Dockerfile上传到服务器，形成结构<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png" alt=""></p>
+<p>构建镜像</p>
+<ul>
+<li>docker build -t apollo-configservice:1.0.0 .</li>
+<li>docker build -t apollo-adminservice:1.0.0 .</li>
+<li>docker build -t apollo-portal:1.0.0 .<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/2.png" alt=""></li>
+</ul>
+<h5 id="部署Apollo服务端"><a href="#部署Apollo服务端" class="headerlink" title="部署Apollo服务端"></a>部署Apollo服务端</h5><p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/3.png" alt=""></p>
+<p>在配置文件目录执行如下命令启动服务：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-cloud/" rel="tag"># spring cloud</a>
+          
+            <a href="/tags/apollo/" rel="tag"># apollo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/docker/redis/docker/redis/1/" rel="next" title="Docker搭建Redis集群">
+                <i class="fa fa-chevron-left"></i> Docker搭建Redis集群
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/docker/docker/4/" rel="prev" title="Nexus搭建Docker私库">
+                Nexus搭建Docker私库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Figthing</p>
+              <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Figthing" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:13966837@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.163.com/023_dns" target="_blank" title="老博客">
+                      
+                        <i class="fa fa-fw fa-globe"></i>老博客</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#携程-Apollo-配置中心"><span class="nav-number">1.</span> <span class="nav-text">携程 Apollo 配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#部署准备"><span class="nav-number">1.1.</span> <span class="nav-text">部署准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apollo工程"><span class="nav-number">1.2.</span> <span class="nav-text">Apollo工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署策略"><span class="nav-number">1.3.</span> <span class="nav-text">部署策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络策略（官网）"><span class="nav-number">1.4.</span> <span class="nav-text">网络策略（官网）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署步骤"><span class="nav-number">1.5.</span> <span class="nav-text">部署步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调整服务端配置"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">调整服务端配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取安装包"><span class="nav-number">1.5.2.</span> <span class="nav-text">获取安装包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调整源码"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">调整源码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#调整apollo-configservice工程"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">调整apollo-configservice工程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#调整apollo-configservice工程-1"><span class="nav-number">1.5.2.1.2.</span> <span class="nav-text">调整apollo-configservice工程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#调整apollo-portal工程"><span class="nav-number">1.5.2.1.3.</span> <span class="nav-text">调整apollo-portal工程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行编译、打包"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">执行编译、打包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构建docker镜像"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">构建docker镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#部署Apollo服务端"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">部署Apollo服务端</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Figthing</span>
+  <span class="post-meta-divider">|</span>
+  <span>Hosted by <a href="https://pages.github.com" style="font-weight: bold">Github Pages</a></span>
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.3"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
