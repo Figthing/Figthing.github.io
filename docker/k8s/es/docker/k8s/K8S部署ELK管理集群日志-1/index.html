@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.3" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.3',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="docker,k8s,es," />
+
+
+<meta name="description" content="前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK而本文采用的是功能更强大的后者：filebeat 采集—&amp;gt;logstash过滤加工—&amp;gt;ES存储与索引—&amp;gt;Kibana展示的方案。  ElasticSearch 集群安装">
+<meta name="keywords" content="docker,k8s,es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8S部署ELK管理集群日志（一）">
+<meta property="og:url" content="http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-1/index.html">
+<meta property="og:site_name" content="Figthing的博客">
+<meta property="og:description" content="前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK而本文采用的是功能更强大的后者：filebeat 采集—&amp;gt;logstash过滤加工—&amp;gt;ES存储与索引—&amp;gt;Kibana展示的方案。  ElasticSearch 集群安装">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-01-15T07:29:15.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="K8S部署ELK管理集群日志（一）">
+<meta name="twitter:description" content="前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK而本文采用的是功能更强大的后者：filebeat 采集—&amp;gt;logstash过滤加工—&amp;gt;ES存储与索引—&amp;gt;Kibana展示的方案。  ElasticSearch 集群安装">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>K8S部署ELK管理集群日志（一） | Figthing的博客</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f1a329d7067c6d34df8dd32ab1da9afc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Figthing的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">blog.appydm.com</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">K8S部署ELK管理集群日志（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-15T10:53:00+08:00">2021-01-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/k8s/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">46k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">42 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：<br>比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK<br>而本文采用的是功能更强大的后者：filebeat 采集—&gt;logstash过滤加工—&gt;ES存储与索引—&gt;Kibana展示的方案。</p>
+</blockquote>
+<h3 id="ElasticSearch-集群安装"><a href="#ElasticSearch-集群安装" class="headerlink" title="ElasticSearch 集群安装"></a>ElasticSearch 集群安装</h3><p>要建立一个 Elastic 技术的监控栈，当然首先我们需要部署 ElasticSearch，它是用来存储所有的指标、日志和追踪的数据库，这里我们通过3个不同角色的可扩展的节点组成一个集群。</p>
+<a id="more"></a>
+<h4 id="安装-ElasticSearch-主节点"><a href="#安装-ElasticSearch-主节点" class="headerlink" title="安装 ElasticSearch 主节点"></a>安装 ElasticSearch 主节点</h4><p>设置集群的第一个节点为 Master 主节点，来负责控制整个集群。首先创建一个 ConfigMap 对象，用来描述集群的一些配置信息，以方便将 ElasticSearch 的主节点配置到集群中并开启安全认证功能。对应的资源清单文件如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-master.configmap.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-master-config</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="string">elasticsearch.yml:</span> <span class="string">|-</span></span><br><span class="line">    <span class="string">cluster.name:</span> <span class="string">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">    <span class="string">node.name:</span> <span class="string">$&#123;NODE_NAME&#125;</span></span><br><span class="line">    <span class="string">discovery.seed_hosts:</span> <span class="string">$&#123;NODE_LIST&#125;</span></span><br><span class="line">    <span class="string">cluster.initial_master_nodes:</span> <span class="string">$&#123;MASTER_NODES&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    node:</span></span><br><span class="line"><span class="attr">      master:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      data:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">      ingest:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># 是否开启验证</span></span><br><span class="line">    <span class="string">xpack.security.enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="string">xpack.monitoring.collection.enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>然后创建一个 Service 对象，在 Master 节点下，我们只需要通过用于集群通信的 9300 端口进行通信。资源清单文件如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-master.service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>最后使用一个 Deployment 对象来定义 Master 节点应用，资源清单文件如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-master.deployment.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">      role:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        role:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">registry.cn-chengdu.aliyuncs.com/zhouqi-kubernetes/es:7.6.1</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">CLUSTER_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_LIST</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master,elasticsearch-data,elasticsearch-client</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">MASTER_NODES</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">"ES_JAVA_OPTS"</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">"-Xms512m -Xmx512m"</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/usr/share/elasticsearch/config/elasticsearch.yml</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">          subPath:</span> <span class="string">elasticsearch.yml</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">storage</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/data</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">        configMap:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">elasticsearch-master-config</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">"storage"</span></span><br><span class="line"><span class="attr">        emptyDir:</span></span><br><span class="line"><span class="attr">          medium:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装-ElasticSearch-数据节点"><a href="#安装-ElasticSearch-数据节点" class="headerlink" title="安装 ElasticSearch 数据节点"></a>安装 ElasticSearch 数据节点</h4><p>现在我们需要安装的是集群的数据节点，它主要来负责集群的数据托管和执行查询。和 master 节点一样，我们使用一个 ConfigMap 对象来配置我们的数据节点：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-data.configmap.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-data-config</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">data</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="string">elasticsearch.yml:</span> <span class="string">|-</span></span><br><span class="line">    <span class="string">cluster.name:</span> <span class="string">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">    <span class="string">node.name:</span> <span class="string">$&#123;NODE_NAME&#125;</span></span><br><span class="line">    <span class="string">discovery.seed_hosts:</span> <span class="string">$&#123;NODE_LIST&#125;</span></span><br><span class="line">    <span class="string">cluster.initial_master_nodes:</span> <span class="string">$&#123;MASTER_NODES&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    node:</span></span><br><span class="line"><span class="attr">      master:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">      data:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      ingest:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># 是否开启验证</span></span><br><span class="line">    <span class="string">xpack.security.enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="string">xpack.monitoring.collection.enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>可以看到和上面的 master 配置非常类似，不过需要注意的是属性 node.data=true。</p>
+<p>同样只需要通过 9300 端口和其他节点进行通信：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-data.service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-data</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">data</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">data</span></span><br></pre></td></tr></table></figure>
+<p>最后创建一个 StatefulSet 的控制器，因为可能会有多个数据节点，每一个节点的数据不是一样的，需要单独存储，所以也使用了一个 volumeClaimTemplates 来分别创建存储卷，对应的资源清单文件如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NFS挂载</span></span><br><span class="line"><span class="comment">#kind: PersistentVolumeClaim</span></span><br><span class="line"><span class="comment">#apiVersion: v1</span></span><br><span class="line"><span class="comment">#metadata:</span></span><br><span class="line"><span class="comment">#  name: elasticsearch-data-claim</span></span><br><span class="line"><span class="comment">#  namespace: kube-system</span></span><br><span class="line"><span class="comment">#  annotations:</span></span><br><span class="line"><span class="comment">#    volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"</span></span><br><span class="line"><span class="comment">#spec:</span></span><br><span class="line"><span class="comment">#  storageClassName: managed-nfs-storage</span></span><br><span class="line"><span class="comment">#  accessModes:</span></span><br><span class="line"><span class="comment">#    - ReadWriteMany</span></span><br><span class="line"><span class="comment">#  resources:</span></span><br><span class="line"><span class="comment">#    requests:</span></span><br><span class="line"><span class="comment">#      storage: 1G</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-data</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">data</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  serviceName:</span> <span class="string">"elasticsearch-data"</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">      role:</span> <span class="string">data</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        role:</span> <span class="string">data</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">elasticsearch-data</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">registry.cn-chengdu.aliyuncs.com/zhouqi-kubernetes/es:7.6.1</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">CLUSTER_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-data</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_LIST</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master,elasticsearch-data,elasticsearch-client</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">MASTER_NODES</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">"ES_JAVA_OPTS"</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">"-Xms1024m -Xmx1024m"</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/usr/share/elasticsearch/config/elasticsearch.yml</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">          subPath:</span> <span class="string">elasticsearch.yml</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">elasticsearch-data-persistent-storage</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/data/db</span>          </span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">        configMap:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">elasticsearch-data-config</span></span><br><span class="line"><span class="comment"># NFS挂载          </span></span><br><span class="line"><span class="comment">#      - name: elasticsearch-data-persistent-storage</span></span><br><span class="line"><span class="comment">#        persistentVolumeClaim:</span></span><br><span class="line"><span class="comment">#          claimName: elasticsearch-data-claim</span></span><br><span class="line"><span class="attr">  volumeClaimTemplates:</span></span><br><span class="line"><span class="attr">  - metadata:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">elasticsearch-data-persistent-storage</span></span><br><span class="line"><span class="attr">      annotations:</span></span><br><span class="line">        <span class="string">volume.beta.kubernetes.io/storage-class:</span> <span class="string">"managed-nfs-storage"</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      accessModes:</span> <span class="string">[</span> <span class="string">"ReadWriteOnce"</span> <span class="string">]</span></span><br><span class="line"><span class="attr">      resources:</span></span><br><span class="line"><span class="attr">        requests:</span></span><br><span class="line"><span class="attr">          storage:</span> <span class="number">1</span><span class="string">Gi</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装-ElasticSearch-客户端节点"><a href="#安装-ElasticSearch-客户端节点" class="headerlink" title="安装 ElasticSearch 客户端节点"></a>安装 ElasticSearch 客户端节点</h4><p>最后来安装配置 ElasticSearch 的客户端节点，该节点主要负责暴露一个 HTTP 接口将查询数据传递给数据节点获取数据。同样使用一个 ConfigMap 对象来配置该节点：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-client.configmap.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-client-config</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="string">elasticsearch.yml:</span> <span class="string">|-</span></span><br><span class="line">    <span class="string">cluster.name:</span> <span class="string">$&#123;CLUSTER_NAME&#125;</span></span><br><span class="line">    <span class="string">node.name:</span> <span class="string">$&#123;NODE_NAME&#125;</span></span><br><span class="line">    <span class="string">discovery.seed_hosts:</span> <span class="string">$&#123;NODE_LIST&#125;</span></span><br><span class="line">    <span class="string">cluster.initial_master_nodes:</span> <span class="string">$&#123;MASTER_NODES&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">network.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    node:</span></span><br><span class="line"><span class="attr">      master:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">      data:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">      ingest:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="string">xpack.security.enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="string">xpack.monitoring.collection.enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>客户端节点需要暴露两个端口，9300端口用于与集群的其他节点进行通信，9200端口用于 HTTP API。对应的 Service 对象如下所示：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-client.service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-client</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">9200</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">    nodePort:</span> <span class="number">30008</span>   <span class="comment"># NodePort     </span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span>       </span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">client</span></span><br></pre></td></tr></table></figure>
+<p>使用一个 Deployment 对象来描述客户端节点：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch-client.deployment.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">elasticsearch-client</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">    role:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">      role:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        role:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">elasticsearch-client</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">registry.cn-chengdu.aliyuncs.com/zhouqi-kubernetes/es:7.6.1</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">CLUSTER_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_NAME</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-client</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">NODE_LIST</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master,elasticsearch-data,elasticsearch-client</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">MASTER_NODES</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">elasticsearch-master</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">"ES_JAVA_OPTS"</span></span><br><span class="line"><span class="attr">          value:</span> <span class="string">"-Xms256m -Xmx256m"</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">9200</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">client</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">9300</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">transport</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/usr/share/elasticsearch/config/elasticsearch.yml</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">          subPath:</span> <span class="string">elasticsearch.yml</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">storage</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/data</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">config</span></span><br><span class="line"><span class="attr">        configMap:</span></span><br><span class="line"><span class="attr">          name:</span> <span class="string">elasticsearch-client-config</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">"storage"</span></span><br><span class="line"><span class="attr">        emptyDir:</span></span><br><span class="line"><span class="attr">          medium:</span> <span class="string">""</span></span><br></pre></td></tr></table></figure>
+<h4 id="生成密码"><a href="#生成密码" class="headerlink" title="生成密码"></a>生成密码</h4><p>我们启用了 xpack 安全模块来保护我们的集群，所以我们需要一个初始化的密码。我们可以执行如下所示的命令，在客户端节点容器内运行 <code>bin/elasticsearch-setup-passwords</code> 命令来生成默认的用户名和密码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl <span class="built_in">exec</span> $(kubectl get pods -n kube-system | grep elasticsearch-client | sed -n 1p | awk <span class="string">'&#123;print $1&#125;'</span>) \</span></span><br><span class="line">    -n elastic \</span><br><span class="line">    -- bin/elasticsearch-setup-passwords auto -b</span><br><span class="line"></span><br><span class="line">Changed password for user apm_system</span><br><span class="line">PASSWORD apm_system = 3Lhx61s6woNLvoL5Bb7t</span><br><span class="line"></span><br><span class="line">Changed password for user kibana_system</span><br><span class="line">PASSWORD kibana_system = NpZv9Cvhq4roFCMzpja3</span><br><span class="line"></span><br><span class="line">Changed password for user kibana</span><br><span class="line">PASSWORD kibana = NpZv9Cvhq4roFCMzpja3</span><br><span class="line"></span><br><span class="line">Changed password for user logstash_system</span><br><span class="line">PASSWORD logstash_system = nNnGnwxu08xxbsiRGk2C</span><br><span class="line"></span><br><span class="line">Changed password for user beats_system</span><br><span class="line">PASSWORD beats_system = fen759y5qxyeJmqj6UPp</span><br><span class="line"></span><br><span class="line">Changed password for user remote_monitoring_user</span><br><span class="line">PASSWORD remote_monitoring_user = mCP77zjCATGmbcTFFgOX</span><br><span class="line"></span><br><span class="line">Changed password for user elastic</span><br><span class="line">PASSWORD elastic = wmxhvsJFeti2dSjbQEAH</span><br></pre></td></tr></table></figure>
+<p>注意需要将 elastic 用户名和密码也添加到 Kubernetes 的 Secret 对象中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create secret generic elasticsearch-pw-elastic \</span></span><br><span class="line">    -n kube-system \</span><br><span class="line">    --from-literal password=wmxhvsJFeti2dSjbQEAH</span><br><span class="line">secret/elasticsearch-pw-elastic created</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/k8s/" rel="tag"># k8s</a>
+          
+            <a href="/tags/es/" rel="tag"># es</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/设计模式/design/pattern-2/" rel="next" title="设计模式六大原则">
+                <i class="fa fa-chevron-left"></i> 设计模式六大原则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-2/" rel="prev" title="K8S部署ELK管理集群日志（二）">
+                K8S部署ELK管理集群日志（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Figthing</p>
+              <p class="site-description motion-element" itemprop="description">奋斗过，就不后悔</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Figthing" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:13966837@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.163.com/023_dns" target="_blank" title="老博客">
+                      
+                        <i class="fa fa-fw fa-globe"></i>老博客</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ElasticSearch-集群安装"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch 集群安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-ElasticSearch-主节点"><span class="nav-number">1.1.</span> <span class="nav-text">安装 ElasticSearch 主节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-ElasticSearch-数据节点"><span class="nav-number">1.2.</span> <span class="nav-text">安装 ElasticSearch 数据节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-ElasticSearch-客户端节点"><span class="nav-number">1.3.</span> <span class="nav-text">安装 ElasticSearch 客户端节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成密码"><span class="nav-number">1.4.</span> <span class="nav-text">生成密码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Figthing</span>
+  <span class="post-meta-divider">|</span>
+  <span>Hosted by <a href="https://pages.github.com" style="font-weight: bold">Github Pages</a></span>
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.3"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

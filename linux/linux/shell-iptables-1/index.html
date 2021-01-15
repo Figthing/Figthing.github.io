@@ -407,7 +407,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.8k</span>
+                <span title="字数统计">3k</span>
               
 
               
@@ -446,7 +446,7 @@
 <p>将192.168.3.195：80 映射到192.168.3.193：80，即访问192.168.3.195：80，得到192.168.3.193：80的结果，实现linux的路由。</p>
 </li>
 <li><p><strong> 实现 </strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>打开转发功能</span><br><span class="line">echo "1" &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">         </span><br><span class="line">/sbin/iptables -F -t filter</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>清空iptables</span><br><span class="line">/sbin/iptables -F -t nat</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span>去192.168.3.193的一条路</span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -d 192.168.3.195 -p tcp --dport 80 -j DNAT --to-destination 192.168.3.193:80    </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>返回的时候的一条路，ip传输要有去有回才能连通 </span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING  -s 192.168.3.0/24 -o eth0 -j SNAT --to 192.168.3.195  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>用2网段访问的时候的回路</span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -o eth0 -j SNAT --to 192.168.3.195  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>用0网段访问的时候的回路</span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j SNAT --to 192.168.3.195</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">打开转发功能</span></span><br><span class="line">echo "1" &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">         </span><br><span class="line">/sbin/iptables -F -t filter</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">清空iptables</span></span><br><span class="line">/sbin/iptables -F -t nat</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span><span class="bash">去192.168.3.193的一条路</span></span><br><span class="line">/sbin/iptables -t nat -A PREROUTING -d 192.168.3.195 -p tcp --dport 80 -j DNAT --to-destination 192.168.3.193:80    </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">返回的时候的一条路，ip传输要有去有回才能连通 </span></span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING  -s 192.168.3.0/24 -o eth0 -j SNAT --to 192.168.3.195  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">用2网段访问的时候的回路</span></span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -o eth0 -j SNAT --to 192.168.3.195  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">用0网段访问的时候的回路</span></span><br><span class="line">/sbin/iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j SNAT --to 192.168.3.195</span><br></pre></td></tr></table></figure>
 <p>回路的那一条，或者只用下面这一句：<br><code>iptables -t nat -A POSTROUTING -s 0.0.0.0/0 -o eth0 -j SNAT --to 192.168.3.195</code>或者<br><code>iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 192.168.3.195</code>把193上的80端口打开</p>
 </li>
 <li><p><strong> 测试 </strong><br>在192.168.3.195上访问 192.168.3.195：80看到 195的apache主页，因为在本机上访问，没有走PREROUTING这条链。在其他主机上访问192.168.3.195：80 返回193的apache主页，路线为PREROUTING–&gt;FORWARD–&gt;PSOTROUTING.</p>
@@ -563,7 +563,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-count">90</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -622,7 +622,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -757,7 +759,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">61</span>
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -826,7 +830,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4.7k</span>
+                <span title="字数统计">4.9k</span>
               
 
               
@@ -458,12 +458,12 @@
 <p>STAT：该程序目前的状态，主要的状态有：<br>   R ：该程序目前正在运作，或者是可被运作；<br>   S ：该程序目前正在睡眠当中 (可说是 idle 状态啦！)，但可被某些讯号(signal) 唤醒。<br>   T ：该程序目前正在侦测或者是停止了；<br>   Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态</p>
 </blockquote>
 </blockquote>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="显示所有进程信息"><a href="#显示所有进程信息" class="headerlink" title="显示所有进程信息"></a>显示所有进程信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -A</span><br></pre></td></tr></table></figure>
-<h4 id="显示指定用户信息"><a href="#显示指定用户信息" class="headerlink" title="显示指定用户信息"></a>显示指定用户信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -u root</span><br></pre></td></tr></table></figure>
-<h4 id="显示所有进程信息，连同命令行"><a href="#显示所有进程信息，连同命令行" class="headerlink" title="显示所有进程信息，连同命令行"></a>显示所有进程信息，连同命令行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -ef</span><br></pre></td></tr></table></figure>
-<h4 id="ps-与grep-常用组合用法，查找特定进程"><a href="#ps-与grep-常用组合用法，查找特定进程" class="headerlink" title="ps 与grep 常用组合用法，查找特定进程"></a>ps 与grep 常用组合用法，查找特定进程</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -ef|grep ssh</span><br></pre></td></tr></table></figure>
-<h4 id="列出类似程序树的程序显示"><a href="#列出类似程序树的程序显示" class="headerlink" title="列出类似程序树的程序显示"></a>列出类似程序树的程序显示</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps -axjf</span><br></pre></td></tr></table></figure>
-<h4 id="找出与-cron-与-syslog-这两个服务有关的-PID-号码"><a href="#找出与-cron-与-syslog-这两个服务有关的-PID-号码" class="headerlink" title="找出与 cron 与 syslog 这两个服务有关的 PID 号码"></a>找出与 cron 与 syslog 这两个服务有关的 PID 号码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps aux | egrep '(cron|syslog)'</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="显示所有进程信息"><a href="#显示所有进程信息" class="headerlink" title="显示所有进程信息"></a>显示所有进程信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -A</span></span><br></pre></td></tr></table></figure>
+<h4 id="显示指定用户信息"><a href="#显示指定用户信息" class="headerlink" title="显示指定用户信息"></a>显示指定用户信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -u root</span></span><br></pre></td></tr></table></figure>
+<h4 id="显示所有进程信息，连同命令行"><a href="#显示所有进程信息，连同命令行" class="headerlink" title="显示所有进程信息，连同命令行"></a>显示所有进程信息，连同命令行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -ef</span></span><br></pre></td></tr></table></figure>
+<h4 id="ps-与grep-常用组合用法，查找特定进程"><a href="#ps-与grep-常用组合用法，查找特定进程" class="headerlink" title="ps 与grep 常用组合用法，查找特定进程"></a>ps 与grep 常用组合用法，查找特定进程</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -ef|grep ssh</span></span><br></pre></td></tr></table></figure>
+<h4 id="列出类似程序树的程序显示"><a href="#列出类似程序树的程序显示" class="headerlink" title="列出类似程序树的程序显示"></a>列出类似程序树的程序显示</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps -axjf</span></span><br></pre></td></tr></table></figure>
+<h4 id="找出与-cron-与-syslog-这两个服务有关的-PID-号码"><a href="#找出与-cron-与-syslog-这两个服务有关的-PID-号码" class="headerlink" title="找出与 cron 与 syslog 这两个服务有关的 PID 号码"></a>找出与 cron 与 syslog 这两个服务有关的 PID 号码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps aux | egrep <span class="string">'(cron|syslog)'</span></span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -583,7 +583,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-count">90</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -642,7 +642,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -777,7 +779,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">61</span>
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -862,7 +866,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2009 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

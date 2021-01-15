@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/</loc>
+    
+    <lastmod>2021-01-15T07:29:15.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/</loc>
+    
+    <lastmod>2021-01-15T07:28:55.556Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.appydm.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/design/pattern-2/</loc>
     
     <lastmod>2020-09-03T03:41:47.595Z</lastmod>

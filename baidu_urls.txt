@@ -1,3 +1,5 @@
+http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-2/
+http://blog.appydm.com/docker/k8s/es/docker/k8s/K8S部署ELK管理集群日志-1/
 http://blog.appydm.com/设计模式/design/pattern-2/
 http://blog.appydm.com/software/rsync/software/rsync-1/
 http://blog.appydm.com/docker/k8s/docker/k8s/3/
