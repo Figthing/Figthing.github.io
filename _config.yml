@@ -106,10 +106,3 @@ symbols_count_time:
   total_symbols: false 
   total_time: false 
   exclude_codeblock: false
-
-leancloud_counter_security: 
-  enable_sync: true 
-  app_id: ''
-  app_key: ''
-  用户名: ''
-  密码: ''
