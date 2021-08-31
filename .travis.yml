@@ -4,7 +4,9 @@ node_js:
 cache:
   apt: true
   directories:
-      - node_modules
+      - node_modules      
+install:
+  - yarn
 branches:
   only:
     - master
