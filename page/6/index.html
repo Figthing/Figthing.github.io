@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -169,105 +169,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/2018/03/08/mq/rocketmq/3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Figthing">
-      <meta itemprop="description" content="奋斗过，就不后悔">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Figthing的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/08/mq/rocketmq/3/" class="post-title-link" itemprop="url">RocketMQ实战（三）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-08 11:27:00" itemprop="dateCreated datePublished" datetime="2018-03-08T11:27:00+08:00">2018-03-08</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>关于多Master多Slave的说明</strong></p>
-<p>由于在之前的博客中已经搭建了双Master，其实多Master多Slave大同小异，因此这里并不会一步步的演示搭建多Master多Slave，而是从思路上，分析下重点应该注意的配置项。</p>
-<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/34.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
-<blockquote>
-</blockquote>
-<ul>
-<li>这四台机器，对外是一个统一的整体，是一个rocketmq cluster，因此需要brokerClusterName保持统一</li>
-<li>123机器是121的从，124机器是122的从，如何在配置中体现？ 主和从的brokerName需要保持一致，另外brokerId标示了谁是主，谁是从（brokerId=0的就是主，大于0的就是从）</li>
-<li>注意namesrvAddr的地址是4台NameServer</li>
-<li>配置项中brokerRole需要指明 ASYNC_MASTER（异步复制Master） or SYNC_MASTER（同步双写Master） or SLAVE（从）</li>
-<li>和以前的多Master启动方式一致，先启动4台Namesrv，然后用指定配置文件的方式启动Master/Slave即可</li>
-<li>多Master多Slave的好处在于，即便集群中某个broker挂了，也可以继续消费，保证了实时性的高可用，但是并不是说某个master挂了，slave就可以升级master，开源版本的rocketmq是不可以的。也就是说，在这种情况下，slave只能提供读的功能，将失去消息负载的能力。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/03/08/mq/rocketmq/3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/2018/03/08/mq/rocketmq/2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,7 +200,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,7 +296,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -491,7 +392,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -581,7 +482,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -680,7 +581,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -773,7 +674,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -863,7 +764,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -955,7 +856,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1057,7 +958,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-31 19:06:10" itemprop="dateModified" datetime="2021-08-31T19:06:10+08:00">2021-08-31</time>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1085,6 +986,93 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/03/06/java/transaction/5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://blog.appydm.com/2018/03/06/java/transaction/4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Figthing">
+      <meta itemprop="description" content="奋斗过，就不后悔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Figthing的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/06/java/transaction/4/" class="post-title-link" itemprop="url">说说分布式事务(四)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-06 10:26:00" itemprop="dateCreated datePublished" datetime="2018-03-06T10:26:00+08:00">2018-03-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-31 19:06:42" itemprop="dateModified" datetime="2021-08-31T19:06:42+08:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="最终一致性-二"><a href="#最终一致性-二" class="headerlink" title="最终一致性(二)"></a>最终一致性(二)</h4><h4 id="基于MQ的分布式事务补偿机制"><a href="#基于MQ的分布式事务补偿机制" class="headerlink" title="基于MQ的分布式事务补偿机制"></a>基于MQ的分布式事务补偿机制</h4><h4 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h4><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/11.jpeg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/06/java/transaction/4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
