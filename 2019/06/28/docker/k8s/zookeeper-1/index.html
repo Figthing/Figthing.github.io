@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="K8S搭建Zookeeper集群服务器资源   服务器地址 k8s NFS    172.24.2.67 k8s-node-3 service   172.24.2.69 k8s-master client   172.24.2.70 k8s-node-2 client   172.24.2.71 k8s-node-1 client   安装NFS1、在67服务器中安装NFS 1234567891">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8s搭建-Zookeeper集群">
+<meta property="og:url" content="http://example.com/2019/06/28/docker/k8s/zookeeper-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="K8S搭建Zookeeper集群服务器资源   服务器地址 k8s NFS    172.24.2.67 k8s-node-3 service   172.24.2.69 k8s-master client   172.24.2.70 k8s-node-2 client   172.24.2.71 k8s-node-1 client   安装NFS1、在67服务器中安装NFS 1234567891">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700173921.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700126674.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700410724.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700478499.png">
+<meta property="article:published_time" content="2019-06-28T15:18:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="k8s">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700173921.png">
+
+
+<link rel="canonical" href="http://example.com/2019/06/28/docker/k8s/zookeeper-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2019/06/28/docker/k8s/zookeeper-1/","path":"2019/06/28/docker/k8s/zookeeper-1/","title":"K8s搭建-Zookeeper集群"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>K8s搭建-Zookeeper集群 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#K8S%E6%90%AD%E5%BB%BAZookeeper%E9%9B%86%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">K8S搭建Zookeeper集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B5%84%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">服务器资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85NFS"><span class="nav-number">1.2.</span> <span class="nav-text">安装NFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2NSF-Zookeeper-PV"><span class="nav-number">1.3.</span> <span class="nav-text">部署NSF-Zookeeper-PV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2Zookeeper%E9%9B%86%E7%BE%A4"><span class="nav-number">1.4.</span> <span class="nav-text">部署Zookeeper集群</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/06/28/docker/k8s/zookeeper-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          K8s搭建-Zookeeper集群
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-06-28 15:18:00" itemprop="dateCreated datePublished" datetime="2019-06-28T15:18:00+00:00">2019-06-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="K8S搭建Zookeeper集群"><a href="#K8S搭建Zookeeper集群" class="headerlink" title="K8S搭建Zookeeper集群"></a>K8S搭建Zookeeper集群</h2><h3 id="服务器资源"><a href="#服务器资源" class="headerlink" title="服务器资源"></a>服务器资源</h3><table>
+<thead>
+<tr>
+<th>服务器地址</th>
+<th>k8s</th>
+<th>NFS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>172.24.2.67</td>
+<td>k8s-node-3</td>
+<td>service</td>
+</tr>
+<tr>
+<td>172.24.2.69</td>
+<td>k8s-master</td>
+<td>client</td>
+</tr>
+<tr>
+<td>172.24.2.70</td>
+<td>k8s-node-2</td>
+<td>client</td>
+</tr>
+<tr>
+<td>172.24.2.71</td>
+<td>k8s-node-1</td>
+<td>client</td>
+</tr>
+</tbody></table>
+<h3 id="安装NFS"><a href="#安装NFS" class="headerlink" title="安装NFS"></a>安装NFS</h3><p>1、在67服务器中安装NFS</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">master节点安装nfs</span></span><br><span class="line">yum -y install nfs-utils</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">创建nfs目录</span></span><br><span class="line">mkdir -p /nfs/data/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">修改权限</span></span><br><span class="line">chmod -R 777 /nfs/data</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">编辑<span class="built_in">export</span>文件,这个文件就是nfs默认的配置文件</span></span><br><span class="line">vi /etc/exports</span><br><span class="line">/nfs/data *(rw,no_root_squash,sync)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">配置生效</span></span><br><span class="line">exportfs -r</span><br><span class="line"><span class="meta">#</span><span class="bash">查看生效</span></span><br><span class="line">exportfs</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">启动rpcbind、nfs服务</span></span><br><span class="line">systemctl restart rpcbind &amp;&amp; systemctl enable rpcbind</span><br><span class="line">systemctl restart nfs &amp;&amp; systemctl enable nfs</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">查看 RPC 服务的注册状况</span></span><br><span class="line">rpcinfo -p localhost</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">showmount测试</span></span><br><span class="line">showmount -e 172.24.2.67</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700173921.png" alt="1561700173921"></p>
+<p>2、所有node节点安装客户端，开机启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nfs-utils</span><br><span class="line">systemctl start nfs &amp;&amp; systemctl enable nfs</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="部署NSF-Zookeeper-PV"><a href="#部署NSF-Zookeeper-PV" class="headerlink" title="部署NSF-Zookeeper-PV"></a>部署NSF-Zookeeper-PV</h3><p>1、新建一个<code>zk-nfs-pv.yaml</code>文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-nfs-pv-01</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">pv:</span> <span class="string">zk-nfs-pv-01</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">3Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">zk-nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs/data/zookeeper/pv-01</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.24</span><span class="number">.2</span><span class="number">.67</span></span><br><span class="line"><span class="meta">---    </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-nfs-pv-02</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">pv:</span> <span class="string">zk-nfs-pv-02</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">3Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">zk-nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs/data/zookeeper/pv-02</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.24</span><span class="number">.2</span><span class="number">.67</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-nfs-pv-03</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">pv:</span> <span class="string">zk-nfs-pv-03</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">3Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">zk-nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs/data/zookeeper/pv-03</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.24</span><span class="number">.2</span><span class="number">.67</span></span><br></pre></td></tr></table></figure>
+
+<p>2、启动zk-nfs-pv</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f zk-nfs-pv.yaml</span><br></pre></td></tr></table></figure>
+
+<p>3、查看状态</p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700126674.png" alt="1561700126674"></p>
+<h3 id="部署Zookeeper集群"><a href="#部署Zookeeper集群" class="headerlink" title="部署Zookeeper集群"></a>部署Zookeeper集群</h3><p>1、新建文件<code>zookeeper.yaml</code>，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span>  </span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-headless</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">zk-headless</span>  </span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">2888</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">server</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">3888</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">leader-election</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">zk</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span>  </span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-cs</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">zk</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">2181</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">client</span></span><br><span class="line">    <span class="attr">nodePort:</span> <span class="number">30002</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">zk</span>    </span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span> </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">ensemble:</span> <span class="string">&quot;zk-0;zk-1;zk-2&quot;</span></span><br><span class="line">  <span class="attr">jvm.heap:</span> <span class="string">&quot;2G&quot;</span></span><br><span class="line">  <span class="attr">tick:</span> <span class="string">&quot;2000&quot;</span></span><br><span class="line">  <span class="attr">init:</span> <span class="string">&quot;10&quot;</span></span><br><span class="line">  <span class="attr">sync:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line">  <span class="attr">client.cnxns:</span> <span class="string">&quot;60&quot;</span></span><br><span class="line">  <span class="attr">snap.retain:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">  <span class="attr">purge.interval:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">policy/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PodDisruptionBudget</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk-budget</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">zk</span></span><br><span class="line">  <span class="attr">minAvailable:</span> <span class="number">2</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">zk</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">zk</span></span><br><span class="line">  <span class="attr">serviceName:</span> <span class="string">zk-headless</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">zk</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">affinity:</span></span><br><span class="line">        <span class="attr">podAntiAffinity:</span></span><br><span class="line">          <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">labelSelector:</span></span><br><span class="line">                <span class="attr">matchExpressions:</span></span><br><span class="line">                  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;app&quot;</span></span><br><span class="line">                    <span class="attr">operator:</span> <span class="string">In</span></span><br><span class="line">                    <span class="attr">values:</span> </span><br><span class="line">                    <span class="bullet">-</span> <span class="string">zk</span></span><br><span class="line">              <span class="attr">topologyKey:</span> <span class="string">&quot;kubernetes.io/hostname&quot;</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">kubernetes-zookeeper</span></span><br><span class="line">        <span class="attr">imagePullPolicy:</span> <span class="string">Always</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">&quot;registry.cn-shenzhen.aliyuncs.com/zhouqi-kubernetes/k8szk:v3&quot;</span></span><br><span class="line">        <span class="attr">resources:</span></span><br><span class="line">          <span class="attr">limits:</span></span><br><span class="line">            <span class="attr">cpu:</span> <span class="number">1</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">1Gi</span></span><br><span class="line">          <span class="attr">requests:</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">512Mi</span></span><br><span class="line">            <span class="attr">cpu:</span> <span class="string">500m</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">2181</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">client</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">2888</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">server</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">3888</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">leader-election</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_REPLICAS</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_ENSEMBLE</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">ensemble</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_HEAP_SIZE</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">jvm.heap</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_TICK_TIME</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">tick</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_INIT_LIMIT</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">init</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_SYNC_LIMIT</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">tick</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name :</span> <span class="string">ZK_MAX_CLIENT_CNXNS</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">client.cnxns</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ZK_SNAP_RETAIN_COUNT</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">snap.retain</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ZK_PURGE_INTERVAL</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">zk-config</span></span><br><span class="line">                <span class="attr">key:</span> <span class="string">purge.interval</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ZK_CLIENT_PORT</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">&quot;2181&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ZK_SERVER_PORT</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">&quot;2888&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ZK_ELECTION_PORT</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">&quot;3888&quot;</span></span><br><span class="line">        <span class="attr">command:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">sh</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">-c</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">zkGenConfig.sh</span> <span class="string">&amp;&amp;</span> <span class="string">zkServer.sh</span> <span class="string">start-foreground</span></span><br><span class="line">        <span class="attr">readinessProbe:</span></span><br><span class="line">          <span class="attr">exec:</span></span><br><span class="line">            <span class="attr">command:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;zkOk.sh&quot;</span></span><br><span class="line">          <span class="attr">initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line">          <span class="attr">timeoutSeconds:</span> <span class="number">5</span></span><br><span class="line">        <span class="attr">livenessProbe:</span></span><br><span class="line">          <span class="attr">exec:</span></span><br><span class="line">            <span class="attr">command:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">&quot;zkOk.sh&quot;</span></span><br><span class="line">          <span class="attr">initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line">          <span class="attr">timeoutSeconds:</span> <span class="number">5</span></span><br><span class="line">        <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">datadir</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/var/lib/zookeeper</span></span><br><span class="line">          <span class="attr">subPath:</span> <span class="string">data/</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">datadir</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/opt/zookeeper/conf</span></span><br><span class="line">          <span class="attr">subPath:</span> <span class="string">config/</span></span><br><span class="line">      <span class="attr">securityContext:</span></span><br><span class="line">        <span class="attr">runAsUser:</span> <span class="number">1000</span></span><br><span class="line">        <span class="attr">fsGroup:</span> <span class="number">1000</span></span><br><span class="line">  <span class="attr">volumeClaimTemplates:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">datadir</span></span><br><span class="line">      <span class="attr">annotations:</span></span><br><span class="line">        <span class="attr">volume.beta.kubernetes.io/storage-class:</span> <span class="string">&quot;zk-nfs&quot;</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">accessModes:</span> [ <span class="string">&quot;ReadWriteOnce&quot;</span> ]</span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">requests:</span></span><br><span class="line">          <span class="attr">storage:</span> <span class="string">3Gi</span></span><br></pre></td></tr></table></figure>
+
+<p>2、启动<code>zookeeper.yaml</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f zookeeper.yaml</span><br></pre></td></tr></table></figure>
+
+<p>3、查看启动情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod -o wide</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700410724.png" alt="1561700410724"></p>
+<p>4、最后来验证Zookeeper集群是否正常，查看集群节点状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in 0 1 2; do kubectl exec zk-$i zkServer.sh status; done</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/k8s/1561700478499.png" alt="1561700478499"></p>
+<p>参考文献：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2633b95c244c">https://www.jianshu.com/p/2633b95c244c</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/k8s/" rel="tag"># k8s</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/18/docker/k8s/dashboard-1/" rel="prev" title="K8s-Dashboard安装">
+                  <i class="fa fa-chevron-left"></i> K8s-Dashboard安装
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/06/28/docker/k8s/coreDns-1/" rel="next" title="K8s搭建-CoreDns">
+                  K8s搭建-CoreDns <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

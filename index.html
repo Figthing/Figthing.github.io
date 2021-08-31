@@ -116,9 +116,19 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -180,7 +190,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-08-31 03:30:56" itemprop="dateCreated datePublished" datetime="2021-08-31T03:30:56+00:00">2021-08-31</time>
+      <time title="Created: 2021-08-31 10:59:49" itemprop="dateCreated datePublished" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
     </span>
 
   
@@ -224,6 +234,886 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">Ambari 2.7.3 离线安装手册</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-06 17:12:00" itemprop="dateCreated datePublished" datetime="2021-07-06T17:12:00+00:00">2021-07-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bigdata/" itemprop="url" rel="index"><span itemprop="name">bigdata</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bigdata/ambari/" itemprop="url" rel="index"><span itemprop="name">ambari</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Ambari-2-7-3-离线安装手册"><a href="#Ambari-2-7-3-离线安装手册" class="headerlink" title="Ambari 2.7.3 离线安装手册"></a>Ambari 2.7.3 离线安装手册</h2><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="版本介绍"><a href="#版本介绍" class="headerlink" title="版本介绍"></a>版本介绍</h3><p>Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持<a target="_blank" rel="noopener" href="https://supportmatrix.hortonworks.com/%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%8B%E8%BD%BD%E6%8A%A5%E5%91%8A">https://supportmatrix.hortonworks.com/，以及下载报告</a></p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/1.png" style="zoom: 67%;" />
+
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/2.png" style="zoom: 67%;" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/" class="post-title-link" itemprop="url">K8S部署ELK管理集群日志（三）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-15 15:29:00" itemprop="dateCreated datePublished" datetime="2021-01-15T15:29:00+00:00">2021-01-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/elk/" itemprop="url" rel="index"><span itemprop="name">elk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>上一篇文章讲述了k8s安装Kibana，本章接着讲解K8S安装Logstash与Filebeat</p>
+</blockquote>
+<h3 id="Logstash和Filebeat安装"><a href="#Logstash和Filebeat安装" class="headerlink" title="Logstash和Filebeat安装"></a>Logstash和Filebeat安装</h3><p>在使用k8s安装Logstash时，先在本地做测试配置，如果已经非常熟悉的，就可以将这个步骤省略</p>
+<h4 id="Windows安装Logstash"><a href="#Windows安装Logstash" class="headerlink" title="Windows安装Logstash"></a>Windows安装Logstash</h4><ol>
+<li>去官方下载Windows版本的<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases/logstash-7-6-1">Logstash</a>，将ZIP文件解压，变成下面的目录结构</li>
+</ol>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/1.png" style="zoom: 67%;" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/" class="post-title-link" itemprop="url">K8S部署ELK管理集群日志（二）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-15 15:15:00" itemprop="dateCreated datePublished" datetime="2021-01-15T15:15:00+00:00">2021-01-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/elk/" itemprop="url" rel="index"><span itemprop="name">elk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>上一篇文章讲述了k8s安装ES集群的方式，本章接着讲解K8S安装Kibana</p>
+</blockquote>
+<h3 id="Kibana安装"><a href="#Kibana安装" class="headerlink" title="Kibana安装"></a>Kibana安装</h3><p>ElasticSearch 集群安装完成后，接着我们可以来部署 Kibana，这是 ElasticSearch 的数据可视化工具，它提供了管理 ElasticSearch 集群和可视化数据的各种功能。</p>
+<p>同样首先我们使用 ConfigMap 对象来提供一个文件文件，其中包括对 ElasticSearch 的访问（主机、用户名和密码），这些都是通过环境变量配置的。对应的资源清单文件如下所示：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/" class="post-title-link" itemprop="url">K8S部署ELK管理集群日志（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-15 10:53:00" itemprop="dateCreated datePublished" datetime="2021-01-15T10:53:00+00:00">2021-01-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/elk/" itemprop="url" rel="index"><span itemprop="name">elk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：<br>比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK<br>而本文采用的是功能更强大的后者：filebeat 采集—&gt;logstash过滤加工—&gt;ES存储与索引—&gt;Kibana展示的方案。</p>
+</blockquote>
+<h3 id="ElasticSearch-集群安装"><a href="#ElasticSearch-集群安装" class="headerlink" title="ElasticSearch 集群安装"></a>ElasticSearch 集群安装</h3><p>要建立一个 Elastic 技术的监控栈，当然首先我们需要部署 ElasticSearch，它是用来存储所有的指标、日志和追踪的数据库，这里我们通过3个不同角色的可扩展的节点组成一个集群。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/03/design/pattern-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/03/design/pattern-2/" class="post-title-link" itemprop="url">设计模式六大原则</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-09-03 10:44:00" itemprop="dateCreated datePublished" datetime="2020-09-03T10:44:00+00:00">2020-09-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>​    对象不应承担太多功能，正如一心不能而用，比如太多的工作(种类)会使人崩溃。唯有专注才能保证对象的高内聚；唯有唯一，才能保证对象的细粒度。</p>
+<p><strong>解决问题：</strong></p>
+<p>　　假如有A和B两个类，当A需求发生改变需要修改时，不能导致B类出问题。</p>
+<p><strong>现状：</strong></p>
+<p>　　在实际情况很难去做到单一职责原则，因为随着业务的不断变更，类的职责也在发生着变化，即职责扩散。如类A完成职责P的功能，但是随着后期业务细化，职责P分解成更小粒度的P1与P2，这时根据单一职责原则则需要拆分类A以分别满足细分后的职责P1和P2。但是实际开发环节，若类的逻辑足够简单，可以在代码上级别上违背单一职责原则；若类的方法足够少，可以在方法级别上违背单一职责原则。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/03/design/pattern-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/21/software/rsync-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/21/software/rsync-1/" class="post-title-link" itemprop="url">Rsync + Sersync 实现文件实时同步</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-21 15:48:00" itemprop="dateCreated datePublished" datetime="2020-07-21T15:48:00+00:00">2020-07-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">software</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/software/rsync/" itemprop="url" rel="index"><span itemprop="name">rsync</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Rsync-Sersync-实现文件实时同步"><a href="#Rsync-Sersync-实现文件实时同步" class="headerlink" title="Rsync + Sersync 实现文件实时同步"></a>Rsync + Sersync 实现文件实时同步</h2><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>sersync主要用于服务器同步，web镜像等功能。基于boost1.43.0,inotify api,rsync command.开发。目前使用的比较多的同步解决方案是inotify-tools+rsync ，另外一个是google开源项目Openduckbill（依赖于inotify- tools），这两个都是基于脚本语言编写的。相比较上面两个项目，本项目优点是：</p>
+<ul>
+<li>sersync是使用c++编写，而且对linux系统文件系统产生的临时文件和重复的文件操作进行过滤，所以在结合rsync同步的时候，节省了运行时耗和网络资源。因此更快。</li>
+<li>sersync配置起来很简单，其中bin目录下已经有基本上静态编译的2进制文件，配合bin目录下的xml配置文件直接使用即可。</li>
+<li>使用多线程进行同步，尤其在同步较大文件时，能够保证多个服务器实时保持同步状态。</li>
+<li>有出错处理机制，通过失败队列对出错的文件重新同步，如果仍旧失败，则按设定时长对同步失败的文件重新同步。</li>
+<li>自带crontab功能，只需在xml配置文件中开启，即可按要求隔一段时间整体同步一次。无需再额外配置crontab功能。</li>
+<li>能够实现socket与http插件扩展。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/21/software/rsync-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/17/docker/k8s/3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/17/docker/k8s/3/" class="post-title-link" itemprop="url">K8S-证书过期问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-17 19:04:00" itemprop="dateCreated datePublished" datetime="2020-06-17T19:04:00+00:00">2020-06-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="K8S-证书过期问题"><a href="#K8S-证书过期问题" class="headerlink" title="K8S-证书过期问题"></a>K8S-证书过期问题</h2><p>最近在开发环境中，在<code>master</code>使用<code>kubectl get pods</code>命令，发现报<code>The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?</code>经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说明一下我在整个解决问题的过程，我使用的k8s版本是1.14.1。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/17/docker/k8s/3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/18/oracle/debug/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/05/18/oracle/debug/1/" class="post-title-link" itemprop="url">Oracle-"WM_CONCAT": 标识符无效</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-05-18 11:19:00" itemprop="dateCreated datePublished" datetime="2020-05-18T11:19:00+00:00">2020-05-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="“WM-CONCAT”-标识符无效"><a href="#“WM-CONCAT”-标识符无效" class="headerlink" title="“WM_CONCAT”: 标识符无效"></a>“WM_CONCAT”: 标识符无效</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>11gr2和12C上已经摒弃了wm_concat函数，当时我们很多程序员在程序中确使用了该函数，导致程序出现错误，为了减轻程序员修改程序的工作量，只有通过手工创建个wm_concat函数，来临时解决该问题，但是注意，及时创建了该函数，在使用的过程中，也需要用to_char(wm_concat())方式，才能完全替代之前的应用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/18/oracle/debug/1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/09/system/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/04/09/system/1/" class="post-title-link" itemprop="url">浅谈系统高可用几个9</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-04-09 14:31:00" itemprop="dateCreated datePublished" datetime="2020-04-09T14:31:00+00:00">2020-04-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="浅谈系统高可用几个9"><a href="#浅谈系统高可用几个9" class="headerlink" title="浅谈系统高可用几个9"></a>浅谈系统高可用几个9</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>经常看到各种技术文章或者分布式系统介绍说系统的可用性达到了多少个9，那么所谓”几个9“到底是怎么计算的？又意味着什么？我们简单计算分析下看看。所谓”1个9“是指90%，”2个9“是指99%，”3个9“是指99.9%，依次类推。</p>
+<p>可用性的反面是故障时间，网站或者分布式系统会因为很多原因导致不可用，比如：程序bug；运维更新错误；环境配置升级变化；机器硬件故障；被恶意攻击；网关不小心踢掉了网线/电源插座；市政施工挖断了光纤；程序猿删库跑路；地震海啸自然灾害等等。</p>
+<h4 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h4><p>如果按照年为单位计算系统的故障时间，公式如下：</p>
+<blockquote>
+<p>故障时间秒数=(1-可用性) * 365 * 24 * 3600</p>
+</blockquote>
+<p>计算6个9以内的情况得到如下结果：  </p>
+<table>
+<thead>
+<tr>
+<th>可用性指标</th>
+<th>计算公式</th>
+<th>不可用时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>99.9%</td>
+<td>0.1% * 365 * 24 * 60</td>
+<td>525.6分钟</td>
+</tr>
+<tr>
+<td>99.99%</td>
+<td>0.01% * 365 * 24 * 60</td>
+<td>52.56分钟</td>
+</tr>
+<tr>
+<td>99.999%</td>
+<td>0.001% * 365 * 24 * 60</td>
+<td>5.256分钟</td>
+</tr>
+<tr>
+<td>99.9999%</td>
+<td>0.0001% * 365 * 24 * 60 * 60</td>
+<td>31.536秒</td>
+</tr>
+</tbody></table>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>可见，如果只有1个9的可用性，体验是极其糟糕的，1年下来有1个多月不能使用。一些大型网站号称能过做到4个9，那么1年有52分钟故障时间，其实已经是不错的情况了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 </div>
   </main>

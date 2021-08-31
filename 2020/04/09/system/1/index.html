@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="浅谈系统高可用几个9概述经常看到各种技术文章或者分布式系统介绍说系统的可用性达到了多少个9，那么所谓”几个9“到底是怎么计算的？又意味着什么？我们简单计算分析下看看。所谓”1个9“是指90%，”2个9“是指99%，”3个9“是指99.9%，依次类推。 可用性的反面是故障时间，网站或者分布式系统会因为很多原因导致不可用，比如：程序bug；运维更新错误；环境配置升级变化；机器硬件故障；被恶意攻击；网关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈系统高可用几个9">
+<meta property="og:url" content="http://example.com/2020/04/09/system/1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="浅谈系统高可用几个9概述经常看到各种技术文章或者分布式系统介绍说系统的可用性达到了多少个9，那么所谓”几个9“到底是怎么计算的？又意味着什么？我们简单计算分析下看看。所谓”1个9“是指90%，”2个9“是指99%，”3个9“是指99.9%，依次类推。 可用性的反面是故障时间，网站或者分布式系统会因为很多原因导致不可用，比如：程序bug；运维更新错误；环境配置升级变化；机器硬件故障；被恶意攻击；网关">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-09T14:31:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.788Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="架构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/04/09/system/1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/04/09/system/1/","path":"2020/04/09/system/1/","title":"浅谈系统高可用几个9"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>浅谈系统高可用几个9 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%8F%AF%E7%94%A8%E5%87%A0%E4%B8%AA9"><span class="nav-number">1.</span> <span class="nav-text">浅谈系统高可用几个9</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">计算公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.3.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/09/system/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈系统高可用几个9
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-04-09 14:31:00" itemprop="dateCreated datePublished" datetime="2020-04-09T14:31:00+00:00">2020-04-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="浅谈系统高可用几个9"><a href="#浅谈系统高可用几个9" class="headerlink" title="浅谈系统高可用几个9"></a>浅谈系统高可用几个9</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>经常看到各种技术文章或者分布式系统介绍说系统的可用性达到了多少个9，那么所谓”几个9“到底是怎么计算的？又意味着什么？我们简单计算分析下看看。所谓”1个9“是指90%，”2个9“是指99%，”3个9“是指99.9%，依次类推。</p>
+<p>可用性的反面是故障时间，网站或者分布式系统会因为很多原因导致不可用，比如：程序bug；运维更新错误；环境配置升级变化；机器硬件故障；被恶意攻击；网关不小心踢掉了网线/电源插座；市政施工挖断了光纤；程序猿删库跑路；地震海啸自然灾害等等。</p>
+<h4 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h4><p>如果按照年为单位计算系统的故障时间，公式如下：</p>
+<blockquote>
+<p>故障时间秒数=(1-可用性) * 365 * 24 * 3600</p>
+</blockquote>
+<p>计算6个9以内的情况得到如下结果：  </p>
+<table>
+<thead>
+<tr>
+<th>可用性指标</th>
+<th>计算公式</th>
+<th>不可用时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>99.9%</td>
+<td>0.1% * 365 * 24 * 60</td>
+<td>525.6分钟</td>
+</tr>
+<tr>
+<td>99.99%</td>
+<td>0.01% * 365 * 24 * 60</td>
+<td>52.56分钟</td>
+</tr>
+<tr>
+<td>99.999%</td>
+<td>0.001% * 365 * 24 * 60</td>
+<td>5.256分钟</td>
+</tr>
+<tr>
+<td>99.9999%</td>
+<td>0.0001% * 365 * 24 * 60 * 60</td>
+<td>31.536秒</td>
+</tr>
+</tbody></table>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>可见，如果只有1个9的可用性，体验是极其糟糕的，1年下来有1个多月不能使用。一些大型网站号称能过做到4个9，那么1年有52分钟故障时间，其实已经是不错的情况了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag"># 架构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/05/software/vpn-1/" rel="prev" title="搭建 IPsec VPN 服务">
+                  <i class="fa fa-chevron-left"></i> 搭建 IPsec VPN 服务
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/18/oracle/debug/1/" rel="next" title="Oracle-"WM_CONCAT": 标识符无效">
+                  Oracle-"WM_CONCAT": 标识符无效 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

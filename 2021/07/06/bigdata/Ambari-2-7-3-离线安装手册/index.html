@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Ambari 2.7.3 离线安装手册准备工作版本介绍Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持https:&#x2F;&#x2F;supportmatrix.hortonworks.com&#x2F;，以及下载报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ambari 2.7.3 离线安装手册">
+<meta property="og:url" content="http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Ambari 2.7.3 离线安装手册准备工作版本介绍Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持https:&#x2F;&#x2F;supportmatrix.hortonworks.com&#x2F;，以及下载报告">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/2.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/3.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/5.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/6.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/7.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/8.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/9.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/10.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/11.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/12.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/13.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/14.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/15.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/16.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/17.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/18.png">
+<meta property="og:image" content="http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/images/8.png">
+<meta property="article:published_time" content="2021-07-06T17:12:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="bigdata">
+<meta property="article:tag" content="ambari">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/1.png">
+
+
+<link rel="canonical" href="http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/","path":"2021/07/06/bigdata/Ambari-2-7-3-离线安装手册/","title":"Ambari 2.7.3 离线安装手册"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Ambari 2.7.3 离线安装手册 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">Ambari 2.7.3 离线安装手册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">版本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%8C%85%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.2.</span> <span class="nav-text">工具包下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">Linux系统软件安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A7%84%E5%88%92"><span class="nav-number">3.1.</span> <span class="nav-text">服务器规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">系统配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%98%B2%E7%81%AB%E5%A2%99%E5%85%B3%E9%97%AD"><span class="nav-number">3.2.1.</span> <span class="nav-text">服务器防火墙关闭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D%E5%8F%8A%E6%9C%BA%E5%99%A8%E9%9A%90%E5%B0%84"><span class="nav-number">3.2.2.</span> <span class="nav-text">修改主机名及机器隐射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.3.</span> <span class="nav-text">服务器文件句柄设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%81%E7%94%A8SELinux%E5%92%8CPackageKit%E5%B0%86%E6%A3%80%E6%9F%A5umask%E5%80%BC"><span class="nav-number">3.2.4.</span> <span class="nav-text">禁用SELinux和PackageKit将检查umask值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%8D%E7%99%BB%E5%BD%95"><span class="nav-number">3.2.5.</span> <span class="nav-text">服务器免登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E6%9C%AC%E5%9C%B0Yum%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.6.</span> <span class="nav-text">挂载本地Yum源配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">系统安装软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5"><span class="nav-number">3.3.1.</span> <span class="nav-text">服务器时间同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%BB%98%E8%AE%A4JDK"><span class="nav-number">3.3.2.</span> <span class="nav-text">删除默认JDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85JDK"><span class="nav-number">3.3.3.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Httpd"><span class="nav-number">3.3.4.</span> <span class="nav-text">安装Httpd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Mysql"><span class="nav-number">3.3.5.</span> <span class="nav-text">安装Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ZIP%E5%92%8CUNZIP"><span class="nav-number">3.3.6.</span> <span class="nav-text">安装ZIP和UNZIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85libtirpc"><span class="nav-number">3.3.7.</span> <span class="nav-text">安装libtirpc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Kerberos"><span class="nav-number">3.3.8.</span> <span class="nav-text">安装Kerberos</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Ambari"><span class="nav-number">4.</span> <span class="nav-text">安装Ambari</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C%E6%9C%AC%E5%9C%B0Ambari%E6%BA%90"><span class="nav-number">4.1.</span> <span class="nav-text">制作本地Ambari源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEMysql"><span class="nav-number">4.2.</span> <span class="nav-text">设置Mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEAmbari"><span class="nav-number">4.3.</span> <span class="nav-text">安装配置Ambari</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E9%85%8D%E7%BD%AEAmbari"><span class="nav-number">4.4.</span> <span class="nav-text">可视化配置Ambari</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ambari%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">Ambari安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HDP%E7%9A%84%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%9C%AA%E8%AE%BE%E7%BD%AE%E6%88%90%E5%8A%9F"><span class="nav-number">4.5.1.</span> <span class="nav-text">HDP的本地yum源未设置成功</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ambari%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98"><span class="nav-number">4.6.</span> <span class="nav-text">Ambari组件安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Yarn"><span class="nav-number">4.6.1.</span> <span class="nav-text">Yarn</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive"><span class="nav-number">4.6.2.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ranger"><span class="nav-number">4.6.3.</span> <span class="nav-text">Ranger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hbase"><span class="nav-number">4.6.4.</span> <span class="nav-text">Hbase</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Knox"><span class="nav-number">4.6.5.</span> <span class="nav-text">Knox</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Atlas"><span class="nav-number">4.6.6.</span> <span class="nav-text">Atlas</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux"><span class="nav-number">4.6.7.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ambari 2.7.3 离线安装手册
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-06 17:12:00" itemprop="dateCreated datePublished" datetime="2021-07-06T17:12:00+00:00">2021-07-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bigdata/" itemprop="url" rel="index"><span itemprop="name">bigdata</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bigdata/ambari/" itemprop="url" rel="index"><span itemprop="name">ambari</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Ambari-2-7-3-离线安装手册"><a href="#Ambari-2-7-3-离线安装手册" class="headerlink" title="Ambari 2.7.3 离线安装手册"></a>Ambari 2.7.3 离线安装手册</h2><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="版本介绍"><a href="#版本介绍" class="headerlink" title="版本介绍"></a>版本介绍</h3><p>Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持<a target="_blank" rel="noopener" href="https://supportmatrix.hortonworks.com/%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%8B%E8%BD%BD%E6%8A%A5%E5%91%8A">https://supportmatrix.hortonworks.com/，以及下载报告</a></p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/1.png" style="zoom: 67%;" />
+
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/2.png" style="zoom: 67%;" />
+
+<span id="more"></span>
+
+<h3 id="工具包下载"><a href="#工具包下载" class="headerlink" title="工具包下载"></a>工具包下载</h3><p>Ambari-2.7.3.0：</p>
+<p><a target="_blank" rel="noopener" href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/ambari-2.7.3.0-centos7.tar.gz">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/ambari-2.7.3.0-centos7.tar.gz</a></p>
+<p>HDP-3.1.0：</p>
+<p><a target="_blank" rel="noopener" href="http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0/HDP-3.1.0.0-centos7-rpm.tar.gz">http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0/HDP-3.1.0.0-centos7-rpm.tar.gz</a></p>
+<p>HDP-UTILS-1.1.0.22：</p>
+<p><a target="_blank" rel="noopener" href="http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.22/repos/centos7/HDP-UTILS-1.1.0.22-centos7.tar.gz">http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.22/repos/centos7/HDP-UTILS-1.1.0.22-centos7.tar.gz</a></p>
+<p>JDK：1.8版本：</p>
+<p>操作系统:centos7任意版本，系统为英文，64位，内存最好每台都10G以上。</p>
+<p>mysql-connector-java-5.1.47.jar</p>
+<p><a target="_blank" rel="noopener" href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar">https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar</a></p>
+<p>Mysql5.7版本：</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz">https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz</a></p>
+<p>Linux ZIP:</p>
+<p><a target="_blank" rel="noopener" href="http://mirror.centos.org/centos/7/os/x86_64/Packages/zip-3.0-11.el7.x86_64.rpm">http://mirror.centos.org/centos/7/os/x86_64/Packages/zip-3.0-11.el7.x86_64.rpm</a></p>
+<p>Linux Unzip:</p>
+<p> <a target="_blank" rel="noopener" href="http://mirror.centos.org/centos/7/os/x86_64/Packages/unzip-6.0-21.el7.x86_64.rpm">http://mirror.centos.org/centos/7/os/x86_64/Packages/unzip-6.0-21.el7.x86_64.rpm</a></p>
+<p>Libtirpc-devel：</p>
+<p><a target="_blank" rel="noopener" href="https://buildlogs.centos.org/c7.1810.00.x86_64/libtirpc/20181031001901/0.2.4-0.15.el7.x86_64/libtirpc-0.2.4-0.15.el7.x86_64.rpm">https://buildlogs.centos.org/c7.1810.00.x86_64/libtirpc/20181031001901/0.2.4-0.15.el7.x86_64/libtirpc-0.2.4-0.15.el7.x86_64.rpm</a></p>
+<p>Percona-XtraDB-Cluster-Shared：</p>
+<p><a target="_blank" rel="noopener" href="http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm">http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm</a></p>
+<h2 id="Linux系统软件安装配置"><a href="#Linux系统软件安装配置" class="headerlink" title="Linux系统软件安装配置"></a>Linux系统软件安装配置</h2><h3 id="服务器规划"><a href="#服务器规划" class="headerlink" title="服务器规划"></a>服务器规划</h3><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>操作系统</th>
+<th>节点角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.1.121</td>
+<td>CentOS 7.6.1810</td>
+<td>master</td>
+</tr>
+<tr>
+<td>192.168.1.122</td>
+<td>CentOS 7.6.1810</td>
+<td>work</td>
+</tr>
+<tr>
+<td>192.168.1.123</td>
+<td>CentOS 7.6.1810</td>
+<td>work</td>
+</tr>
+</tbody></table>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><h4 id="服务器防火墙关闭"><a href="#服务器防火墙关闭" class="headerlink" title="服务器防火墙关闭"></a>服务器防火墙关闭</h4><p>关闭掉linux防火墙（所有机器）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl stop firewalld.service</span><br><span class="line">[root@localhost ~]# systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+
+
+<p>安装完成后，可以重新启动iptables。如果您环境中的安全协议阻止禁用iptables，则可以启用iptables，如果所有必需端口都已打开且可用，Ambari会在Ambari Server安装过程中检查iptables是否正在运行。如果iptables正在运行，则会显示警告，提醒检查所需端口是否已打开且可用。群集安装向导中的“主机确认”步骤还会为运行iptables的每个主机发出警告。</p>
+<h4 id="修改主机名及机器隐射"><a href="#修改主机名及机器隐射" class="headerlink" title="修改主机名及机器隐射"></a>修改主机名及机器隐射</h4><p><strong>修改主机名</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1)192.168.1.121</span><br><span class="line">[root@localhost ~]# hostnamectl set-hostname master</span><br><span class="line"></span><br><span class="line">2)192.168.1.122</span><br><span class="line">[root@localhost ~]# hostnamectl set-hostname slave1</span><br><span class="line"></span><br><span class="line">3)192.168.1.123</span><br><span class="line">[root@localhost ~]# hostnamectl set-hostname slave2</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改/etc/hosts文件（所有机器）</strong></p>
+<p>这里主要是为了可以实现通过名称来查找相应的服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat &lt;&lt; EOF &gt; /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.1.121 master</span><br><span class="line">192.168.1.122 slave1</span><br><span class="line">192.168.1.123 slave2</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改主机为英文</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat &lt;&lt; EOF &gt; /etc/locale.conf</span><br><span class="line">LANG=&quot;en_US.UTF-8&quot;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p><strong>重启电脑</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# reboot</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务器文件句柄设置"><a href="#服务器文件句柄设置" class="headerlink" title="服务器文件句柄设置"></a>服务器文件句柄设置</h4><p><strong>永久设置（所有机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# vi /etc/security/limits.conf </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> End of file</span></span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nofile 65536</span><br><span class="line">* soft nproc 131072</span><br><span class="line">* hard nproc 131072</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭当前的shell窗口，重新打开ulimit -a查看是否设置成功</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# ulimit -a</span><br><span class="line">core file size          (blocks, -c) 0</span><br><span class="line">data seg size           (kbytes, -d) unlimited</span><br><span class="line">scheduling priority             (-e) 0</span><br><span class="line">file size               (blocks, -f) unlimited</span><br><span class="line">pending signals                 (-i) 31116</span><br><span class="line">max locked memory       (kbytes, -l) 64</span><br><span class="line">max memory size         (kbytes, -m) unlimited</span><br><span class="line">open files                      (-n) 65536</span><br><span class="line">pipe size            (512 bytes, -p) 8</span><br><span class="line">POSIX message queues     (bytes, -q) 819200</span><br><span class="line">real-time priority              (-r) 0</span><br><span class="line">stack size              (kbytes, -s) 8192</span><br><span class="line">cpu time               (seconds, -t) unlimited</span><br><span class="line">max user processes              (-u) 131072</span><br><span class="line">virtual memory          (kbytes, -v) unlimited</span><br><span class="line">file locks                      (-x) unlimited</span><br></pre></td></tr></table></figure>
+
+<h4 id="禁用SELinux和PackageKit将检查umask值"><a href="#禁用SELinux和PackageKit将检查umask值" class="headerlink" title="禁用SELinux和PackageKit将检查umask值"></a>禁用SELinux和PackageKit将检查umask值</h4><p><strong>禁用selinux（所有机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# vi /etc/selinux/config </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This file controls the state of SELinux on the system.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> SELINUX= can take one of these three values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     enforcing - SELinux security policy is enforced.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     permissive - SELinux prints warnings instead of enforcing.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     disabled - No SELinux policy is loaded.</span></span><br><span class="line">SELINUX=disabled</span><br><span class="line"><span class="meta">#</span><span class="bash"> SELINUXTYPE= can take one of three values:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     targeted - Targeted processes are protected,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     minimum - Modification of targeted policy. Only selected processes are protected.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     mls - Multi Level Security protection.</span></span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure>
+
+<p>主要是把SELINUX改为disabled</p>
+<p><strong>umask值（所有机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# echo umask 0022 &gt;&gt; /etc/profile</span><br><span class="line">[root@master ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务器免登录"><a href="#服务器免登录" class="headerlink" title="服务器免登录"></a>服务器免登录</h4><p><strong>配置<code>所有节点</code>无密码登录到其他节点</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# ssh-keygen -t rsa		## 一路回车</span><br><span class="line">[root@master ~]# chmod 700 ~/.ssh</span><br><span class="line">[root@master ~]# ssh-copy-id slave1</span><br><span class="line">[root@master ~]# ssh-copy-id slave2</span><br><span class="line">[root@master ~]# ssh-copy-id master</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试所有机器是否SSH免登录互通</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# ssh slave1 date; ssh slave2 date; ssh master date;</span><br><span class="line">Wed Jun 30 02:56:40 CST 2021</span><br><span class="line">Wed Jun 30 02:56:40 CST 2021</span><br><span class="line">Wed Jun 30 02:56:40 CST 2021</span><br></pre></td></tr></table></figure>
+
+<p><strong>将创建的密钥拷贝出来</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# mkdir /home/tools				## 所有节点</span><br><span class="line">[root@master ~]# cp /root/.ssh/id_rsa /home/tools/</span><br><span class="line">[root@master ~]# ls /home/tools/</span><br><span class="line">id_rsa</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：后面ambari安装的时候需要上传这个密钥，所以需要先拷贝出来。</p>
+</blockquote>
+<h4 id="挂载本地Yum源配置"><a href="#挂载本地Yum源配置" class="headerlink" title="挂载本地Yum源配置"></a>挂载本地Yum源配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1）将CentOS7的ISO文件挂载到本地（所有机器）</span><br><span class="line">[root@localhost ~]# mkdir /mnt/cdrom</span><br><span class="line">[root@localhost ~]# mount /dev/cdrom /mnt/cdrom </span><br><span class="line"></span><br><span class="line">2）创建yum本地源，并将系统自带的迁移到tmp目录中（所有机器）</span><br><span class="line">[root@localhost ~]# mv /etc/yum.repos.d/* /tmp/</span><br><span class="line">[root@localhost ~]# touch /etc/yum.repos.d/local.repo</span><br><span class="line">[root@localhost ~]# cat &lt;&lt; EOF &gt; /etc/yum.repos.d/local.repo</span><br><span class="line"></span><br><span class="line">[LocalRepo]</span><br><span class="line">name=LocalRepository</span><br><span class="line">baseurl=file:///mnt/cdrom</span><br><span class="line">enable=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">3）重置yum源</span><br><span class="line">[root@localhost ~]# yum clean all</span><br><span class="line">[root@localhost ~]# yum makecache</span><br><span class="line">[root@localhost ~]# yum repolist</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统安装软件"><a href="#系统安装软件" class="headerlink" title="系统安装软件"></a>系统安装软件</h3><h4 id="服务器时间同步"><a href="#服务器时间同步" class="headerlink" title="服务器时间同步"></a>服务器时间同步</h4><p><strong>安装ntp服务（所有机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master cdrom]# yum -y install ntp</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置master为主服务器，开启nptd服务</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# vi /etc/ntp.conf </span><br></pre></td></tr></table></figure>
+
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/3.png" style="zoom: 67%;" />
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 红色框内是需要修改的部分：</span></span><br><span class="line">restrict 192.168.0.0 mask 255.255.255.0</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use public servers from the pool.ntp.org project.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please consider joining the pool (http://www.pool.ntp.org/join.html).</span></span><br><span class="line"><span class="meta">#</span><span class="bash">server 0.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash">server 1.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash">server 2.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash">server 3.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 新增</span></span><br><span class="line">server 127.127.1.0</span><br><span class="line">fudge 127.127.1.0 stratum 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>重启服务</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# systemctl restart ntpd.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>开机自启动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# systemctl enable ntpd.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>子节点设置同步（子节点）</strong></p>
+<p>主服务器开启ntp服务器以后，子节点就不需要开启了，因为当server与client之间的时间误差过大时（可能是1000秒），处于对修改时间可能对系统和应用带来不可预知的问题，NTP将停止时间同步！所以如果发现NTP启动之后时间并不进行同步时，应该考虑到可能是时间差过大引起的，此时需要先手动进行时间同步！所以直接使用定时手动同步的方式就可以了。</p>
+<p>添加任务计划实时同步master服务器时间：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@slave1 ~]# crontab -e</span><br><span class="line">0-59/10 * * * * /usr/sbin/ntpdate master</span><br><span class="line">[root@slave1 ~]# crontab -l</span><br><span class="line">0-59/10 * * * * /usr/sbin/ntpdate master</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Master时间为当前时间</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# date -s &#x27;2021-06-30 13:06&#x27;</span><br><span class="line">Wed Jun 30 13:06:00 CST 2021</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除默认JDK"><a href="#删除默认JDK" class="headerlink" title="删除默认JDK"></a>删除默认JDK</h4><p><strong>删除openJDK（所有节点）</strong></p>
+<p>一些开发版的centos会自带jdk，我们一般用自己的jdk，把自带的删除。先看看有没有安装java -version</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# java -version</span><br><span class="line">openjdk version &quot;1.8.0_101&quot;</span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_101-b13)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.101-b13, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<p><strong>查找他们的安装位置（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# rpm -qa | grep java</span><br><span class="line">java-1.8.0-openjdk-headless-1.8.0.101-3.b13.el7_2.x86_64</span><br><span class="line">tzdata-java-2016f-1.el7.noarch</span><br><span class="line">java-1.8.0-openjdk-1.8.0.101-3.b13.el7_2.x86_64</span><br><span class="line">javapackages-tools-3.4.1-11.el7.noarch</span><br><span class="line">java-1.7.0-openjdk-headless-1.7.0.111-2.6.7.2.el7_2.x86_64</span><br><span class="line">java-1.7.0-openjdk-1.7.0.111-2.6.7.2.el7_2.x86_64</span><br><span class="line">python-javapackages-3.4.1-11.el7.noarch</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除全部，noarch文件可以不用删除（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.101-3.b13.el7_2.x86_64</span><br><span class="line">[root@master ~]# rpm -e --nodeps java-1.8.0-openjdk-1.8.0.101-3.b13.el7_2.x86_64</span><br><span class="line">[root@master ~]# rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.111-2.6.7.2.el7_2.x86_64</span><br><span class="line">[root@master ~]# rpm -e --nodeps java-1.7.0-openjdk-1.7.0.111-2.6.7.2.el7_2.x86_64</span><br></pre></td></tr></table></figure>
+
+<p><strong>检查有没有删除</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# java -version</span><br><span class="line">-bash: /usr/bin/java: 没有那个文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>注：如果还没有删除，则用<code>yum -y remove</code>去删除他们</p>
+<h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><p><strong>上传jdk到Master的/home/tools/目录下</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# tar -zxvf jdk-8u291-linux-x64.tar.gz</span><br><span class="line">[root@master tools]# rm -rf jdk-8u291-linux-x64.tar.gz</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 把JDK复制到其他机器</span></span></span><br><span class="line">[root@master tools]# scp -r /home/tools/jdk1.8.0_291 root@slave1:/home/tools/jdk1.8.0_291</span><br><span class="line">[root@master tools]# scp -r /home/tools/jdk1.8.0_291 root@slave2:/home/tools/jdk1.8.0_291</span><br></pre></td></tr></table></figure>
+
+<p><strong>进入配置JAVA环境（所以机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line">JAVA_HOME=/home/tools/jdk1.8.0_291</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+
+<p><strong>使环境变量生效（所以机器）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试JDK</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# java -version</span><br><span class="line">java version &quot;1.8.0_291&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_291-b10)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.291-b10, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Httpd"><a href="#安装Httpd" class="headerlink" title="安装Httpd"></a>安装Httpd</h4><p><strong>Master安装httpd</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# yum -y install httpd</span><br><span class="line">[root@master tools]# service httpd restart</span><br><span class="line">[root@master tools]# chkconfig httpd on</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h4><p><strong>上传mysql安装包到/home/tools中（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 解压mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz</span></span><br><span class="line">[root@master tools]# tar -zxvf mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 迁移Mysql</span></span><br><span class="line">[root@master tools]# mv mysql-5.7.17-linux-glibc2.5-x86_64 /usr/local/mysql</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建mysql用户组及用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# groupadd mysql</span><br><span class="line">[root@master tools]# useradd -r -g mysql mysql</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改Mysql文件夹用户组及用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# cd /usr/local/</span><br><span class="line">[root@master local]# chown -R mysql:mysql mysql</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建Mysql数据目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master local]# mkdir -p /usr/local/mysql/data</span><br><span class="line">[root@master local]# chown -R mysql:mysql data</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置Mysql</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# cd /usr/local/mysql/</span><br><span class="line">[root@master mysql]# cp ./support-files/my-default.cnf /etc/my.cnf</span><br><span class="line">[root@master mysql]# vi /etc/my.cnf</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Remove leading <span class="comment"># and set to the amount of RAM for the most important data</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cache <span class="keyword">in</span> MySQL. Start at 70% of total RAM <span class="keyword">for</span> dedicated server, <span class="keyword">else</span> 10%.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> innodb_buffer_pool_size = 128M</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Remove leading <span class="comment"># to turn on a very important data integrity option: logging</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> changes to the binary <span class="built_in">log</span> between backups.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> log_bin</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> These are commonly <span class="built_in">set</span>, remove the <span class="comment"># and set as required.</span></span></span><br><span class="line">basedir = /usr/local/mysql</span><br><span class="line">datadir = /usr/local/mysql/data</span><br><span class="line">port = 3306</span><br><span class="line"><span class="meta">#</span><span class="bash"> server_id = .....</span></span><br><span class="line">socket = /tmp/mysql.sock</span><br><span class="line">character-set-server = utf8</span><br><span class="line">log_error = error.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> socket = .....</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Remove leading <span class="comment"># to set options mainly useful for reporting servers.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The server defaults are faster <span class="keyword">for</span> transactions and fast SELECTs.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Adjust sizes as needed, experiment to find the optimal values.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> join_buffer_size = 128M</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sort_buffer_size = 2M</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> read_rnd_buffer_size = 2M</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span></span><br><span class="line">sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTIO</span><br><span class="line">skip_ssl</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化Mysql</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# yum install perl			# mysql依赖</span><br><span class="line">[root@master mysql]# yum install autoconf		# mysql依赖</span><br><span class="line">[root@master mysql]# ./bin/mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Mysql开机启动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# cp /usr/local/mysql/support-files/mysql.server /etc/rc.d/init.d/mysqld</span><br><span class="line">[root@master mysql]# chmod +x /etc/rc.d/init.d/mysqld </span><br><span class="line">[root@master mysql]# chkconfig --add mysqld</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动Mysql</span></span><br><span class="line">[root@master mysql]# service mysqld start</span><br></pre></td></tr></table></figure>
+
+<p><strong>终端使用mysql命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# vi ~/.bash_profile </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加入</span></span><br><span class="line">export PATH=$PATH:/usr/local/mysql/bin</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加载</span></span><br><span class="line">[root@master mysql]# source ~/.bash_profile </span><br></pre></td></tr></table></figure>
+
+<h4 id="安装ZIP和UNZIP"><a href="#安装ZIP和UNZIP" class="headerlink" title="安装ZIP和UNZIP"></a>安装ZIP和UNZIP</h4><p><strong>上传zip和unzip安装包到/home/tools中（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# rpm -ivh zip-3.0-11.el7.x86_64.rpm</span><br><span class="line">[root@master tools]# rpm -ivh unzip-6.0-21.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装libtirpc"><a href="#安装libtirpc" class="headerlink" title="安装libtirpc"></a>安装libtirpc</h4><p><strong>上传libtirpc-devel安装包到/home/tools中（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# yum install -y libtirpc</span><br><span class="line">[root@master tools]# rpm -ivh libtirpc-devel-0.2.4-0.15.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装Kerberos"><a href="#安装Kerberos" class="headerlink" title="安装Kerberos"></a>安装Kerberos</h4><p><strong>在Master中安装软件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# yum install -y krb5-server krb5-workstation</span><br></pre></td></tr></table></figure>
+
+<p><strong>编辑文件/etc/krb5.conf</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# vi /etc/krb5.conf</span><br><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">  renew_lifetime = 7d</span><br><span class="line">  forwardable = true</span><br><span class="line">  default_realm = BIGDATA.COM			# 这个名字必须和realms名字相同</span><br><span class="line">  ticket_lifetime = 24h</span><br><span class="line">  dns_lookup_realm = false</span><br><span class="line">  dns_lookup_kdc = false</span><br><span class="line">  default_ccache_name = /tmp/krb5cc_%&#123;uid&#125;</span><br><span class="line"><span class="meta">  #</span><span class="bash">default_tgs_enctypes = aes des3-cbc-sha1 rc4 des-cbc-md5</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">default_tkt_enctypes = aes des3-cbc-sha1 rc4 des-cbc-md5</span></span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">  default = FILE:/var/log/krb5kdc.log</span><br><span class="line">  admin_server = FILE:/var/log/kadmind.log</span><br><span class="line">  kdc = FILE:/var/log/krb5kdc.log</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">  BIGDATA.COM = &#123;</span><br><span class="line">    admin_server = master				# 主机名</span><br><span class="line">    kdc = master						# 主机名</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>编辑文件/var/kerberos/krb5kdc/kdc.conf</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# vi /var/kerberos/krb5kdc/kdc.conf</span><br><span class="line"></span><br><span class="line">[kdcdefaults]</span><br><span class="line"> kdc_ports = 88</span><br><span class="line"> kdc_tcp_ports = 88</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line"> BIGDATA.COM = &#123;							# 名字和krb5.conf中的realms名字相同</span><br><span class="line"><span class="meta">  #</span><span class="bash">master_key_type = aes256-cts</span></span><br><span class="line">  acl_file = /var/kerberos/krb5kdc/kadm5.acl</span><br><span class="line">  dict_file = /usr/share/dict/words</span><br><span class="line">  admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab</span><br><span class="line">  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal camellia256-cts:normal camellia128-cts:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>编辑文件/var/kerberos/krb5kdc/kadm5.acl</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# vi /var/kerberos/krb5kdc/kadm5.acl</span><br><span class="line">*/admin@BIGDATA.COM     *</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化数据库</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kdb5_util create -s -r BIGDATA.COM</span><br><span class="line">Loading random data</span><br><span class="line">Initializing database &#x27;/var/kerberos/krb5kdc/principal&#x27; for realm &#x27;BIGDATA.COM&#x27;,</span><br><span class="line">master key name &#x27;K/M@BIGDATA.COM&#x27;</span><br><span class="line">You will be prompted for the database Master Password.</span><br><span class="line">It is important that you NOT FORGET this password.</span><br><span class="line">Enter KDC database master key: 								# 数据库密码，可以回车</span><br><span class="line">Re-enter KDC database master key to verify: 				# 数据库密码，可以回车</span><br><span class="line"></span><br><span class="line">[root@master ~]# ll /var/kerberos/krb5kdc/				# 生成的文件</span><br><span class="line">total 24</span><br><span class="line">-rw-------. 1 root root   22 Jul  7 00:22 kadm5.acl</span><br><span class="line">-rw-------. 1 root root  451 Jul  7 00:22 kdc.conf</span><br><span class="line">-rw-------. 1 root root 8192 Jul  7 00:23 principal</span><br><span class="line">-rw-------. 1 root root 8192 Jul  7 00:23 principal.kadm5</span><br><span class="line">-rw-------. 1 root root    0 Jul  7 00:23 principal.kadm5.lock</span><br><span class="line">-rw-------. 1 root root    0 Jul  7 00:23 principal.ok</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化KDC超级管理员</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kadmin.local</span><br><span class="line">Authenticating as principal root/admin@BIGDATA.COM with password.</span><br><span class="line">kadmin.local:  addprinc admin/admin				# 新增admin/admin用户</span><br><span class="line">WARNING: no policy specified for admin/admin@BIGDATA.COM; defaulting to no policy</span><br><span class="line">Enter password for principal &quot;admin/admin@BIGDATA.COM&quot;: 					# 输入超级管理员密码</span><br><span class="line">Re-enter password for principal &quot;admin/admin@BIGDATA.COM&quot;: 					# 输入超级管理员密码</span><br><span class="line">Principal &quot;admin/admin@BIGDATA.COM&quot; created.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>启动kerberos</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# systemctl start krb5kdc</span><br><span class="line">[root@master ~]# systemctl start kadmin</span><br><span class="line">[root@master ~]# systemctl enable krb5kdc			# 开机启动</span><br><span class="line">[root@master ~]# systemctl enable kadmin			# 开机启动</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装Ambari"><a href="#安装Ambari" class="headerlink" title="安装Ambari"></a>安装Ambari</h2><h3 id="制作本地Ambari源"><a href="#制作本地Ambari源" class="headerlink" title="制作本地Ambari源"></a>制作本地Ambari源</h3><p><strong>将ambari、hdp、hdp-utils放到/var/www/html/hdp目录下，解压（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@master tools]# mkdir -p /var/www/html/hdp</span><br><span class="line">[root@master tools]# cd /var/www/html/hdp</span><br><span class="line">[root@master hdp]# ll</span><br><span class="line">total 10844988</span><br><span class="line">-rw-r--r--. 1 root root 1947685893 Jun 30 16:55 ambari-2.7.3.0-centos7.tar.gz</span><br><span class="line">-rw-r--r--. 1 root root 9066967592 Jun 30 17:41 HDP-3.1.0.0-centos7-rpm.tar.gz</span><br><span class="line">-rw-r--r--. 1 root root   90606616 Jun 30 17:35 HDP-UTILS-1.1.0.22-centos7.tar.gz</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">[root@master hdp]# tar -zxvf ambari-2.7.3.0-centos7.tar.gz</span><br><span class="line">[root@master hdp]# tar -zxvf HDP-3.1.0.0-centos7-rpm.tar.gz</span><br><span class="line">[root@master hdp]# mkdir HDP-UTILS-1.1.0.22</span><br><span class="line">[root@master hdp]# tar -zxvf HDP-UTILS-1.1.0.22-centos7.tar.gz -C /var/www/html/hdp/HDP-UTILS-1.1.0.22/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除所有的tar.gz包</span></span><br><span class="line">[root@master hdp]# rm -rf ambari-2.7.3.0-centos7.tar.gz HDP-3.1.0.0-centos7-rpm.tar.gz HDP-UTILS-1.1.0.22-centos7.tar.gz</span><br><span class="line"></span><br><span class="line">[root@master hdp]# ll</span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x. 3 root root  21 Jun 30 17:46 ambari</span><br><span class="line">drwxr-xr-x. 3 1001 users 21 Dec 11  2018 HDP</span><br><span class="line">drwxr-xr-x. 3 root root  23 Jul  1 09:43 HDP-UTILS-1.1.0.22</span><br></pre></td></tr></table></figure>
+
+<p>现在可以通过访问<a target="_blank" rel="noopener" href="http://192.168.1.121/hdp/%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E8%83%BD%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE">http://192.168.1.121/hdp/查看是否能成功访问</a></p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/5.png" style="zoom: 67%;" />
+
+<p><strong>安装本地源制作相关工具（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# yum install yum-utils createrepo yum-plugin-priorities -y</span><br><span class="line">[root@master hdp]# createrepo  ./</span><br><span class="line">Spawning worker 0 with 29 pkgs</span><br><span class="line">Spawning worker 1 with 29 pkgs</span><br><span class="line">Spawning worker 2 with 29 pkgs</span><br><span class="line">Spawning worker 3 with 29 pkgs</span><br><span class="line">Spawning worker 4 with 29 pkgs</span><br><span class="line">Spawning worker 5 with 29 pkgs</span><br><span class="line">Spawning worker 6 with 28 pkgs</span><br><span class="line">Spawning worker 7 with 28 pkgs</span><br><span class="line">Workers Finished</span><br><span class="line">Saving Primary metadata</span><br><span class="line">Saving file lists metadata</span><br><span class="line">Saving other metadata</span><br><span class="line">Generating sqlite DBs</span><br><span class="line">Sqlite DBs complete</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Ambari的yum源（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# vi ambari/centos7/2.7.3.0-139/ambari.repo </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">VERSION_NUMBER=2.7.3.0-139</span></span><br><span class="line">[ambari-2.7.3.0]</span><br><span class="line"><span class="meta">#</span><span class="bash">json.url = http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json</span></span><br><span class="line">name=ambari Version - ambari-2.7.3.0</span><br><span class="line"><span class="meta">#</span><span class="bash">baseurl=http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0</span></span><br><span class="line">baseurl=http://192.168.1.121/hdp/ambari/centos7/2.7.3.0-139</span><br><span class="line">gpgcheck=1</span><br><span class="line"><span class="meta">#</span><span class="bash">gpgkey=http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span></span><br><span class="line">gpgkey=http://192.168.1.121/hdp/ambari/centos7/2.7.3.0-139/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置HDP的yum源（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# vi HDP/centos7/3.1.0.0-78/hdp.repo </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">VERSION_NUMBER=3.1.0.0-78</span></span><br><span class="line">[HDP-3.1.0.0]</span><br><span class="line">name=HDP Version - HDP-3.1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash">baseurl=http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0</span></span><br><span class="line">baseurl=http://192.168.1.121/hdp/HDP/centos7/3.1.0.0-78</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://192.168.1.121/hdp/HDP/centos7/3.1.0.0-78/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[HDP-UTILS-1.1.0.22]</span><br><span class="line">name=HDP-UTILS Version - HDP-UTILS-1.1.0.22</span><br><span class="line"><span class="meta">#</span><span class="bash">baseurl=http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.22/repos/centos7</span></span><br><span class="line">baseurl=http://192.168.1.121/hdp/HDP-UTILS-1.1.0.22/HDP-UTILS/centos7/1.1.0.22</span><br><span class="line">gpgcheck=1</span><br><span class="line"><span class="meta">#</span><span class="bash">gpgkey=http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span></span><br><span class="line">gpgkey=http://192.168.1.121/hdp/HDP-UTILS-1.1.0.22/HDP-UTILS/centos7/1.1.0.22/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>把设置好的yum文件，复制到/etc/yum.repos.d/（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# cp ambari/centos7/2.7.3.0-139/ambari.repo /etc/yum.repos.d/</span><br><span class="line">[root@master hdp]# cp HDP/centos7/3.1.0.0-78/hdp.repo /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
+
+<p><strong>分发yum文件到slave1和slave2中</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# scp ambari/centos7/2.7.3.0-139/ambari.repo root@slave1:/etc/yum.repos.d/</span><br><span class="line">ambari.repo                                                                                                                                                                    100%  529   925.5KB/s   00:00    </span><br><span class="line">[root@master hdp]# scp ambari/centos7/2.7.3.0-139/ambari.repo root@slave2:/etc/yum.repos.d/</span><br><span class="line">ambari.repo       </span><br><span class="line"></span><br><span class="line">[root@master hdp]# scp HDP/centos7/3.1.0.0-78/hdp.repo root@slave1:/etc/yum.repos.d/</span><br><span class="line">hdp.repo                                                                                                                                                                       100%  801     1.3MB/s   00:00    </span><br><span class="line">[root@master hdp]# scp HDP/centos7/3.1.0.0-78/hdp.repo root@slave2:/etc/yum.repos.d/</span><br><span class="line">hdp.repo    </span><br></pre></td></tr></table></figure>
+
+<p><strong>把设置好的yum重置（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# yum clean all</span><br><span class="line">[root@master hdp]# yum makecache</span><br><span class="line">[root@master hdp]# yum repolist</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置Mysql"><a href="#设置Mysql" class="headerlink" title="设置Mysql"></a>设置Mysql</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@master mysql]# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 4</span><br><span class="line">Server version: 5.7.17 MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 设置登录密码</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">set</span> password <span class="keyword">for</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>=password(<span class="string">&#x27;000000&#x27;</span>);</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 添加远程登录用户</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all privileges on *.* to <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified by <span class="string">&#x27;000000&#x27;</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>root远程连接赋所有权限，grant all privileges on <em>.</em> to ‘root‘@’%’ with grant option;</p>
+</blockquote>
+<h3 id="安装配置Ambari"><a href="#安装配置Ambari" class="headerlink" title="安装配置Ambari"></a>安装配置Ambari</h3><p><strong>安装Ambari-Server（Master）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# yum install ambari-server</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建Ambari-Server数据表和用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@master hdp]# mysql -u root -p</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 创建表</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE DATABASE ambari DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span></span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use ambari;</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 创建ambari用户</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;ambari&#x27;</span>;</span></span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;ambari&#x27;</span>;</span></span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;master&#x27;</span> IDENTIFIED BY <span class="string">&#x27;ambari&#x27;</span>;</span></span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 授权</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span>  </span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span>  </span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;ambari&#x27;</span>@<span class="string">&#x27;master&#x27;</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> FLUSH PRIVILEGES;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 将SQL脚本加载到ambari数据库中</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">source</span> /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql</span> </span><br></pre></td></tr></table></figure>
+
+<p><strong>建立mysql与ambari-server的连接</strong></p>
+<p>上传mysql-connector-java-5.1.47.jar到/home/tools中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# mkdir /usr/share/java</span><br><span class="line">[root@master ~]# cp /home/tools/mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar</span><br><span class="line">[root@master ~]# cp /usr/share/java/mysql-connector-java.jar /var/lib/ambari-server/resources/mysql-connector-java.jar</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化配置Ambari并启动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# ambari-server setup</span><br><span class="line">Using python  /usr/bin/python</span><br><span class="line">Setup ambari-server</span><br><span class="line">Checking SELinux...</span><br><span class="line">SELinux status is &#x27;enabled&#x27;</span><br><span class="line">SELinux mode is &#x27;permissive&#x27;</span><br><span class="line">WARNING: SELinux is set to &#x27;permissive&#x27; mode and temporarily disabled.		# 检查防火墙是否关闭</span><br><span class="line">OK to continue [y/n] (y)? y</span><br><span class="line">Customize user account for ambari-server daemon [y/n] (n)? y				# 提示是否自定义设置</span><br><span class="line">Enter user account for ambari-server daemon (root):							# 如果直接回车就是默认选择root用户</span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Checking firewall status...</span><br><span class="line">Checking JDK...</span><br><span class="line">[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8</span><br><span class="line">[2] Custom JDK</span><br><span class="line">==============================================================================</span><br><span class="line">Enter choice (1): 2															# 设置JDK</span><br><span class="line">WARNING: JDK must be installed on all hosts and JAVA_HOME must be valid on all hosts.</span><br><span class="line">WARNING: JCE Policy files are required for configuring Kerberos security. If you plan to use Kerberos,please make sure JCE Unlimited Strength Jurisdiction Policy Files are valid on all hosts.</span><br><span class="line">Path to JAVA_HOME: /home/tools/jdk1.8.0_291									# JAVA_HOME地址</span><br><span class="line">Validating JDK on Ambari Server...done.</span><br><span class="line">Check JDK version for Ambari Server...</span><br><span class="line">JDK version found: 8</span><br><span class="line">Minimum JDK version is 8 for Ambari. Skipping to setup different JDK for Ambari Server.</span><br><span class="line">Checking GPL software agreement...</span><br><span class="line">GPL License for LZO: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</span><br><span class="line">Enable Ambari Server to download and install GPL Licensed LZO packages [y/n] (n)? </span><br><span class="line">Completing setup...</span><br><span class="line">Configuring database...</span><br><span class="line">Enter advanced database configuration [y/n] (n)? y							# 是否自定义配置数据库</span><br><span class="line">Configuring database...</span><br><span class="line">==============================================================================</span><br><span class="line">Choose one of the following options:</span><br><span class="line">[1] - PostgreSQL (Embedded)</span><br><span class="line">[2] - Oracle</span><br><span class="line">[3] - MySQL / MariaDB</span><br><span class="line">[4] - PostgreSQL</span><br><span class="line">[5] - Microsoft SQL Server (Tech Preview)</span><br><span class="line">[6] - SQL Anywhere</span><br><span class="line">[7] - BDB</span><br><span class="line">==============================================================================</span><br><span class="line">Enter choice (1): 3															# Mysql</span><br><span class="line">Hostname (localhost): 														# Mysql地址</span><br><span class="line">Port (3306): 																# Mysql端口</span><br><span class="line">Database name (ambari): 													# 数据库名</span><br><span class="line">Username (ambari): 															# 用户名</span><br><span class="line">Enter Database Password (bigdata): 											# 密码</span><br><span class="line">Re-enter password: 															# 再次输入密码</span><br><span class="line">Configuring ambari database...</span><br><span class="line">Should ambari use existing default jdbc /usr/share/java/mysql-connector-java.jar [y/n] (y)? </span><br><span class="line">Configuring remote database connection properties...</span><br><span class="line">WARNING: Before starting Ambari Server, you must run the following DDL directly from the database shell to create the schema: /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql</span><br><span class="line">Proceed with configuring remote database connection properties [y/n] (y)? </span><br><span class="line">Extracting system views...</span><br><span class="line">ambari-admin-2.7.3.0.139.jar</span><br><span class="line">....</span><br><span class="line">Ambari repo file contains latest json url http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json, updating stacks repoinfos with it...</span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Ambari Server &#x27;setup&#x27; completed successfully.</span><br></pre></td></tr></table></figure>
+
+<p><strong>启动日志查看</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# ambari-server start</span><br><span class="line">Using python  /usr/bin/python</span><br><span class="line">Starting ambari-server</span><br><span class="line">Ambari Server running with administrator privileges.</span><br><span class="line">Organizing resource files at /var/lib/ambari-server/resources...</span><br><span class="line">Ambari database consistency check started...</span><br><span class="line">Server PID at: /var/run/ambari-server/ambari-server.pid</span><br><span class="line">Server out at: /var/log/ambari-server/ambari-server.out</span><br><span class="line">Server log at: /var/log/ambari-server/ambari-server.log</span><br><span class="line">Waiting for server start.................</span><br><span class="line">Server started listening on 8080</span><br><span class="line"></span><br><span class="line">DB configs consistency check: no errors and warnings were found.</span><br><span class="line">Ambari Server &#x27;start&#x27; completed successfully.</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可通过192.168.1.121:8080查看ambari界面</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过tail查看日志</span></span><br><span class="line">[root@master ~]# tail -f /var/log/ambari-server/ambari-server.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装Ambari-Agent并设置自启动（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# yum -y install ambari-agent</span><br><span class="line">[root@master ~]# chkconfig --add ambari-agent</span><br></pre></td></tr></table></figure>
+
+<h3 id="可视化配置Ambari"><a href="#可视化配置Ambari" class="headerlink" title="可视化配置Ambari"></a>可视化配置Ambari</h3><p><strong>访问Ambari web页面</strong></p>
+<blockquote>
+<p>默认端口8080，Username：admin；Password：admin；<a target="_blank" rel="noopener" href="http://192.168.1.121:8080/">http://192.168.1.121:8080</a></p>
+</blockquote>
+<p><strong>开始集群安装</strong></p>
+<p>点击启用安装向导，只有在没有安装过HDP集群才有这个界面</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/6.png" style="zoom: 67%;" />
+
+<p>输入集群名称</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/7.png" style="zoom: 67%;" />
+
+<p>设置HDP版本和安装源</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/8.png" style="zoom: 67%;" />
+
+<p>设置集群域的名称和上传密钥</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/9.png" style="zoom: 67%;" />
+
+<p>集群注册</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/10.png" style="zoom: 67%;" />
+
+<p>安装基础插件HDFS、YARN + MapReduce2、Zookeeper、Ambari Metrics、SmartSense</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/11.png" style="zoom: 67%;" />
+
+<p>选择节点安装服务</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/12.png" style="zoom: 67%;" />
+
+<p>集群节点选择配置《DataNode，NodeManager，Client》</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/13.png" style="zoom: 67%;" />
+
+<p>设置密码</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/14.png" style="zoom: 67%;" />
+
+<p>组件地址配置</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/15.png" style="zoom: 67%;" />
+
+<p>组件用户名配置</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/16.png" style="zoom: 67%;" />
+
+<p>CPU、内存资源配置</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/17.png" style="zoom: 67%;" />
+
+<p>查看安装信息，点击DEPLOY进行安装</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/18.png" style="zoom: 67%;" />
+
+<h3 id="Ambari安装问题"><a href="#Ambari安装问题" class="headerlink" title="Ambari安装问题"></a>Ambari安装问题</h3><h4 id="HDP的本地yum源未设置成功"><a href="#HDP的本地yum源未设置成功" class="headerlink" title="HDP的本地yum源未设置成功"></a>HDP的本地yum源未设置成功</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">RuntimeError: Failed to execute command &#x27;/usr/bin/yum -y install hdp-select&#x27;, exited with code &#x27;1&#x27;, message: &#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> One of the configured repositories failed (Unknown),</span><br><span class="line"></span><br><span class="line"> and yum doesn&#x27;t have enough cached data to continue. At this point the only</span><br><span class="line"></span><br><span class="line"> safe thing yum can do is fail. There are a few ways to work &quot;fix&quot; this:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     1. Contact the upstream for the repository and get them to fix the problem.</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决（所有节点）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入yum.repos.d</span></span><br><span class="line">[root@master ~]# cd /etc/yum.repos.d/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看，多了一个ambari-hdp-1.repo文件</span></span><br><span class="line">[root@master yum.repos.d]# ll</span><br><span class="line">total 16</span><br><span class="line">-rw-r--r--. 1 root root 171 Jul  1 17:50 ambari-hdp-1.repo</span><br><span class="line">-rw-r--r--. 1 root root 529 Jul  1 17:29 ambari.repo</span><br><span class="line">-rw-r--r--. 1 root root 801 Jul  1 12:53 hdp.repo</span><br><span class="line">-rw-r--r--. 1 root root 132 Jun 30 01:30 local.repo</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看ambari-hdp-1.repo内容，发现本地repo没有设置进去</span></span><br><span class="line">[root@master yum.repos.d]# cat ambari-hdp-1.repo</span><br><span class="line">[HDP-3.1-repo-1]</span><br><span class="line">name=HDP-3.1-repo-1</span><br><span class="line">baseurl=</span><br><span class="line"></span><br><span class="line">path=/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">[HDP-UTILS-1.1.0.22-repo-1]</span><br><span class="line">name=HDP-UTILS-1.1.0.22-repo-1</span><br><span class="line">baseurl=</span><br><span class="line"></span><br><span class="line">path=/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除所有节点的ambari-hdp-1.repo文件</span></span><br><span class="line">[root@master yum.repos.d]# rm -rf /etc/yum.repos.d/ambari-hdp-1.repo</span><br></pre></td></tr></table></figure>
+
+<p>重新点击<code>Select Version</code>，重新将<code>HDP-3.1</code>和<code>HDP-UTILS-1.1.0.22</code>设置</p>
+<img src="./images/8.png" style="zoom:50%;" />
+
+
+
+<h3 id="Ambari组件安装问题"><a href="#Ambari组件安装问题" class="headerlink" title="Ambari组件安装问题"></a>Ambari组件安装问题</h3><h4 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h4><ol>
+<li> Error running Client；org.apache.hadoop.security.AccessControlException: Permission denied: user=ambari-qa, access=EXECUTE, inode=”/user”:hdfs:hdfs:drwxrwx—</li>
+</ol>
+<blockquote>
+<p>解决：</p>
+<p>[root@slave2 ~]# su - hdfs</p>
+<p>[hdfs@slave2 ~]$ hdfs dfs -setfacl -m user:ambari-qa:rwx /user</p>
+</blockquote>
+<h4 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h4><ol>
+<li><p>resource_management.core.exceptions.Fail: Check db_connection_check was unsuccessful. Exit code: 1. Message: The MySQL JDBC driver has not been set. Please ensure that you have executed ‘ambari-server setup –jdbc-db=mysql –jdbc-driver=/usr/share/jdbc_driver’.</p>
+<blockquote>
+<p>解决：ambari-server setup –jdbc-db=mysql –jdbc-driver=/usr/share/java/mysql-connector-java.jar</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Ranger"><a href="#Ranger" class="headerlink" title="Ranger"></a>Ranger</h4><ol>
+<li><p>Specified key was too long; max key length is 767 bytes</p>
+<blockquote>
+<p>解决：Mysql 5.6数据库需要设置<code>set global innodb_file_format=BARRACUDA;</code>和<code>set global innodb_large_prefix=1;</code></p>
+</blockquote>
+</li>
+<li><p>If Ranger Hive Plugin is disabled. hive.security.authorization.manager needs to be set to org.apache.hadoop.hive.ql.security.authorization.plugin.sqlstd.SQLStdHiveAuthorizerFactory</p>
+<blockquote>
+<p>解决：在Hive配置中将hive.security.authorization.manager设置为 org.apache.hadoop.hive.ql.security.authorization.plugin.sqlstd.SQLStdHiveAuthorizerFactory</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Hbase"><a href="#Hbase" class="headerlink" title="Hbase"></a>Hbase</h4><ol>
+<li><p>Warning Ambari Metrics hbase_master_heapsize 896 Value is less than the recommended default of 1024. HBase Master Heap Size. In embedded mode, total heap size is sum of master and regionserver heap sizes.</p>
+<blockquote>
+<p>解决：在Ambari Metrics中将HBase Master Maximum Memory调整为1024</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Knox"><a href="#Knox" class="headerlink" title="Knox"></a>Knox</h4><ol>
+<li><p>dfs.permissions.enabled needs to be set to true if Ranger HDFS Plugin is enabled.</p>
+<blockquote>
+<p>解决：在HDFS中将dfs.permissions.enabled设置为true</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Atlas"><a href="#Atlas" class="headerlink" title="Atlas"></a>Atlas</h4><ol>
+<li><p>Atlas is configured to use the HBase installed in this cluster. If you would like Atlas to use another HBase instance, please configure this property and HBASE_CONF_DIR variable in atlas-env appropriately.</p>
+<blockquote>
+<p>解决：将atlas.graph.storage.hostname设置为对应服务器的IP或根据上实例中的master,slave1,slave2</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><ol>
+<li><p>Linux内核报错，Message from syslogd@slave2 at Jul  1 19:16:26 … kernel:NMI watchdog: BUG: soft lockup - CPU#7 stuck for 36s! [sshd:29945]</p>
+<blockquote>
+<p>解决：</p>
+<p>echo 30 &gt; /proc/sys/kernel/watchdog_thresh</p>
+<p>echo “kernel.watchdog_thresh=30” &gt;&gt; /etc/sysctl.conf</p>
+<p>sysctl -w kernel.watchdog_thresh=30</p>
+<p>sysctl -q vm.swappiness</p>
+</blockquote>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/bigdata/" rel="tag"># bigdata</a>
+              <a href="/tags/ambari/" rel="tag"># ambari</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/" rel="prev" title="K8S部署ELK管理集群日志（三）">
+                  <i class="fa fa-chevron-left"></i> K8S部署ELK管理集群日志（三）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/31/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

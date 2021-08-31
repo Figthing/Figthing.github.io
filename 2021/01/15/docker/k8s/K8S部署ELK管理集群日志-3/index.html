@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="上一篇文章讲述了k8s安装Kibana，本章接着讲解K8S安装Logstash与Filebeat  Logstash和Filebeat安装在使用k8s安装Logstash时，先在本地做测试配置，如果已经非常熟悉的，就可以将这个步骤省略 Windows安装Logstash 去官方下载Windows版本的Logstash，将ZIP文件解压，变成下面的目录结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8S部署ELK管理集群日志（三）">
+<meta property="og:url" content="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上一篇文章讲述了k8s安装Kibana，本章接着讲解K8S安装Logstash与Filebeat  Logstash和Filebeat安装在使用k8s安装Logstash时，先在本地做测试配置，如果已经非常熟悉的，就可以将这个步骤省略 Windows安装Logstash 去官方下载Windows版本的Logstash，将ZIP文件解压，变成下面的目录结构">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/2.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/3.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/1.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/2.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/3.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/4.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/6.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/7.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/8.png">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/9.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/5.png">
+<meta property="article:published_time" content="2021-01-15T15:29:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="k8s">
+<meta property="article:tag" content="elk">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/1.png">
+
+
+<link rel="canonical" href="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/","path":"2021/01/15/docker/k8s/K8S部署ELK管理集群日志-3/","title":"K8S部署ELK管理集群日志（三）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>K8S部署ELK管理集群日志（三） | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Logstash%E5%92%8CFilebeat%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Logstash和Filebeat安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E5%AE%89%E8%A3%85Logstash"><span class="nav-number">1.1.</span> <span class="nav-text">Windows安装Logstash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E5%AE%89%E8%A3%85Filebeat"><span class="nav-number">1.2.</span> <span class="nav-text">Windows安装Filebeat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E6%B5%8B%E8%AF%95ELK"><span class="nav-number">1.3.</span> <span class="nav-text">Windows测试ELK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K8s%E5%AE%89%E8%A3%85Logstash%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.</span> <span class="nav-text">K8s安装Logstash安装</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          K8S部署ELK管理集群日志（三）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-15 15:29:00" itemprop="dateCreated datePublished" datetime="2021-01-15T15:29:00+00:00">2021-01-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/elk/" itemprop="url" rel="index"><span itemprop="name">elk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>上一篇文章讲述了k8s安装Kibana，本章接着讲解K8S安装Logstash与Filebeat</p>
+</blockquote>
+<h3 id="Logstash和Filebeat安装"><a href="#Logstash和Filebeat安装" class="headerlink" title="Logstash和Filebeat安装"></a>Logstash和Filebeat安装</h3><p>在使用k8s安装Logstash时，先在本地做测试配置，如果已经非常熟悉的，就可以将这个步骤省略</p>
+<h4 id="Windows安装Logstash"><a href="#Windows安装Logstash" class="headerlink" title="Windows安装Logstash"></a>Windows安装Logstash</h4><ol>
+<li>去官方下载Windows版本的<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases/logstash-7-6-1">Logstash</a>，将ZIP文件解压，变成下面的目录结构</li>
+</ol>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/1.png" style="zoom: 67%;" />
+
+<span id="more"></span>
+
+<ol start="2">
+<li>进入bin文件夹中新建一个logstash.conf配置文件，并进行编辑，内容如下</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参考官方文档：https://www.elastic.co/guide/en/logstash/current/plugins-inputs-beats.html</span></span><br><span class="line"><span class="comment"># 输入</span></span><br><span class="line"><span class="string">input</span> &#123;	</span><br><span class="line">    <span class="string">beats</span>&#123;</span><br><span class="line">		<span class="comment"># 接受数据端口</span></span><br><span class="line">		<span class="string">port</span> <span class="string">=&gt;</span> <span class="string">&quot;5044&quot;</span></span><br><span class="line">		<span class="comment"># 主要用于筛选器激活，字符串</span></span><br><span class="line">		<span class="comment"># type =&gt; &quot;logs&quot;</span></span><br><span class="line">		<span class="comment"># 额外添加字段，这里是为了区分来自哪一个插件</span></span><br><span class="line">		<span class="comment"># add_field =&gt; &#123;&quot;[fields][class]&quot; =&gt; &quot;beats&quot;&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">#这个插件需要和filebeat进行配很这里不做多讲，到时候结合起来一起介绍。</span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="string">output</span> &#123;</span><br><span class="line">    <span class="string">stdout</span>&#123;</span><br><span class="line">		<span class="comment"># 使用 ruby &quot;awesome_print&quot; 库输出事件数据这是 stdout 的默认编解码器。</span></span><br><span class="line">		<span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">rubydebug</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="string">elasticsearch</span> &#123;</span><br><span class="line">		<span class="comment"># 要用于查询的elasticsearch主机的列表</span></span><br><span class="line">		<span class="string">hosts</span> <span class="string">=&gt;</span> <span class="string">&quot;elasticsearch-client客户端IP:elasticsearch-client端口&quot;</span> </span><br><span class="line">		</span><br><span class="line">		<span class="comment"># 要搜索的索引名称的逗号列表;使用 或空字符串对所有索引执行操作。</span></span><br><span class="line">		<span class="string">index</span> <span class="string">=&gt;</span> <span class="string">&quot;log-<span class="template-variable">%&#123;+YYYY.MM.dd&#125;</span>&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行logstash</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash.bat -f logstash.conf</span><br></pre></td></tr></table></figure>
+
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/2.png" style="zoom: 67%;" />
+
+<p>可以通过9600端口访问页面，查看是否执行成功<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/3.png" style="zoom: 67%;" /></p>
+<h4 id="Windows安装Filebeat"><a href="#Windows安装Filebeat" class="headerlink" title="Windows安装Filebeat"></a>Windows安装Filebeat</h4><ol>
+<li>去官方下载Windows版本的<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases/filebeat-7-6-1">Filebeat</a>，将ZIP文件解压，变成下面的目录结构</li>
+</ol>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/1.png" style="zoom: 67%;" />
+
+<ol start="2">
+<li>在根目录下编辑<code>filebeat.yml</code>文件，因我们是先将数据传递给Logstash，所以不用配置es的地址信息，注释掉就可以了</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参考官方文档： https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html</span></span><br><span class="line"><span class="attr">filebeat.inputs:</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">type:</span> <span class="string">log</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 开启监视，不开不采集</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">    <span class="comment"># 指定需要收集的日志文件的路径</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">G:\*\info\*.log</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">output.logstash:</span></span><br><span class="line">  <span class="attr">hosts:</span> [<span class="string">&quot;localhost:5044&quot;</span>]    </span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>执行</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebeat <span class="literal">-e</span> <span class="literal">-c</span> filebeat.yml <span class="literal">-d</span> <span class="string">&quot;publish&quot;</span></span><br></pre></td></tr></table></figure>
+
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/2.png" style="zoom: 67%;" />
+
+<h4 id="Windows测试ELK"><a href="#Windows测试ELK" class="headerlink" title="Windows测试ELK"></a>Windows测试ELK</h4><ol>
+<li>在Filebeat监听目录下新增一个*.log文件，并写入内容，并观察</li>
+</ol>
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/filebeat/3.png" style="zoom: 67%;" />
+
+<p>上面图片中，我们已经能够看见对监听的文件内容变更，进行push到logstash中</p>
+<ol start="2">
+<li>我们在观察一下logstash的情况</li>
+</ol>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/4.png" style="zoom: 67%;" />
+
+<p>看见已经接收到传过来的信息了，然后将数据提交到ES中了</p>
+<ol start="3">
+<li>我们在Kibana中查看我们的索引</li>
+</ol>
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/6.png" style="zoom: 67%;" />
+
+<ol start="4">
+<li>创建索引模式</li>
+</ol>
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/7.png" style="zoom: 67%;" />
+
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/8.png" style="zoom: 67%;" />
+
+<ol start="5">
+<li>索引模式创建成功后，我们可以去面板看一下数据了</li>
+</ol>
+<img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/kibana/9.png" style="zoom: 67%;" />
+
+<p>到这里，ELK的集成就基本结束了。后续是K8S部署Logstash和Spring项目中的使用</p>
+<h4 id="K8s安装Logstash安装"><a href="#K8s安装Logstash安装" class="headerlink" title="K8s安装Logstash安装"></a>K8s安装Logstash安装</h4><ol>
+<li>在NFS目录下新建一个test.conf文件，并写入内容</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test.conf</span></span><br><span class="line"><span class="string">input</span> &#123;</span><br><span class="line">    <span class="string">beats</span>&#123;</span><br><span class="line">                <span class="string">port</span> <span class="string">=&gt;</span> <span class="string">&quot;5044&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">output</span> &#123;</span><br><span class="line">    <span class="string">stdout</span>&#123;</span><br><span class="line">                <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">rubydebug</span></span><br><span class="line">    &#125;</span><br><span class="line">        <span class="string">elasticsearch</span> &#123;</span><br><span class="line">                <span class="string">hosts</span> <span class="string">=&gt;</span> <span class="string">&quot;&#123;elasticsearch-client IP地址&#125;:9200&quot;</span></span><br><span class="line">                <span class="string">index</span> <span class="string">=&gt;</span> <span class="string">&quot;log-<span class="template-variable">%&#123;+YYYY.MM.dd&#125;</span>&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>执行下面yaml文件</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># logstash.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">logstash</span></span><br><span class="line">    <span class="attr">elk:</span> <span class="string">logstash-service</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">logstash-service-svc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">web</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">9600</span></span><br><span class="line">      <span class="attr">targetPort:</span> <span class="string">web</span>  </span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">tcp</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">5044</span>      </span><br><span class="line">      <span class="attr">targetPort:</span> <span class="string">tcp</span>        </span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">elk:</span> <span class="string">logstash-dep</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">logstash-service-dep</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">logstash</span></span><br><span class="line">    <span class="attr">elk:</span> <span class="string">logstash-dep</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">logstash</span></span><br><span class="line">        <span class="attr">elk:</span> <span class="string">logstash-dep</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">logstash</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">logstash:7.6.1</span></span><br><span class="line">          <span class="attr">imagePullPolicy:</span> <span class="string">Always</span></span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">limits:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="number">1</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">1Gi</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">&quot;512Mi&quot;</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">&quot;200m&quot;</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">web</span></span><br><span class="line">              <span class="attr">containerPort:</span> <span class="number">9600</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">tcp</span></span><br><span class="line">              <span class="attr">containerPort:</span> <span class="number">5044</span></span><br><span class="line">          <span class="attr">volumeMounts:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">logstash-nfs</span></span><br><span class="line">            <span class="attr">mountPath:</span> <span class="string">/usr/share/logstash/config/conf.d/</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config</span></span><br><span class="line">            <span class="attr">mountPath:</span> <span class="string">/usr/share/logstash/config/logstash.yml</span></span><br><span class="line">            <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">            <span class="attr">subPath:</span> <span class="string">logstash.yml</span>            </span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">logstash-nfs</span></span><br><span class="line">        <span class="attr">nfs:</span></span><br><span class="line">          <span class="attr">server:</span> <span class="comment">#NFS IP地址</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/nfs/data/logstash</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config</span></span><br><span class="line">        <span class="attr">configMap:</span> </span><br><span class="line">          <span class="attr">name:</span> <span class="string">logstash-config</span>          </span><br><span class="line"><span class="meta">---                  </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">logstash-config</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">logstash</span></span><br><span class="line">    <span class="attr">elk:</span> <span class="string">logstash-service</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">logstash.yml:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">    http.host: &quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="string">    xpack.monitoring.elasticsearch.hosts: [ &quot;http://&#123;elasticsearch-client IP地址&#125;:9200&quot; ]</span></span><br><span class="line"><span class="string">    path.config: &quot;/usr/share/logstash/config/conf.d/*.conf&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查看启动情况</li>
+</ol>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/5.png" style="zoom: 67%;" />
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/k8s/" rel="tag"># k8s</a>
+              <a href="/tags/elk/" rel="tag"># elk</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/" rel="prev" title="K8S部署ELK管理集群日志（二）">
+                  <i class="fa fa-chevron-left"></i> K8S部署ELK管理集群日志（二）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/" rel="next" title="Ambari 2.7.3 离线安装手册">
+                  Ambari 2.7.3 离线安装手册 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

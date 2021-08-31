@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Quick Start写一个简单的生产者、消费者，带大家快速体验RocketMQ~ Maven配置：  生产者：  消费者：   无论生产者、消费者都必须给出GroupName，而且具有唯一性！生产到哪个Topic的哪个Tag下，消费者也是从Topic的哪个Tag进行消费，可见这个Tag有点类似于JMS Selector机制，即实现消息的过滤。生产者、消费者需要设置NameServer地址。这里，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RocketMQ实战（二）">
+<meta property="og:url" content="http://example.com/2018/03/08/mq/rocketmq/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Quick Start写一个简单的生产者、消费者，带大家快速体验RocketMQ~ Maven配置：  生产者：  消费者：   无论生产者、消费者都必须给出GroupName，而且具有唯一性！生产到哪个Topic的哪个Tag下，消费者也是从Topic的哪个Tag进行消费，可见这个Tag有点类似于JMS Selector机制，即实现消息的过滤。生产者、消费者需要设置NameServer地址。这里，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/19.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/20.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/21.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/22.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/23.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/24.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/25.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/26.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/27.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/28.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/29.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/30.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/31.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/32.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/33.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="article:published_time" content="2018-03-08T10:53:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mq">
+<meta property="article:tag" content="rocketmq">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/19.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+
+
+<link rel="canonical" href="http://example.com/2018/03/08/mq/rocketmq/2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/03/08/mq/rocketmq/2/","path":"2018/03/08/mq/rocketmq/2/","title":"RocketMQ实战（二）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RocketMQ实战（二） | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3%E6%B6%88%E6%81%AF%E5%A4%B1%E8%B4%A5%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.</span> <span class="nav-text">初步了解消息失败重试机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A9%E7%84%B6%E7%9A%84%E6%B6%88%E6%81%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8F%8A%E9%AB%98%E6%95%88%E7%9A%84%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">天然的消息负载均衡及高效的水平扩展机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E6%B6%88%E8%B4%B9-AND-%E5%B9%BF%E6%92%AD%E6%B6%88%E8%B4%B9"><span class="nav-number">1.3.</span> <span class="nav-text">集群消费 AND 广播消费</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/08/mq/rocketmq/2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RocketMQ实战（二）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-08 10:53:00" itemprop="dateCreated datePublished" datetime="2018-03-08T10:53:00+00:00">2018-03-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h4><p>写一个简单的生产者、消费者，带大家快速体验RocketMQ~</p>
+<p>Maven配置：</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/19.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>生产者：</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/20.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>消费者：</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/21.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<blockquote>
+<p>无论生产者、消费者都必须给出GroupName，而且具有唯一性！<br>生产到哪个Topic的哪个Tag下，消费者也是从Topic的哪个Tag进行消费，可见这个Tag有点类似于JMS Selector机制，即实现消息的过滤。<br>生产者、消费者需要设置NameServer地址。<br>这里，采用的是Consumer Push的方式，即设置Listener机制回调，相当于开启了一个线程。以后为大家介绍Consumer Pull的方式。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>我们看一下运行结果：</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/22.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>仔细看看生产者结果输出，你会发现，有的消息发往broker-a，有的在broker-b上，自动实现了消息的负载均衡！</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/23.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>这里消费消息是没有什么顺序的，以后我们在来谈消息的顺序性。</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/24.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/25.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>在多Master模式中，如果某个Master进程挂了，显然这台broker将不可用，上面的消息也将无法消费，要知道开源版本的RocketMQ是没有提供切换程序，来自动恢复故障的，因此在实际开发中，我们一般提供一个监听程序，用于监控Master的状态。</p>
+<p>在ActiveMQ中，生产消息的时候会提供是否持久化的选择，但是对于RocketMQ而言，消息是一定会被持久化的！</p>
+<blockquote>
+<p>上面的消费者采用的是Push Consumer的方式，那么监听的Listener中的消息List到底是多少条呢？虽然提供了API，如consumer.setConsumeMessageBatchMaxSize(10)，实际上即使设置了批量的条数，但是注意了，是最大是10，并不意味着每次batch的都是10，只有在消息有挤压的情况下才有可能。而且Push Consumer的最佳实践方式就是一条条的消费，如果需要batch，可以使用Pull Consumer。</p>
+</blockquote>
+<p>务必保证先启动消费者进行Topic订阅，然后在启动生产者进行生产（否则极有可能导致消息的重复消费，重复消费，重复消费！重要的事情说三遍！关于消息的重复问题后续给大家介绍~）。而且在实际开发中，有时候不会批量的处理消息，而是原子性的，单线程的去一条一条的处理消息，这样就是实时的在处理消息。（批量的处理海量的消息，可以考虑Kafka）</p>
+<h5 id="初步了解消息失败重试机制"><a href="#初步了解消息失败重试机制" class="headerlink" title="初步了解消息失败重试机制"></a>初步了解消息失败重试机制</h5><p>消息失败，无非涉及到2端：从生产者端发往MQ的失败；消费者端从MQ消费消息的失败；</p>
+<p><strong>生产者端的失败重试</strong></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/26.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>生产者端的消息失败：比如网络抖动导致生产者发送消息到MQ失败。</p>
+<p>上图代码示例的处理手段是：如果该条消息在1S内没有发送成功，那么重试3次。</p>
+<p><strong>消费者端的失败重试</strong></p>
+<blockquote>
+<p>消费者端的失败，分为2种情况，一个是timeout，一个是exception<br>timeout，比如由于网络原因导致消息压根就没有从MQ到消费者上，在RocketMQ内部会不断的尝试发送这条消息，直至发送成功为止！（比如集群中一个broker失败，就尝试另一个broker）<br>exception，消息正常的到了消费者，结果消费者发生异常，处理失败了。这里涉及到一些问题，需要我们思考下，比如，消费者消费消息的状态有哪些定义？如果失败，MQ将采取什么策略进行重试？假设一次性批量PUSH了10条，其中某条数据消费异常，那么消息重试是10条呢，还是1条呢？而且在重试的过程中，需要保证不重复消费吗？</p>
+</blockquote>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/27.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>消息消费的状态，有2种，一个是成功（CONSUME_SUCCESS），一个是失败&amp;稍后重试（RECONSUME_LATER）</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/28.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>在启动broker的过程中，可以观察下日志，你会发现RECONSUME_LATER的策略。</p>
+<p>如果消费失败，那么1S后再次消费，如果失败，那么5S后，再次消费，……直至2H后如果消费还失败，那么该条消息就会终止发送给消费者了！</p>
+<p>RocketMQ为我们提供了这么多次数的失败重试，但是在实际中也许我们并不需要这么多重试，比如重试3次，还没有成功，我们希望把这条消息存储起来并采用另一种方式处理，而且希望RocketMQ不要在重试呢，因为重试解决不了问题了！这该如何做呢？</p>
+<p>我们先来看一下一条消息MessageExt对象的输出：</p>
+<blockquote>
+<p>MessageExt [queueId=0, storeSize=137, queueOffset=0, sysFlag=0, bornTimestamp=1492213846916, bornHost=/192.168.99.219:50478, storeTimestamp=1492213846981, storeHost=/192.168.99.121:10911, msgId=C0A8637900002A9F0000000000000000, commitLogOffset=0, bodyCRC=613185359, reconsumeTimes=0, preparedTransactionOffset=0, toString()=Message [topic=TopicTest2, flag=0, properties={TAGS=TagA, WAIT=true, MAX_OFFSET=3, MIN_OFFSET=0}, body=16]]</p>
+</blockquote>
+<p>注意到reconsumeTimes属性，这个属性就代表消息重试的次数！来看一段代码：</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/29.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>注意了，对于消费消息而言，存在2种指定的状态（成功 OR 失败重试），如果一条消息在消费端处理没有返回这2个状态，那么相当于这条消息没有达到消费者，势必会再次发送给消费者！也即是消息的处理必须有返回值，否则就进行重发。</p>
+<h5 id="天然的消息负载均衡及高效的水平扩展机制"><a href="#天然的消息负载均衡及高效的水平扩展机制" class="headerlink" title="天然的消息负载均衡及高效的水平扩展机制"></a>天然的消息负载均衡及高效的水平扩展机制</h5><p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/30.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>对于RocketMQ而言，通过ConsumeGroup的机制，实现了天然的消息负载均衡！通俗点来说，RocketMQ中的消息通过ConsumeGroup实现了将消息分发到C1/C2/C3/……的机制，这意味着我们将非常方便的通过加机器来实现水平扩展！</p>
+<p>我们考虑一下这种情况：比如C2发生了重启，一条消息发往C3进行消费，但是这条消息的处理需要0.1S，而此时C2刚好完成重启，那么C2是否可能会收到这条消息呢？答案是肯定的，也就是consume broker的重启，或者水平扩容，或者不遵守先订阅后生产消息，都可能导致消息的重复消费！关于去重的话题会在后续中予以介绍！</p>
+<p>至于消息分发到C1/C2/C3，其实也是可以设置策略的。</p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/31.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<h5 id="集群消费-AND-广播消费"><a href="#集群消费-AND-广播消费" class="headerlink" title="集群消费 AND 广播消费"></a>集群消费 AND 广播消费</h5><blockquote>
+<p>RocketMQ的消费方式有2种，在默认情况下，就是集群消费，也就是上面提及的消息的负载均衡消费。另一种消费模式，是广播消费。广播消费，类似于ActiveMQ中的发布订阅模式，消息会发给Consume Group中的每一个消费者进行消费。</p>
+</blockquote>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/32.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/mq/33.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mq/" rel="tag"># mq</a>
+              <a href="/tags/rocketmq/" rel="tag"># rocketmq</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/08/mq/rocketmq/1/" rel="prev" title="RocketMQ实战（一）">
+                  <i class="fa fa-chevron-left"></i> RocketMQ实战（一）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/08/mq/rocketmq/3/" rel="next" title="RocketMQ实战（三）">
+                  RocketMQ实战（三） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

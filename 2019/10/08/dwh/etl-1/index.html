@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="数据仓库之ETL概述ETL，Extraction-Transformation-Loading的缩写，中文名称为数据抽取、转换和加载。一般随着业务的发展扩张，产线也越来越多，产生的数据也越来越多，这些数据的收集方式、原始数据格式、数据量、存储要求、使用场景等方面有很大的差异。作为数据中心，既要保证数据的准确性，存储的安全性，后续的扩展性，以及数据分析的时效性，这是一个很大的挑战。 名词解释 ODS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据仓库之ETL">
+<meta property="og:url" content="http://example.com/2019/10/08/dwh/etl-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据仓库之ETL概述ETL，Extraction-Transformation-Loading的缩写，中文名称为数据抽取、转换和加载。一般随着业务的发展扩张，产线也越来越多，产生的数据也越来越多，这些数据的收集方式、原始数据格式、数据量、存储要求、使用场景等方面有很大的差异。作为数据中心，既要保证数据的准确性，存储的安全性，后续的扩展性，以及数据分析的时效性，这是一个很大的挑战。 名词解释 ODS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/dwh/etl-1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/dwh/etl-2.png">
+<meta property="article:published_time" content="2019-10-08T17:44:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="data-warehouse">
+<meta property="article:tag" content="etl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/dwh/etl-1.png">
+
+
+<link rel="canonical" href="http://example.com/2019/10/08/dwh/etl-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2019/10/08/dwh/etl-1/","path":"2019/10/08/dwh/etl-1/","title":"数据仓库之ETL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据仓库之ETL | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B9%8BETL"><span class="nav-number">1.</span> <span class="nav-text">数据仓库之ETL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96"><span class="nav-number">1.3.</span> <span class="nav-text">数据抽取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E3%80%81%E6%B8%85%E6%B4%97"><span class="nav-number">1.4.</span> <span class="nav-text">数据转换、清洗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.5.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7"><span class="nav-number">1.6.</span> <span class="nav-text">开源工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Talend"><span class="nav-number">1.6.1.</span> <span class="nav-text">Talend</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Kettle"><span class="nav-number">1.6.2.</span> <span class="nav-text">Kettle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Informatica"><span class="nav-number">1.6.3.</span> <span class="nav-text">Informatica</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/08/dwh/etl-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据仓库之ETL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-10-08 17:44:00" itemprop="dateCreated datePublished" datetime="2019-10-08T17:44:00+00:00">2019-10-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dwh/" itemprop="url" rel="index"><span itemprop="name">dwh</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dwh/etl/" itemprop="url" rel="index"><span itemprop="name">etl</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="数据仓库之ETL"><a href="#数据仓库之ETL" class="headerlink" title="数据仓库之ETL"></a>数据仓库之ETL</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>ETL，Extraction-Transformation-Loading的缩写，中文名称为数据抽取、转换和加载。<br>一般随着业务的发展扩张，产线也越来越多，产生的数据也越来越多，这些数据的收集方式、原始数据格式、数据量、存储要求、使用场景等方面有很大的差异。作为数据中心，既要保证数据的准确性，存储的安全性，后续的扩展性，以及数据分析的时效性，这是一个很大的挑战。</p>
+<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><ul>
+<li>ODS——操作性数据</li>
+<li>DW——数据仓库</li>
+<li>DM——数据集市</li>
+</ul>
+<span id="more"></span>
+
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/dwh/etl-1.png"></p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/dwh/etl-2.png"></p>
+<h4 id="数据抽取"><a href="#数据抽取" class="headerlink" title="数据抽取"></a>数据抽取</h4><p>数据抽取是指把ODS源数据抽取到DW中，然后处理成展示给相关人员查看的数据</p>
+<p>源数据：</p>
+<ul>
+<li>用户访问日志</li>
+<li>自定义事件日志、操作日志</li>
+<li>业务日志</li>
+<li>各服务产生的日志</li>
+<li>系统日志：操作系统日志，CDN日志等</li>
+<li>监控日志</li>
+<li>其它日志</li>
+</ul>
+<p>抽取频次：</p>
+<ul>
+<li>如果没有特殊要求可以一天一次，但是需要避开拉去日志的高峰期</li>
+<li>对于有实时性要求的日志，可以一小时一次，或者直接使用kafka等相关工具收集，需要考虑到系统能否承受</li>
+</ul>
+<p>抽取策略：</p>
+<ul>
+<li>由于数据量较大，一般都是采用增量抽取，但是对于一些特殊场景的数据，比如订单数据，由于订单的状态会发生变化，并且订单的量级是可预知和相对较少的，就需要采用全量拉取的策略</li>
+<li>对于增量拉取的日志，如果是文件类型，可以在文件名称上追加日期，例如 server_log_2018082718.log，这样就可以满足按小时拉取的需求</li>
+<li>对于源数据的保留，考虑到突发情况，服务器上的源数据至少要保证2天以上的时间</li>
+</ul>
+<h4 id="数据转换、清洗"><a href="#数据转换、清洗" class="headerlink" title="数据转换、清洗"></a>数据转换、清洗</h4><p>顾名思义，就是把不需要的和不符合规范的数据进行处理。数据清洗最好不要放在抽取的环节进行，考虑到有时可能会查原始数据。一般各公司都会有自己的规范，以下列出几点仅供参考</p>
+<p>数据清洗主要包括以下几个方面：</p>
+<ul>
+<li><p>空值处理；根据业务需要，可以将空值替换为特定的值或者直接过滤掉；</p>
+</li>
+<li><p>验证数据正确性；主要是把不符合业务含义的数据做一处理，比如，把一个表示数量的字段中的字符串替换为0，把一个日期字段的非日期字符串过滤掉等等；</p>
+</li>
+<li><p>规范数据格式；比如，把所有的日期都格式化成yyyy-MM-dd HH:mm:ss的格式等；</p>
+</li>
+<li><p>数据转码；把一个源数据中用编码表示的字段，通过关联编码表，转换成代表其真实意义的值等等；</p>
+</li>
+<li><p>数据标准，统一；比如在源数据中表示男女的方式有很多种，在抽取的时候，直接根据模型中定义的值做转化，统一表示男女；</p>
+</li>
+<li><p>其他业务规则定义的数据清洗…</p>
+</li>
+</ul>
+<h4 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h4><p>数据拉取，清洗完之后，就需要展示了。一般是把清洗好的数据加载到mysql中，然后在各系统中使用，或者使用Tableau直接给相关人员展示</p>
+<h4 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h4><h5 id="Talend"><a href="#Talend" class="headerlink" title="Talend"></a>Talend</h5><p>易用性：有 GUI 图形界面但是以 Eclipse 的插件方式提供</p>
+<p>技术支持：主要在美国</p>
+<p>速度：需要手工调整，对特定数据源有优化知识</p>
+<p>监控：有监控和日志工具</p>
+<p>连接性：各种常用 数据库 ，文件， web，service</p>
+<h5 id="Kettle"><a href="#Kettle" class="headerlink" title="Kettle"></a>Kettle</h5><p>易用性：有非常容易使用的 GUI，出现问题可以到社区咨询</p>
+<p>技术支持：在美国，欧洲（比利时，德国，法国，英国），亚洲（ 中国 ，日本，韩国）都可以找到相关技术支持人员</p>
+<p>速度：比 Talend 快，不过也需要手工调整，对 Oracle 和 PostGre 等数据源做了优化，同时也取决于转换任务的设计</p>
+<p>监控：有监控和日志工具</p>
+<p>连接性：非常广泛的数据库，文件，另外可以通过插件扩展</p>
+<h5 id="Informatica"><a href="#Informatica" class="headerlink" title="Informatica"></a>Informatica</h5><p>易用性：有非常容易使用的 GUI，但是要专门的训练</p>
+<p>技术支持：遍布全世界</p>
+<p>速度：是最快的</p>
+<p>监控：有非常详细的监控和日志工具</p>
+<p>连接性：各种数据源</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/data-warehouse/" rel="tag"># data-warehouse</a>
+              <a href="/tags/etl/" rel="tag"># etl</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/09/06/spring/redis-1/" rel="prev" title="Redis客户端选择">
+                  <i class="fa fa-chevron-left"></i> Redis客户端选择
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/10/08/dwh/kettle-1/" rel="next" title="kettle">
+                  kettle <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

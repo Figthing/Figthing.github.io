@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Linux下Oracle安装（一）在Linux中安装Oracle主要有以下几步 安装Oracle依赖包 1# yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle安装（一）">
+<meta property="og:url" content="http://example.com/2018/03/28/oracle/1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux下Oracle安装（一）在Linux中安装Oracle主要有以下几步 安装Oracle依赖包 1# yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/2.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/3.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/4.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="article:published_time" content="2018-03-28T18:49:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="oracle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+
+
+<link rel="canonical" href="http://example.com/2018/03/28/oracle/1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/03/28/oracle/1/","path":"2018/03/28/oracle/1/","title":"Oracle安装（一）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Oracle安装（一） | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E4%B8%8BOracle%E5%AE%89%E8%A3%85%EF%BC%88%E4%B8%80%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Linux下Oracle安装（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Oracle%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装Oracle依赖包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOracle%E5%AF%B9%E5%BA%94%E7%9B%AE%E5%BD%95%E5%B9%B6%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90"><span class="nav-number">1.2.</span> <span class="nav-text">创建Oracle对应目录并设置权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">安装图形界面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">设置图形界面显示位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAOracle%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7"><span class="nav-number">1.5.</span> <span class="nav-text">创建Oracle系统用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">修改系统内核（可选）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%99%90%E5%88%B6%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">配置文件限制（可选）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEOracle%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.8.</span> <span class="nav-text">配置Oracle环境变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Xshell-MobaXterm%E6%9D%A5%E6%98%BE%E7%A4%BA%E7%95%8C%E9%9D%A2"><span class="nav-number">1.9.</span> <span class="nav-text">使用Xshell&#x2F;MobaXterm来显示界面</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/28/oracle/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Oracle安装（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-28 18:49:00" itemprop="dateCreated datePublished" datetime="2018-03-28T18:49:00+00:00">2018-03-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="Linux下Oracle安装（一）"><a href="#Linux下Oracle安装（一）" class="headerlink" title="Linux下Oracle安装（一）"></a>Linux下Oracle安装（一）</h4><p>在Linux中安装Oracle主要有以下几步</p>
+<h5 id="安装Oracle依赖包"><a href="#安装Oracle依赖包" class="headerlink" title="安装Oracle依赖包"></a>安装Oracle依赖包</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh ksh libaio.i686 glibc.i686 compat-libstdc++-33.i686 libaio-devel.i686 libgcc.i686 libstdc++.i686 unixODBC.i686 unixODBC-devel.i686</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建Oracle对应目录并设置权限"><a href="#创建Oracle对应目录并设置权限" class="headerlink" title="创建Oracle对应目录并设置权限"></a>创建Oracle对应目录并设置权限</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oracle &amp;&amp; chown -R oracle:oinstall /oracle/app/oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir -p /oracle/app/oraInventory &amp;&amp; chown -R oracle:oinstall /oracle/app/oraInventory</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum install xhost</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum grouplist</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall <span class="string">&quot;X Window System&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum groupinstall Desktop</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xterm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> yum install xclock</span></span><br></pre></td></tr></table></figure>
+
+ <span id="more"></span>
+
+<h5 id="设置图形界面显示位置"><a href="#设置图形界面显示位置" class="headerlink" title="设置图形界面显示位置"></a>设置图形界面显示位置</h5><p> <code>export DISPLAY=客户端IP:0.0</code></p>
+<h5 id="创建Oracle系统用户"><a href="#创建Oracle系统用户" class="headerlink" title="创建Oracle系统用户"></a>创建Oracle系统用户</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> groupadd oinstall</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> groupadd dba</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> useradd -g oinstall -G dba oracle</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> passwd oracle</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="修改系统内核（可选）"><a href="#修改系统内核（可选）" class="headerlink" title="修改系统内核（可选）"></a>修改系统内核（可选）</h5><p> <code>vi /etc/sysctl.conf</code></p>
+<blockquote>
+<p>新增内容如下：<br> kernel.shmall = 2097152<br> kernel.shmmax = 536870912<br> kernel.shmmni = 4096<br> kernel.sem = 250 32000 100 128<br> fs.aio-max-nr = 1048576<br> fs.file-max = 6815744<br> net.ipv4.ip_local_port_range = 9000 65500<br> net.core.rmem_default = 262144<br> net.core.rmem_max = 4194304<br> net.core.wmem_default = 262144<br> net.core.wmem_max = 1048586</p>
+</blockquote>
+<h5 id="配置文件限制（可选）"><a href="#配置文件限制（可选）" class="headerlink" title="配置文件限制（可选）"></a>配置文件限制（可选）</h5><p> <code>vi /etc/security/limits.conf</code></p>
+<blockquote>
+<p>内容如下：<br> oracle           soft    nproc   2047<br> oracle           hard    nproc   16384<br> oracle           soft    nofile  1024<br> oracle           hard    nofile  65536</p>
+</blockquote>
+<h5 id="配置Oracle环境变量"><a href="#配置Oracle环境变量" class="headerlink" title="配置Oracle环境变量"></a>配置Oracle环境变量</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> su oracle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vi .bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>bash_profile内容修改如下：<br> export ORACLE_BASE=/oracle/app/oracle        #ORACLE基础目录<br> export ORACLE_HOME=/oracle/app/oracle/product/11.2.0/dbhome_1        #ORACLE安装目录<br> export ORACLE_SID=CCMP                        #SID<br> export PATH=$ORACLE_HOME/bin:$PATH<br> export ORACLE_TERM=xterm<br> export TNS_ADMIN=$ORACLE_HOME/network/admin<br> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/oracm/lib:$ORACLE_HOME/lib<br> export CLASSPATH=$CLASSPATH:$ORACLE_HOME/rdbms/jlib:$ORACLE_HOME/jlib:$ORACLE_HOME/network/lib<br> export LANG=en_US.gbk<br> export NLS_LANG=american_america.ZHS16GBK<br> export EDITOR=vi<br> PATH=$PATH:$HOME/.local/bin:$HOME/bin<br> export PATH</p>
+</blockquote>
+<h5 id="使用Xshell-MobaXterm来显示界面"><a href="#使用Xshell-MobaXterm来显示界面" class="headerlink" title="使用Xshell/MobaXterm来显示界面"></a>使用Xshell/MobaXterm来显示界面</h5><p> <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p> <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/2.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p> <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/3.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p> <img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/oracle/4.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/oracle/" rel="tag"># oracle</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/12/linux/ssh-drawboard-1/" rel="prev" title="搭建跳板机">
+                  <i class="fa fa-chevron-left"></i> 搭建跳板机
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/29/oracle/2/" rel="next" title="Oracle安装（二）">
+                  Oracle安装（二） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

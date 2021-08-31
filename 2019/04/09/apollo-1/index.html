@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="携程 Apollo 配置中心在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。 部署准备 docker 安装 docker-compose 安装 mysql 安装  Apollo工程| 工程名 | 优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="携程Apollo配置中心">
+<meta property="og:url" content="http://example.com/2019/04/09/apollo-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="携程 Apollo 配置中心在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。 部署准备 docker 安装 docker-compose 安装 mysql 安装  Apollo工程| 工程名 | 优">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/2.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/3.png">
+<meta property="article:published_time" content="2019-04-09T13:13:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.780Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="spring cloud">
+<meta property="article:tag" content="apollo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png">
+
+
+<link rel="canonical" href="http://example.com/2019/04/09/apollo-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2019/04/09/apollo-1/","path":"2019/04/09/apollo-1/","title":"携程Apollo配置中心"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>携程Apollo配置中心 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%BA%E7%A8%8B-Apollo-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.</span> <span class="nav-text">携程 Apollo 配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">部署准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apollo%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Apollo工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.</span> <span class="nav-text">部署策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%AD%96%E7%95%A5%EF%BC%88%E5%AE%98%E7%BD%91%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">网络策略（官网）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.5.</span> <span class="nav-text">部署步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">调整服务端配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">1.5.2.</span> <span class="nav-text">获取安装包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%BA%90%E7%A0%81"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">调整源码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B0%83%E6%95%B4apollo-configservice%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">调整apollo-configservice工程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B0%83%E6%95%B4apollo-configservice%E5%B7%A5%E7%A8%8B-1"><span class="nav-number">1.5.2.1.2.</span> <span class="nav-text">调整apollo-configservice工程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B0%83%E6%95%B4apollo-portal%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.5.2.1.3.</span> <span class="nav-text">调整apollo-portal工程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E7%BC%96%E8%AF%91%E3%80%81%E6%89%93%E5%8C%85"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">执行编译、打包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">构建docker镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2Apollo%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">部署Apollo服务端</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/09/apollo-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          携程Apollo配置中心
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-04-09 13:13:00" itemprop="dateCreated datePublished" datetime="2019-04-09T13:13:00+00:00">2019-04-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="携程-Apollo-配置中心"><a href="#携程-Apollo-配置中心" class="headerlink" title="携程 Apollo 配置中心"></a>携程 Apollo 配置中心</h2><p>在Spring Boot 2.0 整合携程Apollo配置中心一文中，我们在本地快速部署试用了Apollo。本文将介绍如何按照分布式部署（采用Docker部署）的方式编译、打包、部署Apollo配置中心，从而可以在开发、测试、生产等环境分别部署运行。</p>
+<h3 id="部署准备"><a href="#部署准备" class="headerlink" title="部署准备"></a>部署准备</h3><ul>
+<li>docker 安装</li>
+<li>docker-compose 安装</li>
+<li>mysql 安装</li>
+</ul>
+<h3 id="Apollo工程"><a href="#Apollo工程" class="headerlink" title="Apollo工程"></a>Apollo工程</h3><p>| 工程名 | 优先级 | 说明 | 端口 | sql |<br>|————————-|<br>| apollo-configservice | 1 | 服务 | 8090 | <a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a> |<br>| apollo-adminservice | 2 | 管理 | 8091 | <a href="(https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloconfigdb.sql">apolloconfigdb.sql</a> |<br>| apollo-portal | 3 | 界面 | 8092 | <a target="_blank" rel="noopener" href="https://github.com/ctripcorp/apollo/blob/master/scripts/docker-quick-start/sql/apolloportaldb.sql">apolloportaldb.sql</a> |</p>
+<span id="more"></span>
+
+
+<h3 id="部署策略"><a href="#部署策略" class="headerlink" title="部署策略"></a>部署策略</h3><p>Apollo目前支持以下环境：</p>
+<ul>
+<li>DEV 开发环境</li>
+<li>FAT 测试环境，相当于alpha环境(功能测试)</li>
+<li>UAT 集成环境，相当于beta环境（回归测试）</li>
+<li>PRO 生产环境</li>
+</ul>
+<h3 id="网络策略（官网）"><a href="#网络策略（官网）" class="headerlink" title="网络策略（官网）"></a>网络策略（官网）</h3><p>分布式部署的时候，apollo-configservice和apollo-adminservice需要把自己的IP和端口注册到Meta Server（apollo-configservice本身）。<br>Apollo客户端和Portal会从Meta Server获取服务的地址（IP+端口），然后通过服务地址直接访问。<br>所以如果实际部署的机器有多块网卡（如docker），或者存在某些网卡的IP是Apollo客户端和Portal无法访问的（如网络安全限制），那么我们就需要在apollo-configservice和apollo-adminservice中做相关限制以避免Eureka将这些网卡的IP注册到Meta Server。<br>如下面这个例子就是对于apollo-configservice，把docker0和veth.* 的网卡在注册到Eureka时忽略掉。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">      name: apollo-configservice</span><br><span class="line">  profiles:</span><br><span class="line">    active: $&#123;apollo_profile&#125;</span><br><span class="line">  cloud:</span><br><span class="line">    inetutils:</span><br><span class="line">      ignoredInterfaces:</span><br><span class="line">        - docker0</span><br><span class="line">        - veth.*</span><br></pre></td></tr></table></figure>
+
+<p>另外一种方式是直接指定要注册的IP，可以修改startup.sh，通过JVM System Property在运行时传入，如-Deureka.instance.ip-address=${指定的IP}，或者也可以修改apollo-adminservice或apollo-configservice 的bootstrap.yml文件，加入以下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    ip-address: $&#123;指定的IP&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一种方式是直接指定要注册的IP+PORT，可以修改startup.sh，通过JVM System Property在运行时传入，如-Deureka.instance.homePageUrl=http://${指定的IP}:${指定的Port}，或者也可以修改apollo-adminservice或apollo-configservice 的bootstrap.yml文件，加入以下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    homePageUrl: http://$&#123;指定的IP&#125;:$&#123;指定的Port&#125;</span><br><span class="line">    preferIpAddress: false</span><br></pre></td></tr></table></figure>
+
+<p>如果Apollo部署在公有云上，本地开发环境无法连接，但又需要做开发测试的话，客户端可以升级到0.11.0版本及以上，然后通过-Dapollo.configService=<a href="http://config-service的公网IP:端口来跳过meta">http://config-service的公网IP:端口来跳过meta</a> service的服务发现</p>
+<h3 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h3><p>部署步骤共四步：</p>
+<ul>
+<li>创建数据库，所有Apollo服务端都依赖于MySQL数据库，所以在启动时，应先配置数据才能启动服务；</li>
+<li>获取安装包：通过源码构建</li>
+<li>构建docker镜像：为apollo-configservice, apollo-adminservice, apollo-portal构建Docker镜像</li>
+<li>部署Apollo服务端：构建镜像后通过docker compose就可以部署到公司的测试和生产环境了</li>
+</ul>
+<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><p>Apollo服务端共需要两个数据库：ApolloPortalDB和ApolloConfigDB，官网把数据库、表的创建和样例数据都分别准备了sql文件，只需要导入数据库即可。</p>
+<p>| 服务器 | 数据库 | 端口 | 环境 |<br>|—————————-|<br>| 172.24.2.65 | ApolloConfigDB | 3306 | dev |<br>| 172.24.2.65 | ApolloPortalDB | 3306 | dev |</p>
+<h5 id="调整服务端配置"><a href="#调整服务端配置" class="headerlink" title="调整服务端配置"></a>调整服务端配置</h5><p>Apollo自身的一些配置是放在数据库里面的，所以需要针对实际情况做一些调整</p>
+<ul>
+<li><p>ApolloPortalDB</p>
+<blockquote>
+<ul>
+<li>配置项统一存储在ServerConfig表中，也可以通过管理员工具 - 系统参数页面进行配置。</li>
+<li>apollo.portal.envs - 可支持的环境列表，默认值是dev，如果portal需要管理多个环境的话，以逗号分隔即可（大小写不敏感）</li>
+</ul>
+</blockquote>
+</li>
+<li><p>ApolloConfigDB</p>
+<blockquote>
+<ul>
+<li>配置项统一存储在ServerConfig表中，需要注意每个环境的ApolloConfigDB.ServerConfig都需要单独配置。</li>
+<li>eureka.service.url - Eureka服务Url，不管是apollo-configservice还是apollo-adminservice都需要向eureka服务注册，所以需要配置eureka服务地址。 按照目前的实现，apollo-configservice本身就是一个eureka服务，所以只需要填入apollo-configservice的地址即可，如有多个，用逗号分隔（注意不要忘了/eureka/后缀）。这里我填写<a target="_blank" rel="noopener" href="http://172.24.2.63:8090/eureka%E3%80%82">http://172.24.2.63:8090/eureka。</a></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="获取安装包"><a href="#获取安装包" class="headerlink" title="获取安装包"></a>获取安装包</h4><p>到github上进行<a target="_blank" rel="noopener" href="https://github.com/ctripcorp/apollo">源码下载</a>，如果github下载比较慢，可以去<a target="_blank" rel="noopener" href="https://www.ipaddress.com/">ipaddress</a>把CDN信息搜索出来，添加到hosts中</p>
+<ul>
+<li>151.101.185.194 github.global.ssl.fastly.net </li>
+<li>192.30.253.113  github.com</li>
+<li>192.30.253.120    codeload.github.com</li>
+</ul>
+<h5 id="调整源码"><a href="#调整源码" class="headerlink" title="调整源码"></a>调整源码</h5><p>配置数据库连接信息<code>scripts/build.bat</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># config</span><br><span class="line">set apollo_config_db_url=<span class="string">&quot;jdbc:mysql://172.24.2.65:3306/ApolloConfigDB?characterEncoding=utf8&quot;</span></span><br><span class="line">set apollo_config_db_username=<span class="string">&quot;apollo-config&quot;</span></span><br><span class="line">set apollo_config_db_password=<span class="string">&quot;apollo-config&quot;</span></span><br><span class="line"></span><br><span class="line"># portal</span><br><span class="line">set apollo_portal_db_url=<span class="string">&quot;jdbc:mysql://172.24.2.65:3306/ApolloPortalDB?characterEncoding=utf8&quot;</span></span><br><span class="line">set apollo_portal_db_username=<span class="string">&quot;apollo-portal&quot;</span></span><br><span class="line">set apollo_portal_db_password=<span class="string">&quot;apollo-portal&quot;</span></span><br><span class="line"></span><br><span class="line"># dev_meta</span><br><span class="line">set dev_meta=<span class="string">&quot;http://172.24.2.63:8090&quot;</span></span><br><span class="line">set META_SERVERS_OPTS=-Ddev_meta=%dev_meta%</span><br></pre></td></tr></table></figure>
+<h6 id="调整apollo-configservice工程"><a href="#调整apollo-configservice工程" class="headerlink" title="调整apollo-configservice工程"></a>调整apollo-configservice工程</h6><ul>
+<li>将所有端口改为8090</li>
+<li><code>bootstrap.yml</code>调整<code>defaultZone: http://$&#123;eureka.instance.hostname&#125;:8090/eureka/</code></li>
+<li><code>startup.sh</code> 新增 <code>export JAVA_OPTS=&quot;-Deureka.instance.ip-address=172.24.2.63&quot;</code></li>
+</ul>
+<h6 id="调整apollo-configservice工程-1"><a href="#调整apollo-configservice工程-1" class="headerlink" title="调整apollo-configservice工程"></a>调整apollo-configservice工程</h6><ul>
+<li>将所有端口改为8091</li>
+<li><code>bootstrap.yml</code>调整 <code>defaultZone: http://$&#123;eureka.instance.hostname&#125;:8090/eureka/</code></li>
+<li><code>startup.sh</code> 新增 <code>export JAVA_OPTS=&quot;-Deureka.instance.ip-address=172.24.2.63&quot;</code></li>
+</ul>
+<h6 id="调整apollo-portal工程"><a href="#调整apollo-portal工程" class="headerlink" title="调整apollo-portal工程"></a>调整apollo-portal工程</h6><ul>
+<li>将所有端口改为8092</li>
+<li><code>apollo-env.properties</code>调整<code>local.meta=http://172.24.2.63:8090</code></li>
+</ul>
+<h5 id="执行编译、打包"><a href="#执行编译、打包" class="headerlink" title="执行编译、打包"></a>执行编译、打包</h5><p>做完上述配置后，就可以执行编译和打包了。执行/scripts目录下build.sh脚本，该脚本会依次打包apollo-configservice, apollo-adminservice, apollo-portal。</p>
+<h5 id="构建docker镜像"><a href="#构建docker镜像" class="headerlink" title="构建docker镜像"></a>构建docker镜像</h5><p>将target下的apollo-*-github.zip和Dockerfile上传到服务器，形成结构<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/1.png"></p>
+<p>构建镜像</p>
+<ul>
+<li>docker build -t apollo-configservice:1.0.0 .</li>
+<li>docker build -t apollo-adminservice:1.0.0 .</li>
+<li>docker build -t apollo-portal:1.0.0 .<br><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/2.png"></li>
+</ul>
+<h5 id="部署Apollo服务端"><a href="#部署Apollo服务端" class="headerlink" title="部署Apollo服务端"></a>部署Apollo服务端</h5><p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/apollo/3.png"></p>
+<p>在配置文件目录执行如下命令启动服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-cloud/" rel="tag"># spring cloud</a>
+              <a href="/tags/apollo/" rel="tag"># apollo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/02/12/docker/redis/1/" rel="prev" title="Docker搭建Redis集群">
+                  <i class="fa fa-chevron-left"></i> Docker搭建Redis集群
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/23/docker/4/" rel="next" title="Nexus搭建Docker私库">
+                  Nexus搭建Docker私库 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

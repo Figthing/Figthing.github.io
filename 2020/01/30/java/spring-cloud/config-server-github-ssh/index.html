@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud 配置中心 Github SSH验证（一）">
+<meta property="og:url" content="http://example.com/2020/01/30/java/spring-cloud/config-server-github-ssh/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Spring Cloud 配置中心 Github SSH验证概述Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。 目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。 接下来，我们开始使用Spr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130201553870.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205501744.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205550957.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205705772.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205930159.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png">
+<meta property="og:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130213543634.png">
+<meta property="article:published_time" content="2020-01-30T17:28:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring-cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130201553870.png">
+
+
+<link rel="canonical" href="http://example.com/2020/01/30/java/spring-cloud/config-server-github-ssh/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/01/30/java/spring-cloud/config-server-github-ssh/","path":"2020/01/30/java/spring-cloud/config-server-github-ssh/","title":"Spring Cloud 配置中心 Github SSH验证（一）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Cloud 配置中心 Github SSH验证（一） | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Cloud-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83-Github-SSH%E9%AA%8C%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud 配置中心 Github SSH验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-SSH%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">Github SSH配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%86%E5%8C%99%E7%94%9F%E6%88%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">密匙生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESSH"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置SSH</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%AF%86%E5%8C%99"><span class="nav-number">1.2.3.</span> <span class="nav-text">校验密匙</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.3.</span> <span class="nav-text">Spring Cloud 配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE"><span class="nav-number">1.3.1.</span> <span class="nav-text">配置文件存放</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#POM%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.2.</span> <span class="nav-text">POM依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">项目配置文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%AA%8C%E8%AF%81"><span class="nav-number">1.4.</span> <span class="nav-text">启动验证</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/01/30/java/spring-cloud/config-server-github-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Cloud 配置中心 Github SSH验证（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-01-30 17:28:00" itemprop="dateCreated datePublished" datetime="2020-01-30T17:28:00+00:00">2020-01-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring-cloud</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Spring-Cloud-配置中心-Github-SSH验证"><a href="#Spring-Cloud-配置中心-Github-SSH验证" class="headerlink" title="Spring Cloud 配置中心 Github SSH验证"></a>Spring Cloud 配置中心 Github SSH验证</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。</p>
+<p>目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。</p>
+<p>接下来，我们开始使用Spring Cloud来搭建一个配置中心，并以 github 作为配置存储。除了 git 外，还可以用数据库、svn、本地文件等作为存储。</p>
+<span id="more"></span>
+
+<h4 id="Github-SSH配置"><a href="#Github-SSH配置" class="headerlink" title="Github SSH配置"></a>Github SSH配置</h4><h5 id="密匙生成"><a href="#密匙生成" class="headerlink" title="密匙生成"></a>密匙生成</h5><p>Windows下生成密匙，可以直接使用<code>Git Bash</code>工具，执行<code>ssh-keygen -m PEM -t rsa -b 4096</code>命令</p>
+<p><img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130201553870.png" alt="image-20200130201553870"></p>
+<p>在弹出来的选项直接按回车就可以了，密匙生成目录<code>C:\Users\用户\.ssh</code></p>
+<ul>
+<li>公钥<code>id_rsa.pub</code></li>
+<li>私钥<code>id_rsa</code></li>
+</ul>
+<h5 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h5><p>点击右上角头像，弹出的菜单中，点击<code>Settings</code>进入设置</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205501744.png" alt="image-20200130205501744" style="zoom:50%;" />
+
+<p>点击<code>SSH and GPG keys</code>，进入SSH的key设置</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205550957.png" alt="image-20200130205550957" style="zoom:50%;" />
+
+<p>点击<code>New SSH key</code>，进行SSH的添加，记住这里的Title随便填写，Key就是我们的公钥，打开公钥内容全部复制粘贴到Key的输入框中，点击<code>Add SSH key</code>即可！公钥是<code>ssh-rsa </code>开头</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205705772.png" alt="image-20200130205705772" style="zoom:50%;" />
+
+<p>添加公钥后就会显示</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130205930159.png" alt="image-20200130205930159" style="zoom:50%;" />
+
+
+
+<h5 id="校验密匙"><a href="#校验密匙" class="headerlink" title="校验密匙"></a>校验密匙</h5><p>这时我们回到Windows上，打开Git Bash，在执行<code>ssh -vT git@github.com</code>命令</p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130210138318.png" alt="image-20200130210138318" style="zoom: 67%;" />
+
+<p>只要出现<code>You&#39;ve successfully authenticated</code>就证明，已经验证成功了。</p>
+<blockquote>
+<p>如果是内网搭建的Gitlab，可以使用 <code>ssh -vT git@ip -p 端口</code>命令</p>
+</blockquote>
+<h4 id="Spring-Cloud-配置中心"><a href="#Spring-Cloud-配置中心" class="headerlink" title="Spring Cloud 配置中心"></a>Spring Cloud 配置中心</h4><h5 id="配置文件存放"><a href="#配置文件存放" class="headerlink" title="配置文件存放"></a>配置文件存放</h5><p>在github中新建一个仓库，这个仓库一定要是<strong>干净</strong>的，就是最好不要有其他文件存在，不然会报错。因为我们使用了SSH，所以这是一个<strong>私库</strong>，我存放的位置是<code>local/eureka.properties</code>。</p>
+<h5 id="POM依赖"><a href="#POM依赖" class="headerlink" title="POM依赖"></a>POM依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-config-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="项目配置文件"><a href="#项目配置文件" class="headerlink" title="项目配置文件"></a>项目配置文件</h5><p><strong>properties文件</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.cloud.config.server.git.uri</span>=<span class="string">git@github.com:Figthing/hyper-config-repo.git</span></span><br><span class="line"><span class="meta">spring.cloud.config.server.git.strict-host-key-checking</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">spring.cloud.config.server.git.ignore-local-ssh-settings</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">spring.cloud.config.server.git.search-paths</span>=<span class="string">/local</span></span><br><span class="line"><span class="meta">spring.cloud.config.server.git.private-key</span>=<span class="string">-----BEGIN RSA PRIVATE KEY-----\n\</span></span><br><span class="line"><span class="string">aaaa\</span></span><br><span class="line"><span class="string">xxxx\n\</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----</span></span><br></pre></td></tr></table></figure>
+
+<p>​    <strong>参数说明</strong></p>
+<ul>
+<li>spring.cloud.config.server.git.uri：配置的Github仓库的ssh地址</li>
+<li>spring.cloud.config.server.git.strict-host-key-checking：true-使用用户名密码，false-使用ssh key</li>
+<li>spring.cloud.config.server.git.ignore-local-ssh-settings：true-ssh 登陆方式</li>
+<li>spring.cloud.config.server.git.search-paths：git仓库地址下的相对地址 多个用逗号”,”分割。</li>
+<li>spring.cloud.config.server.git.private-key：私钥内容（可以使用变量代替），这里要注意几点<ul>
+<li>第一行使用<code>\n\</code>结尾</li>
+<li>内容行使用<code>\</code>结尾</li>
+<li>End结束之前使用<code>\n\</code>结尾</li>
+</ul>
+</li>
+</ul>
+<p><strong>yaml文件</strong></p>
+<p>因我项目使用的<code>properties</code>，至于yaml就自行百度吧，应该相差不大。</p>
+<h4 id="启动验证"><a href="#启动验证" class="headerlink" title="启动验证"></a>启动验证</h4><p><strong>main类文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableConfigServer</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ConfigApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>访问配置</strong></p>
+<p>我们在URL中输入<code>http://localhost:8802/eureka/local</code></p>
+<img src="https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/spring-cloud/config/image-20200130213543634.png" alt="image-20200130213543634" style="zoom:50%;" />
+
+
+<p>Spring cloud config 的URL与配置文件的映射关系如下:</p>
+<blockquote>
+<p>/{application}/{profile}[/{label}]<br>/{application}-{profile}.yml<br>/{label}/{application}-{profile}.yml<br>/{application}-{profile}.properties<br>/{label}/{application}-{profile}.properties</p>
+</blockquote>
+<p>我这里的application = eureka，profile = local</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring-cloud/" rel="tag"># spring-cloud</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/13/docker/k8s/2/" rel="prev" title="Windows下访问K8S集群中的POD">
+                  <i class="fa fa-chevron-left"></i> Windows下访问K8S集群中的POD
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/02/java/spring-cloud/config-server-github-ssh-2/" rel="next" title="Spring Cloud 配置中心 Github SSH验证（二）">
+                  Spring Cloud 配置中心 Github SSH验证（二） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="源码解读Spring IOC原理（一）什么是IOC&#x2F;DI？IoC 容器：最主要是完成了完成对象的创建和依赖的管理注入等等。 先从我们自己设计这样一个视角来考虑： 所谓控制反转，就是把原先我们代码里面需要实现的对象创建、依赖的代码，反转给容器来帮忙实现。那么必然的我们需要创建一个容器，同时需要一种描述来让容器知道需要创建的对象与对象的关系。这个描述最具体表现就是我们可配置的文件。XmlXmlXml对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码解读Spring IOC原理（一）">
+<meta property="og:url" content="http://example.com/2018/05/09/java/spring/1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="源码解读Spring IOC原理（一）什么是IOC&#x2F;DI？IoC 容器：最主要是完成了完成对象的创建和依赖的管理注入等等。 先从我们自己设计这样一个视角来考虑： 所谓控制反转，就是把原先我们代码里面需要实现的对象创建、依赖的代码，反转给容器来帮忙实现。那么必然的我们需要创建一个容器，同时需要一种描述来让容器知道需要创建的对象与对象的关系。这个描述最具体表现就是我们可配置的文件。XmlXmlXml对">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/2.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/3.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+<meta property="article:published_time" content="2018-05-09T18:03:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim">
+
+
+<link rel="canonical" href="http://example.com/2018/05/09/java/spring/1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/05/09/java/spring/1/","path":"2018/05/09/java/spring/1/","title":"源码解读Spring IOC原理（一）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>源码解读Spring IOC原理（一） | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BBSpring-IOC%E5%8E%9F%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">源码解读Spring IOC原理（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFIOC-DI%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">什么是IOC&#x2F;DI？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-IOC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">Spring IOC体系结构？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#BeanFactory"><span class="nav-number">1.2.1.</span> <span class="nav-text">BeanFactory</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#BeanDefinition"><span class="nav-number">1.2.2.</span> <span class="nav-text">BeanDefinition</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/09/java/spring/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          源码解读Spring IOC原理（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-05-09 18:03:00" itemprop="dateCreated datePublished" datetime="2018-05-09T18:03:00+00:00">2018-05-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="源码解读Spring-IOC原理（一）"><a href="#源码解读Spring-IOC原理（一）" class="headerlink" title="源码解读Spring IOC原理（一）"></a>源码解读Spring IOC原理（一）</h4><h5 id="什么是IOC-DI？"><a href="#什么是IOC-DI？" class="headerlink" title="什么是IOC/DI？"></a>什么是IOC/DI？</h5><p>IoC 容器：最主要是完成了完成对象的创建和依赖的管理注入等等。</p>
+<p>先从我们自己设计这样一个视角来考虑：</p>
+<p>所谓控制反转，就是把原先我们代码里面需要实现的对象创建、依赖的代码，反转给容器来帮忙实现。那么必然的我们需要创建一个容器，同时需要一种描述来让容器知道需要创建的对象与对象的关系。这个描述最具体表现就是我们可配置的文件。<br>XmlXmlXml<br>对象和对象关系怎么表示？</p>
+<p>可以用 xml ， properties 文件等语义化配置文件表示。</p>
+<p>描述对象关系的文件存放在哪里？</p>
+<p>可能是 classpath ， filesystem ，或者是 URL 网络资源， servletContext 等。</p>
+<p>回到正题，有了配置文件，还需要对配置文件解析。</p>
+<p>不同的配置文件对对象的描述不一样，如标准的，自定义声明式的，如何统一？ 在内部需要有一个统一的关于对象的定义，所有外部的描述都必须转化成统一的描述定义。</p>
+<p>如何对不同的配置文件进行解析？需要对不同的配置文件语法，采用不同的解析器</p>
+<span id="more"></span>
+
+<h5 id="Spring-IOC体系结构？"><a href="#Spring-IOC体系结构？" class="headerlink" title="Spring IOC体系结构？"></a>Spring IOC体系结构？</h5><h6 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h6><p>Spring Bean的创建是典型的工厂模式，这一系列的Bean工厂，也即IOC容器为开发者管理对象间的依赖关系提供了很多便利和基础服务，在Spring中有许多的IOC容器的实现供用户选择和使用，其相互关系<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/1.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"><br>其中BeanFactory作为最顶层的一个接口类，它定义了IOC容器的基本功能规范，BeanFactory 有三个子类：ListableBeanFactory、HierarchicalBeanFactory 和AutowireCapableBeanFactory。但是从上图中我们可以发现最终的默认实现类是 DefaultListableBeanFactory，他实现了所有的接口。那为何要定义这么多层次的接口呢？查阅这些接口的源码和说明发现，每个接口都有他使用的场合，它主要是为了区分在 Spring 内部在操作过程中对象的传递和转化过程中，对对象的数据访问所做的限制。例如 ListableBeanFactory 接口表示这些 Bean 是可列表的，而 HierarchicalBeanFactory 表示的是这些 Bean 是有继承关系的，也就是每个Bean 有可能有父 Bean。AutowireCapableBeanFactory 接口定义 Bean 的自动装配规则。这四个接口共同定义了 Bean 的集合、Bean 之间的关系、以及 Bean 行为.</p>
+<p>最基本的IOC容器接口BeanFactory</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanFactory</span> </span>&#123;    </span><br><span class="line">     </span><br><span class="line">     <span class="comment">//对FactoryBean的转义定义，因为如果使用bean的名字检索FactoryBean得到的对象是工厂生成的对象，    </span></span><br><span class="line">     <span class="comment">//如果需要得到工厂本身，需要转义           </span></span><br><span class="line">     String FACTORY_BEAN_PREFIX = <span class="string">&quot;&amp;&quot;</span>; </span><br><span class="line">        </span><br><span class="line">     <span class="comment">//根据bean的名字，获取在IOC容器中得到bean实例    </span></span><br><span class="line">     <span class="function">Object <span class="title">getBean</span><span class="params">(String name)</span> <span class="keyword">throws</span> BeansException</span>;    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">//根据bean的名字和Class类型来得到bean实例，增加了类型安全验证机制。    </span></span><br><span class="line">     <span class="function">Object <span class="title">getBean</span><span class="params">(String name, Class requiredType)</span> <span class="keyword">throws</span> BeansException</span>;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//提供对bean的检索，看看是否在IOC容器有这个名字的bean    </span></span><br><span class="line">     <span class="function"><span class="keyword">boolean</span> <span class="title">containsBean</span><span class="params">(String name)</span></span>;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//根据bean名字得到bean实例，并同时判断这个bean是不是单例    </span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//得到bean实例的Class类型    </span></span><br><span class="line">    <span class="function">Class <span class="title">getType</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//得到bean的别名，如果根据别名检索，那么其原名也会被检索出来    </span></span><br><span class="line">   String[] getAliases(String name);    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在BeanFactory里只对IOC容器的基本行为作了定义，根本不关心你的bean是如何定义怎样加载的。正如我们只关心工厂里得到什么的产品对象，至于工厂是怎么生产这些对象的，这个基本的接口不关心。</p>
+<p>而要知道工厂是如何产生对象的，我们需要看具体的IOC容器实现，spring提供了许多IOC容器的实现。比如XmlBeanFactory，ClasspathXmlApplicationContext等。其中XmlBeanFactory就是针对最基本的ioc容器的实现，这个IOC容器可以读取XML文件定义的BeanDefinition（XML文件中对bean的描述）,如果说XmlBeanFactory是容器中的屌丝，ApplicationContext应该算容器中的高帅富.<br>ApplicationContext是Spring提供的一个高级的IoC容器，它除了能够提供IoC容器的基本功能外，还为用户提供了以下的附加服务。</p>
+<blockquote>
+<p>从ApplicationContext接口的实现，我们看出其特点：</p>
+</blockquote>
+<ol>
+<li>支持信息源，可以实现国际化。（实现MessageSource接口）</li>
+<li>访问资源。(实现ResourcePatternResolver接口，这个后面要讲)</li>
+<li>支持应用事件。(实现ApplicationEventPublisher接口)</li>
+</ol>
+<h6 id="BeanDefinition"><a href="#BeanDefinition" class="headerlink" title="BeanDefinition"></a>BeanDefinition</h6><p>SpringIOC容器管理了我们定义的各种Bean对象及其相互的关系，Bean对象在Spring实现中是以BeanDefinition来描述的，其继承体系如下<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/2.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+<p>Bean 的解析过程非常复杂，功能被分的很细，因为这里需要被扩展的地方很多，必须保证有足够的灵活性，以应对可能的变化。<br>Bean 的解析主要就是对Spring 配置文件的解析。这个解析过程主要通过下图中的类完成：<br><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/spring/3.png?imageView2/2/w/600/h/600/q/75%7Cimageslim"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/04/java/proxy-1/" rel="prev" title="JAVA动态代理机制">
+                  <i class="fa fa-chevron-left"></i> JAVA动态代理机制
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/10/java/spring/2/" rel="next" title="源码解读Spring IOC原理（二）">
+                  源码解读Spring IOC原理（二） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

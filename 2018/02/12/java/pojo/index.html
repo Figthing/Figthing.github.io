@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="DAO[data access object]数据访问对象   DAO层对开发人员黑盒，由架构师设计封装。在很长一段时间内，我将它理解为对数据库的访问，后面随着项目的积累。发现自己的理解相对狭隘，对数据访问不仅仅指的是对数据库的访问。假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。  DTO[data transfer object]数据传输对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaEE PO VO BO DTO POJO DAO 整理总结">
+<meta property="og:url" content="http://example.com/2018/02/12/java/pojo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DAO[data access object]数据访问对象   DAO层对开发人员黑盒，由架构师设计封装。在很长一段时间内，我将它理解为对数据库的访问，后面随着项目的积累。发现自己的理解相对狭隘，对数据访问不仅仅指的是对数据库的访问。假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。  DTO[data transfer object]数据传输对象">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/1.jpg">
+<meta property="article:published_time" content="2018-02-12T10:06:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="pojo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/1.jpg">
+
+
+<link rel="canonical" href="http://example.com/2018/02/12/java/pojo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2018/02/12/java/pojo/","path":"2018/02/12/java/pojo/","title":"JavaEE PO VO BO DTO POJO DAO 整理总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaEE PO VO BO DTO POJO DAO 整理总结 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/02/12/java/pojo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaEE PO VO BO DTO POJO DAO 整理总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-12 10:06:00" itemprop="dateCreated datePublished" datetime="2018-02-12T10:06:00+00:00">2018-02-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="http://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/java/1.jpg"></p>
+<ol>
+<li><p><strong>DAO[data access object]数据访问对象</strong></p>
+<blockquote>
+</blockquote>
+<p>DAO层对开发人员黑盒，由架构师设计封装。<br>在很长一段时间内，我将它理解为对数据库的访问，后面随着项目的积累。<br>发现自己的理解相对狭隘，对数据访问不仅仅指的是对数据库的访问。<br>假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。</p>
+</li>
+<li><p><strong>DTO[data transfer object]数据传输对象</strong></p>
+<blockquote>
+</blockquote>
+<p>假设数据表中存在20个字段，但是在页面展示列表的时候，这20个字段显然都不会用到。<br>我想对其中的5个字段进行展示，而且这5个字段展示的时候，也并不是数据库中他们原有的样子。<br>还需要进行计算、截取、业务代码转名称 …..等等<br>数据传输对象因此而被诞生，一是能提高数据传输的速度，二能隐藏后端表结构。</p>
+</li>
+<li><p><strong>PO[persistant object]持久层对象</strong></p>
+<blockquote>
+</blockquote>
+<p>持久对象属性和数据库中的字段是一一对应的，数据库中的一条数据可以理解为一个持久对象。<br>因ORM框架的广泛使用而被引入到 JavaEE 项目设计当中。</p>
+</li>
+<li><p><strong>BO[bussiness object]业务对象</strong></p>
+<blockquote>
+</blockquote>
+<p>业务对象顾名思义是在业务处理中抽象出来的对象，里面除了get/set 方法外，也可以有对字段进行业务处理的方法。<br>假设你要对一个班级进行业务处理，其中的学生、教师、甚至是桌椅板凳都是业务对象的组成部分。<br>当然其中的学生、教室….都可以是和数据库对应的PO。</p>
+</li>
+<li><p><strong>VO[value object]值对象</strong></p>
+<blockquote>
+</blockquote>
+<p>值对象也可以称做页面对象，如果称做页面对象，那门它所代表的将是整个页面展示层的对象。<br>可以由需要的业务对象进行的换算转换而来。<br>如果称呼他为值对象的话，那门他可以理解为存放业务对象的一个地方。<br>假设锅碗瓢盆分别为对应的业务对象的话，那门整个碗柜就是一个值对象。</p>
+</li>
+<li><p><strong>POJO[plain ordiary java object] 简单java对象</strong></p>
+<blockquote>
+</blockquote>
+<p>简单java对象应该是JavaEE世界里面最灵活的对象。<br>在简单系统中，如果从数据库到页面展示都是POJO的话，它可以是DTO。<br>如果从数据库中到业务处理中都是POJO的话，他也可以是BO。<br>同样如果从数据库到整个页面的展示的话，它同样可以是VO。</p>
+</li>
+</ol>
+<p><strong>小结：</strong></p>
+<blockquote>
+</blockquote>
+<p>各个数据对象之间的转换是相当灵活的，在项目中可以定义上述对象的全部和其中的几种类型，这取决与架构师和需求。<br>在大型项目中，架构师在项目初期的任务除了搭建起整个开发环境以外，定义在系统中流转的数据结构对象同样是重重之重。<br>这项工作需要许多项目的积累和长期对软件开发的思考，多实践，多思考，提供最合适的数据对象解决方法，方能展现架构师的魅力。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/pojo/" rel="tag"># pojo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/02/05/npm/1/" rel="prev" title="npm使用">
+                  <i class="fa fa-chevron-left"></i> npm使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/12/java/mapstruct/1/" rel="next" title="MapStruct介绍">
+                  MapStruct介绍 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

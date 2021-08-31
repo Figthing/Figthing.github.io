@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="K8S-证书过期问题最近在开发环境中，在master使用kubectl get pods命令，发现报The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8S-证书过期问题">
+<meta property="og:url" content="http://example.com/2020/06/17/docker/k8s/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="K8S-证书过期问题最近在开发环境中，在master使用kubectl get pods命令，发现报The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-17T19:04:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T10:59:49.784Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="k8s">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/06/17/docker/k8s/3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/06/17/docker/k8s/3/","path":"2020/06/17/docker/k8s/3/","title":"K8S-证书过期问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>K8S-证书过期问题 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#K8S-%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">K8S-证书过期问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">找到问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">解决证书问题</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/17/docker/k8s/3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          K8S-证书过期问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-17 19:04:00" itemprop="dateCreated datePublished" datetime="2020-06-17T19:04:00+00:00">2020-06-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-31 10:59:49" itemprop="dateModified" datetime="2021-08-31T10:59:49+00:00">2021-08-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="K8S-证书过期问题"><a href="#K8S-证书过期问题" class="headerlink" title="K8S-证书过期问题"></a>K8S-证书过期问题</h2><p>最近在开发环境中，在<code>master</code>使用<code>kubectl get pods</code>命令，发现报<code>The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?</code>经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说明一下我在整个解决问题的过程，我使用的k8s版本是1.14.1。</p>
+<span id="more"></span>
+
+
+<h3 id="找到问题"><a href="#找到问题" class="headerlink" title="找到问题"></a>找到问题</h3><p>1、执行<code>systemctl status kubelet</code>，看一下<code>kuberntes</code>是否启动正常，这个时候如果显示<code>Unit kubelet.service entered failed state.</code>句话，说明服务没有启动，有错误。</p>
+<p>2、执行<code>journalctl -xefu kubelet</code>，查看<code>kubernets</code>中具体报错原因，在我这里显示的是<code>Part of the existing bootstrap client certificate is expired: 2020-06-16 05:56:48 +0000 UTC</code>，证书已经过期了。</p>
+<p>3、使用以下命令，查看所有证书过期时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for item in `find /etc/kubernetes/pki -maxdepth 2 -name &quot;*.crt&quot;`;do openssl x509 -in $item -text -noout| grep Not;echo ======================$item===============;done</span><br></pre></td></tr></table></figure>
+
+<p>or 也可以单独查看某一个证书过期时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -noout -dates -in /etc/kubernetes/pki/apiserver.crt</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意巨坑</strong>：<code>Kuberntes</code>里面有很多证书，其中有些证书失效时间是10年，有些证书是1年，我安装的正好到了时间，所以爆出了证书过期，现在看一下如何解决</p>
+<h3 id="解决证书问题"><a href="#解决证书问题" class="headerlink" title="解决证书问题"></a>解决证书问题</h3><p><strong>修改源码，调整过期时间</strong></p>
+<p>1、克隆源码，切换到对应的分支，并修改源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/kubernetes/kubernetes.git</span><br><span class="line">git checkout -b remotes/origin/release-1.14.1  v1.14.1</span><br><span class="line">vi kubernetes/cmd/kubeadm/app/util/pkiutil/pki_helpers.go</span><br></pre></td></tr></table></figure>
+
+<p>将<code>NotAfter:     time.Now().Add(duration365d).UTC(),</code>修改为<code>NotAfter:     time.Now().Add(duration365d * 10).UTC(),</code></p>
+<p>2、下载go语言编译环境，并编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v &#123;源码路径&#125;:/go/src/k8s.io/kubernetes -it icyboy/k8s_build:v1.14.1 bash</span><br><span class="line">cd /go/src/k8s.io/kubernetes</span><br><span class="line">make all WHAT=cmd/kubeadm GOFLAGS=-v</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3、替换本地的<code>kubeadm</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/bin/kubeadm /usr/bin/kubeadm-bak</span><br><span class="line">ln -s kubernetes/_output/local/bin/linux/amd64/kubeadm /usr/bin/kubeadm</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4、查看是否替换成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubeadm version</span><br><span class="line"></span><br><span class="line">新的</span><br><span class="line">kubeadm version: &amp;version.Info&#123;Major:&quot;1&quot;, Minor:&quot;14+&quot;, GitVersion:&quot;v1.14.1-dirty&quot;, GitCommit:&quot;b7394102d6ef778017f2ca4046abbaa23b88c290&quot;, GitTreeState:&quot;dirty&quot;, BuildDate:&quot;2020-06-17T08:02:51Z&quot;, GoVersion:&quot;go1.12.1&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;&#125;</span><br><span class="line"></span><br><span class="line">旧的</span><br><span class="line">kubeadm version: &amp;version.Info&#123;Major:&quot;1&quot;, Minor:&quot;14+&quot;, GitVersion:&quot;v1.14.1&quot;, GitCommit:&quot;b7394102d6ef778017f2ca4046abbaa23b88c290&quot;, GitTreeState:&quot;dirty&quot;, BuildDate:&quot;2020-06-17T08:02:51Z&quot;, GoVersion:&quot;go1.12.1&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建新证书，重新载入</strong></p>
+<p>1、创建<code>kubeadm.conf</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch kubeadm.conf</span><br><span class="line"></span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta1</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">kubernetesVersion: v1.14.3			## 注意：这个是你k8s的版本号</span><br><span class="line">imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers</span><br></pre></td></tr></table></figure>
+
+<p>2、生成证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp -r /etc/kubernetes /etc/kubernetes-bak</span><br><span class="line">rm -rf /etc/kubernetes/pki</span><br><span class="line">kubeadm alpha certs renew all --config=~/kubeadm.conf</span><br></pre></td></tr></table></figure>
+
+<p>3、查看证书过期时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for item in `find /etc/kubernetes/pki -maxdepth 2 -name &quot;*.crt&quot;`;do openssl x509 -in $item -text -noout| grep Not;echo ======================$item===============;done</span><br></pre></td></tr></table></figure>
+
+<p>4、重新载入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下面这几个文件，必须删了（后面会自动生成），不然会显示已存在，无法载入</span></span><br><span class="line">rm -rf /etc/kubernetes/admin.conf</span><br><span class="line">rm -rf /etc/kubernetes/kubelet.conf</span><br><span class="line">rm -rf /etc/kubernetes/controller-manager.conf</span><br><span class="line">rm -rf /etc/kubernetes/scheduler.conf</span><br><span class="line"></span><br><span class="line">kubeadm init phase kubeconfig all</span><br></pre></td></tr></table></figure>
+
+<p>5、重启<code>kuberntes</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<p>每一个版本解决思路不太一样，其他版本可以参考文献：<a target="_blank" rel="noopener" href="http://team.jiunile.com/blog/2018/12/k8s-kubeadm-ca-upgdate.html">http://team.jiunile.com/blog/2018/12/k8s-kubeadm-ca-upgdate.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/k8s/" rel="tag"># k8s</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/18/oracle/debug/1/" rel="prev" title="Oracle-"WM_CONCAT": 标识符无效">
+                  <i class="fa fa-chevron-left"></i> Oracle-"WM_CONCAT": 标识符无效
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/21/software/rsync-1/" rel="next" title="Rsync + Sersync 实现文件实时同步">
+                  Rsync + Sersync 实现文件实时同步 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
