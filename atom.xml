@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Figthing的博客</title>
+  
+  <subtitle>blog.appydm.com</subtitle>
+  <link href="http://blog.appydm.com/atom.xml" rel="self"/>
+  
+  <link href="http://blog.appydm.com/"/>
+  <updated>2021-08-31T11:41:49.788Z</updated>
+  <id>http://blog.appydm.com/</id>
+  
+  <author>
+    <name>Figthing</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ambari 2.7.3 离线安装手册</title>
+    <link href="http://blog.appydm.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/"/>
+    <id>http://blog.appydm.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/</id>
+    <published>2021-07-06T09:12:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Ambari-2-7-3-离线安装手册&quot;&gt;&lt;a href=&quot;#Ambari-2-7-3-离线安装手册&quot; class=&quot;headerlink&quot; title=&quot;Ambari 2.7.3 离线安装手册&quot;&gt;&lt;/a&gt;Ambari 2.7.3 离线安装手册&lt;/h2&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;h3 id=&quot;版本介绍&quot;&gt;&lt;a href=&quot;#版本介绍&quot; class=&quot;headerlink&quot; title=&quot;版本介绍&quot;&gt;&lt;/a&gt;版本介绍&lt;/h3&gt;&lt;p&gt;Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持&lt;a href=&quot;https://supportmatrix.hortonworks.com/%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%8B%E8%BD%BD%E6%8A%A5%E5%91%8A&quot;&gt;https://supportmatrix.hortonworks.com/，以及下载报告&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&quot;https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/1.png&quot; style=&quot;zoom: 67%;&quot; /&gt;
+
+&lt;img src=&quot;https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/bigdata/ambari/2.png&quot; style=&quot;zoom: 67%;&quot; /&gt;</summary>
+    
+    
+    
+    <category term="bigdata" scheme="http://blog.appydm.com/categories/bigdata/"/>
+    
+    <category term="ambari" scheme="http://blog.appydm.com/categories/bigdata/ambari/"/>
+    
+    
+    <category term="bigdata" scheme="http://blog.appydm.com/tags/bigdata/"/>
+    
+    <category term="ambari" scheme="http://blog.appydm.com/tags/ambari/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8S部署ELK管理集群日志（三）</title>
+    <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/"/>
+    <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/</id>
+    <published>2021-01-15T07:29:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;上一篇文章讲述了k8s安装Kibana，本章接着讲解K8S安装Logstash与Filebeat&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;Logstash和Filebeat安装&quot;&gt;&lt;a href=&quot;#Logstash和Filebeat安装&quot; class=&quot;headerlink&quot; title=&quot;Logstash和Filebeat安装&quot;&gt;&lt;/a&gt;Logstash和Filebeat安装&lt;/h3&gt;&lt;p&gt;在使用k8s安装Logstash时，先在本地做测试配置，如果已经非常熟悉的，就可以将这个步骤省略&lt;/p&gt;
+&lt;h4 id=&quot;Windows安装Logstash&quot;&gt;&lt;a href=&quot;#Windows安装Logstash&quot; class=&quot;headerlink&quot; title=&quot;Windows安装Logstash&quot;&gt;&lt;/a&gt;Windows安装Logstash&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;去官方下载Windows版本的&lt;a href=&quot;https://www.elastic.co/cn/downloads/past-releases/logstash-7-6-1&quot;&gt;Logstash&lt;/a&gt;，将ZIP文件解压，变成下面的目录结构&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&quot;https://zhouqi-blog.oss-cn-shenzhen.aliyuncs.com/img/docker/logstash/1.png&quot; style=&quot;zoom: 67%;&quot; /&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/categories/docker/k8s/elk/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/tags/elk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8S部署ELK管理集群日志（二）</title>
+    <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/"/>
+    <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/</id>
+    <published>2021-01-15T07:15:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;上一篇文章讲述了k8s安装ES集群的方式，本章接着讲解K8S安装Kibana&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;Kibana安装&quot;&gt;&lt;a href=&quot;#Kibana安装&quot; class=&quot;headerlink&quot; title=&quot;Kibana安装&quot;&gt;&lt;/a&gt;Kibana安装&lt;/h3&gt;&lt;p&gt;ElasticSearch 集群安装完成后，接着我们可以来部署 Kibana，这是 ElasticSearch 的数据可视化工具，它提供了管理 ElasticSearch 集群和可视化数据的各种功能。&lt;/p&gt;
+&lt;p&gt;同样首先我们使用 ConfigMap 对象来提供一个文件文件，其中包括对 ElasticSearch 的访问（主机、用户名和密码），这些都是通过环境变量配置的。对应的资源清单文件如下所示：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/categories/docker/k8s/elk/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/tags/elk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8S部署ELK管理集群日志（一）</title>
+    <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/"/>
+    <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/</id>
+    <published>2021-01-15T02:53:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;前言：ELK是目前主流的日志解决方案，尤其是容器化集群的今天，ELK几乎是集群必备的一部分能力；ELK在K8S落地有多种组合模式：&lt;br&gt;比如：fluentd+ELK或filebeat+ELK或log-pilot+ELK&lt;br&gt;而本文采用的是功能更强大的后者：filebeat 采集—&amp;gt;logstash过滤加工—&amp;gt;ES存储与索引—&amp;gt;Kibana展示的方案。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;ElasticSearch-集群安装&quot;&gt;&lt;a href=&quot;#ElasticSearch-集群安装&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 集群安装&quot;&gt;&lt;/a&gt;ElasticSearch 集群安装&lt;/h3&gt;&lt;p&gt;要建立一个 Elastic 技术的监控栈，当然首先我们需要部署 ElasticSearch，它是用来存储所有的指标、日志和追踪的数据库，这里我们通过3个不同角色的可扩展的节点组成一个集群。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/categories/docker/k8s/elk/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+    <category term="elk" scheme="http://blog.appydm.com/tags/elk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式六大原则</title>
+    <link href="http://blog.appydm.com/2020/09/03/design/pattern-2/"/>
+    <id>http://blog.appydm.com/2020/09/03/design/pattern-2/</id>
+    <published>2020-09-03T02:44:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;设计模式六大原则&quot;&gt;&lt;a href=&quot;#设计模式六大原则&quot; class=&quot;headerlink&quot; title=&quot;设计模式六大原则&quot;&gt;&lt;/a&gt;设计模式六大原则&lt;/h2&gt;&lt;h3 id=&quot;单一职责原则&quot;&gt;&lt;a href=&quot;#单一职责原则&quot; class=&quot;headerlink&quot; title=&quot;单一职责原则&quot;&gt;&lt;/a&gt;单一职责原则&lt;/h3&gt;&lt;p&gt;​    对象不应承担太多功能，正如一心不能而用，比如太多的工作(种类)会使人崩溃。唯有专注才能保证对象的高内聚；唯有唯一，才能保证对象的细粒度。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决问题：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　假如有A和B两个类，当A需求发生改变需要修改时，不能导致B类出问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;现状：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　在实际情况很难去做到单一职责原则，因为随着业务的不断变更，类的职责也在发生着变化，即职责扩散。如类A完成职责P的功能，但是随着后期业务细化，职责P分解成更小粒度的P1与P2，这时根据单一职责原则则需要拆分类A以分别满足细分后的职责P1和P2。但是实际开发环节，若类的逻辑足够简单，可以在代码上级别上违背单一职责原则；若类的方法足够少，可以在方法级别上违背单一职责原则。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="设计模式" scheme="http://blog.appydm.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="设计模式" scheme="http://blog.appydm.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rsync + Sersync 实现文件实时同步</title>
+    <link href="http://blog.appydm.com/2020/07/21/software/rsync-1/"/>
+    <id>http://blog.appydm.com/2020/07/21/software/rsync-1/</id>
+    <published>2020-07-21T07:48:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Rsync-Sersync-实现文件实时同步&quot;&gt;&lt;a href=&quot;#Rsync-Sersync-实现文件实时同步&quot; class=&quot;headerlink&quot; title=&quot;Rsync + Sersync 实现文件实时同步&quot;&gt;&lt;/a&gt;Rsync + Sersync 实现文件实时同步&lt;/h2&gt;&lt;h3 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h3&gt;&lt;p&gt;sersync主要用于服务器同步，web镜像等功能。基于boost1.43.0,inotify api,rsync command.开发。目前使用的比较多的同步解决方案是inotify-tools+rsync ，另外一个是google开源项目Openduckbill（依赖于inotify- tools），这两个都是基于脚本语言编写的。相比较上面两个项目，本项目优点是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sersync是使用c++编写，而且对linux系统文件系统产生的临时文件和重复的文件操作进行过滤，所以在结合rsync同步的时候，节省了运行时耗和网络资源。因此更快。&lt;/li&gt;
+&lt;li&gt;sersync配置起来很简单，其中bin目录下已经有基本上静态编译的2进制文件，配合bin目录下的xml配置文件直接使用即可。&lt;/li&gt;
+&lt;li&gt;使用多线程进行同步，尤其在同步较大文件时，能够保证多个服务器实时保持同步状态。&lt;/li&gt;
+&lt;li&gt;有出错处理机制，通过失败队列对出错的文件重新同步，如果仍旧失败，则按设定时长对同步失败的文件重新同步。&lt;/li&gt;
+&lt;li&gt;自带crontab功能，只需在xml配置文件中开启，即可按要求隔一段时间整体同步一次。无需再额外配置crontab功能。&lt;/li&gt;
+&lt;li&gt;能够实现socket与http插件扩展。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/categories/software/"/>
+    
+    <category term="rsync" scheme="http://blog.appydm.com/categories/software/rsync/"/>
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/tags/software/"/>
+    
+    <category term="rsync" scheme="http://blog.appydm.com/tags/rsync/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8S-证书过期问题</title>
+    <link href="http://blog.appydm.com/2020/06/17/docker/k8s/3/"/>
+    <id>http://blog.appydm.com/2020/06/17/docker/k8s/3/</id>
+    <published>2020-06-17T11:04:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;K8S-证书过期问题&quot;&gt;&lt;a href=&quot;#K8S-证书过期问题&quot; class=&quot;headerlink&quot; title=&quot;K8S-证书过期问题&quot;&gt;&lt;/a&gt;K8S-证书过期问题&lt;/h2&gt;&lt;p&gt;最近在开发环境中，在&lt;code&gt;master&lt;/code&gt;使用&lt;code&gt;kubectl get pods&lt;/code&gt;命令，发现报&lt;code&gt;The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?&lt;/code&gt;经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说明一下我在整个解决问题的过程，我使用的k8s版本是1.14.1。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle-&quot;WM_CONCAT&quot;: 标识符无效</title>
+    <link href="http://blog.appydm.com/2020/05/18/oracle/debug/1/"/>
+    <id>http://blog.appydm.com/2020/05/18/oracle/debug/1/</id>
+    <published>2020-05-18T03:19:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;“WM-CONCAT”-标识符无效&quot;&gt;&lt;a href=&quot;#“WM-CONCAT”-标识符无效&quot; class=&quot;headerlink&quot; title=&quot;“WM_CONCAT”: 标识符无效&quot;&gt;&lt;/a&gt;“WM_CONCAT”: 标识符无效&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;11gr2和12C上已经摒弃了wm_concat函数，当时我们很多程序员在程序中确使用了该函数，导致程序出现错误，为了减轻程序员修改程序的工作量，只有通过手工创建个wm_concat函数，来临时解决该问题，但是注意，及时创建了该函数，在使用的过程中，也需要用to_char(wm_concat())方式，才能完全替代之前的应用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="oracle" scheme="http://blog.appydm.com/categories/oracle/"/>
+    
+    
+    <category term="oracle" scheme="http://blog.appydm.com/tags/oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈系统高可用几个9</title>
+    <link href="http://blog.appydm.com/2020/04/09/system/1/"/>
+    <id>http://blog.appydm.com/2020/04/09/system/1/</id>
+    <published>2020-04-09T06:31:00.000Z</published>
+    <updated>2021-08-31T11:41:49.796Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;浅谈系统高可用几个9&quot;&gt;&lt;a href=&quot;#浅谈系统高可用几个9&quot; class=&quot;headerlink&quot; title=&quot;浅谈系统高可用几个9&quot;&gt;&lt;/a&gt;浅谈系统高可用几个9&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="架构" scheme="http://blog.appydm.com/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="架构" scheme="http://blog.appydm.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建 IPsec VPN 服务</title>
+    <link href="http://blog.appydm.com/2020/02/05/software/vpn-1/"/>
+    <id>http://blog.appydm.com/2020/02/05/software/vpn-1/</id>
+    <published>2020-02-05T09:24:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;搭建-IPsec-VPN-服务&quot;&gt;&lt;a href=&quot;#搭建-IPsec-VPN-服务&quot; class=&quot;headerlink&quot; title=&quot;搭建 IPsec VPN 服务&quot;&gt;&lt;/a&gt;搭建 IPsec VPN 服务&lt;/h3&gt;&lt;h4 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h4&gt;&lt;p&gt;我们在开发的时候经常遇见启动服务过多，内存消耗过大，安全问题，等，让我们非常头痛，特别是对Spring Cloud微服务的开发。在这里有同学会说把这些都部署到局域网的服务器上就行了，但如果资源有限的时候，我们对资源的利用率应该有所考虑。&lt;/p&gt;
+&lt;p&gt;将部分资源部署到云服务器，搭建一个的VPN服务，并隔离外网，这样做能让我们很好的解决上面的问题。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/categories/software/"/>
+    
+    <category term="vpn" scheme="http://blog.appydm.com/categories/software/vpn/"/>
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/tags/software/"/>
+    
+    <category term="vpn" scheme="http://blog.appydm.com/tags/vpn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Cloud 配置中心 Github SSH验证（二）</title>
+    <link href="http://blog.appydm.com/2020/02/02/java/spring-cloud/config-server-github-ssh-2/"/>
+    <id>http://blog.appydm.com/2020/02/02/java/spring-cloud/config-server-github-ssh-2/</id>
+    <published>2020-02-02T08:53:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;Spring-Cloud-配置中心-Github-SSH验证（二）&quot;&gt;&lt;a href=&quot;#Spring-Cloud-配置中心-Github-SSH验证（二）&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud 配置中心 Github SSH验证（二）&quot;&gt;&lt;/a&gt;Spring Cloud 配置中心 Github SSH验证（二）&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;在上一章讲解了如何使用Spring Cloud配置中心读取Github SSH的文件后，发现如果将&lt;code&gt;spring.cloud.config.server.git.private-key=&lt;/code&gt;配置的值设置为一个环境变量，在JVM:JAVA_OPS是不可行的，在网上找了很多资料国内的解决方案是使用&lt;code&gt;private_key_file&lt;/code&gt;，但官方并未提供，最后找到了解决方案，下面将给出干货提供给大家。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：前面工作不在叙述，请自行参考，&lt;a href=&quot;http://blog.appydm.com/java/spring-cloud/java/spring-cloud/config-server-github-ssh/&quot;&gt;Spring Cloud 配置中心 Github SSH验证（一）&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/categories/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/categories/java/spring-cloud/"/>
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/tags/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/tags/spring-cloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Cloud 配置中心 Github SSH验证（一）</title>
+    <link href="http://blog.appydm.com/2020/01/30/java/spring-cloud/config-server-github-ssh/"/>
+    <id>http://blog.appydm.com/2020/01/30/java/spring-cloud/config-server-github-ssh/</id>
+    <published>2020-01-30T09:28:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;Spring-Cloud-配置中心-Github-SSH验证&quot;&gt;&lt;a href=&quot;#Spring-Cloud-配置中心-Github-SSH验证&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud 配置中心 Github SSH验证&quot;&gt;&lt;/a&gt;Spring Cloud 配置中心 Github SSH验证&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。&lt;/p&gt;
+&lt;p&gt;目前有一些用的比较多的开源的配置中心，比如携程的 Apollo、阿里Nacos、百度的 Disconf 等，对比 Spring Cloud Config，这些配置中心功能更加强大。有兴趣的可以拿来试一试。&lt;/p&gt;
+&lt;p&gt;接下来，我们开始使用Spring Cloud来搭建一个配置中心，并以 github 作为配置存储。除了 git 外，还可以用数据库、svn、本地文件等作为存储。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/categories/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/categories/java/spring-cloud/"/>
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/tags/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/tags/spring-cloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows下访问K8S集群中的POD</title>
+    <link href="http://blog.appydm.com/2019/11/13/docker/k8s/2/"/>
+    <id>http://blog.appydm.com/2019/11/13/docker/k8s/2/</id>
+    <published>2019-11-13T09:10:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;Windows下访问K8S集群中的POD&quot;&gt;&lt;a href=&quot;#Windows下访问K8S集群中的POD&quot; class=&quot;headerlink&quot; title=&quot;Windows下访问K8S集群中的POD&quot;&gt;&lt;/a&gt;Windows下访问K8S集群中的POD&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;近期在公司搭建了一个K8s集群，有一个项目使用了spring cloud框架做开发，在部署的时候发现一个问题。所有的微服务打包后运行在集群上，互相是可以通过feign进行访问的，这点没问题。但如果需要在本地调试，发现在集群中部署的应用无法反向访问本地应用，下面是我解决的具体方法。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建Shadowsocks服务</title>
+    <link href="http://blog.appydm.com/2019/10/13/software/ss-1/"/>
+    <id>http://blog.appydm.com/2019/10/13/software/ss-1/</id>
+    <published>2019-10-13T15:49:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;搭建Shadowsocks服务&quot;&gt;&lt;a href=&quot;#搭建Shadowsocks服务&quot; class=&quot;headerlink&quot; title=&quot;搭建Shadowsocks服务&quot;&gt;&lt;/a&gt;搭建Shadowsocks服务&lt;/h3&gt;&lt;h4 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h4&gt;&lt;p&gt; shadowsocks可以指一种SOCKS5的加密传输协议，也可以指基于这种加密协议的各种数据传输包。 &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;shadowsocks实现科学上网原理？&lt;/strong&gt;shadowsocks正常工作需要服务器端和客户端两端合作实现，首先，客户端（本机）通过ss（shadowsocks）对正常的访问请求进行SOCK5加密，将加密后的访问请求传输给ss服务器端，服务器端接收到客户端的加密请求后，解密得到原始的访问请求，根据请求内容访问指定的网站（例如Google，YouTube，Facebook，instagram等），得到网站的返回结果后，再利用SOCKS5加密并返回给客户端，客户端通过ss解密后得到正常的访问结果，于是就可以实现你直接访问该网站的“假象”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为什么选择shadowsocks？&lt;/strong&gt;不限终端（安卓，苹果，Windows，Mac都可用），流量便宜（服务器500G只要15元），方便（一键脚本，不需要专业知识）。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/categories/software/"/>
+    
+    <category term="ss" scheme="http://blog.appydm.com/categories/software/ss/"/>
+    
+    
+    <category term="software" scheme="http://blog.appydm.com/tags/software/"/>
+    
+    <category term="ss" scheme="http://blog.appydm.com/tags/ss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>War包二次开发技巧</title>
+    <link href="http://blog.appydm.com/2019/10/11/java/war/1/"/>
+    <id>http://blog.appydm.com/2019/10/11/java/war/1/</id>
+    <published>2019-10-11T11:05:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;War包二次开发技巧&quot;&gt;&lt;a href=&quot;#War包二次开发技巧&quot; class=&quot;headerlink&quot; title=&quot;War包二次开发技巧&quot;&gt;&lt;/a&gt;War包二次开发技巧&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;近期拿到一个war包项目，里面没有认证功能，也没有源码。对于系统安全来说，直接能访问里面的数据，并对数据操作，是相当不安全的。所以想在项目里面增加一个简单的Basic认证功能，并且使用idea工具能够快速热部署开发。&lt;/p&gt;
+&lt;h4 id=&quot;Tomcat模式&quot;&gt;&lt;a href=&quot;#Tomcat模式&quot; class=&quot;headerlink&quot; title=&quot;Tomcat模式&quot;&gt;&lt;/a&gt;Tomcat模式&lt;/h4&gt;&lt;p&gt;使用Tomcat来进行Basic认证控制新增&lt;code&gt;config/tomcat-users.xml&lt;/code&gt;内容&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;tomcat-users&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;http://tomcat.apache.org/xml&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;              &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;              &lt;span class=&quot;attr&quot;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;http://tomcat.apache.org/xml tomcat-users.xsd&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;              &lt;span class=&quot;attr&quot;&gt;version&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;rolename&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;test&amp;quot;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;username&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;password&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;000000&amp;quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;roles&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;test&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;tomcat-users&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/categories/java/"/>
+    
+    <category term="war" scheme="http://blog.appydm.com/categories/java/war/"/>
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/tags/java/"/>
+    
+    <category term="war" scheme="http://blog.appydm.com/tags/war/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ApiGateway整合Swagger2</title>
+    <link href="http://blog.appydm.com/2019/10/09/java/spring-cloud/spring-cloud-gateway-1/"/>
+    <id>http://blog.appydm.com/2019/10/09/java/spring-cloud/spring-cloud-gateway-1/</id>
+    <published>2019-10-09T10:15:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;ApiGateway整合Swagger2&quot;&gt;&lt;a href=&quot;#ApiGateway整合Swagger2&quot; class=&quot;headerlink&quot; title=&quot;ApiGateway整合Swagger2&quot;&gt;&lt;/a&gt;ApiGateway整合Swagger2&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。&lt;/p&gt;
+&lt;h4 id=&quot;引入依赖&quot;&gt;&lt;a href=&quot;#引入依赖&quot; class=&quot;headerlink&quot; title=&quot;引入依赖&quot;&gt;&lt;/a&gt;引入依赖&lt;/h4&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-cloud-starter-gateway&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Swagger2 --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;io.springfox&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;springfox-swagger2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;2.9.2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;io.springfox&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;springfox-swagger-ui&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;2.9.2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;	&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/categories/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/categories/java/spring-cloud/"/>
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/tags/java/"/>
+    
+    <category term="spring-cloud" scheme="http://blog.appydm.com/tags/spring-cloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kettle</title>
+    <link href="http://blog.appydm.com/2019/10/08/dwh/kettle-1/"/>
+    <id>http://blog.appydm.com/2019/10/08/dwh/kettle-1/</id>
+    <published>2019-10-08T10:08:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;Kettle&quot;&gt;&lt;a href=&quot;#Kettle&quot; class=&quot;headerlink&quot; title=&quot;Kettle&quot;&gt;&lt;/a&gt;Kettle&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，绿色无需安装，数据抽取高效稳定。中文名称叫水壶，该项目的主程序员MATT 希望把各种数据放到一个壶里，然后以一种指定的格式流出。&lt;/p&gt;
+&lt;h4 id=&quot;产品家族&quot;&gt;&lt;a href=&quot;#产品家族&quot; class=&quot;headerlink&quot; title=&quot;产品家族&quot;&gt;&lt;/a&gt;产品家族&lt;/h4&gt;&lt;p&gt;Kettle家族目前包括4个产品：Spoon、Pan、CHEF、Kitchen&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;SPOON&lt;/strong&gt; 允许你通过图形界面来设计ETL转换过程（Transformation）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;PAN&lt;/strong&gt; 允许你批量运行由Spoon设计的ETL转换 (例如使用一个时间调度器)。Pan是一个后台执行的程序，没有图形界面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;CHEF&lt;/strong&gt; 允许你创建任务（Job）。 任务通过允许每个转换，任务，脚本等等，更有利于自动化更新数据仓库的复杂工作。任务通过允许每个转换，任务，脚本等等。任务将会被检查，看看是否正确地运行了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;KITCHEN&lt;/strong&gt; 允许你批量使用由Chef设计的任务 (例如使用一个时间调度器)。KITCHEN也是一个后台运行的程序。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="dwh" scheme="http://blog.appydm.com/categories/dwh/"/>
+    
+    <category term="etl" scheme="http://blog.appydm.com/categories/dwh/etl/"/>
+    
+    
+    <category term="etl" scheme="http://blog.appydm.com/tags/etl/"/>
+    
+    <category term="dwh" scheme="http://blog.appydm.com/tags/dwh/"/>
+    
+    <category term="kettle" scheme="http://blog.appydm.com/tags/kettle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据仓库之ETL</title>
+    <link href="http://blog.appydm.com/2019/10/08/dwh/etl-1/"/>
+    <id>http://blog.appydm.com/2019/10/08/dwh/etl-1/</id>
+    <published>2019-10-08T09:44:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;数据仓库之ETL&quot;&gt;&lt;a href=&quot;#数据仓库之ETL&quot; class=&quot;headerlink&quot; title=&quot;数据仓库之ETL&quot;&gt;&lt;/a&gt;数据仓库之ETL&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;ETL，Extraction-Transformation-Loading的缩写，中文名称为数据抽取、转换和加载。&lt;br&gt;一般随着业务的发展扩张，产线也越来越多，产生的数据也越来越多，这些数据的收集方式、原始数据格式、数据量、存储要求、使用场景等方面有很大的差异。作为数据中心，既要保证数据的准确性，存储的安全性，后续的扩展性，以及数据分析的时效性，这是一个很大的挑战。&lt;/p&gt;
+&lt;h4 id=&quot;名词解释&quot;&gt;&lt;a href=&quot;#名词解释&quot; class=&quot;headerlink&quot; title=&quot;名词解释&quot;&gt;&lt;/a&gt;名词解释&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;ODS——操作性数据&lt;/li&gt;
+&lt;li&gt;DW——数据仓库&lt;/li&gt;
+&lt;li&gt;DM——数据集市&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="dwh" scheme="http://blog.appydm.com/categories/dwh/"/>
+    
+    <category term="etl" scheme="http://blog.appydm.com/categories/dwh/etl/"/>
+    
+    
+    <category term="data-warehouse" scheme="http://blog.appydm.com/tags/data-warehouse/"/>
+    
+    <category term="etl" scheme="http://blog.appydm.com/tags/etl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis客户端选择</title>
+    <link href="http://blog.appydm.com/2019/09/06/spring/redis-1/"/>
+    <id>http://blog.appydm.com/2019/09/06/spring/redis-1/</id>
+    <published>2019-09-06T07:44:00.000Z</published>
+    <updated>2021-08-31T11:41:49.792Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;Redis-客户端的选择&quot;&gt;&lt;a href=&quot;#Redis-客户端的选择&quot; class=&quot;headerlink&quot; title=&quot;Redis 客户端的选择&quot;&gt;&lt;/a&gt;Redis 客户端的选择&lt;/h3&gt;&lt;h4 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Jedis：是老牌的Redis的Java实现客户端，提供了比较全面的Redis命令的支持，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Redisson：实现了分布式和可扩展的Java数据结构。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Lettuce：高级Redis客户端，用于线程安全同步，异步和响应使用，支持集群，Sentinel，管道和编码器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    
+    <category term="java" scheme="http://blog.appydm.com/tags/java/"/>
+    
+    <category term="spring" scheme="http://blog.appydm.com/tags/spring/"/>
+    
+    <category term="redis" scheme="http://blog.appydm.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8s搭建-YAPI</title>
+    <link href="http://blog.appydm.com/2019/07/18/docker/k8s/yapi-1/"/>
+    <id>http://blog.appydm.com/2019/07/18/docker/k8s/yapi-1/</id>
+    <published>2019-07-18T04:01:00.000Z</published>
+    <updated>2021-08-31T11:41:49.788Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;YAPI搭建&quot;&gt;&lt;a href=&quot;#YAPI搭建&quot; class=&quot;headerlink&quot; title=&quot;YAPI搭建&quot;&gt;&lt;/a&gt;YAPI搭建&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台&lt;/p&gt;
+&lt;h3 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h3&gt;&lt;p&gt;1、准备Yapi镜像&lt;/p&gt;
+&lt;p&gt;2、准备Mongo镜像&lt;/p&gt;
+&lt;p&gt;3、创建NFS共享文件&lt;/p&gt;
+&lt;p&gt;这些准备工作，都在我的博客中有写道，有疑问可以去找一下 &lt;a href=&quot;http://blog.appydm.com/&quot;&gt;http://blog.appydm.com&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/categories/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/categories/docker/k8s/"/>
+    
+    
+    <category term="docker" scheme="http://blog.appydm.com/tags/docker/"/>
+    
+    <category term="k8s" scheme="http://blog.appydm.com/tags/k8s/"/>
+    
+  </entry>
+  
+</feed>
