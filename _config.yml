@@ -97,7 +97,65 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+# RSS订阅
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+# 搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+
 theme: next
+theme_config:
+    rss: /atom.xml
+    scheme: Gemini
+    social:
+        GitHub: https://github.com/Figthing || github
+        E-Mail: mailto:13966837@qq.com || envelope
+        老博客: http://blog.163.com/023_dns
+    menu:
+        home: / || home
+        categories: /categories/ || th
+        tags: /tags/ || tags
+        archives: /archives/ || archive
+        sitemap: /sitemap.xml || sitemap
+        about: /about/ || user
+    menu_icons:
+        enable: true
+    canvas_ribbon:
+        enable: false
+        size: 300
+        alpha: 0.6
+        zIndex: -1
+    sidebar:
+        position: right
+        display: always
+        offset: 12
+        b2t: false
+        scrollpercent: true
+        onmobile: false
+    local_search:
+        enable: true
+        trigger: auto
+        top_n_per_article: 1
+    footer:
+        since: 2009
+        icon: heart
+        copyright:
+        powered: false
+        theme:
+            enable: false
+            version: false
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
