@@ -6,7 +6,7 @@
   <link href="http://blog.appydm.com/atom.xml" rel="self"/>
   
   <link href="http://blog.appydm.com/"/>
-  <updated>2022-11-02T10:07:16.037Z</updated>
+  <updated>2022-11-02T10:20:40.853Z</updated>
   <id>http://blog.appydm.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.appydm.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/"/>
     <id>http://blog.appydm.com/2021/07/06/bigdata/Ambari-2-7-3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C/</id>
     <published>2021-07-06T09:12:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Ambari-2-7-3-离线安装手册&quot;&gt;&lt;a href=&quot;#Ambari-2-7-3-离线安装手册&quot; class=&quot;headerlink&quot; title=&quot;Ambari 2.7.3 离线安装手册&quot;&gt;&lt;/a&gt;Ambari 2.7.3 离线安装手册&lt;/h2&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;h3 id=&quot;版本介绍&quot;&gt;&lt;a href=&quot;#版本介绍&quot; class=&quot;headerlink&quot; title=&quot;版本介绍&quot;&gt;&lt;/a&gt;版本介绍&lt;/h3&gt;&lt;p&gt;Ambari 2.7.3仅支持HDP-3.1.0，HDP-3.0.1，HDP-3.0.0使用以下URL确定对每个产品版本的支持&lt;a href=&quot;https://supportmatrix.hortonworks.com/%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%8B%E8%BD%BD%E6%8A%A5%E5%91%8A&quot;&gt;https://supportmatrix.hortonworks.com/，以及下载报告&lt;/a&gt;&lt;/p&gt;
@@ -47,7 +47,7 @@
     <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/"/>
     <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-3/</id>
     <published>2021-01-15T07:29:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -81,7 +81,7 @@
     <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/"/>
     <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-2/</id>
     <published>2021-01-15T07:15:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -112,7 +112,7 @@
     <link href="http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/"/>
     <id>http://blog.appydm.com/2021/01/15/docker/k8s/K8S%E9%83%A8%E7%BD%B2ELK%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E6%97%A5%E5%BF%97-1/</id>
     <published>2021-01-15T02:53:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -142,7 +142,7 @@
     <link href="http://blog.appydm.com/2020/09/03/design/pattern-2/"/>
     <id>http://blog.appydm.com/2020/09/03/design/pattern-2/</id>
     <published>2020-09-03T02:44:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;设计模式六大原则&quot;&gt;&lt;a href=&quot;#设计模式六大原则&quot; class=&quot;headerlink&quot; title=&quot;设计模式六大原则&quot;&gt;&lt;/a&gt;设计模式六大原则&lt;/h2&gt;&lt;h3 id=&quot;单一职责原则&quot;&gt;&lt;a href=&quot;#单一职责原则&quot; class=&quot;headerlink&quot; title=&quot;单一职责原则&quot;&gt;&lt;/a&gt;单一职责原则&lt;/h3&gt;&lt;p&gt;​    对象不应承担太多功能，正如一心不能而用，比如太多的工作(种类)会使人崩溃。唯有专注才能保证对象的高内聚；唯有唯一，才能保证对象的细粒度。&lt;/p&gt;
@@ -165,7 +165,7 @@
     <link href="http://blog.appydm.com/2020/07/21/software/rsync-1/"/>
     <id>http://blog.appydm.com/2020/07/21/software/rsync-1/</id>
     <published>2020-07-21T07:48:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Rsync-Sersync-实现文件实时同步&quot;&gt;&lt;a href=&quot;#Rsync-Sersync-实现文件实时同步&quot; class=&quot;headerlink&quot; title=&quot;Rsync + Sersync 实现文件实时同步&quot;&gt;&lt;/a&gt;Rsync + Sersync 实现文件实时同步&lt;/h2&gt;&lt;h3 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h3&gt;&lt;p&gt;sersync主要用于服务器同步，web镜像等功能。基于boost1.43.0,inotify api,rsync command.开发。目前使用的比较多的同步解决方案是inotify-tools+rsync ，另外一个是google开源项目Openduckbill（依赖于inotify- tools），这两个都是基于脚本语言编写的。相比较上面两个项目，本项目优点是：&lt;/p&gt;
@@ -196,7 +196,7 @@
     <link href="http://blog.appydm.com/2020/06/17/docker/k8s/3/"/>
     <id>http://blog.appydm.com/2020/06/17/docker/k8s/3/</id>
     <published>2020-06-17T11:04:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;K8S-证书过期问题&quot;&gt;&lt;a href=&quot;#K8S-证书过期问题&quot; class=&quot;headerlink&quot; title=&quot;K8S-证书过期问题&quot;&gt;&lt;/a&gt;K8S-证书过期问题&lt;/h2&gt;&lt;p&gt;最近在开发环境中，在&lt;code&gt;master&lt;/code&gt;使用&lt;code&gt;kubectl get pods&lt;/code&gt;命令，发现报&lt;code&gt;The connection to the server 172.24.2.69:6443 was refused - did you specify the right host or port?&lt;/code&gt;经过不断的百度和google终于把问题解决了，但网上的文章都很片面，没有具体说明处理的整个过程，下面说明一下我在整个解决问题的过程，我使用的k8s版本是1.14.1。&lt;/p&gt;</summary>
@@ -219,7 +219,7 @@
     <link href="http://blog.appydm.com/2020/05/18/oracle/debug/1/"/>
     <id>http://blog.appydm.com/2020/05/18/oracle/debug/1/</id>
     <published>2020-05-18T03:19:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;“WM-CONCAT”-标识符无效&quot;&gt;&lt;a href=&quot;#“WM-CONCAT”-标识符无效&quot; class=&quot;headerlink&quot; title=&quot;“WM_CONCAT”: 标识符无效&quot;&gt;&lt;/a&gt;“WM_CONCAT”: 标识符无效&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;11gr2和12C上已经摒弃了wm_concat函数，当时我们很多程序员在程序中确使用了该函数，导致程序出现错误，为了减轻程序员修改程序的工作量，只有通过手工创建个wm_concat函数，来临时解决该问题，但是注意，及时创建了该函数，在使用的过程中，也需要用to_char(wm_concat())方式，才能完全替代之前的应用。&lt;/p&gt;</summary>
@@ -238,7 +238,7 @@
     <link href="http://blog.appydm.com/2020/04/09/system/1/"/>
     <id>http://blog.appydm.com/2020/04/09/system/1/</id>
     <published>2020-04-09T06:31:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
       
@@ -263,7 +263,7 @@
     <link href="http://blog.appydm.com/2020/02/05/software/vpn-1/"/>
     <id>http://blog.appydm.com/2020/02/05/software/vpn-1/</id>
     <published>2020-02-05T09:24:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;搭建-IPsec-VPN-服务&quot;&gt;&lt;a href=&quot;#搭建-IPsec-VPN-服务&quot; class=&quot;headerlink&quot; title=&quot;搭建 IPsec VPN 服务&quot;&gt;&lt;/a&gt;搭建 IPsec VPN 服务&lt;/h3&gt;&lt;h4 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h4&gt;&lt;p&gt;我们在开发的时候经常遇见启动服务过多，内存消耗过大，安全问题，等，让我们非常头痛，特别是对Spring Cloud微服务的开发。在这里有同学会说把这些都部署到局域网的服务器上就行了，但如果资源有限的时候，我们对资源的利用率应该有所考虑。&lt;/p&gt;
@@ -287,7 +287,7 @@
     <link href="http://blog.appydm.com/2020/02/02/java/spring-cloud/config-server-github-ssh-2/"/>
     <id>http://blog.appydm.com/2020/02/02/java/spring-cloud/config-server-github-ssh-2/</id>
     <published>2020-02-02T08:53:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;Spring-Cloud-配置中心-Github-SSH验证（二）&quot;&gt;&lt;a href=&quot;#Spring-Cloud-配置中心-Github-SSH验证（二）&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud 配置中心 Github SSH验证（二）&quot;&gt;&lt;/a&gt;Spring Cloud 配置中心 Github SSH验证（二）&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;在上一章讲解了如何使用Spring Cloud配置中心读取Github SSH的文件后，发现如果将&lt;code&gt;spring.cloud.config.server.git.private-key=&lt;/code&gt;配置的值设置为一个环境变量，在JVM:JAVA_OPS是不可行的，在网上找了很多资料国内的解决方案是使用&lt;code&gt;private_key_file&lt;/code&gt;，但官方并未提供，最后找到了解决方案，下面将给出干货提供给大家。&lt;/p&gt;
@@ -311,7 +311,7 @@
     <link href="http://blog.appydm.com/2020/01/30/java/spring-cloud/config-server-github-ssh/"/>
     <id>http://blog.appydm.com/2020/01/30/java/spring-cloud/config-server-github-ssh/</id>
     <published>2020-01-30T09:28:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;Spring-Cloud-配置中心-Github-SSH验证&quot;&gt;&lt;a href=&quot;#Spring-Cloud-配置中心-Github-SSH验证&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud 配置中心 Github SSH验证&quot;&gt;&lt;/a&gt;Spring Cloud 配置中心 Github SSH验证&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持，方便部署与运维。&lt;/p&gt;
@@ -336,7 +336,7 @@
     <link href="http://blog.appydm.com/2019/11/13/docker/k8s/2/"/>
     <id>http://blog.appydm.com/2019/11/13/docker/k8s/2/</id>
     <published>2019-11-13T09:10:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;Windows下访问K8S集群中的POD&quot;&gt;&lt;a href=&quot;#Windows下访问K8S集群中的POD&quot; class=&quot;headerlink&quot; title=&quot;Windows下访问K8S集群中的POD&quot;&gt;&lt;/a&gt;Windows下访问K8S集群中的POD&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;近期在公司搭建了一个K8s集群，有一个项目使用了spring cloud框架做开发，在部署的时候发现一个问题。所有的微服务打包后运行在集群上，互相是可以通过feign进行访问的，这点没问题。但如果需要在本地调试，发现在集群中部署的应用无法反向访问本地应用，下面是我解决的具体方法。&lt;/p&gt;</summary>
@@ -359,7 +359,7 @@
     <link href="http://blog.appydm.com/2019/10/13/software/ss-1/"/>
     <id>http://blog.appydm.com/2019/10/13/software/ss-1/</id>
     <published>2019-10-13T15:49:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;搭建Shadowsocks服务&quot;&gt;&lt;a href=&quot;#搭建Shadowsocks服务&quot; class=&quot;headerlink&quot; title=&quot;搭建Shadowsocks服务&quot;&gt;&lt;/a&gt;搭建Shadowsocks服务&lt;/h3&gt;&lt;h4 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h4&gt;&lt;p&gt; shadowsocks可以指一种SOCKS5的加密传输协议，也可以指基于这种加密协议的各种数据传输包。 &lt;/p&gt;
@@ -384,7 +384,7 @@
     <link href="http://blog.appydm.com/2019/10/11/java/war/1/"/>
     <id>http://blog.appydm.com/2019/10/11/java/war/1/</id>
     <published>2019-10-11T11:05:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;War包二次开发技巧&quot;&gt;&lt;a href=&quot;#War包二次开发技巧&quot; class=&quot;headerlink&quot; title=&quot;War包二次开发技巧&quot;&gt;&lt;/a&gt;War包二次开发技巧&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;近期拿到一个war包项目，里面没有认证功能，也没有源码。对于系统安全来说，直接能访问里面的数据，并对数据操作，是相当不安全的。所以想在项目里面增加一个简单的Basic认证功能，并且使用idea工具能够快速热部署开发。&lt;/p&gt;
@@ -409,7 +409,7 @@
     <link href="http://blog.appydm.com/2019/10/09/java/spring-cloud/spring-cloud-gateway-1/"/>
     <id>http://blog.appydm.com/2019/10/09/java/spring-cloud/spring-cloud-gateway-1/</id>
     <published>2019-10-09T10:15:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;ApiGateway整合Swagger2&quot;&gt;&lt;a href=&quot;#ApiGateway整合Swagger2&quot; class=&quot;headerlink&quot; title=&quot;ApiGateway整合Swagger2&quot;&gt;&lt;/a&gt;ApiGateway整合Swagger2&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;最近在项目中尝试使用Spring Cloud.Greenwich版整合Swagger2。发现Swagger并不支持以WebFlux为底层的Gateway，无法集成，运行报错。下面分享我的解决思路，和关键代码。&lt;/p&gt;
@@ -433,7 +433,7 @@
     <link href="http://blog.appydm.com/2019/10/08/dwh/kettle-1/"/>
     <id>http://blog.appydm.com/2019/10/08/dwh/kettle-1/</id>
     <published>2019-10-08T10:08:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;Kettle&quot;&gt;&lt;a href=&quot;#Kettle&quot; class=&quot;headerlink&quot; title=&quot;Kettle&quot;&gt;&lt;/a&gt;Kettle&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，绿色无需安装，数据抽取高效稳定。中文名称叫水壶，该项目的主程序员MATT 希望把各种数据放到一个壶里，然后以一种指定的格式流出。&lt;/p&gt;
@@ -469,7 +469,7 @@
     <link href="http://blog.appydm.com/2019/10/08/dwh/etl-1/"/>
     <id>http://blog.appydm.com/2019/10/08/dwh/etl-1/</id>
     <published>2019-10-08T09:44:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;数据仓库之ETL&quot;&gt;&lt;a href=&quot;#数据仓库之ETL&quot; class=&quot;headerlink&quot; title=&quot;数据仓库之ETL&quot;&gt;&lt;/a&gt;数据仓库之ETL&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;ETL，Extraction-Transformation-Loading的缩写，中文名称为数据抽取、转换和加载。&lt;br&gt;一般随着业务的发展扩张，产线也越来越多，产生的数据也越来越多，这些数据的收集方式、原始数据格式、数据量、存储要求、使用场景等方面有很大的差异。作为数据中心，既要保证数据的准确性，存储的安全性，后续的扩展性，以及数据分析的时效性，这是一个很大的挑战。&lt;/p&gt;
@@ -497,7 +497,7 @@
     <link href="http://blog.appydm.com/2019/09/06/spring/redis-1/"/>
     <id>http://blog.appydm.com/2019/09/06/spring/redis-1/</id>
     <published>2019-09-06T07:44:00.000Z</published>
-    <updated>2022-11-02T10:07:16.041Z</updated>
+    <updated>2022-11-02T10:20:40.857Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;Redis-客户端的选择&quot;&gt;&lt;a href=&quot;#Redis-客户端的选择&quot; class=&quot;headerlink&quot; title=&quot;Redis 客户端的选择&quot;&gt;&lt;/a&gt;Redis 客户端的选择&lt;/h3&gt;&lt;h4 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h4&gt;&lt;ul&gt;
@@ -525,7 +525,7 @@
     <link href="http://blog.appydm.com/2019/07/18/docker/k8s/yapi-1/"/>
     <id>http://blog.appydm.com/2019/07/18/docker/k8s/yapi-1/</id>
     <published>2019-07-18T04:01:00.000Z</published>
-    <updated>2022-11-02T10:07:16.037Z</updated>
+    <updated>2022-11-02T10:20:40.853Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;YAPI搭建&quot;&gt;&lt;a href=&quot;#YAPI搭建&quot; class=&quot;headerlink&quot; title=&quot;YAPI搭建&quot;&gt;&lt;/a&gt;YAPI搭建&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台&lt;/p&gt;
